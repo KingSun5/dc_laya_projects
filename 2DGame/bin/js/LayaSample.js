@@ -2,6 +2,7 @@
 var GameMain = (function () {
     function GameMain() {
         this.m_image1_url = "res/image/1.png";
+        this.aa = 0;
         Laya.init(600, 400);
         this.m_img = new Laya.Sprite();
         this.m_img.loadImage(this.m_image1_url, 100, 50);
@@ -38,7 +39,7 @@ var GameMain = (function () {
         //net
         this.m_socket = new dc.ClientSocket();
         this.m_socket.ConnectUrl("ws://echo.websocket.org:80");
-        this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData));
+        this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
         this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected);
     };
     GameMain.prototype.OnConnected = function (args) {
@@ -47,12 +48,16 @@ var GameMain = (function () {
         by.writeInt32(85555555);
         by.writeUTFString("1234");
         by.writeFloat32(0.123);
-        by.writeByte(111);
         this.m_socket.Send(by);
     };
     GameMain.prototype.OnRecvData = function (by) {
-        dc.Log.Debug("接收数据");
-        dc.Log.Debug(this.m_image1_url);
+        dc.Log.Debug("接收数据:" + this.aa.toString());
+        this.aa++;
+        var by = dc.ByteArrayUtils.CreateSocketByte();
+        by.writeInt32(85555555);
+        by.writeUTFString("1234");
+        by.writeFloat32(0.123);
+        this.m_socket.Send(by);
     };
     GameMain.prototype.callback = function (args) {
         dc.Log.Debug(args.Type, args.Get(0));

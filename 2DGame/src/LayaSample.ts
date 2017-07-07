@@ -58,13 +58,13 @@ class GameMain
         by.writeInt32(85555555);
         by.writeUTFString("1234");
         by.writeFloat32(0.123);
-        by.writeByte(111);
         this.m_socket.Send(by);
     }
+    private aa:number = 0;
     private OnRecvData(by:Laya.Byte):void
     {
-        dc.Log.Debug("接收数据");
-        dc.Log.Debug(this.m_image1_url);
+        dc.Log.Debug("接收数据:" + this.aa.toString());
+        this.aa++;
     }
     private callback(args:dc.EventArgs):void
     {
