@@ -17,12 +17,12 @@ class GameMain
     private OnImageClickEvt():void
     {
         //事件
-        // dc.EventController.Instance.AddEventListener("11",this, this.callback);
-        // dc.EventController.Instance.Trigger("11",  "1234567");   
-        // dc.EventController.Instance.RemoveEventListener("11", this, this.callback);
-        // dc.EventController.Instance.Trigger("11",  "1234567"); 
-        // dc.EventController.Instance.AddEventListener("12",this,  this.callback2);
-        // dc.EventController.Instance.Trigger("12", "234567");   
+        dc.EventController.Instance.AddEventListener("11",this, this.callback);
+        dc.EventController.Instance.Trigger("11",  "1234567");   
+        dc.EventController.Instance.RemoveEventListener("11", this, this.callback);
+        dc.EventController.Instance.Trigger("11",  "1234567"); 
+        dc.EventController.Instance.AddEventListener("12",this,  this.callback2);
+        dc.EventController.Instance.Trigger("12", "234567");   
 
         //数据结构
         // var queue:dc.Queue<number> = new dc.Queue<number>();
@@ -48,7 +48,7 @@ class GameMain
         //net
         this.m_socket = new dc.ClientSocket();
         this.m_socket.ConnectUrl("ws://echo.websocket.org:80");
-        this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData));
+        this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
         this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected)
     }
     private OnConnected(args:dc.EventArgs):void

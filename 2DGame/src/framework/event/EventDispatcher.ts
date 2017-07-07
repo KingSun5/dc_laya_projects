@@ -14,28 +14,28 @@ module dc
         {
             if(this.m_DicFuns[type] == null)
             {
-                this.m_DicFuns[type] = new Array<EventItem>();
-                this.m_DicFuns[type].push(new EventItem(context, fun));
+                this.m_DicFuns[type] = [];
+                this.m_DicFuns[type].push(Laya.Handler.create(context, fun, null, false));
             }
             else
             {
-                var arr:EventItem[] = this.m_DicFuns[type];
+                var arr:Laya.Handler[] = this.m_DicFuns[type];
                 for(var item of arr)
                 {
-                    if(item.context == context && item.callback == fun)return;
+                    if(item.caller == context && item.method == fun)return;
                 }
-                arr.push(new EventItem(context, fun));
+                arr.push(Laya.Handler.create(context, fun, null, false));
             }
         }
 
         public RemoveEventListener(type:string, context:any,fun:Function):void
         {
-            var arr:EventItem[] = this.m_DicFuns[type];
+            var arr:Laya.Handler[] = this.m_DicFuns[type];
             if(arr == null)return;
             for(var i = 0; i < arr.length; ++i)
             {
                 var item = arr[i];
-                if(item.context == context && item.callback == fun)
+                if(item.caller == context && item.method == fun)
                 {
                     arr.splice(i, 1);
                     break;
@@ -46,11 +46,11 @@ module dc
         public TriggerEvent(type:string, args:EventArgs):void
         {
             args.Type = type;
-            var arr:EventItem[] = this.m_DicFuns[type];
+            var arr:Laya.Handler[] = this.m_DicFuns[type];
             if(arr == null)return;
             for(var item of arr)
             {
-                item.callback.call(item.context,args);
+                item.runWith(args);
             }
         }
 
@@ -63,17 +63,6 @@ module dc
         public Clear():void
         {
             DicUtils.ClearDic(this.m_DicFuns);
-        }
-    }
-    class EventItem
-    {
-        public context:any = null;//上下文，也就是调用者。。。
-        public callback:Function = null;
-
-        constructor(c:any, fun:Function)
-        {
-            this.context = c;
-            this.callback = fun;
         }
     }
 }

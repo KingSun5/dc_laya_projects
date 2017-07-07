@@ -12,17 +12,17 @@ var dc;
         }
         EventDispatcher.prototype.AddEventListener = function (type, context, fun) {
             if (this.m_DicFuns[type] == null) {
-                this.m_DicFuns[type] = new Array();
-                this.m_DicFuns[type].push(new EventItem(context, fun));
+                this.m_DicFuns[type] = [];
+                this.m_DicFuns[type].push(Laya.Handler.create(context, fun, null, false));
             }
             else {
                 var arr = this.m_DicFuns[type];
                 for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
                     var item = arr_1[_i];
-                    if (item.context == context && item.callback == fun)
+                    if (item.caller == context && item.method == fun)
                         return;
                 }
-                arr.push(new EventItem(context, fun));
+                arr.push(Laya.Handler.create(context, fun, null, false));
             }
         };
         EventDispatcher.prototype.RemoveEventListener = function (type, context, fun) {
@@ -31,7 +31,7 @@ var dc;
                 return;
             for (var i = 0; i < arr.length; ++i) {
                 var item = arr[i];
-                if (item.context == context && item.callback == fun) {
+                if (item.caller == context && item.method == fun) {
                     arr.splice(i, 1);
                     break;
                 }
@@ -44,7 +44,7 @@ var dc;
                 return;
             for (var _i = 0, arr_2 = arr; _i < arr_2.length; _i++) {
                 var item = arr_2[_i];
-                item.callback.call(item.context, args);
+                item.runWith(args);
             }
         };
         EventDispatcher.prototype.Trigger = function (type) {
@@ -61,14 +61,5 @@ var dc;
         return EventDispatcher;
     }());
     dc.EventDispatcher = EventDispatcher;
-    var EventItem = (function () {
-        function EventItem(c, fun) {
-            this.context = null; //上下文，也就是调用者。。。
-            this.callback = null;
-            this.context = c;
-            this.callback = fun;
-        }
-        return EventItem;
-    }());
 })(dc || (dc = {}));
 //# sourceMappingURL=EventDispatcher.js.map

@@ -10,12 +10,12 @@ var GameMain = (function () {
     }
     GameMain.prototype.OnImageClickEvt = function () {
         //事件
-        // dc.EventController.Instance.AddEventListener("11",this, this.callback);
-        // dc.EventController.Instance.Trigger("11",  "1234567");   
-        // dc.EventController.Instance.RemoveEventListener("11", this, this.callback);
-        // dc.EventController.Instance.Trigger("11",  "1234567"); 
-        // dc.EventController.Instance.AddEventListener("12",this,  this.callback2);
-        // dc.EventController.Instance.Trigger("12", "234567");   
+        dc.EventController.Instance.AddEventListener("11", this, this.callback);
+        dc.EventController.Instance.Trigger("11", "1234567");
+        dc.EventController.Instance.RemoveEventListener("11", this, this.callback);
+        dc.EventController.Instance.Trigger("11", "1234567");
+        dc.EventController.Instance.AddEventListener("12", this, this.callback2);
+        dc.EventController.Instance.Trigger("12", "234567");
         //数据结构
         // var queue:dc.Queue<number> = new dc.Queue<number>();
         // queue.Enqueue(1);
