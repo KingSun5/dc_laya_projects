@@ -10,38 +10,48 @@ var GameMain = (function () {
     }
     GameMain.prototype.OnImageClickEvt = function () {
         //事件
-        // var evt:dc.EventDispatcher = new dc.EventDispatcher();
-        // evt.AddEventListener("11", this.callback);
-        // evt.TriggerEvent("11", "1234567");
-        // dc.EventController.Instance.AddEventListener("11", this.callback);
-        // dc.EventController.Instance.TriggerEvent("11", "1234567");   
-        // dc.EventController.Instance.RemoveEventListener("11", this.callback);
-        // dc.EventController.Instance.TriggerEvent("11", "1234567"); 
-        // dc.EventController.Instance.AddEventListener("12", this.callback2);
-        // dc.EventController.Instance.TriggerEvent("12", "234567");   
+        // dc.EventController.Instance.AddEventListener("11",this, this.callback);
+        // dc.EventController.Instance.Trigger("11",  "1234567");   
+        // dc.EventController.Instance.RemoveEventListener("11", this, this.callback);
+        // dc.EventController.Instance.Trigger("11",  "1234567"); 
+        // dc.EventController.Instance.AddEventListener("12",this,  this.callback2);
+        // dc.EventController.Instance.Trigger("12", "234567");   
         //数据结构
-        var queue = new dc.Queue();
-        queue.Enqueue(1);
-        queue.Enqueue(2);
-        queue.Enqueue(3);
-        queue.Enqueue(4);
-        while (queue.Size() > 0) {
-            dc.Log.Debug(queue.Dequeue().toString());
-        }
-        var stack = new dc.Stack();
-        stack.Push(1);
-        stack.Push(2);
-        stack.Push(3);
-        stack.Push(4);
-        while (stack.Size() > 0) {
-            dc.Log.Debug(stack.Pop().toString());
-        }
-        var dic = new dc.NDictionary();
-        dic.Add(1, "1");
-        for (var kk in dic) {
-            dc.Log.Debug(kk);
-            dc.Log.Debug(dic[kk]);
-        }
+        // var queue:dc.Queue<number> = new dc.Queue<number>();
+        // queue.Enqueue(1);
+        // queue.Enqueue(2);
+        // queue.Enqueue(3);
+        // queue.Enqueue(4);
+        // while(queue.Size() > 0)
+        // {
+        //     dc.Log.Debug(queue.Dequeue().toString());
+        // }
+        // var stack:dc.Stack<number> = new dc.Stack<number>();
+        // stack.Push(1);
+        // stack.Push(2);
+        // stack.Push(3);
+        // stack.Push(4);
+        // while(stack.Size() > 0)
+        // {
+        //     dc.Log.Debug(stack.Pop().toString());
+        // }
+        //net
+        this.m_socket = new dc.ClientSocket();
+        this.m_socket.ConnectUrl("ws://echo.websocket.org:80");
+        this.m_socket.BindRecvCallback(Laya.Utils.bind(this.OnRecvData, this));
+        this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected);
+    };
+    GameMain.prototype.OnConnected = function (args) {
+        dc.Log.Debug("连接成功");
+        var by = dc.ByteArrayUtils.CreateSocketByte();
+        by.writeInt32(85555555);
+        by.writeUTFString("1234");
+        by.writeFloat32(0.123);
+        by.writeByte(111);
+        this.m_socket.Send(by);
+    };
+    GameMain.prototype.OnRecvData = function (by) {
+        dc.Log.Debug("接收数据");
     };
     GameMain.prototype.callback = function (args) {
         dc.Log.Debug(args.Type, args.Get(0));

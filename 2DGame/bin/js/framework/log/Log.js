@@ -8,35 +8,35 @@ var dc;
             for (var _i = 0; _i < arguments.length; _i++) {
                 args[_i] = arguments[_i];
             }
-            console.debug("debug", args.join(","));
+            console.debug("[debug]", args.join(","));
         };
         Log.Info = function () {
             var args = [];
             for (var _i = 0; _i < arguments.length; _i++) {
                 args[_i] = arguments[_i];
             }
-            console.info("info", args.join(","));
+            console.info("[info]", args.join(","));
         };
         Log.Warning = function () {
             var args = [];
             for (var _i = 0; _i < arguments.length; _i++) {
                 args[_i] = arguments[_i];
             }
-            console.warn("warn", args.join(","));
+            console.warn("[warn]", args.join(","));
         };
         Log.Error = function () {
             var args = [];
             for (var _i = 0; _i < arguments.length; _i++) {
                 args[_i] = arguments[_i];
             }
-            console.error("error", args.join(","));
+            console.error("[error]", args.join(","));
         };
         Log.Exception = function () {
             var args = [];
             for (var _i = 0; _i < arguments.length; _i++) {
                 args[_i] = arguments[_i];
             }
-            console.exception("exce", args.join(","));
+            console.exception("[exce]", args.join(","));
         };
         return Log;
     }());

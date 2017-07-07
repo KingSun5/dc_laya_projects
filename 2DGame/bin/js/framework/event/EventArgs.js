@@ -13,7 +13,7 @@ var dc;
             }
             this.m_Type = "";
             this.m_data = null;
-            if (args.length == 0)
+            if (args == null || args.length == 0)
                 return;
             if (args instanceof Array)
                 this.m_data = dc.ArrayUtils.Copy(args[0]);
@@ -33,7 +33,7 @@ var dc;
                 this.m_data = dc.ArrayUtils.Copy(args);
         };
         EventArgs.prototype.Get = function (index) {
-            if (this.m_data.length == 0)
+            if (this.m_data == null || this.m_data.length == 0)
                 return null;
             if (index < 0 || index >= this.m_data.length)
                 return null;

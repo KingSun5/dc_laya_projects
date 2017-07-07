@@ -8,36 +8,72 @@ module dc
     export class EventDispatcher
     {
         private m_DicFuns:Object = {};
+        private m_EvtArgs:EventArgs = new EventArgs();
 
-        public AddEventListener(type:string, fun:Function):void
+        public AddEventListener(type:string, context:any, fun:Function):void
         {
             if(this.m_DicFuns[type] == null)
-                this.m_DicFuns[type] = [];
-            if(ArrayUtils.ContainsValue(this.m_DicFuns[type], fun) == false)
-                this.m_DicFuns[type].push(fun);
+            {
+                this.m_DicFuns[type] = new Array<EventItem>();
+                this.m_DicFuns[type].push(new EventItem(context, fun));
+            }
+            else
+            {
+                var arr:EventItem[] = this.m_DicFuns[type];
+                for(var item of arr)
+                {
+                    if(item.context == context && item.callback == fun)return;
+                }
+                arr.push(new EventItem(context, fun));
+            }
         }
 
-        public RemoveEventListener(type:string, fun:Function):void
+        public RemoveEventListener(type:string, context:any,fun:Function):void
         {
-            var arr:Function[] = this.m_DicFuns[type];
+            var arr:EventItem[] = this.m_DicFuns[type];
             if(arr == null)return;
-            ArrayUtils.RemoveValue(arr, fun);
+            for(var i = 0; i < arr.length; ++i)
+            {
+                var item = arr[i];
+                if(item.context == context && item.callback == fun)
+                {
+                    arr.splice(i, 1);
+                    break;
+                }
+            }
         }
 
         public TriggerEvent(type:string, args:EventArgs):void
         {
             args.Type = type;
-            var arr:Function[] = this.m_DicFuns[type];
+            var arr:EventItem[] = this.m_DicFuns[type];
             if(arr == null)return;
-            for(var fun of arr)
+            for(var item of arr)
             {
-                fun.call(type,args);
+                item.callback.call(item.context,args);
             }
+        }
+
+        public Trigger(type:string, ...args:any[]):void
+        {
+            this.m_EvtArgs.Init(args);
+            this.TriggerEvent(type, this.m_EvtArgs);
         }
 
         public Clear():void
         {
             DicUtils.ClearDic(this.m_DicFuns);
+        }
+    }
+    class EventItem
+    {
+        public context:any = null;//上下文，也就是调用者。。。
+        public callback:Function = null;
+
+        constructor(c:any, fun:Function)
+        {
+            this.context = c;
+            this.callback = fun;
         }
     }
 }

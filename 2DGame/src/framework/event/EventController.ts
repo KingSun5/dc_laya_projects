@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-6
      */
-    export class EventController extends Singleton
+    export class EventController
     {
         private m_Event:EventDispatcher = new EventDispatcher();
         private m_EvtArgs:EventArgs = new EventArgs();
@@ -17,17 +17,17 @@ module dc
             return this.instance;
         }
 
-        public AddEventListener(type:string, fun:Function):void
+        public AddEventListener(type:string, context:any, fun:Function):void
         {
-            this.m_Event.AddEventListener(type, fun);
+            this.m_Event.AddEventListener(type, context, fun);
         }
 
-        public RemoveEventListener(type:string, fun:Function):void
+        public RemoveEventListener(type:string, context:any, fun:Function):void
         {
-            this.m_Event.RemoveEventListener(type, fun);
+            this.m_Event.RemoveEventListener(type, context, fun);
         }
 
-        public TriggerEvent(type:string, ...args:any[]):void
+        public Trigger(type:string, ...args:any[]):void
         {
             this.m_EvtArgs.Init(args);
             this.m_Event.TriggerEvent(type, this.m_EvtArgs);

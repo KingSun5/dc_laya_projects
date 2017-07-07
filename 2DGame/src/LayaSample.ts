@@ -3,7 +3,7 @@ class GameMain
 {
     private m_image1_url:string = "res/image/1.png";
     private m_img:Laya.Sprite;
-
+    private m_socket:dc.ClientSocket;
     constructor()
     {
         Laya.init(600,400);
@@ -17,16 +17,12 @@ class GameMain
     private OnImageClickEvt():void
     {
         //事件
-        // var evt:dc.EventDispatcher = new dc.EventDispatcher();
-        // evt.AddEventListener("11", this.callback);
-        // evt.TriggerEvent("11", "1234567");
-
-        // dc.EventController.Instance.AddEventListener("11", this.callback);
-        // dc.EventController.Instance.TriggerEvent("11", "1234567");   
-        // dc.EventController.Instance.RemoveEventListener("11", this.callback);
-        // dc.EventController.Instance.TriggerEvent("11", "1234567"); 
-        // dc.EventController.Instance.AddEventListener("12", this.callback2);
-        // dc.EventController.Instance.TriggerEvent("12", "234567");   
+        // dc.EventController.Instance.AddEventListener("11",this, this.callback);
+        // dc.EventController.Instance.Trigger("11",  "1234567");   
+        // dc.EventController.Instance.RemoveEventListener("11", this, this.callback);
+        // dc.EventController.Instance.Trigger("11",  "1234567"); 
+        // dc.EventController.Instance.AddEventListener("12",this,  this.callback2);
+        // dc.EventController.Instance.Trigger("12", "234567");   
 
         //数据结构
         // var queue:dc.Queue<number> = new dc.Queue<number>();
@@ -48,6 +44,26 @@ class GameMain
         // {
         //     dc.Log.Debug(stack.Pop().toString());
         // }
+
+        //net
+        this.m_socket = new dc.ClientSocket();
+        this.m_socket.ConnectUrl("ws://echo.websocket.org:80");
+        this.m_socket.BindRecvCallback(Laya.Utils.bind(this.OnRecvData, this));
+        this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected)
+    }
+    private OnConnected(args:dc.EventArgs):void
+    {
+        dc.Log.Debug("连接成功");
+        var by:Laya.Byte = dc.ByteArrayUtils.CreateSocketByte();
+        by.writeInt32(85555555);
+        by.writeUTFString("1234");
+        by.writeFloat32(0.123);
+        by.writeByte(111);
+        this.m_socket.Send(by);
+    }
+    private OnRecvData(by:Laya.Byte):void
+    {
+        dc.Log.Debug("接收数据");
     }
     private callback(args:dc.EventArgs):void
     {
