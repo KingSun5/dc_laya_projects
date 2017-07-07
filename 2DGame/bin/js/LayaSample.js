@@ -38,7 +38,7 @@ var GameMain = (function () {
         //net
         this.m_socket = new dc.ClientSocket();
         this.m_socket.ConnectUrl("ws://echo.websocket.org:80");
-        this.m_socket.BindRecvCallback(Laya.Utils.bind(this.OnRecvData, this));
+        this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData));
         this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected);
     };
     GameMain.prototype.OnConnected = function (args) {
@@ -52,6 +52,7 @@ var GameMain = (function () {
     };
     GameMain.prototype.OnRecvData = function (by) {
         dc.Log.Debug("接收数据");
+        dc.Log.Debug(this.m_image1_url);
     };
     GameMain.prototype.callback = function (args) {
         dc.Log.Debug(args.Type, args.Get(0));

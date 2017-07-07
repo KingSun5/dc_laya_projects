@@ -97,7 +97,8 @@ var dc;
                         this.m_TempBuff.writeArrayBuffer(this.m_ReadBuff, this.m_ReadBuff.pos, this.m_DataLength);
                         this.m_TempBuff.pos = 0;
                         //派发数据
-                        //if(this.m_RecvCallback != null)this.m_RecvCallback.call(this.m_RecvCallback.apply, this.m_TempBuff);
+                        if (this.m_RecvCallback != null)
+                            this.m_RecvCallback.runWith(this.m_TempBuff);
                         this.m_ReadBuff.pos += this.m_DataLength;
                         this.m_IsReadHead = true;
                     }

@@ -16,7 +16,7 @@ module dc
         private m_WriteBuff:Laya.Byte;
         private m_TempBuff:Laya.Byte;
 
-        private m_RecvCallback:Function;
+        private m_RecvCallback:Laya.Handler;
 
         /**请求连接:主机*/
         public ConnectHost(host:string, port:number):void
@@ -114,8 +114,8 @@ module dc
                         this.m_TempBuff.pos = 0;
 
                         //派发数据
-                        //if(this.m_RecvCallback != null)this.m_RecvCallback.call(this.m_RecvCallback.apply, this.m_TempBuff);
-
+                        if(this.m_RecvCallback != null)this.m_RecvCallback.runWith(this.m_TempBuff);
+                        
                         this.m_ReadBuff.pos += this.m_DataLength;
                         this.m_IsReadHead = true;
                     }
@@ -155,7 +155,7 @@ module dc
                 return true;
             return false;
         }  
-        public BindRecvCallback(fun:Function):void
+        public BindRecvCallback(fun:Laya.Handler):void
         {
             this.m_RecvCallback = fun;
         }

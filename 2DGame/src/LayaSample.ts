@@ -48,7 +48,7 @@ class GameMain
         //net
         this.m_socket = new dc.ClientSocket();
         this.m_socket.ConnectUrl("ws://echo.websocket.org:80");
-        this.m_socket.BindRecvCallback(Laya.Utils.bind(this.OnRecvData, this));
+        this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData));
         this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected)
     }
     private OnConnected(args:dc.EventArgs):void
@@ -64,6 +64,7 @@ class GameMain
     private OnRecvData(by:Laya.Byte):void
     {
         dc.Log.Debug("接收数据");
+        dc.Log.Debug(this.m_image1_url);
     }
     private callback(args:dc.EventArgs):void
     {
