@@ -30,7 +30,6 @@ module dc
 
 		public Remove(url:string):boolean
 		{
-			if (this.m_CurLoaderAsset != null && url == this.m_CurLoaderAsset.Url) return false;
 			return super.Remove(url);
 		}
 	}

@@ -7,10 +7,13 @@ module dc
      */
 	export class ResourceLoadSyncThread extends ResourceLoadThread
 	{
+		protected m_TotalCount:number = 0;
+
 		public Setup(strategy:eResLoadStrategy, thread_type:eResLoadThreadType):void
 		{
 			super.Setup(strategy, thread_type);
 			this.m_Active = false;
+			this.m_TotalCount = 0;
 		}
 
 		public Update():void
@@ -54,12 +57,19 @@ module dc
 		public Start():void
 		{
 			super.Start();
+			this.m_TotalCount = 0;
+		}
+
+		private Stop():void
+		{
+			this.m_Active = false;
 		}
 
 		/**加载完成侦听器*/
 		protected OnComplete(asset: any): void 
 		{
 			super.OnComplete(asset);
+			this.m_TotalCount++;
 			EventController.Instance.DispatchEvent(LoaderID.RESOURCE_LOAD_PROGRESS, this.m_TotalCount, this.m_TotalCount+this.m_LoadQueue.length);
 			this.CheckLoadComplate();
 		}

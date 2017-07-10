@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-9
      */
-	export class DataManager
+	export class DataManager extends Singleton
 	{
         private static instance:DataManager = null;
         public static get Instance():DataManager

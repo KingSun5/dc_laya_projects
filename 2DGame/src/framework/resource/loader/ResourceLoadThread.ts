@@ -14,7 +14,6 @@ module dc
 		protected m_IsLoading:boolean = false;
 		protected m_CurLoaderAsset:LoaderAsset = null;
 
-		protected m_TotalCount:number = 0;
 		protected m_LoadQueue:LoaderAsset[] = null;
 
 		public Setup(strategy:eResLoadStrategy, thread_type:eResLoadThreadType):void
@@ -23,7 +22,6 @@ module dc
 			this.m_LoadThreadType = thread_type;
 			this.m_IsLoading = false;
 			this.m_CurLoaderAsset = null;
-			this.m_TotalCount = 0;
 			this.m_LoadQueue = [];
 		}
 
@@ -40,7 +38,6 @@ module dc
 		public Destroy():void
 		{
 			this.m_Active = false;
-			this.m_TotalCount = 0;
 			this.m_IsLoading = false;
 			this.m_CurLoaderAsset = null;
 			ArrayUtils.Clear(this.m_LoadQueue);
@@ -71,9 +68,11 @@ module dc
 			}
 			return true;
 		}
-		/**从加载队列移除未加载的资源*/
+		/**从加载队列移除未开始加载的资源*/
 		public Remove(url:string):boolean
 		{
+			if (this.m_CurLoaderAsset != null && url == this.m_CurLoaderAsset.Url) return false;
+
 			var info:LoaderAsset = null;
 			for (var i = 0; i <this.m_LoadQueue.length; ++i)
 			{
@@ -81,7 +80,6 @@ module dc
 				if(info.Url == url && info.Stage == eResLoadStage.UNLOAD)
 				{//只有处于未加载状态的资源才能取消
 					this.m_LoadQueue.splice(i, 1);
-					this.m_TotalCount--;
 					return true;
 				}
 			}
@@ -90,20 +88,15 @@ module dc
 
 		public Clear():void
 		{
+			this.m_Active = false;
 			this.m_CurLoaderAsset = null;
 			ArrayUtils.Clear(this.m_LoadQueue)
-			this.m_TotalCount = 0;
 		}
 
 		public Start():void
 		{
 			this.m_Active = true;
 			Log.Info("[load]begin load total:" + this.m_LoadQueue.length);
-		}
-
-		public Stop():void
-		{
-			this.m_Active = false;
 		}
 
 		public Pause():void
@@ -123,6 +116,7 @@ module dc
 
 			this.m_IsLoading = true;
 			this.m_CurLoaderAsset = this.m_LoadQueue.shift();
+			this.m_CurLoaderAsset.Stage = eResLoadStage.LOADING;
 			Laya.loader.load(
 				this.m_CurLoaderAsset.Url,
 				Laya.Handler.create(this, this.OnAssetComplete),
@@ -148,9 +142,12 @@ module dc
 		/**加载完成侦听器*/
 		protected OnComplete(asset: any): void 
 		{
-			if(this.m_CurLoaderAsset != null && this.m_CurLoaderAsset.Complete != null)
-				this.m_CurLoaderAsset.Complete.runWith(this.m_CurLoaderAsset.Url);
-			this.m_TotalCount++;
+			if(this.m_CurLoaderAsset != null)
+			{
+				this.m_CurLoaderAsset.Stage = eResLoadStage.LOADED;
+				if(this.m_CurLoaderAsset.Complete != null)
+					this.m_CurLoaderAsset.Complete.runWith(this.m_CurLoaderAsset.Url);
+			}
 			this.m_IsLoading = false;
 		}	
 	}

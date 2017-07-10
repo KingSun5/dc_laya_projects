@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-10
      */
-	export class ResourceManager
+	export class ResourceManager extends Singleton
 	{
 		private m_ShareGUID:number = 0;
 		private m_FrontLoadThread:ResourceLoadThread = null;   //同步加载线程

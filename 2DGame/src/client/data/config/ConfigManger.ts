@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-9
      */
-	export class ConfigManger
+	export class ConfigManger extends Singleton
 	{
         private static instance:ConfigManger = null;
         public static get Instance():ConfigManger

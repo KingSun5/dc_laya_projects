@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-6
      */
-    export class EventController
+    export class EventController extends Singleton
     {
         private m_Event:EventDispatcher = new EventDispatcher();
         private m_EvtArgs:EventArgs = new EventArgs();

@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-9
      */
-    export class Procedure
+    export class Procedure extends Singleton
     {
         private static instance:Procedure = null;
         public static get Instance():Procedure

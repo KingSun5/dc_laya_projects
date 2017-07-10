@@ -24,7 +24,7 @@ module dc
 			this.IgnoreCache = ignoreCache;
 			this.Complete = complete;
 			this.Stage = eResLoadStage.UNLOAD;
-			this.StartTime = Time.realtimeSinceStartup;
+			this.StartTime = Laya.timer.currTimer;
 		}
 	}
 }

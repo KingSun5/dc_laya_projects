@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-9
      */
-    export class GameApp
+    export class GameApp extends Singleton
     {        
         private static instance:GameApp = null;
         public static get Instance():GameApp
@@ -32,7 +32,6 @@ module dc
 
         public Tick(elapse:number, game_frame:number):void
         {
-            
         }
 
         private RegisterEvent():void

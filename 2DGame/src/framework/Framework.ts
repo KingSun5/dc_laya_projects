@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-6
      */
-    export class Framework
+    export class Framework extends Singleton
     {        
         private static instance:Framework = null;
         public static get Instance():Framework
@@ -16,6 +16,7 @@ module dc
 
         public Setup():void
         {
+            Time.Start();
             UIManager.Instance.Setup();
             ObjectManager.Instance.Setup();
             SoundManager.Instance.Setup();

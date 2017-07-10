@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-8
      */
-    export class SoundManager
+    export class SoundManager extends Singleton
     {
         private static instance:SoundManager = null;
         public static get Instance():SoundManager

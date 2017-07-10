@@ -7,25 +7,42 @@ module dc
      */
     export class Time
     {
-        public static get deltaTime():number { return 0; }
+        private static m_StartTime:number = 0;
+        public static Start()
+        {
+           this.m_StartTime = Laya.timer.currTimer;
+        }
 
-        public static get fixedDeltaTime():number {return 0; }
+        /**两帧之间的时间间隔,单位毫秒*/
+        public static get deltaTime():number
+        { 
+            return Laya.timer.delta; 
+        }
+        /**固定两帧之间的时间间隔*/
+        public static get fixedDeltaTime():number
+        {
+            return 0; 
+        }
+        /**当前时间，相对xxxx年开始经过的毫秒数*/
+        public static get time():number 
+        {
+            return Laya.timer.currTimer; 
+        }
+        /**游戏启动到现在的时间,单位毫秒*/
+        public static get timeSinceStartup():number
+        {
+            return (Laya.timer.currTimer - this.m_StartTime);
+        }
 
-        public static get fixedTime():number {return 0; }
+        /**游戏启动后，经过的帧数*/
+        public static get frameCount():number 
+        {
+            return Laya.timer.currFrame; 
+        }
 
-        public static get frameCount():number { return 0; }
-
-        public static get maximumDeltaTime():number {return 0; }
-
-        public static get realtimeSinceStartup():number {return 0; }
-
-        public static get renderedFrameCount():number {return 0; }
-
-        public static get smoothDeltaTime():number {return 0; }
-
-        public static get time():number {return 0; }
-
-        public static get timeScale():number {return 0; }
-
+        public static get timeScale():number 
+        {
+            return Laya.timer.scale; 
+        }
     }
 }

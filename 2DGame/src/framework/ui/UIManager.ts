@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-9
      */	
-	export class UIManager
+	export class UIManager extends Singleton
 	{
         private static instance:UIManager = null;
         public static get Instance():UIManager
