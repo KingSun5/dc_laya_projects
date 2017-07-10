@@ -34,6 +34,10 @@ class GameMain
         // {
         //     dc.Log.Debug(queue.Dequeue().toString());
         // }
+        // var darr:dc.DoubleArray = new dc.DoubleArray(1,1,0);
+        // darr.Set(0,1,10);
+        // dc.Log.Debug(darr.Get(0,1));
+        // dc.Log.Debug(darr.Get(0,0));
 
         // var stack:dc.Stack<number> = new dc.Stack<number>();
         // stack.Push(1);
@@ -45,11 +49,29 @@ class GameMain
         //     dc.Log.Debug(stack.Pop().toString());
         // }
 
+        //dc.Log.Debug(dc.StringUtils.minuteFormat(123));
+        //dc.Log.Debug(dc.StringUtils.formate("杰卫，这里有{0}个苹果，和{1}个香蕉！", 5,10));
+
+        //dc.Log.Debug(dc.NumberUtils.toFixed(100.01111, 3).toString());
+
+        //随机数
+        // for(var i = 0; i < 50; ++i)
+        // {
+        //     var n:number = dc.MathUtils.randRange(10, 15);
+        //     dc.Log.Debug(n.toString());
+        // }
+        dc.Log.Debug(dc.MathUtils.Repeat(5,10).toString());
+
+        //vector2
+        // var vec1:dc.Vector3 = new dc.Vector3(0,1,0);
+        // var vec2:dc.Vector3 = new dc.Vector3(1,1,0);
+        // dc.Log.Debug(dc.Vector3.Project(vec1, vec2).ToString());
+
         //net
-        this.m_socket = new dc.ClientSocket();
-        this.m_socket.ConnectUrl("ws://echo.websocket.org:80");
-        this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
-        this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected)
+        // this.m_socket = new dc.ClientSocket();
+        // this.m_socket.ConnectUrl("ws://echo.websocket.org:80");
+        // this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
+        // this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected)
     }
     private OnConnected(args:dc.EventArgs):void
     {

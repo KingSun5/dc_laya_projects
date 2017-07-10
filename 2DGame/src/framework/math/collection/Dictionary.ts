@@ -15,7 +15,7 @@ module dc
             this.m_Dic[key] = value;
         }
         public Remove(key:number):void
-        {
+        {Laya.MathUtil.lerp
             delete this.m_Dic[key];
         }
         public ContainsKey(key:number):boolean

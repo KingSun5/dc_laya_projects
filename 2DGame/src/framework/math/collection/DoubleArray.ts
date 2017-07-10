@@ -1,0 +1,43 @@
+module dc
+{
+    /**
+     * 字典-键为number
+     * @author hannibal
+     * @time 20174-7-8
+     */
+    export class DoubleArray
+    {
+        private m_Array:any[] = [];
+
+        constructor(rows:number, cols:number, value:any)
+        {
+            if(rows > 0 && cols > 0)
+            {
+                for(var row = 0; row < rows; ++row)
+                {
+                    for(var col = 0; col < cols; ++col)
+                    {
+                        this.Set(row, col, value);
+                    }
+                }
+            }
+        }
+
+        public Set(row:number, col:number, value:any):void
+        {
+            if(this.m_Array[row] == null)
+                this.m_Array[row] = [];
+            this.m_Array[row][col] = value;
+        }
+        public Get(row:number, col:number):any
+        {
+            if(this.m_Array[row] == null)
+                return null;
+            return this.m_Array[row][col];
+        }
+        public Clear():void
+        {
+            ArrayUtils.Clear(this.m_Array);
+        }
+    }
+}
