@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-6
      */
-    export class ObjectManager extends Singleton
+    export class ObjectManager
     {
         private m_shareObjID:number = 0;
         private m_DicObject:Object = {};

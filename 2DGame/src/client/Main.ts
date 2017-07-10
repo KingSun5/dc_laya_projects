@@ -17,10 +17,16 @@ module dc
         {
             if (Main.isFirstEnterGame)
             {
-                Procedure.Setup();
-                Procedure.StartGame();
+                Laya.init(600,400);
+                Laya.Stat.show();
+
+                dc.Procedure.Instance.Setup();
+                dc.Procedure.Instance.StartGame();
                 Main.isFirstEnterGame = false;
+
+                new GameMain();
             }
         }
     }
 }
+new dc.Main();

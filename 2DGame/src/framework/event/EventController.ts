@@ -13,10 +13,12 @@ module dc
         private static instance:EventController = null;
         public static get Instance():EventController
         {
-            if(!this.instance)this.instance = new EventController();
+            if(!this.instance)
+            {
+                this.instance = new EventController();
+            }
             return this.instance;
         }
-
         public AddEventListener(type:string, context:any, fun:Function):void
         {
             this.m_Event.AddEventListener(type, context, fun);
@@ -27,10 +29,10 @@ module dc
             this.m_Event.RemoveEventListener(type, context, fun);
         }
 
-        public Trigger(type:string, ...args:any[]):void
+        public DispatchEvent(type:string, ...args:any[]):void
         {
             this.m_EvtArgs.Init(args);
-            this.m_Event.TriggerEvent(type, this.m_EvtArgs);
+            this.m_Event.DispatchEvent(type, this.m_EvtArgs);
         }
         
         public Clear():void

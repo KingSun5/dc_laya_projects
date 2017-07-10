@@ -7,40 +7,49 @@ module dc
      */
     export class Procedure
     {
-        public static Setup():void
+        private static instance:Procedure = null;
+        public static get Instance():Procedure
         {
-            Procedure.InitGameManager();
+            if(!this.instance)this.instance = new Procedure();
+            return this.instance;
         }
 
-        public static Destroy():void
+        public Setup():void
         {
-            Procedure.ReleaseGameManager();
+            Log.Info("Procedure::setup");
+            this.InitGameManager();
+            Laya.timer.frameLoop(1, this, this.MainLoop);
         }
 
-        public static StartGame():void
+        public Destroy():void
+        {
+            this.ReleaseGameManager();
+        }
+
+        public StartGame():void
         {
             GameApp.Instance.StartGame();    
         }
 
-        public static MainLoop():void
+        private MainLoop():void
         {
-            Procedure.Tick(Time.deltaTime,Time.frameCount);
+            this.Tick(Time.deltaTime,Time.frameCount);
         }
 
-        private static InitGameManager():void
+        private InitGameManager():void
         {
             Framework.Instance.Setup();
             
             GameApp.Instance.Setup();
         }
-        private static ReleaseGameManager():void
+        private ReleaseGameManager():void
         {
             GameApp.Instance.Destroy();
 
             Framework.Instance.Destroy();
         }
 
-        private static Tick(elapse:number, game_frame:number):void
+        private Tick(elapse:number, game_frame:number):void
         {
             Framework.Instance.Tick(elapse, game_frame);
 

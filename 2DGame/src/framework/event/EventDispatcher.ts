@@ -43,7 +43,7 @@ module dc
             }
         }
 
-        public TriggerEvent(type:string, args:EventArgs):void
+        public DispatchEvent(type:string, args:EventArgs):void
         {
             args.Type = type;
             var arr:Laya.Handler[] = this.m_DicFuns[type];
@@ -54,10 +54,10 @@ module dc
             }
         }
 
-        public Trigger(type:string, ...args:any[]):void
+        public Dispatch(type:string, ...args:any[]):void
         {
             this.m_EvtArgs.Init(args);
-            this.TriggerEvent(type, this.m_EvtArgs);
+            this.DispatchEvent(type, this.m_EvtArgs);
         }
 
         public Clear():void

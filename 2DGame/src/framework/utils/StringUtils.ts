@@ -7,6 +7,13 @@ module dc
      */
     export class StringUtils
     {
+		/**
+		 * 字符串是否有值
+		 */		
+		public static IsNullOrEmpty(s:string):boolean
+		{
+			return (s != null && s.length > 0) ? false : true;
+		}
         public static toInt(str:string):number
 		{
 			if(!str || str.length == 0)return 0;
@@ -143,13 +150,6 @@ module dc
 		public static endsWith(input:string, suffix:string):boolean
 		{
 			return suffix == input.substring(input.length - suffix.length);
-		}
-		/**
-		 * 字符串是否有值
-		 */		
-		public static IsNullOrEmpty(s:string):boolean
-		{
-			return (s != null && s.length > 0) ? false : true;
 		}
     }
 }

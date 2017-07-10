@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-6
      */
-    export class Framework extends Singleton
+    export class Framework
     {        
         private static instance:Framework = null;
         public static get Instance():Framework
@@ -19,13 +19,15 @@ module dc
             UIManager.Instance.Setup();
             ObjectManager.Instance.Setup();
             SoundManager.Instance.Setup();
+            ResourceManager.Instance.Setup();
         }
 
         public Destroy():void
         {
             UIManager.Instance.Destroy();
             ObjectManager.Instance.Destroy();   
-            SoundManager.Instance.Destroy();  
+            SoundManager.Instance.Destroy();    
+            ResourceManager.Instance.Destroy();  
         }
 
         public Tick(elapse:number, game_frame:number):void
@@ -33,6 +35,7 @@ module dc
             UIManager.Instance.Tick(elapse, game_frame);
             ObjectManager.Instance.Tick(elapse, game_frame);
             SoundManager.Instance.Tick(elapse, game_frame);
+            ResourceManager.Instance.Tick(elapse, game_frame);
         }
     }
 }

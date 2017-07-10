@@ -64,12 +64,12 @@ module dc
         private OnSocketOpen(): void 
         {
 			Log.Info("Socket Connected");
-            this.Trigger(SocketID.SOCKET_CONNECTED);
+            this.Dispatch(SocketID.SOCKET_CONNECTED);
 		}
 		private OnSocketClose(): void 
         {
 			Log.Info("Socket closed");
-            this.Trigger(SocketID.SOCKET_CLOSE);
+            this.Dispatch(SocketID.SOCKET_CLOSE);
 		}
 		private OnMessageReveived(msg: any): void
         {
@@ -84,7 +84,7 @@ module dc
 		private OnConnectError(e: Event): void
         {
 			Log.Info("Socket Error");
-            this.Trigger(SocketID.SOCKET_ERROR);
+            this.Dispatch(SocketID.SOCKET_ERROR);
 		}
         private m_IsReadHead:boolean = true;
         private m_DataLength:number = 0;

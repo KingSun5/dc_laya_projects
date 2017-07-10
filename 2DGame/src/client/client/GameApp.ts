@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-9
      */
-    export class GameApp extends Singleton
+    export class GameApp
     {        
         private static instance:GameApp = null;
         public static get Instance():GameApp
