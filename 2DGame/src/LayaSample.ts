@@ -18,12 +18,12 @@ module dc
         private OnImageClickEvt():void
         {
             //事件
-            // dc.EventController.Instance.AddEventListener("11",this, this.callback);
-            // dc.EventController.Instance.DispatchEvent("11",  "1234567");   
-            // dc.EventController.Instance.RemoveEventListener("11", this, this.callback);
-            // dc.EventController.Instance.DispatchEvent("11",  "1234567"); 
-            // dc.EventController.Instance.AddEventListener("12",this,  this.callback2);
-            // dc.EventController.Instance.DispatchEvent("12", "234567");   
+            // dc.EventController.AddEventListener("11",this, this.callback);
+            // dc.EventController.DispatchEvent("11",  "1234567");   
+            // dc.EventController.RemoveEventListener("11", this, this.callback);
+            // dc.EventController.DispatchEvent("11",  "1234567"); 
+            // dc.EventController.AddEventListener("12",this,  this.callback2);
+            // dc.EventController.DispatchEvent("12", "234567");   
 
             //数据结构
             // var queue:dc.Queue<number> = new dc.Queue<number>();
@@ -74,14 +74,17 @@ module dc
             // this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
             // this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected);
 
+            //声音
+            SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
+
             //加载
-            dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
-            dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
-            dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
-            dc.ResourceManager.Instance.AddSync("res/image/1.png", Laya.Loader.IMAGE);
-            dc.ResourceManager.Instance.AddSync("res/image/2.png", Laya.Loader.IMAGE);
-            dc.ResourceManager.Instance.AddSync("res/image/3.png", Laya.Loader.IMAGE);
-            dc.ResourceManager.Instance.StartSync();
+            // dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
+            // dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
+            // dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
+            // dc.ResourceManager.Instance.AddSync("res/image/1.png", Laya.Loader.IMAGE);
+            // dc.ResourceManager.Instance.AddSync("res/image/2.png", Laya.Loader.IMAGE);
+            // dc.ResourceManager.Instance.AddSync("res/image/3.png", Laya.Loader.IMAGE);
+            // dc.ResourceManager.Instance.StartSync();
         }
         private OnComplete(url:string):void
         {

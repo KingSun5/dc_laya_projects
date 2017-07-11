@@ -70,7 +70,7 @@ module dc
 		{
 			super.OnComplete(asset);
 			this.m_TotalCount++;
-			EventController.Instance.DispatchEvent(LoaderID.RESOURCE_LOAD_PROGRESS, this.m_TotalCount, this.m_TotalCount+this.m_LoadQueue.length);
+			EventController.DispatchEvent(LoaderID.RESOURCE_LOAD_PROGRESS, this.m_TotalCount, this.m_TotalCount+this.m_LoadQueue.length);
 			this.CheckLoadComplate();
 		}
 		/**验证是否加载完成*/
@@ -80,7 +80,7 @@ module dc
 			{
             	Log.Info("[load]load complate");
 				this.Stop();
-				EventController.Instance.DispatchEvent(LoaderID.RESOURCE_LOAD_COMPLATE, this.m_TotalCount);
+				EventController.DispatchEvent(LoaderID.RESOURCE_LOAD_COMPLATE, this.m_TotalCount);
 				return true;
 			}
 			return false;

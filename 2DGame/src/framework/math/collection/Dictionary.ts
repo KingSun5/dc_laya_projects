@@ -10,12 +10,14 @@ module dc
     {
         private m_Dic:Object = {};
 
-        public Add(key:number, value:TValue):void
+        public Add(key:number, value:TValue):boolean
         {
+            if(this.ContainsKey(key))return false;
             this.m_Dic[key] = value;
+            return true;
         }
         public Remove(key:number):void
-        {Laya.MathUtil.lerp
+        {
             delete this.m_Dic[key];
         }
         public ContainsKey(key:number):boolean
@@ -43,9 +45,11 @@ module dc
     {
         private m_Dic:Object = {};
 
-        public Add(key:string, value:TValue):void
+        public Add(key:string, value:TValue):boolean
         {
+            if(this.ContainsKey(key))return false;
             this.m_Dic[key] = value;
+            return true;
         }
         public Remove(key:string):void
         {
