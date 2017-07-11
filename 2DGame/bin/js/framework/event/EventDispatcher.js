@@ -37,7 +37,7 @@ var dc;
                 }
             }
         };
-        EventDispatcher.prototype.TriggerEvent = function (type, args) {
+        EventDispatcher.prototype.DispatchEvent = function (type, args) {
             args.Type = type;
             var arr = this.m_DicFuns[type];
             if (arr == null)
@@ -47,13 +47,13 @@ var dc;
                 item.runWith(args);
             }
         };
-        EventDispatcher.prototype.Trigger = function (type) {
+        EventDispatcher.prototype.Dispatch = function (type) {
             var args = [];
             for (var _i = 1; _i < arguments.length; _i++) {
                 args[_i - 1] = arguments[_i];
             }
             this.m_EvtArgs.Init(args);
-            this.TriggerEvent(type, this.m_EvtArgs);
+            this.DispatchEvent(type, this.m_EvtArgs);
         };
         EventDispatcher.prototype.Clear = function () {
             dc.DicUtils.ClearDic(this.m_DicFuns);

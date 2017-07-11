@@ -61,11 +61,11 @@ var dc;
         };
         ClientSocket.prototype.OnSocketOpen = function () {
             dc.Log.Info("Socket Connected");
-            this.Trigger(dc.SocketID.SOCKET_CONNECTED);
+            this.Dispatch(dc.SocketID.SOCKET_CONNECTED);
         };
         ClientSocket.prototype.OnSocketClose = function () {
             dc.Log.Info("Socket closed");
-            this.Trigger(dc.SocketID.SOCKET_CLOSE);
+            this.Dispatch(dc.SocketID.SOCKET_CLOSE);
         };
         ClientSocket.prototype.OnMessageReveived = function (msg) {
             if (msg instanceof ArrayBuffer) {
@@ -77,7 +77,7 @@ var dc;
         };
         ClientSocket.prototype.OnConnectError = function (e) {
             dc.Log.Info("Socket Error");
-            this.Trigger(dc.SocketID.SOCKET_ERROR);
+            this.Dispatch(dc.SocketID.SOCKET_ERROR);
         };
         ClientSocket.prototype.DispatcherData = function () {
             while (this.m_ReadBuff.bytesAvailable > 0) {
