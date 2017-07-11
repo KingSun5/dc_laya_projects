@@ -44,5 +44,9 @@ module dc
         {
             return Laya.timer.scale; 
         }
+        public static set timeScale(scale:number) 
+        {
+            Laya.timer.scale = scale; 
+        }
     }
 }

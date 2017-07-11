@@ -7,14 +7,30 @@ module dc
      */
 	export class ObjectPools
 	{
-        public static Get(sign:string):any
+        public static Get(classDef: any):any
         {
-            return Laya.Pool.getItem(sign);
+            var sign:string = "dc." + classDef.name;
+            var obj:any = Laya.Pool.getItem(sign);
+            if(obj == null)
+            {
+                if(Laya.ClassUtils.getRegClass(sign) == null)
+                {
+                    Log.Debug("[pools]注册对象池:" + sign);
+                    Laya.ClassUtils.regClass(sign, classDef);
+                }
+                obj = Laya.ClassUtils.getInstance(sign);
+            }
+            return obj;
         }
 
-        public static Recover(sign: string, item: any):void
+        public static Recover(obj: any):void
         {
-            Laya.Pool.recover(sign, item);
+            if(obj == null)return;
+
+            var proto:any = Object.getPrototypeOf(obj);
+            var clazz: any = proto["constructor"];
+            var sign:string = "dc." + clazz.name;
+            Laya.Pool.recover(sign, obj);
         }
 	}
 }

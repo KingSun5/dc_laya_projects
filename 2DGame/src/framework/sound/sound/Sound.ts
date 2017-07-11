@@ -19,6 +19,7 @@ module dc
 			this.m_SoundFile = file_name;
 			this.m_PlayCount = count;
 			this.m_IsPlaying = false;
+			this.m_SoundChannel = null;
 			this.LoadResource();
 		}
 		public Destroy():void
@@ -29,6 +30,7 @@ module dc
 				this.m_SoundChannel.stop();
 				this.m_SoundChannel = null;
 			}
+			ObjectPools.Recover(this);
 		}
 
 		public Update():void

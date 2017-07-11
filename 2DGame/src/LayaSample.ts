@@ -75,7 +75,7 @@ module dc
             // this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected);
 
             //声音
-            SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
+            //SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
 
             //加载
             // dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
@@ -85,6 +85,15 @@ module dc
             // dc.ResourceManager.Instance.AddSync("res/image/2.png", Laya.Loader.IMAGE);
             // dc.ResourceManager.Instance.AddSync("res/image/3.png", Laya.Loader.IMAGE);
             // dc.ResourceManager.Instance.StartSync();
+
+            //时间
+            Log.Debug(TimeUtils.TimeSince2009.toString());
+
+            TimerManager.Instance.AddTimer(1000, 10, this, this.OnTimerEvt, [123,12]);
+        }
+        private OnTimerEvt(args:any[])
+        {
+            Log.Debug("定时器触发:" + Time.timeSinceStartup);
         }
         private OnComplete(url:string):void
         {

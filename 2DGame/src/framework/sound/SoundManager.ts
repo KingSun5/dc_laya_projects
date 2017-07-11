@@ -24,6 +24,7 @@ module dc
 
         public Setup():void
         {
+            
             this.RegisterEvent();
         }
 
@@ -77,7 +78,7 @@ module dc
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～音效～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         public PlaySoundEffect(file_name:string, count:number):EffectSound
         {
-            var sound:EffectSound = new EffectSound();
+            var sound:EffectSound = ObjectPools.Get(EffectSound);
             sound.Setup(file_name, count);
 
             return sound;
