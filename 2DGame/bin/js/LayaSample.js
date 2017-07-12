@@ -5,7 +5,7 @@ var dc;
         function GameMain() {
             this.m_image1_url = "res/image/1.png";
             this.aa = 0;
-            this.m_img = new Laya.Sprite();
+            this.m_img = new LayaSprite();
             this.m_img.loadImage(this.m_image1_url, 100, 50);
             this.m_img.on(Laya.Event.CLICK, this, this.OnImageClickEvt);
             Laya.stage.addChild(this.m_img);
