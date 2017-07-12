@@ -7,7 +7,7 @@ module dc
      */
 	export class RenderObject extends GameObject
 	{
-		protected m_RootNode:Laya.Sprite;
+		protected m_RootNode:LayaSprite;
 		protected m_IsVisible:boolean;		//是否可见
 		protected m_IsLoadComplete:boolean;	//是否准备完成
 
@@ -22,7 +22,7 @@ module dc
 
 			this.m_IsVisible = true;
 			this.m_IsLoadComplete = false;
-           	this.m_RootNode = new Laya.Sprite();
+           	this.m_RootNode = new LayaSprite();
         }
 
         public Setup(info:any):void
