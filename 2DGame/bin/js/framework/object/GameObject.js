@@ -1,11 +1,11 @@
-var dc;
+let dc;
 (function (dc) {
     /**
      * 游戏对象基类
      * @author hannibal
      * @time 20174-7-6
      */
-    var GameObject = (function () {
+    let GameObject = (function () {
         function GameObject() {
             this.m_Active = true;
             this.m_ObjectGUID = 0;

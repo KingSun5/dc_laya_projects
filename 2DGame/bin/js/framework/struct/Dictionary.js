@@ -1,4 +1,4 @@
-var dc;
+let dc;
 (function (dc) {
     /**
      * 字典-键为number
@@ -6,7 +6,7 @@ var dc;
      * @author hannibal
      * @time 20174-7-6
      */
-    var NDictionary = (function () {
+    let NDictionary = (function () {
         function NDictionary() {
             this.m_Dic = {};
         }
@@ -14,6 +14,7 @@ var dc;
             this.m_Dic[key] = value;
         };
         NDictionary.prototype.Remove = function (key) {
+            Laya.MathUtil.lerp;
             delete this.m_Dic[key];
         };
         NDictionary.prototype.ContainsKey = function (key) {
@@ -23,7 +24,7 @@ var dc;
             return this.m_Dic[key];
         };
         NDictionary.prototype.Clear = function () {
-            for (var key in this.m_Dic) {
+            for (let key in this.m_Dic) {
                 delete this.m_Dic[key];
             }
         };
@@ -35,7 +36,7 @@ var dc;
      * @author hannibal
      * @time 20174-7-6
      */
-    var SDictionary = (function () {
+    let SDictionary = (function () {
         function SDictionary() {
             this.m_Dic = {};
         }
@@ -52,7 +53,7 @@ var dc;
             return this.m_Dic[key];
         };
         SDictionary.prototype.Clear = function () {
-            for (var key in this.m_Dic) {
+            for (let key in this.m_Dic) {
                 delete this.m_Dic[key];
             }
         };

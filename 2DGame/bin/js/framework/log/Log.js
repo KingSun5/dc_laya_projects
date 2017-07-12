@@ -1,5 +1,10 @@
 var dc;
 (function (dc) {
+    /**
+     * 写日志
+     * @author hannibal
+     * @time 20174-7-8
+     */
     var Log = (function () {
         function Log() {
         }

@@ -1,4 +1,4 @@
-var dc;
+let dc;
 (function (dc) {
     /**
      * 列表
@@ -6,7 +6,7 @@ var dc;
      * @author hannibal
      * @time 20174-7-6
      */
-    var List = (function () {
+    let List = (function () {
         function List() {
         }
         return List;

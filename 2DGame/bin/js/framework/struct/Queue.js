@@ -1,11 +1,11 @@
-var dc;
+let dc;
 (function (dc) {
     /**
      * 队列：先入先出
      * @author hannibal
      * @time 20174-7-6
      */
-    var Queue = (function () {
+    let Queue = (function () {
         function Queue() {
             this.m_List = [];
         }

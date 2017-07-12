@@ -1,11 +1,11 @@
-var dc;
+let dc;
 (function (dc) {
     /**
      * 栈：后入先出
      * @author hannibal
      * @time 20174-7-6
      */
-    var Stack = (function () {
+    let Stack = (function () {
         function Stack() {
             this.m_List = [];
         }

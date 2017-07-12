@@ -1,24 +1,24 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
+let __extends = (this && this.__extends) || (function () {
+    let extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        function (d, b) { for (let p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var dc;
+let dc;
 (function (dc) {
     /**
      * 对象管理
      * @author hannibal
      * @time 20174-7-6
      */
-    var ObjectManager = (function (_super) {
+    let ObjectManager = (function (_super) {
         __extends(ObjectManager, _super);
         function ObjectManager() {
-            var _this = _super !== null && _super.apply(this, arguments) || this;
+            let _this = _super !== null && _super.apply(this, arguments) || this;
             _this.m_shareObjID = 0;
             _this.m_DicObject = {};
             _this.m_DicServerObject = {};
@@ -39,8 +39,8 @@ var dc;
         ObjectManager.prototype.Destroy = function () {
         };
         ObjectManager.prototype.Tick = function (elapse, game_frame) {
-            for (var key in this.m_DicObject) {
-                var obj = this.m_DicObject[key];
+            for (let key in this.m_DicObject) {
+                let obj = this.m_DicObject[key];
                 if (obj != null && obj.Active && obj.Update(elapse, game_frame)) {
                 }
                 else {
@@ -61,7 +61,7 @@ var dc;
         };
         /**移除所有对象*/
         ObjectManager.prototype.ReleaseAllObject = function () {
-            for (var key in this.m_DicObject) {
+            for (let key in this.m_DicObject) {
                 this.ReleaseObject(this.m_DicObject[key]);
             }
             this.m_ListReleaseObject.length = 0;
@@ -96,8 +96,8 @@ var dc;
         ObjectManager.prototype.ProcessReleaseObject = function () {
             if (this.m_ListReleaseObject.length == 0)
                 return;
-            for (var _i = 0, _a = this.m_ListReleaseObject; _i < _a.length; _i++) {
-                var obj = _a[_i];
+            for (let _i = 0, _a = this.m_ListReleaseObject; _i < _a.length; _i++) {
+                let obj = _a[_i];
                 this.ReleaseObject(obj);
             }
             this.m_ListReleaseObject.length = 0;
@@ -112,9 +112,9 @@ var dc;
         ObjectManager.prototype.ShareObjectGUID = function () {
             return ++this.m_shareObjID;
         };
+        ObjectManager.instance = null;
         return ObjectManager;
     }(dc.Singleton));
-    ObjectManager.instance = null;
     dc.ObjectManager = ObjectManager;
 })(dc || (dc = {}));
 //# sourceMappingURL=ObjectManager.js.map
