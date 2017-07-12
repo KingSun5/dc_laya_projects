@@ -13,7 +13,6 @@ module dc
         constructor()
         {
             var clazz: any = this["constructor"];
-            
             //为空时，表示浏览器不支持这样读取构造函数
             if (!clazz)
             {

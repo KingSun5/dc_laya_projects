@@ -27,6 +27,17 @@ module dc
             this.m_Width = width;
             this.m_Height = height;
         }
+
+        public SetPos(left:number, top:number):void
+        {
+            this.m_XMin = left;
+            this.m_YMin = top;
+        }
+        public SetWH(width:number, height:number):void
+        {
+            this.m_Width = width;
+            this.m_Height = height;
+        }
          
         public get x():number
         {

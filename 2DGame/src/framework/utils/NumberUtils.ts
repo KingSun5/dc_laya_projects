@@ -14,6 +14,10 @@ module dc
         {
           return StringUtils.toNumber(value.toFixed(p));
         }
+        public static toInt(value:number):number
+        {
+          return Math.floor(value);
+        }  
         public static isInt(value:number):boolean
         {
           return Math.ceil(value) != value ? false : true;

@@ -1,7 +1,7 @@
 module dc
 {
     /**
-     * 字典-键为number
+     * 二维数组
      * @author hannibal
      * @time 20174-7-8
      */

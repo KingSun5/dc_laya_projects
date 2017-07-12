@@ -93,28 +93,28 @@ module dc
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～事件～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         private RegisterEvent():void
         {
-            EventController.AddEventListener(SoundID.SWITCH_BG_SOUND, this, this.OnSoundEvent);
-            EventController.AddEventListener(SoundID.SWITCH_EFFECT_SOUND, this, this.OnSoundEvent);
-            EventController.AddEventListener(SoundID.SWITCH_CHAT_SOUND, this, this.OnSoundEvent);
-            EventController.AddEventListener(SoundID.ADJUST_BG_VOLUME, this, this.OnSoundEvent);
-            EventController.AddEventListener(SoundID.ADJUST_EFFECT_VOLUME, this, this.OnSoundEvent);
-            EventController.AddEventListener(SoundID.ADJUST_CHAT_VOLUME, this, this.OnSoundEvent);
+            EventController.AddEventListener(SoundEvent.SWITCH_BG_SOUND, this, this.OnSoundEvent);
+            EventController.AddEventListener(SoundEvent.SWITCH_EFFECT_SOUND, this, this.OnSoundEvent);
+            EventController.AddEventListener(SoundEvent.SWITCH_CHAT_SOUND, this, this.OnSoundEvent);
+            EventController.AddEventListener(SoundEvent.ADJUST_BG_VOLUME, this, this.OnSoundEvent);
+            EventController.AddEventListener(SoundEvent.ADJUST_EFFECT_VOLUME, this, this.OnSoundEvent);
+            EventController.AddEventListener(SoundEvent.ADJUST_CHAT_VOLUME, this, this.OnSoundEvent);
         }
         private UnRegisterEvent():void
         {
-            EventController.RemoveEventListener(SoundID.SWITCH_BG_SOUND, this, this.OnSoundEvent);
-            EventController.RemoveEventListener(SoundID.SWITCH_EFFECT_SOUND, this, this.OnSoundEvent);
-            EventController.RemoveEventListener(SoundID.SWITCH_CHAT_SOUND, this, this.OnSoundEvent);
-            EventController.RemoveEventListener(SoundID.ADJUST_BG_VOLUME, this, this.OnSoundEvent);
-            EventController.RemoveEventListener(SoundID.ADJUST_EFFECT_VOLUME, this, this.OnSoundEvent);
-            EventController.RemoveEventListener(SoundID.ADJUST_CHAT_VOLUME, this, this.OnSoundEvent);
+            EventController.RemoveEventListener(SoundEvent.SWITCH_BG_SOUND, this, this.OnSoundEvent);
+            EventController.RemoveEventListener(SoundEvent.SWITCH_EFFECT_SOUND, this, this.OnSoundEvent);
+            EventController.RemoveEventListener(SoundEvent.SWITCH_CHAT_SOUND, this, this.OnSoundEvent);
+            EventController.RemoveEventListener(SoundEvent.ADJUST_BG_VOLUME, this, this.OnSoundEvent);
+            EventController.RemoveEventListener(SoundEvent.ADJUST_EFFECT_VOLUME, this, this.OnSoundEvent);
+            EventController.RemoveEventListener(SoundEvent.ADJUST_CHAT_VOLUME, this, this.OnSoundEvent);
         }
         private OnSoundEvent(evt:EventArgs):void
         {
             var evt_type:string = evt.Type;
             switch(evt_type)
             {
-                case SoundID.SWITCH_BG_SOUND:
+                case SoundEvent.SWITCH_BG_SOUND:
                     this.m_IsCloseBGSound = evt.Get(0) == 0 ? true : false;
                     if(this.m_IsCloseBGSound)
                         this.PauseBGSound();
@@ -122,26 +122,26 @@ module dc
                         this.ResumeBGSound();
                     break;
 
-                case SoundID.SWITCH_EFFECT_SOUND:
+                case SoundEvent.SWITCH_EFFECT_SOUND:
                     this.m_IsCloseEffectSound = evt.Get(0) == 0 ? true : false;
                     break;
 
-                case SoundID.SWITCH_CHAT_SOUND:
+                case SoundEvent.SWITCH_CHAT_SOUND:
                     // 语音开关
                     break;
 
-                case SoundID.ADJUST_BG_VOLUME:
+                case SoundEvent.ADJUST_BG_VOLUME:
                     this.m_BGSoundVolume = evt.Get(0);
                     this.m_BGSoundVolume = MathUtils.Clamp(this.m_BGSoundVolume, 0, 1);
                     this.SetBGSoundVolume(this.m_BGSoundVolume);
                     break;
 
-                case SoundID.ADJUST_EFFECT_VOLUME:
+                case SoundEvent.ADJUST_EFFECT_VOLUME:
                     this.m_EffectSoundVolume = evt.Get(0);
                     this.m_EffectSoundVolume = MathUtils.Clamp(this.m_EffectSoundVolume, 0, 1);
                     break;
 
-                case SoundID.ADJUST_CHAT_VOLUME:
+                case SoundEvent.ADJUST_CHAT_VOLUME:
                     // 语音音量大小
                     break;
             }
