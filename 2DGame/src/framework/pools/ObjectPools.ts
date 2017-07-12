@@ -9,8 +9,8 @@ module dc
 	{
         public static Get(classDef: any):any
         {
-            var sign:string = "dc." + classDef.name;
-            var obj:any = Laya.Pool.getItem(sign);
+            let sign:string = "dc." + classDef.name;
+            let obj:any = Laya.Pool.getItem(sign);
             if(obj == null)
             {
                 if(Laya.ClassUtils.getRegClass(sign) == null)
@@ -27,9 +27,9 @@ module dc
         {
             if(obj == null)return;
 
-            var proto:any = Object.getPrototypeOf(obj);
-            var clazz: any = proto["constructor"];
-            var sign:string = "dc." + clazz.name;
+            let proto:any = Object.getPrototypeOf(obj);
+            let clazz: any = proto["constructor"];
+            let sign:string = "dc." + clazz.name;
             Laya.Pool.recover(sign, obj);
         }
 	}

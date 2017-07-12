@@ -30,7 +30,7 @@ module dc
         }
         public Clear():void
         {
-            for(var key in this.m_Dic)
+            for(let key in this.m_Dic)
             {
                 delete this.m_Dic[key];
             }
@@ -65,7 +65,7 @@ module dc
         }
         public Clear():void
         {
-            for(var key in this.m_Dic)
+            for(let key in this.m_Dic)
             {
                 delete this.m_Dic[key];
             }

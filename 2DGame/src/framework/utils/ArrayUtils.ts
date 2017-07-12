@@ -23,7 +23,7 @@ module dc
 		/**从数组移除元素*/		
 		public static RemoveValue(arr:any[], v:any):void
 		{
-			var i:number = arr.indexOf(v);
+			let i:number = arr.indexOf(v);
 			if(i != -1)
 			{
 				arr.splice(i, 1);
@@ -32,7 +32,7 @@ module dc
         /**移除所有*/
 		public static RemoveAllValue(arr:any[], v:any):void
 		{
-			var i:number = arr.indexOf(v);
+			let i:number = arr.indexOf(v);
 			while(i>=0)
 			{
 				arr.splice(i, 1);
@@ -52,8 +52,8 @@ module dc
         /**清空数组*/		
 		public static Clear(arr:any[]):void
 		{
-			var i:number=0;
-			var len:number = arr.length;
+			let i:number=0;
+			let len:number = arr.length;
 			for(;i<len;++i)
 			{
 				arr[i] = null;

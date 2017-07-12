@@ -12,8 +12,8 @@ module dc
 		 */		
 		public static GetKeys(d:Object):any[]
 		{
-			var a:any[] = [];
-			for(var key in d)
+			let a:any[] = [];
+			for(let key in d)
 			{
 				a.push(key);
 			} 
@@ -26,9 +26,9 @@ module dc
 		 */		
 		public static GetValues(d:Object):any[]
 		{
-			var a:any[] = [];
+			let a:any[] = [];
 
-			for(var key in d)
+			for(let key in d)
 			{
 				a.push(d[key]);
 			}
@@ -41,8 +41,8 @@ module dc
 		 */
 		public static ClearDic(dic:Object):void
 		{
-            var v:any;
-			for(var key in dic)
+            let v:any;
+			for(let key in dic)
 			{
                 v = dic[key];
 				if(v instanceof Object)
@@ -60,7 +60,7 @@ module dc
 		{
 			if(fun == null) return;
 			
-			for(var key in dic)
+			for(let key in dic)
 			{
 				fun(dic[key]);
 			}
@@ -70,7 +70,7 @@ module dc
 		{
 			if(dic == null) return true;
 			
-			for(var key in dic)
+			for(let key in dic)
 			{
 				return false;
 			}
@@ -81,8 +81,8 @@ module dc
 		{
 			if(dic == null) return 0;
 			
-			var count:number = 0;
-			for(var key in dic)
+			let count:number = 0;
+			for(let key in dic)
 			{
 				++count;
 			}

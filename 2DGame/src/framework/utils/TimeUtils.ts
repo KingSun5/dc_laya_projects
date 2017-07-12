@@ -10,13 +10,13 @@ module dc
 		/**从1970年以来经过的毫秒数*/
 		public static get TimeSince1970():number
 		{
-			var base_date = new Date(1970,1,1,0,0,0,0);
+			let base_date = new Date(1970,1,1,0,0,0,0);
 			return (Date.now() - base_date.getTime());
 		}
 		/**从2009年以来经过的毫秒数*/
 		public static get TimeSince2009():number
 		{
-			var base_date = new Date(2009,1,1,0,0,0,0);
+			let base_date = new Date(2009,1,1,0,0,0,0);
 			return (Date.now() - base_date.getTime());
 		}
 	}

@@ -13,9 +13,9 @@ module dc
         {
             if(rows > 0 && cols > 0)
             {
-                for(var row = 0; row < rows; ++row)
+                for(let row = 0; row < rows; ++row)
                 {
-                    for(var col = 0; col < cols; ++col)
+                    for(let col = 0; col < cols; ++col)
                     {
                         this.Set(row, col, value);
                     }

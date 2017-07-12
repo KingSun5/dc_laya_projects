@@ -89,7 +89,7 @@ module dc
 
         public static Project(vector:Vector3, onNormal:Vector3):Vector3
         {
-            var num:number = Vector3.Dot(onNormal, onNormal);
+            let num:number = Vector3.Dot(onNormal, onNormal);
             if (num < 1E-05)
             {
                 return Vector3.zero;
@@ -108,10 +108,10 @@ module dc
  
         public Normalize():void
         {
-            var magnitude:number = this.magnitude;
+            let magnitude:number = this.magnitude;
             if (magnitude > 1E-05)
             {
-                var v:Vector3 = Vector3.Div(this, this.magnitude);
+                let v:Vector3 = Vector3.Div(this, this.magnitude);
                 this.Set(v.x, v.y, v.z);
             }
             else
@@ -121,7 +121,7 @@ module dc
         }
         public get normalized():Vector3
         {
-            var vector:Vector3 = new Vector3(this.x, this.y, this.z);
+            let vector:Vector3 = new Vector3(this.x, this.y, this.z);
             vector.Normalize();
             return vector;
         }
@@ -133,7 +133,7 @@ module dc
 
         public static Distance(a:Vector3, b:Vector3):number
         {
-            var vector:Vector3 = Vector3.Sub(a, b);
+            let vector:Vector3 = Vector3.Sub(a, b);
             return vector.magnitude;
         }
 
@@ -174,8 +174,8 @@ module dc
         }
         public static MoveTowards(current:Vector3, target:Vector3, maxDistanceDelta:number):Vector3
         {
-            var vector:Vector3 = Vector3.Sub(target, current);
-            var magnitude:number = vector.magnitude;
+            let vector:Vector3 = Vector3.Sub(target, current);
+            let magnitude:number = vector.magnitude;
             if ((magnitude > maxDistanceDelta) && (magnitude != 0))
             {
                 return Vector3.Add(current, (Vector3.Mul(Vector3.Div(vector, magnitude), maxDistanceDelta)));

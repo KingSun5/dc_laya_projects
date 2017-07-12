@@ -73,8 +73,8 @@ module dc
 		{
 			if (this.m_CurLoaderAsset != null && url == this.m_CurLoaderAsset.Url) return false;
 
-			var info:LoaderAsset = null;
-			for (var i = 0; i <this.m_LoadQueue.length; ++i)
+			let info:LoaderAsset = null;
+			for (let i = 0; i <this.m_LoadQueue.length; ++i)
 			{
 				info = this.m_LoadQueue[i];
 				if(info.Url == url && info.Stage == eResLoadStage.UNLOAD)

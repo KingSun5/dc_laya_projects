@@ -16,7 +16,7 @@ module dc
          */		
 		public static GetGlowFilter(color: string, blur?: number, offX?: number, offY?: number):Laya.GlowFilter[]
 		{
-			var glow = new Laya.GlowFilter(color, blur, offX, offY);
+			let glow = new Laya.GlowFilter(color, blur, offX, offY);
 			return [glow];
 		}
         /**
@@ -25,7 +25,7 @@ module dc
          */		
 		public static GetBlurFilter(strength?: number):Laya.BlurFilter[]
 		{
-			var blur = new Laya.BlurFilter(strength);
+			let blur = new Laya.BlurFilter(strength);
 			return [blur];
 		}
         /**
@@ -34,7 +34,7 @@ module dc
          */		
 		public static GetColorFilter(mat?: Array<any>):Laya.ColorFilter[]
 		{
-			var color = new Laya.ColorFilter(mat);
+			let color = new Laya.ColorFilter(mat);
 			return [color];
 		}
 	}

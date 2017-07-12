@@ -33,10 +33,10 @@ module dc
 		 */		
 		public static addZero(str:string, len:number, dir:number = 0):string
 		{
-			var _str:string = "";
-			var _len:number = str.length;
-			var str_pre_zero:string = "";
-			var str_end_zero:string = "";
+			let _str:string = "";
+			let _len:number = str.length;
+			let str_pre_zero:string = "";
+			let str_end_zero:string = "";
 			if(dir == 0)
 				str_end_zero = "0";
 			else
@@ -44,7 +44,7 @@ module dc
 			
 			if(_len < len)
 			{
-				var i:number = 0;
+				let i:number = 0;
 				while(i < len - _len)
 				{
 					_str = str_pre_zero + _str + str_end_zero;
@@ -103,11 +103,11 @@ module dc
 		 */		
 		public static minuteFormat(seconds:number):string
 		{
-			var min:number = Math.floor(seconds / 60);
-			var sec:number = Math.floor(seconds % 60);
+			let min:number = Math.floor(seconds / 60);
+			let sec:number = Math.floor(seconds % 60);
 			
-			var min_str:string = min < 10 ? ("0" + min.toString()) : (min.toString());
-			var sec_str:string = sec < 10 ? ("0" + sec.toString()) : (sec.toString());
+			let min_str:string = min < 10 ? ("0" + min.toString()) : (min.toString());
+			let sec_str:string = sec < 10 ? ("0" + sec.toString()) : (sec.toString());
 			
 			return min_str + ":" + sec_str;
 		} 
@@ -119,8 +119,8 @@ module dc
 		 */
 		public static hourFormat(seconds:number):string
 		{
-			var hour:number = Math.floor(seconds / 3600);
-			var hour_str:String = hour < 10 ? ("0" + hour.toString()) : (hour.toString());
+			let hour:number = Math.floor(seconds / 3600);
+			let hour_str:String = hour < 10 ? ("0" + hour.toString()) : (hour.toString());
 			return hour_str + ":" + StringUtils.minuteFormat(seconds % 3600);
 		}
 	    /**
@@ -130,7 +130,7 @@ module dc
 		 */
 		public static format(str:string, ...args):string
 		{  
-			for(var i = 0; i<args.length; i++)
+			for(let i = 0; i<args.length; i++)
             {  
 				str = str.replace(new RegExp("\\{" + i + "\\}", "gm"), args[i]);  
 			}  

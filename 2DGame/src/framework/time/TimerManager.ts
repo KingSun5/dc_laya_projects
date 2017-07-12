@@ -33,7 +33,7 @@ module dc
         {
             this.Remove();
 
-            for (var i = 0; i < this.m_Timers.length; i++)
+            for (let i = 0; i < this.m_Timers.length; i++)
             {
                 this.m_Timers[i].Update(elapse);
             }
@@ -49,7 +49,7 @@ module dc
         public AddTimer(rate: number, ticks:number, caller: any, method: Function, args?: Array<any>):number
         {
             if (ticks <= 0) ticks = 0;
-            var newTimer:TimerEntity = ObjectPools.Get(TimerEntity);
+            let newTimer:TimerEntity = ObjectPools.Get(TimerEntity);
             newTimer.Set(++this.m_idCounter, rate, ticks, Laya.Handler.create(caller, method, args, false));
             this.m_Timers.push(newTimer);
             return newTimer.id;
@@ -70,9 +70,9 @@ module dc
         {
             if (this.m_RemovalPending.length > 0)
             {
-                for (var id of this.m_RemovalPending)
+                for (let id of this.m_RemovalPending)
                 {
-                    for (var i = 0; i < this.m_Timers.length; i++)
+                    for (let i = 0; i < this.m_Timers.length; i++)
                     {
                         if (this.m_Timers[i].id == id)
                         {

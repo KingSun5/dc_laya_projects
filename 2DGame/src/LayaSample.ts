@@ -26,7 +26,7 @@ module dc
             // dc.EventController.DispatchEvent("12", "234567");   
 
             //数据结构
-            // var queue:dc.Queue<number> = new dc.Queue<number>();
+            // let queue:dc.Queue<number> = new dc.Queue<number>();
             // queue.Enqueue(1);
             // queue.Enqueue(2);
             // queue.Enqueue(3);
@@ -35,12 +35,12 @@ module dc
             // {
             //     dc.Log.Debug(queue.Dequeue().toString());
             // }
-            // var darr:dc.DoubleArray = new dc.DoubleArray(1,1,0);
+            // let darr:dc.DoubleArray = new dc.DoubleArray(1,1,0);
             // darr.Set(0,1,10);
             // dc.Log.Debug(darr.Get(0,1));
             // dc.Log.Debug(darr.Get(0,0));
 
-            // var stack:dc.Stack<number> = new dc.Stack<number>();
+            // let stack:dc.Stack<number> = new dc.Stack<number>();
             // stack.Push(1);
             // stack.Push(2);
             // stack.Push(3);
@@ -56,16 +56,16 @@ module dc
             //dc.Log.Debug(dc.NumberUtils.toFixed(100.01111, 3).toString());
 
             //随机数
-            // for(var i = 0; i < 50; ++i)
+            // for(let i = 0; i < 50; ++i)
             // {
-            //     var n:number = dc.MathUtils.randRange(10, 15);
+            //     let n:number = dc.MathUtils.randRange(10, 15);
             //     dc.Log.Debug(n.toString());
             // }
             //dc.Log.Debug(dc.MathUtils.Repeat(5,10).toString());
 
             //vector2
-            // var vec1:dc.Vector3 = new dc.Vector3(0,1,0);
-            // var vec2:dc.Vector3 = new dc.Vector3(1,1,0);
+            // let vec1:dc.Vector3 = new dc.Vector3(0,1,0);
+            // let vec2:dc.Vector3 = new dc.Vector3(1,1,0);
             // dc.Log.Debug(dc.Vector3.Project(vec1, vec2).ToString());
 
             //net
@@ -87,9 +87,19 @@ module dc
             // dc.ResourceManager.Instance.StartSync();
 
             //时间
-            Log.Debug(TimeUtils.TimeSince2009.toString());
+            //Log.Debug(TimeUtils.TimeSince2009.toString());
+            //TimerManager.Instance.AddTimer(1000, 10, this, this.OnTimerEvt, [123,12]);
 
-            TimerManager.Instance.AddTimer(1000, 10, this, this.OnTimerEvt, [123,12]);
+            //utils
+            let sound = ClassUtils.CreateObject<dc.Sound>("dc.Sound");
+            sound.Setup("",1);
+
+            let a = Utils.GetLocationParams();
+            
+        }
+        public Add(a:number):number
+        {
+            return a+10;
         }
         private OnTimerEvt(args:any[])
         {
@@ -102,7 +112,7 @@ module dc
         private OnConnected(args:dc.EventArgs):void
         {
             dc.Log.Debug("连接成功");
-            var by:Laya.Byte = dc.ByteArrayUtils.CreateSocketByte();
+            let by:Laya.Byte = dc.ByteArrayUtils.CreateSocketByte();
             by.writeInt32(85555555);
             by.writeUTFString("1234");
             by.writeFloat32(0.123);

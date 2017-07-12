@@ -31,9 +31,9 @@ module dc
 
         public Tick(elapse:number, game_frame:number):void
         {
-            for(var key in this.m_DicObject)
+            for(let key in this.m_DicObject)
             {
-                var obj:GameObject = this.m_DicObject[key];
+                let obj:GameObject = this.m_DicObject[key];
                 if(obj != null && obj.Active && obj.Update(elapse, game_frame))
                 {
                     
@@ -56,13 +56,13 @@ module dc
             }
             else
             {
-                obj.Active = false;
+                obj.SetActive(false);
             }
         }
         /**移除所有对象*/
         public ReleaseAllObject():void
         {
-            for(var key in this.m_DicObject)
+            for(let key in this.m_DicObject)
             {
                 this.ReleaseObject(this.m_DicObject[key]);
             }
@@ -103,7 +103,7 @@ module dc
         {
             if(this.m_ListReleaseObject.length == 0)return;
 
-            for(var obj of this.m_ListReleaseObject)
+            for(let obj of this.m_ListReleaseObject)
             {
                 this.ReleaseObject(obj);
             }

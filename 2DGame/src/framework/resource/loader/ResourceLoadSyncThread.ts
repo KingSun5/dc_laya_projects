@@ -33,7 +33,7 @@ module dc
 				Log.Error("加载队列正在执行:" + asset.Url);
 				return false;
 			}
-			for(var item of this.m_LoadQueue)
+			for(let item of this.m_LoadQueue)
 			{
 				if(item.Url == asset.Url)
 				{

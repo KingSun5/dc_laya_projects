@@ -1,5 +1,10 @@
 module dc
 {
+    /**
+     * 写日志
+     * @author hannibal
+     * @time 20174-7-8
+     */	
     export class Log
     {
         public static Debug(...args:string[])

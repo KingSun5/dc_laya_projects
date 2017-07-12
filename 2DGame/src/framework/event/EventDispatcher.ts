@@ -19,8 +19,8 @@ module dc
             }
             else
             {
-                var arr:Laya.Handler[] = this.m_DicFuns[type];
-                for(var item of arr)
+                let arr:Laya.Handler[] = this.m_DicFuns[type];
+                for(let item of arr)
                 {
                     if(item.caller == context && item.method == fun)return;
                 }
@@ -30,11 +30,11 @@ module dc
 
         public RemoveEventListener(type:string, context:any,fun:Function):void
         {
-            var arr:Laya.Handler[] = this.m_DicFuns[type];
+            let arr:Laya.Handler[] = this.m_DicFuns[type];
             if(arr == null)return;
-            for(var i = 0; i < arr.length; ++i)
+            for(let i = 0; i < arr.length; ++i)
             {
-                var item = arr[i];
+                let item = arr[i];
                 if(item.caller == context && item.method == fun)
                 {
                     arr.splice(i, 1);
@@ -46,9 +46,9 @@ module dc
         public DispatchEvent(type:string, args:EventArgs):void
         {
             args.Type = type;
-            var arr:Laya.Handler[] = this.m_DicFuns[type];
+            let arr:Laya.Handler[] = this.m_DicFuns[type];
             if(arr == null)return;
-            for(var item of arr)
+            for(let item of arr)
             {
                 item.runWith(args);
             }

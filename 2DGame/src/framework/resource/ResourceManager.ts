@@ -90,8 +90,8 @@ module dc
 			if (this.m_FrontLoadThread == null || StringUtils.IsNullOrEmpty(url)) return 0;
 
 			//加载
-			var id:number = this.ShareGUID();
-			var info:LoaderAsset = new LoaderAsset(url, type, null, eResLoadPriority.HIGH, true, "sync", false);
+			let id:number = this.ShareGUID();
+			let info:LoaderAsset = new LoaderAsset(url, type, null, eResLoadPriority.HIGH, true, "sync", false);
 			info.ID = id;
 			this.m_FrontLoadThread.Add(info);
 			//添加到加载目录
@@ -134,15 +134,15 @@ module dc
 			if (this.m_BackLoadThread == null || StringUtils.IsNullOrEmpty(url)) return 0;
 
 			//判断是否已经加载过
-			var res:any = this.GetRes(url);
+			let res:any = this.GetRes(url);
 			if (res != null)
 			{
 				if (callback != null) callback.runWith(url);
 				return 0;
 			}
 			//加载
-			var id:number = this.ShareGUID();
-			var info:LoaderAsset = new LoaderAsset(url, type, callback, eResLoadPriority.LOW, true, "sync", false);
+			let id:number = this.ShareGUID();
+			let info:LoaderAsset = new LoaderAsset(url, type, callback, eResLoadPriority.LOW, true, "sync", false);
 			info.ID = id;
 			this.m_BackLoadThread.Add(info);
 			//添加到加载目录

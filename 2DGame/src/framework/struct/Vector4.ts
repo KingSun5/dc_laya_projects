@@ -97,10 +97,10 @@ module dc
  
         public Normalize():void
         {
-            var magnitude:number = this.magnitude;
+            let magnitude:number = this.magnitude;
             if (magnitude > 1E-05)
             {
-                var v:Vector4 = Vector4.Div(this, this.magnitude);
+                let v:Vector4 = Vector4.Div(this, this.magnitude);
                 this.Set(v.x, v.y, v.z, v.w);
             }
             else
@@ -110,14 +110,14 @@ module dc
         }
         public get normalized():Vector4
         {
-            var vector:Vector4 = new Vector4(this.x, this.y, this.z, this.w);
+            let vector:Vector4 = new Vector4(this.x, this.y, this.z, this.w);
             vector.Normalize();
             return vector;
         }
 
         public static Distance(a:Vector4, b:Vector4):number
         {
-            var vector:Vector4 = Vector4.Sub(a, b);
+            let vector:Vector4 = Vector4.Sub(a, b);
             return vector.magnitude;
         }
 
@@ -158,8 +158,8 @@ module dc
         }
         public static MoveTowards(current:Vector4, target:Vector4, maxDistanceDelta:number):Vector4
         {
-            var vector:Vector4 = Vector4.Sub(target, current);
-            var magnitude:number = vector.magnitude;
+            let vector:Vector4 = Vector4.Sub(target, current);
+            let magnitude:number = vector.magnitude;
             if ((magnitude > maxDistanceDelta) && (magnitude != 0))
             {
                 return Vector4.Add(current, (Vector4.Mul(Vector4.Div(vector, magnitude), maxDistanceDelta)));

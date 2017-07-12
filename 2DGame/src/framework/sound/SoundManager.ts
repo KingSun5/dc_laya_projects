@@ -78,7 +78,7 @@ module dc
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～音效～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         public PlaySoundEffect(file_name:string, count:number):EffectSound
         {
-            var sound:EffectSound = ObjectPools.Get(EffectSound);
+            let sound:EffectSound = ObjectPools.Get(EffectSound);
             sound.Setup(file_name, count);
 
             return sound;
@@ -111,7 +111,7 @@ module dc
         }
         private OnSoundEvent(evt:EventArgs):void
         {
-            var evt_type:string = evt.Type;
+            let evt_type:string = evt.Type;
             switch(evt_type)
             {
                 case SoundEvent.SWITCH_BG_SOUND:

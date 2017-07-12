@@ -9,7 +9,7 @@ module dc
     {
         public static CreateSocketByte():Laya.Byte
         {
-            var by:Laya.Byte = new Laya.Byte();
+            let by:Laya.Byte = new Laya.Byte();
             by.writeUint16(0);
             return by;
         }

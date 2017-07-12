@@ -27,7 +27,7 @@ module dc
 		{
 			if(min > max)
 			{
-				var i:number = min;
+				let i:number = min;
 				min = max;
 				max = i;
 			}
@@ -52,7 +52,7 @@ module dc
         }
         public static LerpAngle(a:number, b:number, t:number):number
         {
-            var num:number = MathUtils.Repeat(b - a, 360);
+            let num:number = MathUtils.Repeat(b - a, 360);
             if (num > 180)
             {
                 num -= 360;
@@ -71,7 +71,7 @@ module dc
 		 */		
 		public static RandRange(param1:number, param2:number) : number
 		{
-			var loc:number = Math.random() * (param2 - param1) + param1;
+			let loc:number = Math.random() * (param2 - param1) + param1;
 			return loc;
 		}
 		/**
@@ -80,7 +80,7 @@ module dc
 		 */	
 		public static RandRange_Int(param1:number, param2:number) : number
 		{
-			var loc:number = Math.random() * (param2 - param1 + 1) + param1;
+			let loc:number = Math.random() * (param2 - param1 + 1) + param1;
 			return Math.floor(loc);
 		}
 		/**
@@ -91,7 +91,7 @@ module dc
 		{
 			if(arr.length == 0)
 				return -1;
-			var loc:number = arr[MathUtils.RandRange_Int(0, arr.length-1)];
+			let loc:number = arr[MathUtils.RandRange_Int(0, arr.length-1)];
 			return loc;
 		}
 		/**
@@ -155,7 +155,7 @@ module dc
 		}
 		public static GetLineDegree(x1:number, y1:number, x2:number, y2:number):number
 		{
-			var degree:number = MathUtils.ToDegree(MathUtils.GetLineRadians(x1, y1, x2, y2));
+			let degree:number = MathUtils.ToDegree(MathUtils.GetLineRadians(x1, y1, x2, y2));
 			return MathUtils.ClampDegrees(degree);
 		}	
 		/**

@@ -36,9 +36,9 @@ module dc
 			this.m_alige = alige;
 
 			this.m_nodes = new PathGrid[this.m_numRows,this.m_numCols];
-			for(var row = 0; row < this.m_numRows; row++) 
+			for(let row = 0; row < this.m_numRows; row++) 
 			{ 
-				for(var col = 0; col < this.m_numCols; col++) 
+				for(let col = 0; col < this.m_numCols; col++) 
 				{ 
 					this.m_nodes.Set(row,col, new PathGrid(row, col, this.m_gridWidth, this.m_gridHeight));
 					switch(this.m_alige)
@@ -148,7 +148,7 @@ module dc
 		 */		
 		public getPosXByGridCol(col:number)
 		{
-			var x:number = this.m_gridWidth * col;
+			let x:number = this.m_gridWidth * col;
 			switch(this.m_alige)
 			{
 			case eAligeType.LEFT_BOTTOM:
@@ -159,7 +159,7 @@ module dc
 		}
 		public getPosYByGridRow(row:number):number
 		{
-			var y:number = this.m_gridHeight * row;
+			let y:number = this.m_gridHeight * row;
 			switch(this.m_alige)
 			{
 			case eAligeType.LEFT_BOTTOM:
@@ -172,8 +172,8 @@ module dc
 		{
 			if(!this.isValidPos(x, y))return null;
 
-			var row:number = this.getNodeRowByPos(y);
-			var col:number = this.getNodeColByPos(x);
+			let row:number = this.getNodeRowByPos(y);
+			let col:number = this.getNodeColByPos(x);
 			if(this.isValidRowCol(row, col))
 				return this.m_nodes.Get(row,col);
 
