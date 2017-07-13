@@ -6,7 +6,9 @@ module dc
      * @time 20174-7-12
      */
 	export class PathFinderID
-	{
+	{		
+		/**默认最大搜索次数*/
+		public static MAX_DEFAULT_SEARCH_COUNT:number = 1000;
 		/**
 		* 节点类型：也是寻路代价
 		*/	

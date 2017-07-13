@@ -23,6 +23,13 @@ module dc
 		private m_numPickCols:number = 0; 
 		private m_numPickRows:number = 0; 
 
+        private static instance:PathGridMap = null;
+        public static get Instance():PathGridMap
+        {
+            if(!this.instance)this.instance = new PathGridMap();
+            return this.instance;
+        }
+
 		public setup(numRows:number, numCols:number, gridW:number = 1, gridH:number = 1, pickW:number = 1, pickH:number = 1, alige:eAligeType = eAligeType.LEFT_BOTTOM):void
 		{
 			this.m_numRows = numRows; 

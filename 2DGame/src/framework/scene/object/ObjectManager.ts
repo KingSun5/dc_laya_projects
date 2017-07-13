@@ -26,7 +26,7 @@ module dc
 
         public Destroy():void
         {
-
+            this.ReleaseAllObject();
         }
 
         public Tick(elapse:number, game_frame:number):void
@@ -40,9 +40,11 @@ module dc
                 }
                 else
                 {
-
+                    this.m_ListReleaseObject.push(obj);
                 }
             }
+
+            this.ProcessReleaseObject();
         }
 
 	    /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～对象集合～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
