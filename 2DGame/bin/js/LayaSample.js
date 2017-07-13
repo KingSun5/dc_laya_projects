@@ -84,9 +84,12 @@ var dc;
             // sound.Setup("",1);
             // let a = Utils.GetLocationParams();
             //配置表
-            var conf = dc.DataProvider.Get("serverList");
+            var conf = dc.DataProvider.GetConfig("serverList");
             var s = conf[0].serverId;
             var n = conf[0].name;
+            var info = dc.DataProvider.GetInfo("global", "nResetTime");
+            s = info.IntegerValue;
+            n = info.DoubleValue;
         };
         GameMain.prototype.Add = function (a) {
             return a + 10;
