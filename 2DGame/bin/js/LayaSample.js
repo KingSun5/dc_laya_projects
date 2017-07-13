@@ -9,6 +9,12 @@ var dc;
             this.m_img.loadImage(this.m_image1_url, 100, 50);
             this.m_img.on(Laya.Event.CLICK, this, this.OnImageClickEvt);
             Laya.stage.addChild(this.m_img);
+            //配置表
+            var list = [
+                new dc.ConfigTemplate("data/serverList.json", "serverList", ""),
+                new dc.ConfigTemplate("data/configs/global.json", "global", "Name"),
+            ];
+            dc.DataProvider.Load(list);
         }
         GameMain.prototype.OnImageClickEvt = function () {
             //事件
@@ -74,9 +80,13 @@ var dc;
             //Log.Debug(TimeUtils.TimeSince2009.toString());
             //TimerManager.Instance.AddTimer(1000, 10, this, this.OnTimerEvt, [123,12]);
             //utils
-            var sound = dc.ClassUtils.CreateObject("dc.Sound");
-            sound.Setup("", 1);
-            var a = dc.Utils.GetLocationParams();
+            // let sound = ClassUtils.CreateObject<dc.Sound>("dc.Sound");
+            // sound.Setup("",1);
+            // let a = Utils.GetLocationParams();
+            //配置表
+            var conf = dc.DataProvider.Get("serverList");
+            var s = conf[0].serverId;
+            var n = conf[0].name;
         };
         GameMain.prototype.Add = function (a) {
             return a + 10;
