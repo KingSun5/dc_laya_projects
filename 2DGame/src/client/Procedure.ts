@@ -38,7 +38,7 @@ module dc
 
         private InitGameManager():void
         {
-            Framework.Instance.Setup();
+            Framework.Instance.Setup(Laya.stage);
             
             GameApp.Instance.Setup();
         }

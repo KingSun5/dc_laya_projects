@@ -29,11 +29,28 @@ module dc
             }
             this.m_DicTemplate.Remove(url);
         }
-
-        public static Get(name:string):any
+        public static UnloadAll():void
         {
-            let data = this.m_DicData.GetValue(name);
+            this.m_DicData.Clear();
+            this.m_DicTemplate.Clear();
+        }
+
+        /**返回表*/
+        public static GetConfig(table:string):any
+        {
+            let data = this.m_DicData.GetValue(table);
             return data;
+        }
+        /**返回一行*/
+        public static GetInfo(table:string, key:string):any
+        {
+            let data = this.m_DicData.GetValue(table);
+            if(data != null)
+            {
+                let info = data[key];
+                return info;
+            }
+            return null;
         }
 
         private static OnLoadComplete(url:string):void
@@ -50,7 +67,20 @@ module dc
                 }
                 else
                 {
-                    
+                    let map = {};
+                    let sValue;
+                    let sData;
+                    let i = 0;
+                    while(json_res[i])
+                    {
+                        sData = json_res[i];
+                        sValue = sData[template.key];
+                        assertNullOrNil(sValue, "配置表解析错误:" + template.url);
+                        map[sValue] = sData;
+
+                        i++;
+                    }
+                    this.m_DicData.Add(template.name, map);
                 }
             }
         }

@@ -47,6 +47,19 @@ module dc
         //～～～～～～～～～～～～～～～～～～～～～～～初始化游戏～～～～～～～～～～～～～～～～～～～～～～～//
         private InitScene():void
         {
+            Laya.Stat.show(0, 0);
+            Laya.stage.frameRate = Laya.Stage.FRAME_MOUSE;
+            Laya.stage.size(640,960);
+            //Laya.stage.fullScreenEnabled = true;
+
+            Laya.stage.scaleMode = laya.display.Stage.SCALE_EXACTFIT;
+            //设置横竖屏
+            Laya.stage.screenMode = laya.display.Stage.SCREEN_VERTICAL;
+      
+            //设置水平对齐
+            Laya.stage.alignH =laya.display.Stage.ALIGN_CENTER;
+            //设置垂直对齐
+            Laya.stage.alignV = laya.display.Stage.ALIGN_MIDDLE;
         }
         private ReleaseScene():void
         {

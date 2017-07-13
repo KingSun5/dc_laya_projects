@@ -103,9 +103,13 @@ module dc
             // let a = Utils.GetLocationParams();
             
             //配置表
-            let conf = DataProvider.Get("serverList");
+            let conf = DataProvider.GetConfig("serverList");
             let s = conf[0].serverId;
             let n = conf[0].name;
+
+            let info = DataProvider.GetInfo("global","nResetTime");
+            s = info.IntegerValue;
+            n = info.DoubleValue;
         }
         public Add(a:number):number
         {

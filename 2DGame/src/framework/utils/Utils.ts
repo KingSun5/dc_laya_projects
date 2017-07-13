@@ -62,4 +62,21 @@ module dc
             throw msg || "assert";
         }
     }
+    export function assertNullOrNil(condition, msg?: string)
+    {
+        if (condition==null || condition===null || typeof condition === 'undefined') 
+        {
+            assert(false, msg);
+        }
+    }
+    /**
+     * 判空
+     */
+    export function checkNullOrNil(x):boolean
+    {
+        if (x == null)return true;
+        if (x === null)return true;
+        if (typeof x === 'undefined')return true;
+        return false;
+    }
 }

@@ -14,9 +14,10 @@ module dc
             return this.instance;
         }
 
-        public Setup():void
+        public Setup(root:LayaSprite):void
         {
             Time.Start();
+            LayerManager.Setup(root);
             TimerManager.Instance.Setup();
             UIManager.Instance.Setup();
             ObjectManager.Instance.Setup();
@@ -33,6 +34,7 @@ module dc
             SoundManager.Instance.Destroy();    
             ResourceManager.Instance.Destroy();  
             EffectManager.Instance.Destroy();
+            LayerManager.Destroy();
         }
 
         public Tick(elapse:number, game_frame:number):void
