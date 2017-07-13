@@ -14,6 +14,12 @@ module dc
             this.m_img.on(Laya.Event.CLICK, this, this.OnImageClickEvt);
             Laya.stage.addChild(this.m_img);
             
+            //配置表
+            let list = [
+                new ConfigTemplate("data/serverList.json", "serverList", ""),
+                new ConfigTemplate("data/configs/global.json", "global", "Name"),
+            ];
+            DataProvider.Load(list);
         }
         private OnImageClickEvt():void
         {
@@ -91,11 +97,15 @@ module dc
             //TimerManager.Instance.AddTimer(1000, 10, this, this.OnTimerEvt, [123,12]);
 
             //utils
-            let sound = ClassUtils.CreateObject<dc.Sound>("dc.Sound");
-            sound.Setup("",1);
+            // let sound = ClassUtils.CreateObject<dc.Sound>("dc.Sound");
+            // sound.Setup("",1);
 
-            let a = Utils.GetLocationParams();
+            // let a = Utils.GetLocationParams();
             
+            //配置表
+            let conf = DataProvider.Get("serverList");
+            let s = conf[0].serverId;
+            let n = conf[0].name;
         }
         public Add(a:number):number
         {
