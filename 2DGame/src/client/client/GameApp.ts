@@ -43,6 +43,7 @@ module dc
         
         public StartGame():void
         {
+            EventController.DispatchEvent(EventID.BEGIN_GAME);
         }
         //～～～～～～～～～～～～～～～～～～～～～～～初始化游戏～～～～～～～～～～～～～～～～～～～～～～～//
         private InitScene():void
@@ -60,9 +61,12 @@ module dc
             Laya.stage.alignH =laya.display.Stage.ALIGN_CENTER;
             //设置垂直对齐
             Laya.stage.alignV = laya.display.Stage.ALIGN_MIDDLE;
+
+            SceneLayerUtils.Setup();
         }
         private ReleaseScene():void
         {
+            SceneLayerUtils.Destroy();
         }
         private InitData():void
         {

@@ -23,36 +23,51 @@ module dc
 
             this.m_backLayer = new LayaSprite();
             this.m_backLayer.name = "backLayer";
+			this.m_backLayer.mouseEnabled = false;
             this.m_root.addChild(this.m_backLayer);
 
             this.m_gameLayer = new LayaSprite();
             this.m_gameLayer.name = "gameLayer";
+			this.m_gameLayer.mouseEnabled = true;
             this.m_root.addChild(this.m_gameLayer);
 
             this.m_toolsLayer = new LayaSprite();
             this.m_toolsLayer.name = "toolsLayer";
+			this.m_toolsLayer.mouseEnabled = true;
             this.m_root.addChild(this.m_toolsLayer);
 
             this.m_appLayer = new LayaSprite();
             this.m_appLayer.name = "appLayer";
+			this.m_appLayer.mouseEnabled = true;
             this.m_root.addChild(this.m_appLayer);
 
             this.m_loadLayer = new LayaSprite();
             this.m_loadLayer.name = "loadLayer";
+			this.m_loadLayer.mouseEnabled = true;
             this.m_root.addChild(this.m_loadLayer);
 
             this.m_maskLayer = new LayaSprite();
             this.m_maskLayer.name = "maskLayer";
+			this.m_maskLayer.mouseEnabled = true;
             this.m_root.addChild(this.m_maskLayer);
 
             this.m_topLayer = new LayaSprite();
             this.m_topLayer.name = "topLayer";
+			this.m_topLayer.mouseEnabled = true;
             this.m_root.addChild(this.m_topLayer);
         }
         public static Destroy():void
         {
             DisplayUtils.RemoveAllChild(this.m_root);
             this.m_root.removeSelf();
+            this.m_root = null;
+            this.m_backLayer = null;
+            this.m_gameLayer = null;
+            this.m_toolsLayer = null;
+            this.m_appLayer = null;
+            this.m_loadLayer = null;
+            this.m_maskLayer = null;
+            this.m_topLayer = null;
         }
         public static RemoveAll():void
         {

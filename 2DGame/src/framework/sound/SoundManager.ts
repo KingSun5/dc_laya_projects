@@ -37,6 +37,12 @@ module dc
         {
             
         }
+        
+        /**停止所有声音*/
+        public StopAll():void
+        {
+            this.StopBGSound();
+        }
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～背景声音～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         public PlayBGSound(file_name:string, count:number):BGSound
         {

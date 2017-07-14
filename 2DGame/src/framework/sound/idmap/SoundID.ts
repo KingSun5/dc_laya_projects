@@ -10,10 +10,11 @@ module dc
 		public static SOUND_LISTENER_ENTER:string = "SOUND_LISTENER_ENTER";		//声音听众
 		public static SOUND_LISTENER_LEAVE:string = "SOUND_LISTENER_LEAVE";		//声音听众
 	}
-
+	/// <summary>
+	/// 声音事件
+	/// </summary>
 	export class SoundEvent
 	{
-		//声音事件
 		public static SWITCH_BG_SOUND:string      = "SWITCH_BG_SOUND";		//切换背景声音(开启/关闭)
 		public static SWITCH_EFFECT_SOUND:string  = "SWITCH_EFFECT_SOUND";	//切换音效(开启/关闭)
 		public static SWITCH_CHAT_SOUND:string    = "SWITCH_CHAT_SOUND";	//切换语音(开启/关闭)

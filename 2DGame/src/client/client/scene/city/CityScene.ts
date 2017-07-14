@@ -1,42 +1,44 @@
 module dc
 {
     /**
-     * 场景基类
+     * 主城场景
      * @author hannibal
-     * @time 20174-7-13
+     * @time 20174-7-14
      */
-	export class BaseScene
+	export class CityScene extends BaseScene
 	{
-        protected m_SceneId:number;
-
         public OnEnter(type:eSceneType, scene_id:number, info:any):void
         {
-            this.RegisterEvent();
+            super.OnEnter(type, scene_id, info);
         }
 
         public OnExit()
         {
-            ObjectManager.Instance.ReleaseAllObject();
-            SoundManager.Instance.StopAll();
-
-            this.UnRegisterEvent();
+            super.OnExit();
         }
 
         public Update():void
         {
-            
+            super.Update();
         }
+
+		private BuildLoadResource():void
+		{
+
+		}
 
         protected RegisterEvent():void
         {
+			super.RegisterEvent();
         }
         protected UnRegisterEvent():void
         {
+			super.UnRegisterEvent();
         }
 
         protected OnResourceLoadComplate():void
         {
-
+			super.OnResourceLoadComplate();
         }
 	}
 }
