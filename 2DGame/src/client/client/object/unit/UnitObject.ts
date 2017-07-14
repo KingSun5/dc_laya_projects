@@ -96,7 +96,22 @@ module dc
         {
             switch (evt.Type)
             {
+                case EventID.UNIT_FEATURE:
+                    {
+                        let type:eFeatureType = evt.Get(0);
+                        switch (type)
+                        {
+                            case eFeatureType.AbilityMoveSpeed:
+                                let s = this.m_UnitInfo.AbilInfo.Get(eAbilType.MoveSpeed);
+                                this.SetSpeed(s);
+                                break;
 
+                            case eFeatureType.AbilityMaxHp:
+                                this.HpMax = this.m_UnitInfo.AbilInfo.Get(eAbilType.Hp);
+                                break;
+                        }
+                    }
+                    break;
             }
         }
         /**死亡*/
