@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-11
      */	
-	export class UIEffect
+	export class UIEffect extends BaseEffect
 	{
 
 	}

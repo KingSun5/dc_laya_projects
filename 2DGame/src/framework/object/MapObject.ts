@@ -63,6 +63,14 @@ module dc
 				this.OnMapGridChangle(map_row, map_col);
 			}
 		}
+		public SetDirection(x:number, y:number)
+		{
+			this.m_Direction.Set(x, y);
+		}
+		public SetSpeed(s:number)
+		{
+			this.m_MoveSpeed = s;
+		}
 		/**格子改变*/
 		protected OnMapGridChangle(new_row:number, new_col:number):void
 		{
@@ -81,6 +89,14 @@ module dc
 			{
 				this.m_PathGrid.addObject(this);
 			}
+		}
+		public get Direction():Vector2
+		{
+			return this.m_Direction;
+		}
+		protected get MoveSpeed():number
+		{
+			return this.m_MoveSpeed;
 		}
 	}
 }

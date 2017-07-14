@@ -6,6 +6,7 @@ module dc
         private m_image1_url:string = "res/image/1.png";
         private m_img:LayaSprite;
         private m_socket:dc.ClientSocket;
+        private m_dic:SDictionary<number>;
         constructor()
         {
 
@@ -55,6 +56,16 @@ module dc
             // {
             //     dc.Log.Debug(stack.Pop().toString());
             // }
+            this.m_dic = new SDictionary<number>();
+            this.m_dic.Add("1", 1);
+            this.m_dic.Add("2", 2);
+            this.m_dic.Add("3", 3);
+            this.m_dic.Foreach(function(key, value)
+            {
+                Log.Debug(value.toString());
+                if(value == 2)return false;
+                return true;
+            });
 
             //dc.Log.Debug(dc.StringUtils.minuteFormat(123));
             //dc.Log.Debug(dc.StringUtils.formate("杰卫，这里有{0}个苹果，和{1}个香蕉！", 5,10));
@@ -103,13 +114,13 @@ module dc
             // let a = Utils.GetLocationParams();
             
             //配置表
-            let conf = DataProvider.GetConfig("serverList");
-            let s = conf[0].serverId;
-            let n = conf[0].name;
+            // let conf = DataProvider.GetConfig("serverList");
+            // let s = conf[0].serverId;
+            // let n = conf[0].name;
 
-            let info = DataProvider.GetInfo("global","nResetTime");
-            s = info.IntegerValue;
-            n = info.DoubleValue;
+            // let info = DataProvider.GetInfo("global","nResetTime");
+            // s = info.IntegerValue;
+            // n = info.DoubleValue;
         }
         public Add(a:number):number
         {

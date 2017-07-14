@@ -4,6 +4,7 @@ import LayaHandler = laya.utils.Handler;
 import LayaEvent = laya.events.Event;
 import LayaEventDispatcher = laya.events.EventDispatcher;
 import LayaSprite = laya.display.Sprite;
+import LayaNode = laya.display.Node;
 import LayaText = laya.display.Text;
 import LayaAnimation = laya.display.Animation;
 import LayaPoint = laya.maths.Point;

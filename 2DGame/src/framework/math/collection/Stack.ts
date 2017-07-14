@@ -7,7 +7,7 @@ module dc
      */
     export class Stack<T>
     {
-        private m_List:T[] = [];
+        private m_List:Array<T> = [];
 
         /**添加数据*/
         public Push(item:T):void
@@ -26,7 +26,7 @@ module dc
             return this.m_List[this.m_List.length-1];
         }
         /**转换成标准数组*/
-        public ToArray():T[]
+        public ToArray():Array<T>
         {
             return this.m_List.slice(0, this.m_List.length);
         }
@@ -43,6 +43,14 @@ module dc
         public Size():number
         {
             return this.m_List.length;
+        }
+        public Foreach(compareFn?: (a: T) => boolean):void
+        {
+            for(let item of this.m_List)
+            {
+                if(!compareFn.call(null, item))
+                    break;
+            }
         }
     }
 }

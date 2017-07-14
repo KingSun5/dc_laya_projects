@@ -16,15 +16,15 @@ module dc
 
         public OnExit()
         {
-            ObjectManager.Instance.ReleaseAllObject();
+            ObjectManager.Instance.RemoveAll();
             SoundManager.Instance.StopAll();
-
+            SceneLayerUtils.Clear();
             this.UnRegisterEvent();
         }
 
         public Update():void
         {
-            
+
         }
 
         protected RegisterEvent():void

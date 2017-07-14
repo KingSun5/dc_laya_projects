@@ -33,5 +33,6 @@ module dc
 		public static UNIT_BUFFER_DELETE:string                 = "UNIT_BUFFER_DELETE";	                        //buff移除
 		public static UNIT_ENTER_AREA:string                    = "UNIT_ENTER_AREA";                            //进入区域
 		public static UNIT_LEAVE_AREA:string                    = "UNIT_LEAVE_AREA";                            //离开区域
+    	public static UNIT_FEATURE:string                    	= "UNIT_FEATURE";                           	//角色属性
 	}
 }

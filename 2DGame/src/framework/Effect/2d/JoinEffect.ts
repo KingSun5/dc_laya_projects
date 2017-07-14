@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-11
      */	
-	export class JoinEffect
+	export class JoinEffect extends BaseEffect
 	{
 
 	}

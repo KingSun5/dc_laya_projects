@@ -41,10 +41,12 @@ module dc
             Framework.Instance.Setup(Laya.stage);
             
             GameApp.Instance.Setup();
+            SceneManager.Instance.Setup();
         }
         private ReleaseGameManager():void
         {
             GameApp.Instance.Destroy();
+            SceneManager.Instance.Destroy();
 
             Framework.Instance.Destroy();
         }
@@ -54,6 +56,7 @@ module dc
             Framework.Instance.Tick(elapse, game_frame);
 
             GameApp.Instance.Tick(elapse, game_frame);
+            SceneManager.Instance.Tick(elapse, game_frame);
         }
     }
 }

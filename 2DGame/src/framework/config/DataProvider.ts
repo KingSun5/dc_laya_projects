@@ -42,7 +42,7 @@ module dc
             return data;
         }
         /**返回一行*/
-        public static GetInfo(table:string, key:string):any
+        public static GetInfo(table:string, key:any):any
         {
             let data = this.m_DicData.GetValue(table);
             if(data != null)

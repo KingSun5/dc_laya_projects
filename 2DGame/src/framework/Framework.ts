@@ -23,7 +23,6 @@ module dc
             ObjectManager.Instance.Setup();
             SoundManager.Instance.Setup();
             ResourceManager.Instance.Setup();
-            EffectManager.Instance.Setup();
         }
 
         public Destroy():void
@@ -33,7 +32,6 @@ module dc
             ObjectManager.Instance.Destroy();   
             SoundManager.Instance.Destroy();    
             ResourceManager.Instance.Destroy();  
-            EffectManager.Instance.Destroy();
             LayerManager.Destroy();
         }
 
@@ -44,7 +42,6 @@ module dc
             ObjectManager.Instance.Tick(elapse, game_frame);
             SoundManager.Instance.Tick(elapse, game_frame);
             ResourceManager.Instance.Tick(elapse, game_frame);
-            EffectManager.Instance.Tick(elapse, game_frame);
         }
     }
 }

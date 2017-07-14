@@ -20,12 +20,17 @@ module dc
         {
             delete this.m_Dic[key];
         }
+        public Set(key:number, value:TValue)
+        {
+            this.m_Dic[key] = value;
+        }
         public ContainsKey(key:number):boolean
         {
             return (this.m_Dic[key] != null ? true : false);
         }
         public GetValue(key:number):TValue
         {
+            if(!this.ContainsKey(key))return null;
             return this.m_Dic[key];
         }
         public Clear():void
@@ -33,6 +38,14 @@ module dc
             for(let key in this.m_Dic)
             {
                 delete this.m_Dic[key];
+            }
+        }
+        public Foreach(compareFn?: (key:number, value: TValue) => boolean):void
+        {
+            for(let key in this.m_Dic)
+            {
+                if(!compareFn.call(null, key, this.m_Dic[key]))
+                    break;
             }
         }
     }
@@ -61,6 +74,7 @@ module dc
         }
         public GetValue(key:string):TValue
         {
+            if(!this.ContainsKey(key))return null;
             return this.m_Dic[key];
         }
         public Clear():void
@@ -68,6 +82,14 @@ module dc
             for(let key in this.m_Dic)
             {
                 delete this.m_Dic[key];
+            }
+        }
+        public Foreach(compareFn?: (key:string, value: TValue) => boolean):void
+        {
+            for(let key in this.m_Dic)
+            {
+                if(!compareFn.call(null, key, this.m_Dic[key]))
+                    break;
             }
         }
     }    

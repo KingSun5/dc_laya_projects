@@ -26,7 +26,7 @@ module dc
 
         public Destroy():void
         {
-            this.ReleaseAllObject();
+            this.RemoveAll();
         }
 
         public Tick(elapse:number, game_frame:number):void
@@ -62,7 +62,7 @@ module dc
             }
         }
         /**移除所有对象*/
-        public ReleaseAllObject():void
+        public RemoveAll():void
         {
             for(let key in this.m_DicObject)
             {
