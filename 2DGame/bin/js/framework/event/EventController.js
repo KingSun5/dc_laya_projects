@@ -37,10 +37,10 @@ var dc;
         EventController.Clear = function () {
             this.m_Event.Clear();
         };
-        EventController.m_Event = new dc.EventDispatcher();
-        EventController.m_EvtArgs = new dc.EventArgs();
         return EventController;
     }(dc.Singleton));
+    EventController.m_Event = new dc.EventDispatcher();
+    EventController.m_EvtArgs = new dc.EventArgs();
     dc.EventController = EventController;
 })(dc || (dc = {}));
 //# sourceMappingURL=EventController.js.map

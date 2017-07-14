@@ -47,6 +47,16 @@ var dc;
             // {
             //     dc.Log.Debug(stack.Pop().toString());
             // }
+            this.m_dic = new dc.SDictionary();
+            this.m_dic.Add("1", 1);
+            this.m_dic.Add("2", 2);
+            this.m_dic.Add("3", 3);
+            this.m_dic.Foreach(function (key, value) {
+                dc.Log.Debug(value.toString());
+                if (value == 2)
+                    return false;
+                return true;
+            });
             //dc.Log.Debug(dc.StringUtils.minuteFormat(123));
             //dc.Log.Debug(dc.StringUtils.formate("杰卫，这里有{0}个苹果，和{1}个香蕉！", 5,10));
             //dc.Log.Debug(dc.NumberUtils.toFixed(100.01111, 3).toString());
@@ -84,12 +94,12 @@ var dc;
             // sound.Setup("",1);
             // let a = Utils.GetLocationParams();
             //配置表
-            var conf = dc.DataProvider.GetConfig("serverList");
-            var s = conf[0].serverId;
-            var n = conf[0].name;
-            var info = dc.DataProvider.GetInfo("global", "nResetTime");
-            s = info.IntegerValue;
-            n = info.DoubleValue;
+            // let conf = DataProvider.GetConfig("serverList");
+            // let s = conf[0].serverId;
+            // let n = conf[0].name;
+            // let info = DataProvider.GetInfo("global","nResetTime");
+            // s = info.IntegerValue;
+            // n = info.DoubleValue;
         };
         GameMain.prototype.Add = function (a) {
             return a + 10;
