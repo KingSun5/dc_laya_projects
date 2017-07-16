@@ -21,4 +21,11 @@ module dc
 		CENTER,
 		RIGHT,
 	}
+    ///垂直方向
+    export enum eVAligeType
+	{
+		UP,
+		MID,
+		DOWN,
+	}
 }

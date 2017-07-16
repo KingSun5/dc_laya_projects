@@ -3,15 +3,14 @@ module dc
     /**
      * 特效
      * @author hannibal
-     * @time 20174-7-11
+     * @time 2017-7-11
      */	
 	export class BaseEffect extends EventDispatcher
 	{
+        protected m_Active:boolean = false      //是否激活中;
         protected m_ObjectUID:number = 0;       //对象唯一ID
-        protected m_StartTime:number = 0;       //开始激活时间
         protected m_TotalTime:number = 0;       //总时长
         protected m_OffsetPos:Vector2 = null;   //位置偏移
-        protected m_Active:boolean = false      //是否激活中;
         protected m_IsLoadComplete:boolean = false;//是否准备完成
 
         protected m_RootNode:LayaSprite = null;
@@ -24,29 +23,29 @@ module dc
             this.m_RootNode = new LayaSprite();
         }
 
-        public Setup()
+        public Setup(file:string)
         {
             this.m_Active = true;
-            this.m_StartTime = Time.timeSinceStartup;
-            this.RegisterEvent();
+            if(this.m_TotalTime > 0)
+            {
+                TimerManager.Instance.AddTimer(this.m_TotalTime, 1, this, this.OnComponentDestroy)
+            }
+            if(!StringUtils.IsNullOrEmpty(file))
+            {
+                this.LoadResource(file);
+            }
         }
-
         public Destroy()
         {
             this.m_Active = false;
-            this.UnRegisterEvent();
+            if(this.m_Animation != null)
+            {
+                this.m_Animation.destroy();
+                this.m_Animation = null;
+            }
+            DisplayUtils.RemoveAllChild(this.m_RootNode);
+            this.m_RootNode.removeSelf();
         }
-        /// <summary>
-        /// 注册事件
-        /// </summary>
-        public RegisterEvent()
-        {
-        }
-
-        public UnRegisterEvent()
-        {
-        }
-
         public Update(elapse:number, game_frame:number):boolean
         {
             return true;
@@ -54,11 +53,11 @@ module dc
         /// <summary>
         /// 加载内部资源
         /// </summary>
-        public LoadResource(file:string):boolean
+        private LoadResource(file:string):boolean
         {
             if(StringUtils.IsNullOrEmpty(file))return false;
             this.m_IsLoadComplete = false;
-            ResourceManager.Instance.AddAsync(file, Laya.Loader.JSON, LayaHandler.create(this, this.OnLoadComplete));
+            ResourceManager.Instance.AddAsync(file, Laya.Loader.ATLAS, LayaHandler.create(this, this.OnLoadComplete));
         }
         protected OnLoadComplete(url:string):void
         {
@@ -67,7 +66,7 @@ module dc
             this.m_IsLoadComplete = true;
             this.m_Animation = new LayaAnimation();
             this.m_Animation.loadAtlas(url);
-            this.m_Animation.play(0, false);
+            this.m_Animation.play(1, true);
             this.m_RootNode.addChild(this.m_Animation);
             this.m_Animation.pos(this.m_OffsetPos.x, this.m_OffsetPos.y);
         }
@@ -78,7 +77,11 @@ module dc
         {
             this.m_Active = false;
             this.Dispatch(EffectEvent.EFFECT_DESTROY);
-            EffectManager.Instance.RemoveEffect(this);
+            EffectManager.Instance.RemoveEffect(this.m_ObjectUID);
+        }
+        public SetParent(node:LayaNode):void
+        {
+            if(node != null)node.addChild(this.m_RootNode);
         }
         public SetPos(x:number, y:number)
         {
@@ -116,4 +119,38 @@ module dc
             return this.m_IsLoadComplete; 
         }
 	}
+	/**
+     * 挂到其他对象上的特效
+     * @author hannibal
+     * @time 2017-7-11
+     */	
+	export class JoinEffect extends BaseEffect
+	{        
+        public Setup(file:string)
+        {
+            super.Setup(file);
+        }
+
+        public Destroy()
+        {
+            super.Destroy();
+        }
+	}  
+    /**
+     * ui界面特效
+     * @author hannibal
+     * @time 2017-7-11
+     */	
+	export class UIEffect extends BaseEffect
+	{
+        public Setup(file:string)
+        {
+            super.Setup(file);
+        }
+
+        public Destroy()
+        {
+            super.Destroy();
+        }
+	}      
 }

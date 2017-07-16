@@ -119,8 +119,8 @@ module dc
 			this.m_CurLoaderAsset.Stage = eResLoadStage.LOADING;
 			Laya.loader.load(
 				this.m_CurLoaderAsset.Url,
-				Laya.Handler.create(this, this.OnAssetComplete),
-				Laya.Handler.create(this, this.OnAssetProgress),
+				LayaHandler.create(this, this.OnAssetComplete),
+				LayaHandler.create(this, this.OnAssetProgress),
 				this.m_CurLoaderAsset.Type,
 				this.m_CurLoaderAsset.Priority,
 				this.m_CurLoaderAsset.Cache,

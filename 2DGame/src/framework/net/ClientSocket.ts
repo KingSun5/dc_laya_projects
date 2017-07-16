@@ -16,7 +16,7 @@ module dc
         private m_WriteBuff:Laya.Byte;
         private m_TempBuff:Laya.Byte;
 
-        private m_RecvCallback:Laya.Handler;
+        private m_RecvCallback:LayaHandler;
 
         /**请求连接:主机*/
         public ConnectHost(host:string, port:number):void
@@ -142,6 +142,11 @@ module dc
         /**主动关闭连接*/
         public Close()
         {
+            if(this.m_RecvCallback != null)
+            {
+                this.m_RecvCallback.recover();
+                this.m_RecvCallback = null;
+            }
             if(this.m_Socket != null)
             {
                 this.m_Socket.close();
@@ -155,7 +160,7 @@ module dc
                 return true;
             return false;
         }  
-        public BindRecvCallback(fun:Laya.Handler):void
+        public BindRecvCallback(fun:LayaHandler):void
         {
             this.m_RecvCallback = fun;
         }

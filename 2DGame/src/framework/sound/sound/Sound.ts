@@ -81,7 +81,7 @@ module dc
 
 		private LoadResource():void
 		{
-			ResourceManager.Instance.AddAsync(this.m_SoundFile, Laya.Loader.SOUND, Laya.Handler.create(this, this.OnLoadComplete));
+			ResourceManager.Instance.AddAsync(this.m_SoundFile, Laya.Loader.SOUND, LayaHandler.create(this, this.OnLoadComplete));
 		}
 
 		private OnLoadComplete():void

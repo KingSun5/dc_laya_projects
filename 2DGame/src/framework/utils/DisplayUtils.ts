@@ -22,5 +22,29 @@ module dc
 				container.removeChildAt(0)
 			}
 		}
+		/**
+		 * 设置对齐方式
+		 * @param alige 对齐方式
+		*/
+		public static SetAlige(node:LayaSprite, alige:eAligeType, w:number=0, h:number=0)
+		{
+			if(node == null)return;
+			let rect:LayaRectangle;
+			if(w <= 0 || h  <= 0)rect = node.getBounds();
+			let width:number = w > 0 ? w : rect.width;
+			let heigth:number = h > 0 ? h : rect.height;
+			switch(alige)
+			{
+				case eAligeType.LEFT_TOP:		node.pivot(0, 0);break;
+				case eAligeType.LEFT:			node.pivot(0, heigth*0.5);break;
+				case eAligeType.LEFT_BOTTOM:	node.pivot(0, heigth);break;
+				case eAligeType.TOP:			node.pivot(width*0.5, 0);break;
+				case eAligeType.MID:			node.pivot(width*0.5, heigth*0.5);break;
+				case eAligeType.BOTTOM:			node.pivot(width*0.5, heigth);break;
+				case eAligeType.RIGHT_TOP:		node.pivot(width, 0);break;
+				case eAligeType.RIGHT:			node.pivot(width, heigth*0.5);break;
+				case eAligeType.RIGHT_BOTTOM:	node.pivot(width, heigth);break;
+			}
+		}
 	}
 }

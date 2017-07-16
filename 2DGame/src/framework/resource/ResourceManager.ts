@@ -129,7 +129,7 @@ module dc
 		/// <param name="type">资源类型</param>
 		/// <param name="callback">资源成功或失败回调函数</param>
 		/// <returns></returns>
-		public AddAsync(url:string, type:string, callback:Laya.Handler):number
+		public AddAsync(url:string, type:string, callback:LayaHandler):number
 		{
 			if (this.m_BackLoadThread == null || StringUtils.IsNullOrEmpty(url)) return 0;
 

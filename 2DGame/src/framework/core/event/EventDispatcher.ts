@@ -15,28 +15,29 @@ module dc
             if(this.m_DicFuns[type] == null)
             {
                 this.m_DicFuns[type] = [];
-                this.m_DicFuns[type].push(Laya.Handler.create(context, fun, null, false));
+                this.m_DicFuns[type].push(LayaHandler.create(context, fun, null, false));
             }
             else
             {
-                let arr:Laya.Handler[] = this.m_DicFuns[type];
+                let arr:LayaHandler[] = this.m_DicFuns[type];
                 for(let item of arr)
                 {
                     if(item.caller == context && item.method == fun)return;
                 }
-                arr.push(Laya.Handler.create(context, fun, null, false));
+                arr.push(LayaHandler.create(context, fun, null, false));
             }
         }
 
         public RemoveEventListener(type:string, context:any,fun:Function):void
         {
-            let arr:Laya.Handler[] = this.m_DicFuns[type];
+            let arr:LayaHandler[] = this.m_DicFuns[type];
             if(arr == null)return;
             for(let i = 0; i < arr.length; ++i)
             {
-                let item = arr[i];
+                let item:LayaHandler = arr[i];
                 if(item.caller == context && item.method == fun)
                 {
+                    item.recover();
                     arr.splice(i, 1);
                     break;
                 }
@@ -46,7 +47,7 @@ module dc
         public DispatchEvent(type:string, args:EventArgs):void
         {
             args.Type = type;
-            let arr:Laya.Handler[] = this.m_DicFuns[type];
+            let arr:LayaHandler[] = this.m_DicFuns[type];
             if(arr == null)return;
             for(let item of arr)
             {

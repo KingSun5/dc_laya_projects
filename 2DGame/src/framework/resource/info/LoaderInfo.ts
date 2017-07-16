@@ -11,9 +11,9 @@ module dc
 		public IgnoreCache: boolean;//是否忽略缓存，强制重新加载
 		public Stage:eResLoadStage; //加载状态
 		public StartTime:number; 	//放入加载队列时间   
-		public Complete:Laya.Handler;
+		public Complete:LayaHandler;
 
-		constructor(url:string, type:string, complete?: Laya.Handler, priority?: number, cache?: boolean, group?: string, ignoreCache?: boolean)
+		constructor(url:string, type:string, complete?: LayaHandler, priority?: number, cache?: boolean, group?: string, ignoreCache?: boolean)
 		{
 			this.ID = 0;
 			this.Url = url;

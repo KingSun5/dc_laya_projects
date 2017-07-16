@@ -14,7 +14,7 @@ module dc
         private m_StdBuffInfo:any;
         private m_LeaveTime:number;
 
-        private m_ListEffect:BaseEffect[] = [];
+        private m_ListEffect:Array<number> = [];
 
         public Setup(obj:UnitObject, type:eBuffType):void
         {
@@ -97,19 +97,19 @@ module dc
             }
             if (this.m_StdBuffInfo.Effect != null)
             {
-                let effect:BaseEffect = this.AddEffect(this.m_StdBuffInfo.Effect.part, this.m_StdBuffInfo.Effect.res, true);
-                if (effect != null)
+                let effect:number = this.AddEffect(this.m_StdBuffInfo.Effect.part, this.m_StdBuffInfo.Effect.res, true);
+                if (effect > 0)
                 {
                     this.m_ListEffect.push(effect);
                 }
             }
         }
 
-        private AddEffect(part:eEffectAttachPart, effect_path:string, loop:boolean):BaseEffect
+        private AddEffect(part:eEffectAttachPart, effect_path:string, loop:boolean):number
         {
             if (StringUtils.IsNullOrEmpty(effect_path)) return null;
 
-            let effect:BaseEffect = null;
+            let effect:number = 0;
             if (part == eEffectAttachPart.UI_CENTER)
             {
                 // if (this.m_OwnerUnit.ObjectGUID == PlayerDataManager.Instance.MainPlayerUID)

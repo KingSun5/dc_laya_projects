@@ -29,7 +29,7 @@ module dc
 			
 			if(this.m_SoundChannel == null)
 			{
-				this.m_SoundChannel = Laya.SoundManager.playMusic(this.m_SoundFile, this.m_PlayCount, Laya.Handler.create(this, this.OnPlayComplete), 0);
+				this.m_SoundChannel = Laya.SoundManager.playMusic(this.m_SoundFile, this.m_PlayCount, LayaHandler.create(this, this.OnPlayComplete), 0);
 			}
 			this.SetVolume(SoundManager.Instance.EffectSoundVolume);
 

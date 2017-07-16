@@ -8,8 +8,8 @@ module dc
 	export class TimerManager extends Singleton
 	{
         private m_idCounter:number = 0;
-        private m_RemovalPending:number[] = [];
-        private m_Timers:TimerEntity[] = [];
+        private m_RemovalPending:Array<number> = [];
+        private m_Timers:Array<TimerEntity> = [];
 
         private static instance:TimerManager = null;
         public static get Instance():TimerManager
@@ -50,7 +50,7 @@ module dc
         {
             if (ticks <= 0) ticks = 0;
             let newTimer:TimerEntity = ObjectPools.Get(TimerEntity);
-            newTimer.Set(++this.m_idCounter, rate, ticks, Laya.Handler.create(caller, method, args, false));
+            newTimer.Set(++this.m_idCounter, rate, ticks, LayaHandler.create(caller, method, args, false));
             this.m_Timers.push(newTimer);
             return newTimer.id;
         }    
@@ -68,14 +68,18 @@ module dc
         /// </summary>
         private Remove():void
         {
+            let timer;
             if (this.m_RemovalPending.length > 0)
             {
                 for (let id of this.m_RemovalPending)
                 {
                     for (let i = 0; i < this.m_Timers.length; i++)
                     {
-                        if (this.m_Timers[i].id == id)
+                        timer = this.m_Timers[i];
+                        if (timer.id == id)
                         {
+                            timer.Clear();
+                            ObjectPools.Recover(timer);
                             this.m_Timers.splice(i, 1);
                             break;
                         }
@@ -95,7 +99,7 @@ module dc
         public mRate:number;
         public mTicks:number;
         public mTicksElapsed:number;
-        public handle:Laya.Handler;
+        public handle:LayaHandler;
 
         public mTime:IntervalTime;
 
@@ -104,7 +108,16 @@ module dc
             this.mTime = new IntervalTime();
         }
 
-        public Set(id:number, rate:number, ticks:number, handle:Laya.Handler)
+        public Clear():void
+        {
+            if(this.handle != null)
+            {
+                this.handle.recover();
+                this.handle = null;
+            }
+        }
+
+        public Set(id:number, rate:number, ticks:number, handle:LayaHandler)
         {
             this.id = id;
             this.mRate = rate < 0 ? 0 : rate;

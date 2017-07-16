@@ -121,6 +121,25 @@ module dc
             // let info = DataProvider.GetInfo("global","nResetTime");
             // s = info.IntegerValue;
             // n = info.DoubleValue;
+
+            //effect
+            //EffectManager.Instance.CreateEffect_Position("res/effect/actEffect.json", SceneLayerUtils.effectLevelContainer,100,100, 0);
+            
+            //缓存
+            // LocalValue.SetGlobalKey("123456789");
+            // LocalValue.Set("name", "test");
+            // LocalValue.Set("psw","123456");
+            // Log.Debug(LocalValue.Get("name"));
+
+            //proxy
+            let sp:LayaSprite = new LayaSprite();
+            Laya.stage.addChild(sp);
+            // let proxy:PictureProxy = new PictureProxy();
+            // proxy.Show("res/image/3.png", null, eAligeType.MID, DisplayProxy.GetProxy("res/effect/actEffect.json"));
+            // sp.addChild(proxy.RootNode);
+            let proxy:AnimationProxy = new AnimationProxy();
+            proxy.Show("res/effect/actEffefct.json", null, eAligeType.MID, DisplayProxy.GetProxy("res/image/1.png"));
+            sp.addChild(proxy.RootNode);
         }
         public Add(a:number):number
         {

@@ -11,7 +11,7 @@ module dc
 
 	export class ObjectEvent
 	{
-		public static MAP_POSITION:string      = "MAP_POSITION";		//地图位置
+		public static MAP_POSITION:string      	= "MAP_POSITION";		//地图位置
 		public static MAP_GRID:string      		= "MAP_GRID";			//地图格子
 	}
 }
