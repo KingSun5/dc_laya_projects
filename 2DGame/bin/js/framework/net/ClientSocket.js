@@ -121,6 +121,10 @@ var dc;
         };
         /**主动关闭连接*/
         ClientSocket.prototype.Close = function () {
+            if (this.m_RecvCallback != null) {
+                this.m_RecvCallback.recover();
+                this.m_RecvCallback = null;
+            }
             if (this.m_Socket != null) {
                 this.m_Socket.close();
                 this.m_Socket = null;

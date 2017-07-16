@@ -13,7 +13,7 @@ var dc;
         EventDispatcher.prototype.AddEventListener = function (type, context, fun) {
             if (this.m_DicFuns[type] == null) {
                 this.m_DicFuns[type] = [];
-                this.m_DicFuns[type].push(Laya.Handler.create(context, fun, null, false));
+                this.m_DicFuns[type].push(LayaHandler.create(context, fun, null, false));
             }
             else {
                 var arr = this.m_DicFuns[type];
@@ -22,7 +22,7 @@ var dc;
                     if (item.caller == context && item.method == fun)
                         return;
                 }
-                arr.push(Laya.Handler.create(context, fun, null, false));
+                arr.push(LayaHandler.create(context, fun, null, false));
             }
         };
         EventDispatcher.prototype.RemoveEventListener = function (type, context, fun) {
@@ -32,6 +32,7 @@ var dc;
             for (var i = 0; i < arr.length; ++i) {
                 var item = arr[i];
                 if (item.caller == context && item.method == fun) {
+                    item.recover();
                     arr.splice(i, 1);
                     break;
                 }

@@ -21,5 +21,12 @@ var dc;
         eHAligeType[eHAligeType["CENTER"] = 1] = "CENTER";
         eHAligeType[eHAligeType["RIGHT"] = 2] = "RIGHT";
     })(eHAligeType = dc.eHAligeType || (dc.eHAligeType = {}));
+    ///垂直方向
+    var eVAligeType;
+    (function (eVAligeType) {
+        eVAligeType[eVAligeType["UP"] = 0] = "UP";
+        eVAligeType[eVAligeType["MID"] = 1] = "MID";
+        eVAligeType[eVAligeType["DOWN"] = 2] = "DOWN";
+    })(eVAligeType = dc.eVAligeType || (dc.eVAligeType = {}));
 })(dc || (dc = {}));
 //# sourceMappingURL=AligeID.js.map

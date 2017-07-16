@@ -115,9 +115,9 @@ var dc;
         ObjectManager.prototype.ShareObjectGUID = function () {
             return ++this.m_shareObjID;
         };
+        ObjectManager.instance = null;
         return ObjectManager;
     }(dc.Singleton));
-    ObjectManager.instance = null;
     dc.ObjectManager = ObjectManager;
 })(dc || (dc = {}));
 //# sourceMappingURL=ObjectManager.js.map

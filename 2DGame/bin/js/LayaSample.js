@@ -100,6 +100,22 @@ var dc;
             // let info = DataProvider.GetInfo("global","nResetTime");
             // s = info.IntegerValue;
             // n = info.DoubleValue;
+            //effect
+            //EffectManager.Instance.CreateEffect_Position("res/effect/actEffect.json", SceneLayerUtils.effectLevelContainer,100,100, 0);
+            //缓存
+            // LocalValue.SetGlobalKey("123456789");
+            // LocalValue.Set("name", "test");
+            // LocalValue.Set("psw","123456");
+            // Log.Debug(LocalValue.Get("name"));
+            //proxy
+            var sp = new LayaSprite();
+            Laya.stage.addChild(sp);
+            // let proxy:PictureProxy = new PictureProxy();
+            // proxy.Show("res/image/3.png", null, eAligeType.MID, DisplayProxy.GetProxy("res/effect/actEffect.json"));
+            // sp.addChild(proxy.RootNode);
+            var proxy = new dc.AnimationProxy();
+            proxy.Show("res/effect/actEffefct.json", null, dc.eAligeType.MID, dc.DisplayProxy.GetProxy("res/image/1.png"));
+            sp.addChild(proxy.RootNode);
         };
         GameMain.prototype.Add = function (a) {
             return a + 10;
