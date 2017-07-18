@@ -75,13 +75,20 @@ module dc
 			}
 			return Laya.loader.getRes(url);
 		}
+		/**
+         * 释放指定资源
+         * @param	url	资源路径
+		 */
 		public ClearRes(url:string):any
 		{
 			this.m_DicLoaderUrl.Remove(url);
 			Laya.loader.clearRes(url);
 			Log.Info("[res]释放资源:" + url);
 		}
-		/**释放资源*/
+		/**
+         * 释放资源
+         * @param	type	释放策略
+		 */		
 		public ClearUnusedAssets(type:eClearStrategy):void
 		{
 			this.ClearAsset(type);
@@ -91,12 +98,11 @@ module dc
 			return ++this.m_ShareGUID;
 		}	
  		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～同步加载～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
-		/// <summary>
-		/// 增加同步资源加载
-		/// </summary>
-		/// <param name="path">资源路径</param>
-		/// <param name="type">资源类型</param>
-		/// <returns></returns>
+		/**
+         * 增加同步资源加载。
+         * @param	url		资源路径
+         * @param	type	资源类型
+		 */
 		public AddSync(url:string, type:string):number
 		{
 			if (this.m_FrontLoadThread == null || StringUtils.IsNullOrEmpty(url)) return 0;
@@ -134,14 +140,13 @@ module dc
 		}
 
 		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～异步加载～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
-		/// <summary>
-		/// 添加异步资源加载
-		/// </summary>
-		/// <param name="path">资源路径</param>
-		/// <param name="type">资源类型</param>
-		/// <param name="callback">资源成功或失败回调函数</param>
-		/// <returns></returns>
-		public AddAsync(url:string, type:string, callback:LayaHandler):number
+		/**
+         * 添加异步资源加载
+         * @param	url		资源路径
+         * @param	type	资源类型
+         * @param	callback 资源成功或失败回调函数
+		 */
+		public AddAsync(url:string, type:string, callback:LayaHandler=null):number
 		{
 			if (this.m_BackLoadThread == null || StringUtils.IsNullOrEmpty(url)) return 0;
 
@@ -199,13 +204,7 @@ module dc
 				case eClearStrategy.FIFO:
 				{
 					let list:Array<sLoaderUrl> = this.m_DicLoaderUrl.GetValues();
-					list.sort(function (info1, info2) {
-						if (info1.ctime < info2.ctime)
-							return 1;
-						if (info1.ctime > info2.ctime)
-							return -1;
-						return 0;
-                	});
+					ArrayUtils.Sort(list,"ctime", eArraySortOrder.ASCENDING);
 					for(let i = 0; i < list.length * 0.5; ++i)
 					{
 						this.ClearRes(list[i].url);
@@ -214,27 +213,42 @@ module dc
 				break;	
 				case eClearStrategy.FILO:
 				{
+					let list:Array<sLoaderUrl> = this.m_DicLoaderUrl.GetValues();
+					ArrayUtils.Sort(list,"ctime", eArraySortOrder.DESCENDING);
+					for(let i = 0; i < list.length * 0.5; ++i)
+					{
+						this.ClearRes(list[i].url);
+					}
 				}
 				break;	
 				case eClearStrategy.LRU:
 				{
+					let list:Array<sLoaderUrl> = this.m_DicLoaderUrl.GetValues();
+					ArrayUtils.Sort(list,"utime", eArraySortOrder.ASCENDING);
+					for(let i = 0; i < list.length * 0.5; ++i)
+					{
+						this.ClearRes(list[i].url);
+					}
 				}
 				break;	
 				case eClearStrategy.UN_USED:
 				{
+					//TODO
 				}
 				break;
 			}
 		}
 	}
-	///
-	///保存加载过的url
-	///
+	/**
+	 * 保存加载过的url
+	 */
 	class sLoaderUrl
 	{
 		public url:string;
-		public ctime:number;	//创建时间
-		public utime:number;	//最近使用时间
+		/**创建时间*/
+		public ctime:number;
+		/**最近使用时间*/
+		public utime:number;	
 
 		constructor(_url:string)
 		{

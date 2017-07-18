@@ -44,11 +44,10 @@ var dc;
         /**
          * 全部应用
          */
-        DicUtils.ApplyEach = function (dic, fun) {
-            if (fun == null)
-                return;
+        DicUtils.Foreach = function (dic, compareFn) {
             for (var key in dic) {
-                fun(dic[key]);
+                if (!compareFn.call(null, key, dic[key]))
+                    break;
             }
         };
         DicUtils.IsEmpty = function (dic) {

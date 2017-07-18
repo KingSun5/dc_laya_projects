@@ -21,6 +21,19 @@ module dc
                 new ConfigTemplate("data/configs/global.json", "global", "Name"),
             ];
             DataProvider.Load(list);
+
+            //Laya.loader.load(["res/image/1.png", "res/image/2.png", "res/image/3.png"]);
+            //dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE);
+            //dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE);
+            //dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE);
+
+            dc.TimerManager.Instance.AddTimer(1000, 3, this, this.OnTime, [11]);
+        }
+        private ii = 1;
+        private OnTime(timer_id:number, args1:any):void
+        {
+            dc.ResourceManager.Instance.AddAsync("res/image/"+this.ii+".png", Laya.Loader.IMAGE);
+            this.ii++;
         }
         private OnImageClickEvt():void
         {
@@ -103,6 +116,9 @@ module dc
             // dc.ResourceManager.Instance.AddSync("res/image/3.png", Laya.Loader.IMAGE);
             // dc.ResourceManager.Instance.StartSync();
 
+            //释放
+            dc.ResourceManager.Instance.ClearUnusedAssets(eClearStrategy.FIFO);
+
             //时间
             //Log.Debug(TimeUtils.TimeSince2009.toString());
             //TimerManager.Instance.AddTimer(1000, 10, this, this.OnTimerEvt, [123,12]);
@@ -151,7 +167,6 @@ module dc
             // Log.Debug(a.toString());
             // let b = FlagUtils.HasFlag(a,2);
             // Log.Debug(a.toString());
-
         }
         public Add(a:number):number
         {

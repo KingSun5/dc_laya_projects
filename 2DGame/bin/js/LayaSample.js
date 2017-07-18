@@ -4,6 +4,7 @@ var dc;
     var GameMain = (function () {
         function GameMain() {
             this.m_image1_url = "res/image/1.png";
+            this.ii = 1;
             this.aa = 0;
             this.m_img = new LayaSprite();
             this.m_img.loadImage(this.m_image1_url, 100, 50);
@@ -15,7 +16,16 @@ var dc;
                 new dc.ConfigTemplate("data/configs/global.json", "global", "Name"),
             ];
             dc.DataProvider.Load(list);
+            //Laya.loader.load(["res/image/1.png", "res/image/2.png", "res/image/3.png"]);
+            //dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE);
+            //dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE);
+            //dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE);
+            dc.TimerManager.Instance.AddTimer(1000, 3, this, this.OnTime, [11]);
         }
+        GameMain.prototype.OnTime = function (timer_id, args1) {
+            dc.ResourceManager.Instance.AddAsync("res/image/" + this.ii + ".png", Laya.Loader.IMAGE);
+            this.ii++;
+        };
         GameMain.prototype.OnImageClickEvt = function () {
             //事件
             // dc.EventController.AddEventListener("11",this, this.callback);
@@ -47,16 +57,16 @@ var dc;
             // {
             //     dc.Log.Debug(stack.Pop().toString());
             // }
-            this.m_dic = new dc.SDictionary();
-            this.m_dic.Add("1", 1);
-            this.m_dic.Add("2", 2);
-            this.m_dic.Add("3", 3);
-            this.m_dic.Foreach(function (key, value) {
-                dc.Log.Debug(value.toString());
-                if (value == 2)
-                    return false;
-                return true;
-            });
+            // this.m_dic = new SDictionary<number>();
+            // this.m_dic.Add("1", 1);
+            // this.m_dic.Add("2", 2);
+            // this.m_dic.Add("3", 3);
+            // this.m_dic.Foreach(function(key, value)
+            // {
+            //     Log.Debug(value.toString());
+            //     if(value == 2)return false;
+            //     return true;
+            // });
             //dc.Log.Debug(dc.StringUtils.minuteFormat(123));
             //dc.Log.Debug(dc.StringUtils.formate("杰卫，这里有{0}个苹果，和{1}个香蕉！", 5,10));
             //dc.Log.Debug(dc.NumberUtils.toFixed(100.01111, 3).toString());
@@ -86,6 +96,8 @@ var dc;
             // dc.ResourceManager.Instance.AddSync("res/image/2.png", Laya.Loader.IMAGE);
             // dc.ResourceManager.Instance.AddSync("res/image/3.png", Laya.Loader.IMAGE);
             // dc.ResourceManager.Instance.StartSync();
+            //释放
+            dc.ResourceManager.Instance.ClearUnusedAssets(dc.eClearStrategy.FIFO);
             //时间
             //Log.Debug(TimeUtils.TimeSince2009.toString());
             //TimerManager.Instance.AddTimer(1000, 10, this, this.OnTimerEvt, [123,12]);
@@ -108,14 +120,23 @@ var dc;
             // LocalValue.Set("psw","123456");
             // Log.Debug(LocalValue.Get("name"));
             //proxy
-            var sp = new LayaSprite();
-            Laya.stage.addChild(sp);
-            // let proxy:PictureProxy = new PictureProxy();
-            // proxy.Show("res/image/3.png", null, eAligeType.MID, DisplayProxy.GetProxy("res/effect/actEffect.json"));
+            // let sp:LayaSprite = new LayaSprite();
+            // Laya.stage.addChild(sp);
+            // // let proxy:PictureProxy = new PictureProxy();
+            // // proxy.Show("res/image/3.png", null, eAligeType.MID, DisplayProxy.GetProxy("res/effect/actEffect.json"));
+            // // sp.addChild(proxy.RootNode);
+            // let proxy:AnimationProxy = new AnimationProxy();
+            // proxy.Show("res/effect/actEffefct.json", null, eAligeType.MID, DisplayProxy.GetProxy("res/image/1.png"));
             // sp.addChild(proxy.RootNode);
-            var proxy = new dc.AnimationProxy();
-            proxy.Show("res/effect/actEffefct.json", null, dc.eAligeType.MID, dc.DisplayProxy.GetProxy("res/image/1.png"));
-            sp.addChild(proxy.RootNode);
+            //md5
+            //Log.Debug(Utils.MD5Encrypt("12424"));
+            //flags
+            // let a = FlagUtils.InsertFlag(1,2);
+            // Log.Debug(a.toString());
+            // a = FlagUtils.RemoveFlag(a,2);
+            // Log.Debug(a.toString());
+            // let b = FlagUtils.HasFlag(a,2);
+            // Log.Debug(a.toString());
         };
         GameMain.prototype.Add = function (a) {
             return a + 10;

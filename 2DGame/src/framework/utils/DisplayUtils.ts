@@ -9,8 +9,6 @@ module dc
 	{
 		/**
 		 * 移除全部子对象
-		 * @param container
-		 * @param StopAll：停止播放
 		 */	
 		public static RemoveAllChild(container:LayaSprite):void
 		{
