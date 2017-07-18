@@ -22,6 +22,20 @@ module dc
 				container.removeChildAt(0)
 			}
 		}
+		/**获得子节点*/
+		public static GetChildWithName(parent:LayaNode, name:string):LayaNode
+		{
+			if(parent == null)return null;
+			if(parent.name == name)return parent;
+			let child:LayaNode = null;
+			for(let i = 0; i < parent.numChildren; ++i)
+			{
+				child = DisplayUtils.GetChildWithName(parent.getChildAt(i), name);
+				if(child != null) 
+					return child;
+			}
+			return null;
+		}
 		/**
 		 * 设置对齐方式
 		 * @param alige 对齐方式

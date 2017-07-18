@@ -61,7 +61,7 @@ module dc
 			arr.splice(0);
 		}    
         /**数据是否为空*/
-		public static isArrayEmpty(arr:any[]):Boolean
+		public static IsEmpty(arr:any[]):Boolean
 		{
 			if (arr == null || arr.length == 0)
 			{

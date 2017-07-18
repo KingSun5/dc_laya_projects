@@ -30,24 +30,36 @@ module dc
             }
             return dic;
         }
+        
+        public static MD5Encrypt(str?: string):string
+        {
+            let md5:MD5 = new MD5();
+            return md5.hex_md5(str);
+        }
     }
     /**
      * 位操作
      */
-	export class FlsgUtils
+	export class FlagUtils
 	{
 		public static HasFlag(a:number, b:number):boolean
 		{
+            a = NumberUtils.toInt(a);
+            b = NumberUtils.toInt(b);
 			return ((a & b) ==0) ? false : true;
 		}
 
 		public static InsertFlag(a:number, b:number):number
 		{
+            a = NumberUtils.toInt(a);
+            b = NumberUtils.toInt(b);
 			a |= b;
 			return a;
 		}
 		public static RemoveFlag(a:number, b:number):number
 		{
+            a = NumberUtils.toInt(a);
+            b = NumberUtils.toInt(b);
 			a ^= b;
 			return a;
 		}

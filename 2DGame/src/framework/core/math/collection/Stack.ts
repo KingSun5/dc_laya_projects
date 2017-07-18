@@ -44,7 +44,7 @@ module dc
         {
             return this.m_List.length;
         }
-        public Foreach(compareFn?: (a: T) => boolean):void
+        public Foreach(compareFn: (a: T) => boolean):void
         {
             for(let item of this.m_List)
             {

@@ -56,13 +56,12 @@ module dc
 		/**
 		 * 全部应用
 		 */		
-		public static ApplyEach(dic:Object, fun:Function):void
+		public static Foreach(dic:Object, compareFn: (key:any, value: any) => boolean):void
 		{
-			if(fun == null) return;
-			
 			for(let key in dic)
 			{
-				fun(dic[key]);
+				if(!compareFn.call(null, key, dic[key]))
+                    break;
 			}
 		}
 		

@@ -7,17 +7,29 @@ module dc
      */	
 	export class UrlUtils
 	{
-		/**扩展名*/
+		/**获取文件扩展名*/
 		public static GetFileExte(url:string):string
 		{
-			if(StringUtils.IsNullOrEmpty(url))return "";
+			if(StringUtils.IsNullOrEmpty(url))return StringUtils.Empty;
 			
-			let i:number = url.lastIndexOf(".");
-			if(i >= 0)
+			let idx:number = url.lastIndexOf(".");
+			if(idx >= 0)
 			{
-				return url.substr(i+1);
+				return url.substr(idx+1);
 			}
-			return "";
+			return StringUtils.Empty;
+		}
+		/**获取不含扩展名的路径*/
+		public static GetPathWithNoExtend(url:string):string
+		{
+			if(StringUtils.IsNullOrEmpty(url))return StringUtils.Empty;
+			
+			let idx:number = url.lastIndexOf(".");
+			if(idx >= 0)
+			{
+				return url.substr(0, idx);
+			}
+			return StringUtils.Empty;
 		}
 	}
 }

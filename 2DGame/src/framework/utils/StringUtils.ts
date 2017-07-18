@@ -7,6 +7,10 @@ module dc
      */
     export class StringUtils
     {
+		public static get Empty():string
+		{
+			return "";
+		}
 		/**
 		 * 字符串是否有值
 		 */		

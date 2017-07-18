@@ -14,7 +14,7 @@ module dc
             this.m_img.loadImage(this.m_image1_url, 100, 50);   
             this.m_img.on(Laya.Event.CLICK, this, this.OnImageClickEvt);
             Laya.stage.addChild(this.m_img);
-            
+
             //配置表
             let list = [
                 new ConfigTemplate("data/serverList.json", "serverList", ""),
@@ -56,16 +56,16 @@ module dc
             // {
             //     dc.Log.Debug(stack.Pop().toString());
             // }
-            this.m_dic = new SDictionary<number>();
-            this.m_dic.Add("1", 1);
-            this.m_dic.Add("2", 2);
-            this.m_dic.Add("3", 3);
-            this.m_dic.Foreach(function(key, value)
-            {
-                Log.Debug(value.toString());
-                if(value == 2)return false;
-                return true;
-            });
+            // this.m_dic = new SDictionary<number>();
+            // this.m_dic.Add("1", 1);
+            // this.m_dic.Add("2", 2);
+            // this.m_dic.Add("3", 3);
+            // this.m_dic.Foreach(function(key, value)
+            // {
+            //     Log.Debug(value.toString());
+            //     if(value == 2)return false;
+            //     return true;
+            // });
 
             //dc.Log.Debug(dc.StringUtils.minuteFormat(123));
             //dc.Log.Debug(dc.StringUtils.formate("杰卫，这里有{0}个苹果，和{1}个香蕉！", 5,10));
@@ -132,14 +132,26 @@ module dc
             // Log.Debug(LocalValue.Get("name"));
 
             //proxy
-            let sp:LayaSprite = new LayaSprite();
-            Laya.stage.addChild(sp);
-            // let proxy:PictureProxy = new PictureProxy();
-            // proxy.Show("res/image/3.png", null, eAligeType.MID, DisplayProxy.GetProxy("res/effect/actEffect.json"));
+            // let sp:LayaSprite = new LayaSprite();
+            // Laya.stage.addChild(sp);
+            // // let proxy:PictureProxy = new PictureProxy();
+            // // proxy.Show("res/image/3.png", null, eAligeType.MID, DisplayProxy.GetProxy("res/effect/actEffect.json"));
+            // // sp.addChild(proxy.RootNode);
+            // let proxy:AnimationProxy = new AnimationProxy();
+            // proxy.Show("res/effect/actEffefct.json", null, eAligeType.MID, DisplayProxy.GetProxy("res/image/1.png"));
             // sp.addChild(proxy.RootNode);
-            let proxy:AnimationProxy = new AnimationProxy();
-            proxy.Show("res/effect/actEffefct.json", null, eAligeType.MID, DisplayProxy.GetProxy("res/image/1.png"));
-            sp.addChild(proxy.RootNode);
+
+            //md5
+            //Log.Debug(Utils.MD5Encrypt("12424"));
+
+            //flags
+            // let a = FlagUtils.InsertFlag(1,2);
+            // Log.Debug(a.toString());
+            // a = FlagUtils.RemoveFlag(a,2);
+            // Log.Debug(a.toString());
+            // let b = FlagUtils.HasFlag(a,2);
+            // Log.Debug(a.toString());
+
         }
         public Add(a:number):number
         {

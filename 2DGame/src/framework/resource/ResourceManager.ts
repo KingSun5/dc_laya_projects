@@ -67,12 +67,24 @@ module dc
 		/**获取资源*/
 		public GetRes(url:string):any
 		{
+			//修改访问时间
+			let loader_info:sLoaderUrl = this.m_DicLoaderUrl.GetValue(url);
+			if(loader_info != null)
+			{
+				loader_info.utime = Time.timeSinceStartup;
+			}
 			return Laya.loader.getRes(url);
+		}
+		public ClearRes(url:string):any
+		{
+			this.m_DicLoaderUrl.Remove(url);
+			Laya.loader.clearRes(url);
+			Log.Info("[res]释放资源:" + url);
 		}
 		/**释放资源*/
 		public ClearUnusedAssets(type:eClearStrategy):void
 		{
-
+			this.ClearAsset(type);
 		}
 		private ShareGUID():number
 		{
@@ -168,6 +180,51 @@ module dc
 		{
 			if (this.m_BackLoadThread == null) return;
 			this.m_BackLoadThread.Clear();
+		}
+ 		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～资源释放～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
+		private ClearAsset(type:eClearStrategy):void
+		{
+			switch(type)
+			{
+				case eClearStrategy.ALL:
+				{
+					for(let key in this.m_DicLoaderUrl)
+					{
+						Laya.loader.clearRes(key);
+					}
+					this.m_DicLoaderUrl.Clear();
+					Log.Info("[res]释放所有资源");
+				}
+				break;
+				case eClearStrategy.FIFO:
+				{
+					let list:Array<sLoaderUrl> = this.m_DicLoaderUrl.GetValues();
+					list.sort(function (info1, info2) {
+						if (info1.ctime < info2.ctime)
+							return 1;
+						if (info1.ctime > info2.ctime)
+							return -1;
+						return 0;
+                	});
+					for(let i = 0; i < list.length * 0.5; ++i)
+					{
+						this.ClearRes(list[i].url);
+					}
+				}
+				break;	
+				case eClearStrategy.FILO:
+				{
+				}
+				break;	
+				case eClearStrategy.LRU:
+				{
+				}
+				break;	
+				case eClearStrategy.UN_USED:
+				{
+				}
+				break;
+			}
 		}
 	}
 	///

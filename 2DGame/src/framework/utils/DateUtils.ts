@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-11
      */
-	export class TimeUtils
+	export class DateUtils
 	{
 		/**从1970年以来经过的毫秒数*/
 		public static get TimeSince1970():number

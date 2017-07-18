@@ -58,9 +58,8 @@ module dc
         }
         public static Destroy():void
         {
+            LayerManager.RemoveAll();
             DisplayUtils.RemoveAllChild(this.m_root);
-            this.m_root.removeSelf();
-            this.m_root = null;
             this.m_backLayer = null;
             this.m_gameLayer = null;
             this.m_toolsLayer = null;
@@ -78,6 +77,10 @@ module dc
             DisplayUtils.RemoveAllChild(this.m_loadLayer);
             DisplayUtils.RemoveAllChild(this.m_maskLayer);
             DisplayUtils.RemoveAllChild(this.m_topLayer);
+        }
+        public static get root():LayaSprite
+        {
+            return this.m_root;
         }
         public static get backLayer():LayaSprite
         {

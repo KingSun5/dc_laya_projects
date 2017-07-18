@@ -9,7 +9,7 @@ module dc
 	{
 		public col:number = 0;   
 		public row:number = 0;  
-		public rect_collide:Rect = new Rect();
+		public rect:Rect = new Rect();
 		
 		public f:number = 0;   
 		public g:number = 0;   
@@ -29,7 +29,7 @@ module dc
 		{     
 			this.row = row;
 			this.col = col; 
-			this.rect_collide.Set(col*w,row*h,w,h);
+			this.rect.Set(col*w,row*h,w,h);
 		} 
 		
 		public reset():void
@@ -38,10 +38,10 @@ module dc
 			this.f = this.g = this.h = 0;
 			this.parent = null;
 			this.costMultiplier = 1;
-			this.rect_collide.x = 0;
-			this.rect_collide.y = 0;
-			this.rect_collide.width = 0;
-			this.rect_collide.height = 0;
+			this.rect.x = 0;
+			this.rect.y = 0;
+			this.rect.width = 0;
+			this.rect.height = 0;
 		}
 		
 		public equal(g:PathGrid):boolean
