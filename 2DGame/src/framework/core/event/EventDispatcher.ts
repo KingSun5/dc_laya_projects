@@ -9,7 +9,12 @@ module dc
     {
         private m_DicFuns:Object = {};
         private m_EvtArgs:EventArgs = new EventArgs();
-
+        /**
+         * 添加监听
+         * @param type      事件类型
+         * @param caller    调用者
+         * @param fun       回调函数，注意回调函数的参数是共用一个，所有不要持有引用[let evt = args;（不建议这样写）]
+        */
         public AddEventListener(type:string, caller:any, fun:Function):void
         {
             if(this.m_DicFuns[type] == null)
@@ -27,7 +32,9 @@ module dc
                 arr.push(LayaHandler.create(caller, fun, null, false));
             }
         }
-
+        /**
+         * 移除监听
+        */
         public RemoveEventListener(type:string, caller:any,fun:Function):void
         {
             let arr:LayaHandler[] = this.m_DicFuns[type];
@@ -43,7 +50,9 @@ module dc
                 }
             }
         }
-
+        /**
+         * 派发事件，注意参数类型为EventArgs
+        */
         public DispatchEvent(type:string, args:EventArgs):void
         {
             args.Type = type;
@@ -54,7 +63,9 @@ module dc
                 item.runWith(args);
             }
         }
-
+        /**
+         * 派发事件
+        */
         public Dispatch(type:string, ...args:any[]):void
         {
             this.m_EvtArgs.Init(args);
