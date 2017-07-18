@@ -43,7 +43,12 @@ module dc
         {
             this.StopBGSound();
         }
-        /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～背景声音～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
+        /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～背景声音～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/ 
+         /**
+         * 播放背景声音
+         * @param	file_name	资源
+         * @param	count	    播放次数
+         */
         public PlayBGSound(file_name:string, count:number):BGSound
         {
             if(this.m_CurBGSound == null)
@@ -81,7 +86,11 @@ module dc
                 this.m_CurBGSound.SetVolume(volume);
             }
         }
-        /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～音效～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
+        /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～音效～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*//**
+         * 播放效果声音
+         * @param	file_name	资源
+         * @param	count	    播放次数
+         */
         public PlaySoundEffect(file_name:string, count:number):EffectSound
         {
             let sound:EffectSound = ObjectPools.Get(EffectSound);

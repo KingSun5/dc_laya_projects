@@ -32,6 +32,9 @@ module dc
 		}
 
 		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～buff～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
+		/**
+		 * 增加buff
+		*/
 		public AddBuff(buffId:number):void
 		{
 			if (this.m_OwnerUnit.IsDead)
@@ -74,6 +77,9 @@ module dc
 			// 	this.m_OwnerUnit.SetColor(r, g, b, a);
 			// }
 		}
+		/**
+		 * 移除buff
+		*/
 		public RemoveBuff(type:eBuffType):void
 		{
 			let buff:Buff = this.m_DicBuff.GetValue(type);
@@ -87,6 +93,9 @@ module dc
 			buff.Destroy();
 			ObjectPools.Recover(buff);
 		}
+		/**
+		 * 移除所有buff
+		*/
 		public ClearAllBuff():void
 		{
 			this.m_DicBuff.Foreach(function(key, value)
@@ -123,9 +132,9 @@ module dc
 				});
 			} while (has_del);
 		}
-		/// <summary>
-		/// buff属性计算
-		/// </summary>
+		/**
+		 * buff属性计算
+		*/
 		public ResolveBufferValue(type:eBuffType, value:number):number
 		{
 			let buff:Buff = this.m_DicBuff.GetValue(type);

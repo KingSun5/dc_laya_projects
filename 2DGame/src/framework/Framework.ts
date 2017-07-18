@@ -13,7 +13,10 @@ module dc
             if(!this.instance)this.instance = new Framework();
             return this.instance;
         }
-
+        /**
+         * 初始化
+         * @param	root	根节点，可以是stage
+         */
         public Setup(root:LayaSprite):void
         {
             this.PrintDeviceInfo();
@@ -89,7 +92,7 @@ module dc
                     device = navigator.platform;
                     version = infoStr;
                 }
-                console.log(system, device, version);
+                Log.Info(system, device, version);
             }
         }
     }

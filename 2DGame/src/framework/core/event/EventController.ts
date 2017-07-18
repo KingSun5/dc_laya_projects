@@ -10,14 +10,14 @@ module dc
         private static m_Event:EventDispatcher = new EventDispatcher();
         private static m_EvtArgs:EventArgs = new EventArgs();
 
-        public static AddEventListener(type:string, context:any, fun:Function):void
+        public static AddEventListener(type:string, caller:any, fun:Function):void
         {
-            this.m_Event.AddEventListener(type, context, fun);
+            this.m_Event.AddEventListener(type, caller, fun);
         }
 
-        public static RemoveEventListener(type:string, context:any, fun:Function):void
+        public static RemoveEventListener(type:string, caller:any, fun:Function):void
         {
-            this.m_Event.RemoveEventListener(type, context, fun);
+            this.m_Event.RemoveEventListener(type, caller, fun);
         }
 
         public static DispatchEvent(type:string, ...args:any[]):void

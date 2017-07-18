@@ -24,18 +24,18 @@ module dc
         }
 
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～创建特效～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
-        /// <summary>
-        /// 定点位置创建特效
-        /// </summary>
-        /// <param name="file">资源文件</param>
-        /// <param name="parent_node">父节点</param>
-        /// <param name="pos">位置</param>
-        /// <param name="time">播放时长(秒)：
-        /// 1.对于非循环特效，且未设置time，特效播放结束后，会自动销毁；
-        /// 2.对于循环特效，到点之后自动销毁
-        /// 3.只要这个参数大于0，不管是循环特效还是非循环特效，指定时间一到，自动销毁</param>
-        /// 4.循环特效，且未指定time，则需要外部调用RemoveEffect接口销毁
-        /// <returns></returns>
+        /**
+         * 定点位置创建特效
+         * @param	file	    资源文件
+         * @param	parent_node	父节点
+         * @param	x	        位置x
+         * @param	y	        位置y
+         * @param	time	    播放时长
+         *          1.对于非循环特效，且未设置time，特效播放结束后，会自动销毁；
+                    2.对于循环特效，到点之后自动销毁
+                    3.只要这个参数大于0，不管是循环特效还是非循环特效，指定时间一到，自动销毁</param>
+                    4.循环特效，且未指定time，则需要外部调用RemoveEffect接口销毁
+         */
         public CreateEffect_Position(file:string, parent_node:LayaNode, x:number=0, y:number=0, time:number = 0):number
         {
             let effect:BaseEffect = ObjectPools.Get(BaseEffect);
@@ -47,14 +47,14 @@ module dc
             this.m_DicEffect.Add(effect.ObjectUID, effect);
             return effect.ObjectUID;
         }
-        /// <summary>
-        /// 挂节点创建特效 
-        /// </summary>
-        /// <param name="file"></param>
-        /// <param name="parent_node">父节点</param>
-        /// <param name="offset">位置偏移</param>
-        /// <param name="time">参考接口CreateEffect_Position的说明</param>
-        /// <returns></returns>
+        /**
+         * 挂节点创建特效
+         * @param	file	    资源文件
+         * @param	parent_node	父节点
+         * @param	x	        位置偏移x
+         * @param	y	        位置偏移y
+         * @param	time	    播放时长,参考接口CreateEffect_Position的说明
+         */        
         public CreateEffect_Joint(file:string, parent_node:LayaNode, offset_x:number=0, offset_y:number=0, time:number = 0):number
         {
             let effect:JoinEffect = ObjectPools.Get(JoinEffect);
@@ -66,14 +66,14 @@ module dc
             this.m_DicEffect.Add(effect.ObjectUID, effect);
             return effect.ObjectUID;
         }
-        /// <summary>
-        /// 创建UI特效
-        /// </summary>
-        /// <param name="file"></param>
-        /// <param name="parent_node">父节点</param>
-        /// <param name="offset">位置偏移</param>
-        /// <param name="time">参考接口CreateEffect_Position的说明</param>
-        /// <returns></returns>
+        /**
+         * 创建UI特效
+         * @param	file	    资源文件
+         * @param	parent_node	父节点
+         * @param	x	        位置偏移x
+         * @param	y	        位置偏移y
+         * @param	time	    播放时长,参考接口CreateEffect_Position的说明
+         */   
         public CreateEffect_UI(file:string, parent_node:LayaNode, offset_x:number=0, offset_y:number=0, time:number = 0):number
         {
             let effect:UIEffect = ObjectPools.Get(UIEffect);

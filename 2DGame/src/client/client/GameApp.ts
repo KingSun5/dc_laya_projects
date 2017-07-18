@@ -43,6 +43,7 @@ module dc
         
         public StartGame():void
         {
+            new GameMain();
             EventController.DispatchEvent(EventID.BEGIN_GAME);
         }
         //～～～～～～～～～～～～～～～～～～～～～～～初始化游戏～～～～～～～～～～～～～～～～～～～～～～～//

@@ -8,6 +8,11 @@ module dc
 	export class LocalValue
 	{
 		private static m_GlobalKey:string = "";
+		 
+         /**
+         * 设置全局id，用于区分同一个设备的不同玩家
+         * @param	key	唯一键，可以使用玩家id
+         */
 		public static SetGlobalKey(key:string):void
 		{
 			this.m_GlobalKey = key;

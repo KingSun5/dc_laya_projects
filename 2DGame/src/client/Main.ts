@@ -12,18 +12,14 @@ module dc
         {
             this.Start();
         }
-
+        /**游戏执行入口*/
         private Start():void
         {
             if (Main.isFirstEnterGame)
             {
-                Laya.init(640,960, Laya.WebGL);
-
                 dc.Procedure.Instance.Setup();
                 dc.Procedure.Instance.StartGame();
                 Main.isFirstEnterGame = false;
-
-                new GameMain();
             }
         }
     }

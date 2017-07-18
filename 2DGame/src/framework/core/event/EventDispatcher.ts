@@ -10,32 +10,32 @@ module dc
         private m_DicFuns:Object = {};
         private m_EvtArgs:EventArgs = new EventArgs();
 
-        public AddEventListener(type:string, context:any, fun:Function):void
+        public AddEventListener(type:string, caller:any, fun:Function):void
         {
             if(this.m_DicFuns[type] == null)
             {
                 this.m_DicFuns[type] = [];
-                this.m_DicFuns[type].push(LayaHandler.create(context, fun, null, false));
+                this.m_DicFuns[type].push(LayaHandler.create(caller, fun, null, false));
             }
             else
             {
                 let arr:LayaHandler[] = this.m_DicFuns[type];
                 for(let item of arr)
                 {
-                    if(item.caller == context && item.method == fun)return;
+                    if(item.caller == caller && item.method == fun)return;
                 }
-                arr.push(LayaHandler.create(context, fun, null, false));
+                arr.push(LayaHandler.create(caller, fun, null, false));
             }
         }
 
-        public RemoveEventListener(type:string, context:any,fun:Function):void
+        public RemoveEventListener(type:string, caller:any,fun:Function):void
         {
             let arr:LayaHandler[] = this.m_DicFuns[type];
             if(arr == null)return;
             for(let i = 0; i < arr.length; ++i)
             {
                 let item:LayaHandler = arr[i];
-                if(item.caller == context && item.method == fun)
+                if(item.caller == caller && item.method == fun)
                 {
                     item.recover();
                     arr.splice(i, 1);

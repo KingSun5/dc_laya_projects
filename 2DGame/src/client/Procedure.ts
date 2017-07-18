@@ -13,24 +13,34 @@ module dc
             if(!this.instance)this.instance = new Procedure();
             return this.instance;
         }
-
+        /**
+         * 初始化
+        */
         public Setup():void
         {
+            Laya.init(640,960, Laya.WebGL);
+            
             Log.Info("Procedure::setup");
             this.InitGameManager();
             Laya.timer.frameLoop(1, this, this.MainLoop);
         }
-
+        /**
+         * 销毁
+        */
         public Destroy():void
         {
             this.ReleaseGameManager();
         }
-
+        /**
+         * 开始游戏，逻辑开始执行
+        */
         public StartGame():void
         {
             GameApp.Instance.StartGame();    
         }
-
+        /**
+         * 游戏主循环
+        */
         private MainLoop():void
         {
             this.Tick(Time.deltaTime,Time.frameCount);

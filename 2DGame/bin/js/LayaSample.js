@@ -106,12 +106,12 @@ var dc;
             // sound.Setup("",1);
             // let a = Utils.GetLocationParams();
             //配置表
-            // let conf = DataProvider.GetConfig("serverList");
-            // let s = conf[0].serverId;
-            // let n = conf[0].name;
-            // let info = DataProvider.GetInfo("global","nResetTime");
-            // s = info.IntegerValue;
-            // n = info.DoubleValue;
+            var conf = dc.DataProvider.GetConfig("serverList");
+            var s = conf[0].serverId;
+            var n = conf[0].name;
+            var info = dc.DataProvider.GetInfo("global", "nResetTime");
+            s = info.IntegerValue;
+            n = info.DoubleValue;
             //effect
             //EffectManager.Instance.CreateEffect_Position("res/effect/actEffect.json", SceneLayerUtils.effectLevelContainer,100,100, 0);
             //缓存

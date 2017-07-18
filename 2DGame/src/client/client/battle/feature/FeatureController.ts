@@ -16,9 +16,7 @@ module dc
 			this.m_FeatureList = new NDictionary<number>();
 		}
 
-		/// <summary>
-		/// 增加特性
-		/// </summary>
+		/**增加特性*/
 		public AddFeature(feature_id:number):void
 		{
 			let stdFeatureInfo = DataProvider.GetInfo("FeatureInfo",feature_id);
@@ -60,9 +58,7 @@ module dc
 			this.Resolve();
 			this.m_OwnerUnit.Observer.DispatchEvent(EventID.UNIT_FEATURE, stdFeatureInfo.Type);
 		}
-		/// <summary>
-		/// 清除
-		/// </summary>
+		/**清除特性*/
 		public RemoveFeature(feature_id:number):void
 		{
 			this.m_FeatureList.Remove(feature_id);
@@ -80,7 +76,7 @@ module dc
 			}
 			return 0;
 		}
-
+		/**计算特效值*/
 		public ResolveFeatureAbils(abil:number, type:eFeatureType):number
 		{
 			let result:number = abil;

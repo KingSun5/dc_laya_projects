@@ -7,6 +7,10 @@ module dc
      */
 	export class ObjectPools
 	{
+        /**
+         * 获取一个对象，不存在则创建
+         * @param classDef  类名
+         */
         public static Get(classDef: any):any
         {
             let sign:string = "dc." + classDef.name;
@@ -23,6 +27,10 @@ module dc
             return obj;
         }
 
+        /**
+         * 回收对象
+         * @param obj  对象实例
+         */
         public static Recover(obj: any):void
         {
             if(obj == null)return;

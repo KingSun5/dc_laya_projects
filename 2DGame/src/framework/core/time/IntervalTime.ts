@@ -14,11 +14,11 @@ module dc
 		{
 			this.m_now_time = 0;
 		}
-		/// <summary>
-		/// 初始化定时器
-		/// </summary>
-		/// <param name="interval">触发间隔</param>
-		/// <param name="start">是否第一帧开始执行</param>
+         /**
+         * 初始化定时器
+         * @param	interval	触发间隔
+         * @param	first_frame	是否第一帧开始执行
+         */
 		public Init(interval:number, first_frame:boolean):void
 		{
 			this.m_interval_time = interval;

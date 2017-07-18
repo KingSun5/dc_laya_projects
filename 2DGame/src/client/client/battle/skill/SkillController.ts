@@ -50,11 +50,7 @@ module dc
 			let skillInfo = this.m_DicID2Skill.GetValue(skillId);
 			return skillInfo;
 		}
-		/// <summary>
-		/// 是否可射击
-		/// </summary>
-		/// <param name="weaponId"></param>
-		/// <returns></returns>
+		/**是否可射击*/
 		public CheckWeaponShoot(weaponId:number):boolean
 		{
 			let stdWeaponInfo = DataProvider.GetInfo("WeaponInfo", weaponId);

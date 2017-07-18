@@ -7,14 +7,14 @@ module dc
      */
 	export class UnitObject extends MapObject
 	{
-        protected m_IsDie:boolean = false;//是否死亡
+        protected m_IsDie:boolean = false;          //是否死亡
         protected m_GroupType:eGroupType = eGroupType.TYPE_NONE;//阵营
-        protected m_UnitTypeID:number = 0;//单位类型
+        protected m_UnitTypeID:number = 0;          //单位类型
         protected m_Hp:number = 0;
         protected m_HpMax:number = 1;
         protected m_WeaponID:number = 0;
 
-        protected m_UnitInfo:UnitInfo = null;      //玩家数据缓存
+        protected m_UnitInfo:UnitInfo = null;       //玩家数据缓存
         protected m_StdUnitInfo:any = null;
         protected m_StdWeaponInfo:any = null;
 
@@ -59,6 +59,7 @@ module dc
 
             super.Destroy();
         }
+        /**加载数据*/
         public LoadData(info:UnitInfo):void
         {
             this.m_UnitInfo = info;

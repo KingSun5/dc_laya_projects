@@ -51,12 +51,12 @@ var dc;
          * @param order 排序方式
         */
         ArrayUtils.Sort = function (arr, key, order) {
-            if (order === void 0) { order = dc.eArraySort.DESCENDING; }
+            if (order === void 0) { order = dc.eArraySortOrder.DESCENDING; }
             if (arr == null)
                 return;
             arr.sort(function (info1, info2) {
                 switch (order) {
-                    case dc.eArraySort.ASCENDING:
+                    case dc.eArraySortOrder.ASCENDING:
                         {
                             if (info1[key] < info2[key])
                                 return -1;
@@ -65,7 +65,7 @@ var dc;
                             else
                                 return 0;
                         }
-                    case dc.eArraySort.DESCENDING:
+                    case dc.eArraySortOrder.DESCENDING:
                         {
                             if (info1[key] > info2[key])
                                 return -1;
