@@ -15,6 +15,8 @@ module dc
             this.m_img.on(Laya.Event.CLICK, this, this.OnImageClickEvt);
             Laya.stage.addChild(this.m_img);
 
+            dc.ResourceManager.Instance.AddAsync("res/atlas/comp.json", LayaLoader.JSON);
+
             //配置表
             let list = [
                 new ConfigTemplate("data/serverList.json", "serverList", ""),
@@ -27,12 +29,12 @@ module dc
             //dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE);
 
-            dc.TimerManager.Instance.AddTimer(1000, 3, this, this.OnTime, [11]);
+            //dc.TimerManager.Instance.AddTimer(1000, 3, this, this.OnTime, [11]);
         }
         private ii = 1;
         private OnTime(timer_id:number, args1:any):void
         {
-            dc.ResourceManager.Instance.AddAsync("res/image/"+this.ii+".png", Laya.Loader.IMAGE);
+            dc.ResourceManager.Instance.AddAsync("res/image/"+this.ii+".png", LayaLoader.IMAGE);
             this.ii++;
         }
         private OnImageClickEvt():void
@@ -108,16 +110,17 @@ module dc
             //SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
 
             //加载
-            // dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
-            // dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
-            // dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
-            // dc.ResourceManager.Instance.AddSync("res/image/1.png", Laya.Loader.IMAGE);
-            // dc.ResourceManager.Instance.AddSync("res/image/2.png", Laya.Loader.IMAGE);
-            // dc.ResourceManager.Instance.AddSync("res/image/3.png", Laya.Loader.IMAGE);
-            // dc.ResourceManager.Instance.StartSync();
+            // dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnAsyncComplete));
+            // dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnAsyncComplete));
+            // dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnAsyncComplete));
+            // let assets = [];
+            // assets.push({url:"res/image/1.png", type:Laya.Loader.IMAGE});
+            // assets.push({url:"res/image/2.png", type:Laya.Loader.IMAGE});
+            // assets.push({url:"res/image/3.png", type:Laya.Loader.IMAGE});
+            // dc.ResourceManager.Instance.AddSync(assets, this, this.OnSyncComplete, this.OnSyncProgress);
 
             //释放
-            dc.ResourceManager.Instance.ClearUnusedAssets(eClearStrategy.FIFO);
+            //dc.ResourceManager.Instance.ClearUnusedAssets(eClearStrategy.FIFO);
 
             //时间
             //Log.Debug(TimeUtils.TimeSince2009.toString());
@@ -167,6 +170,26 @@ module dc
             // Log.Debug(a.toString());
             // let b = FlagUtils.HasFlag(a,2);
             // Log.Debug(a.toString());
+
+            //界面显示
+            //var testui:LoginView = new LoginView();
+            //LayerManager.dialogLayer.addChild(testui);
+            //UIManager.Instance.Show(GUIID.ID_LOGIN);
+            let objs:Object = {};
+            objs[1] = 1;
+            objs[2] = 2;
+            objs[3] = 3;
+            objs[4] = 4;
+            objs[5] = 5;
+            for(let key in objs)
+            {
+                if(objs[key] == 2 || objs[key] == 4)
+                delete objs[key];
+            }
+            for(let key in objs)
+            {
+                Log.Debug(objs[key]);
+            }
         }
         public Add(a:number):number
         {
@@ -176,9 +199,17 @@ module dc
         {
             Log.Debug("定时器触发:" + Time.timeSinceStartup);
         }
-        private OnComplete(url:string):void
+        private OnAsyncComplete(url:string):void
         {
             Log.Debug("加载完成:" + url);
+        }
+        private OnSyncComplete():void
+        {
+            Log.Debug("同步加载完成");
+        }
+        private OnSyncProgress(cur:number, total:number):void
+        {
+            Log.Debug("同步加载进度:" + cur + ", " + total);
         }
         private OnConnected(args:dc.EventArgs):void
         {

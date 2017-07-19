@@ -52,11 +52,13 @@ module dc
             
             GameApp.Instance.Setup();
             SceneManager.Instance.Setup();
+            UILoaderRegister.Setup();
         }
         private ReleaseGameManager():void
         {
             GameApp.Instance.Destroy();
             SceneManager.Instance.Destroy();
+            UILoaderRegister.Destroy();
 
             Framework.Instance.Destroy();
         }

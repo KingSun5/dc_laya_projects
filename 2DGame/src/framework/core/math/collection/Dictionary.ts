@@ -58,6 +58,9 @@ module dc
             }
             return list;
         }
+        /**
+         * 遍历列表，执行回调函数；注意返回值为false时，中断遍历
+        */
         public Foreach(compareFn: (key:number, value: TValue) => boolean):void
         {
             for(let key in this.m_Dic)
@@ -65,6 +68,10 @@ module dc
                 if(!compareFn.call(null, key, this.m_Dic[key]))
                     break;
             }
+        }
+        public get Length():number
+        {
+            return DicUtils.GetLength(this.m_Dic);
         }
     }
     /**
@@ -120,6 +127,9 @@ module dc
                 delete this.m_Dic[key];
             }
         }
+        /**
+         * 遍历列表，执行回调函数；注意返回值为false时，中断遍历
+        */
         public Foreach(compareFn: (key:string, value: TValue) => boolean):void
         {
             for(let key in this.m_Dic)
@@ -127,6 +137,10 @@ module dc
                 if(!compareFn.call(null, key, this.m_Dic[key]))
                     break;
             }
+        }
+        public get Length():number
+        {
+            return DicUtils.GetLength(this.m_Dic);
         }
     }    
 }

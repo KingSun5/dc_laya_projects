@@ -10,6 +10,7 @@ var dc;
             this.m_img.loadImage(this.m_image1_url, 100, 50);
             this.m_img.on(Laya.Event.CLICK, this, this.OnImageClickEvt);
             Laya.stage.addChild(this.m_img);
+            dc.ResourceManager.Instance.AddAsync("res/atlas/comp.json", LayaLoader.JSON);
             //配置表
             var list = [
                 new dc.ConfigTemplate("data/serverList.json", "serverList", ""),
@@ -20,10 +21,10 @@ var dc;
             //dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE);
-            dc.TimerManager.Instance.AddTimer(1000, 3, this, this.OnTime, [11]);
+            //dc.TimerManager.Instance.AddTimer(1000, 3, this, this.OnTime, [11]);
         }
         GameMain.prototype.OnTime = function (timer_id, args1) {
-            dc.ResourceManager.Instance.AddAsync("res/image/" + this.ii + ".png", Laya.Loader.IMAGE);
+            dc.ResourceManager.Instance.AddAsync("res/image/" + this.ii + ".png", LayaLoader.IMAGE);
             this.ii++;
         };
         GameMain.prototype.OnImageClickEvt = function () {
@@ -89,15 +90,16 @@ var dc;
             //声音
             //SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
             //加载
-            // dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
-            // dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
-            // dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnComplete));
-            // dc.ResourceManager.Instance.AddSync("res/image/1.png", Laya.Loader.IMAGE);
-            // dc.ResourceManager.Instance.AddSync("res/image/2.png", Laya.Loader.IMAGE);
-            // dc.ResourceManager.Instance.AddSync("res/image/3.png", Laya.Loader.IMAGE);
-            // dc.ResourceManager.Instance.StartSync();
+            // dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnAsyncComplete));
+            // dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnAsyncComplete));
+            // dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnAsyncComplete));
+            // let assets = [];
+            // assets.push({url:"res/image/1.png", type:Laya.Loader.IMAGE});
+            // assets.push({url:"res/image/2.png", type:Laya.Loader.IMAGE});
+            // assets.push({url:"res/image/3.png", type:Laya.Loader.IMAGE});
+            // dc.ResourceManager.Instance.AddSync(assets, this, this.OnSyncComplete, this.OnSyncProgress);
             //释放
-            dc.ResourceManager.Instance.ClearUnusedAssets(dc.eClearStrategy.FIFO);
+            //dc.ResourceManager.Instance.ClearUnusedAssets(eClearStrategy.FIFO);
             //时间
             //Log.Debug(TimeUtils.TimeSince2009.toString());
             //TimerManager.Instance.AddTimer(1000, 10, this, this.OnTimerEvt, [123,12]);
@@ -137,6 +139,23 @@ var dc;
             // Log.Debug(a.toString());
             // let b = FlagUtils.HasFlag(a,2);
             // Log.Debug(a.toString());
+            //界面显示
+            //var testui:LoginView = new LoginView();
+            //LayerManager.dialogLayer.addChild(testui);
+            //UIManager.Instance.Show(GUIID.ID_LOGIN);
+            var objs = {};
+            objs[1] = 1;
+            objs[2] = 2;
+            objs[3] = 3;
+            objs[4] = 4;
+            objs[5] = 5;
+            for (var key in objs) {
+                if (objs[key] == 2 || objs[key] == 4)
+                    delete objs[key];
+            }
+            for (var key in objs) {
+                dc.Log.Debug(objs[key]);
+            }
         };
         GameMain.prototype.Add = function (a) {
             return a + 10;
@@ -144,8 +163,14 @@ var dc;
         GameMain.prototype.OnTimerEvt = function (args) {
             dc.Log.Debug("定时器触发:" + dc.Time.timeSinceStartup);
         };
-        GameMain.prototype.OnComplete = function (url) {
+        GameMain.prototype.OnAsyncComplete = function (url) {
             dc.Log.Debug("加载完成:" + url);
+        };
+        GameMain.prototype.OnSyncComplete = function () {
+            dc.Log.Debug("同步加载完成");
+        };
+        GameMain.prototype.OnSyncProgress = function (cur, total) {
+            dc.Log.Debug("同步加载进度:" + cur + ", " + total);
         };
         GameMain.prototype.OnConnected = function (args) {
             dc.Log.Debug("连接成功");

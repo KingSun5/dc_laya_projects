@@ -39,7 +39,7 @@ module dc
                     
                 }
                 else
-                {
+                {//结束后删除
                     this.m_ListReleaseObject.push(obj);
                 }
             }

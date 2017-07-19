@@ -20,6 +20,7 @@ import LayaTimeLine = laya.utils.TimeLine;
 //UI
 import LayaImage = laya.ui.Image;
 import LayaView = laya.ui.View;
+import LayaDialog = laya.ui.Dialog;
 import LayaLabel = laya.ui.Label;
 import LayaButton = laya.ui.Button;
 import LayaPanel = laya.ui.Panel;

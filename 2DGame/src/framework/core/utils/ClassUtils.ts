@@ -7,6 +7,11 @@ module dc
      */
 	export class ClassUtils
 	{
+        /**
+         * 根据名称创建实例
+         * @param objectName    类名，包括命名空间
+         * @param args          参数
+        */
         public static CreateObject<T>(objectName: string, ...args: any[]): T 
         {
             if (StringUtils.IsNullOrEmpty(objectName)) 

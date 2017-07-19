@@ -11,8 +11,8 @@ module dc
 		
 		private static m_backLayer:LayaSprite;		//背景层
 		private static m_gameLayer:LayaSprite;		//游戏层		游戏主内容
-		private static m_toolsLayer:LayaSprite;		//工具层		角色信息、快捷菜单、聊天等工具视图
-		private static m_appLayer:LayaSprite;		//app层		  面板视图
+		private static m_viewLayer:LayaSprite;		//ui工具层		角色信息、快捷菜单、聊天等工具视图
+		private static m_dialogLayer:LayaSprite;	//ui弹出框层   面板视图
 		private static m_loadLayer:LayaSprite;		//加载层		加载条、服务器请求遮罩等
 		private static m_maskLayer:LayaSprite;		//遮罩层
 		private static m_topLayer:LayaSprite;		//最高层	
@@ -31,15 +31,15 @@ module dc
 			this.m_gameLayer.mouseEnabled = true;
             this.m_root.addChild(this.m_gameLayer);
 
-            this.m_toolsLayer = new LayaSprite();
-            this.m_toolsLayer.name = "toolsLayer";
-			this.m_toolsLayer.mouseEnabled = true;
-            this.m_root.addChild(this.m_toolsLayer);
+            this.m_viewLayer = new LayaSprite();
+            this.m_viewLayer.name = "toolsLayer";
+			this.m_viewLayer.mouseEnabled = true;
+            this.m_root.addChild(this.m_viewLayer);
 
-            this.m_appLayer = new LayaSprite();
-            this.m_appLayer.name = "appLayer";
-			this.m_appLayer.mouseEnabled = true;
-            this.m_root.addChild(this.m_appLayer);
+            this.m_dialogLayer = new LayaSprite();
+            this.m_dialogLayer.name = "uiLayer";
+			this.m_dialogLayer.mouseEnabled = true;
+            this.m_root.addChild(this.m_dialogLayer);
 
             this.m_loadLayer = new LayaSprite();
             this.m_loadLayer.name = "loadLayer";
@@ -62,8 +62,8 @@ module dc
             DisplayUtils.RemoveAllChild(this.m_root);
             this.m_backLayer = null;
             this.m_gameLayer = null;
-            this.m_toolsLayer = null;
-            this.m_appLayer = null;
+            this.m_viewLayer = null;
+            this.m_dialogLayer = null;
             this.m_loadLayer = null;
             this.m_maskLayer = null;
             this.m_topLayer = null;
@@ -72,8 +72,8 @@ module dc
         {
             DisplayUtils.RemoveAllChild(this.m_backLayer);
             DisplayUtils.RemoveAllChild(this.m_gameLayer);
-            DisplayUtils.RemoveAllChild(this.m_toolsLayer);
-            DisplayUtils.RemoveAllChild(this.m_appLayer);
+            DisplayUtils.RemoveAllChild(this.m_viewLayer);
+            DisplayUtils.RemoveAllChild(this.m_dialogLayer);
             DisplayUtils.RemoveAllChild(this.m_loadLayer);
             DisplayUtils.RemoveAllChild(this.m_maskLayer);
             DisplayUtils.RemoveAllChild(this.m_topLayer);
@@ -90,13 +90,13 @@ module dc
         {
             return this.m_gameLayer;
         }
-		public static get toolsLayer():LayaSprite
+		public static get viewLayer():LayaSprite
         {
-            return this.m_toolsLayer;
+            return this.m_viewLayer;
         }
-		public static get appLayer():LayaSprite
+		public static get dialogLayer():LayaSprite
         {
-            return this.m_appLayer;
+            return this.m_dialogLayer;
         }
 		public static get loadLayer():LayaSprite
         {

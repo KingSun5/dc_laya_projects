@@ -1,5 +1,8 @@
 module dc
 {
+	/**
+	 * 加载资源信息
+	*/
 	export class LoaderAsset
 	{
 		public ID:number;
@@ -13,7 +16,7 @@ module dc
 		public StartTime:number; 	//放入加载队列时间   
 		public Complete:LayaHandler;
 
-		constructor(url:string, type:string, complete?: LayaHandler, priority?: number, cache?: boolean, group?: string, ignoreCache?: boolean)
+		constructor(url:string, type:string, complete: LayaHandler=null, priority?: number, cache?: boolean, group?: string, ignoreCache?: boolean)
 		{
 			this.ID = 0;
 			this.Url = url;
@@ -25,6 +28,25 @@ module dc
 			this.Complete = complete;
 			this.Stage = eResLoadStage.UNLOAD;
 			this.StartTime = Laya.timer.currTimer;
+		}
+	}
+	/**
+	 * 加载批次
+	*/
+	export class LoadBatchInfo
+	{
+		public mLoadBatchQueue:Array<LoaderAsset> = null;
+		public mInitTime:number = 0;		//加入队列时间
+		public CompleteFun:LayaHandler = null;	
+		public ProgressFun:LayaHandler = null;	
+		constructor()
+		{
+			this.mInitTime = Time.timeSinceStartup;
+			this.mLoadBatchQueue = [];
+		}
+		public Add(asset:LoaderAsset):void
+		{
+			this.mLoadBatchQueue.push(asset);
 		}
 	}
 }
