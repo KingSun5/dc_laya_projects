@@ -142,20 +142,23 @@ var dc;
             //界面显示
             //var testui:LoginView = new LoginView();
             //LayerManager.dialogLayer.addChild(testui);
-            //UIManager.Instance.Show(GUIID.ID_LOGIN);
-            var objs = {};
-            objs[1] = 1;
-            objs[2] = 2;
-            objs[3] = 3;
-            objs[4] = 4;
-            objs[5] = 5;
-            for (var key in objs) {
-                if (objs[key] == 2 || objs[key] == 4)
-                    delete objs[key];
-            }
-            for (var key in objs) {
-                dc.Log.Debug(objs[key]);
-            }
+            dc.UIManager.Instance.Show(dc.GUIID.ID_LOGIN);
+            //测试删除
+            // let objs:Object = {};
+            // objs[1] = 1;
+            // objs[2] = 2;
+            // objs[3] = 3;
+            // objs[4] = 4;
+            // objs[5] = 5;
+            // for(let key in objs)
+            // {
+            //     if(objs[key] == 2 || objs[key] == 4)
+            //     delete objs[key];
+            // }
+            // for(let key in objs)
+            // {
+            //     Log.Debug(objs[key]);
+            // }
         };
         GameMain.prototype.Add = function (a) {
             return a + 10;
