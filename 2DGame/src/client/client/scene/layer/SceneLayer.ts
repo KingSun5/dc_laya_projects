@@ -13,9 +13,7 @@ module dc
 		/**最高层*/
 		private static m_topLevelContainer:LayaSprite;	
 		/**特效*/
-		private static m_effectLevelContainer:LayaSprite;	
-		/**玩家名字*/
-		private static m_playerNameLevelContainer:LayaSprite;	
+		private static m_effectLevelContainer:LayaSprite;
 		/**玩家*/
 		private static m_playerLevelContainer:LayaSprite;	
 		/**角色 */
@@ -43,9 +41,6 @@ module dc
 			this.m_effectLevelContainer = new LayaSprite();
 			this.m_effectLevelContainer.name = "effectLevelContainer";
 			this.m_effectLevelContainer.mouseEnabled = false;
-			this.m_playerNameLevelContainer = new LayaSprite();
-			this.m_playerNameLevelContainer.name = "playerNameLevelContainer";
-			this.m_playerNameLevelContainer.mouseEnabled = false;
 			this.m_playerLevelContainer = new LayaSprite();
 			this.m_playerLevelContainer.name = "playerLevelContainer";
 			this.m_playerLevelContainer.mouseEnabled = false;
@@ -76,7 +71,6 @@ module dc
 			this.m_sceneRootContainer.addChild(this.m_bulletLevelContainer);
 			this.m_sceneRootContainer.addChild(this.m_roleLevelContainer);
 			this.m_sceneRootContainer.addChild(this.m_playerLevelContainer);
-			this.m_sceneRootContainer.addChild(this.m_playerNameLevelContainer);
 			this.m_sceneRootContainer.addChild(this.m_effectLevelContainer);
 			this.m_sceneRootContainer.addChild(this.m_topLevelContainer);
 		}	
@@ -89,7 +83,6 @@ module dc
 			DisplayUtils.RemoveAllChild(this.m_bulletLevelContainer);
 			DisplayUtils.RemoveAllChild(this.m_roleLevelContainer);
 			DisplayUtils.RemoveAllChild(this.m_playerLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_playerNameLevelContainer);
 			DisplayUtils.RemoveAllChild(this.m_effectLevelContainer);
 			DisplayUtils.RemoveAllChild(this.m_topLevelContainer);
 			
@@ -104,7 +97,6 @@ module dc
 			this.m_bulletLevelContainer = null;
 			this.m_roleLevelContainer = null;
 			this.m_playerLevelContainer = null;
-			this.m_playerNameLevelContainer = null;
 			this.m_effectLevelContainer = null;
 			this.m_topLevelContainer = null;
 		}
@@ -117,47 +109,42 @@ module dc
 			DisplayUtils.RemoveAllChild(this.m_bulletLevelContainer);
 			DisplayUtils.RemoveAllChild(this.m_roleLevelContainer);
 			DisplayUtils.RemoveAllChild(this.m_playerLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_playerNameLevelContainer);
 			DisplayUtils.RemoveAllChild(this.m_effectLevelContainer);
 			DisplayUtils.RemoveAllChild(this.m_topLevelContainer);
 		}
-		public static get playerLevelContainer():LayaSprite
+		public static get player():LayaSprite
 		{
 			return this.m_playerLevelContainer;
 		}
-		public static get roleLevelContainer():LayaSprite
+		public static get role():LayaSprite
 		{
 			return this.m_roleLevelContainer;
 		}
-		public static get bulletLevelContainer():LayaSprite
+		public static get bullet():LayaSprite
 		{
 			return this.m_bulletLevelContainer;
 		}
-		public static get mapItemLevelContainer():LayaSprite
+		public static get mapItem():LayaSprite
 		{
 			return this.m_mapItemLevelContainer;
 		}
-		public static get mapObjLevelContainer():LayaSprite
+		public static get mapObj():LayaSprite
 		{
 			return this.m_mapObjLevelContainer;
 		}
-		public static get terrainLevelContainer():LayaSprite
+		public static get terrain():LayaSprite
 		{
 			return this.m_terrainLevelContainer;
 		}
-		public static get effectLevelContainer():LayaSprite
+		public static get effect():LayaSprite
 		{
 			return this.m_effectLevelContainer;
 		}
-		public static get terrainEffectLevelContainer():LayaSprite
+		public static get terrainEffect():LayaSprite
 		{
 			return this.m_terrainEffectLevelContainer;
 		}
-		public static get playerNameLevelContainer():LayaSprite
-		{
-			return this.m_playerNameLevelContainer;
-		}
-		public static get topLevelContainer():LayaSprite
+		public static get top():LayaSprite
 		{
 			return this.m_topLevelContainer;
 		}

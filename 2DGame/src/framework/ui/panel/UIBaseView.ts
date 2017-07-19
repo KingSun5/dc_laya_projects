@@ -19,7 +19,6 @@ module dc
             this.OnLangChange();
             this.OnCreate();
             this.OnEnable();
-            LayerManager.dialogLayer.addChild(this);
         }
         /**关闭*/
         public Close():void

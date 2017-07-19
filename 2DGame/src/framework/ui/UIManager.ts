@@ -26,12 +26,14 @@ module dc
    
         public Setup():void
         {
+            UILayerUtils.Setup();
         }
 
         public Destroy():void
         {
             this.CloseAll();
             this.ClearLoaderInfo();
+            UILayerUtils.Destroy();
         }
 
         public Tick(elapse:number, game_frame:number):void
@@ -62,12 +64,15 @@ module dc
             assert(loader_info != null, "UIManager::Show - not find id:"+loader_info.mID);
 
             //构建界面
-            let panel:UIPanelInterface = new loader_info.classDef;
+            let panel = new loader_info.classDef;
             assert(panel != null,"UIManager::Show - cannot create ui:" + id);
 
             //执行初始操作
             panel.SetScreenID(id);
             panel.Open();
+
+            let layer:LayaSprite = UILayerUtils.GetLayer(loader_info.mLayer);
+            layer.addChild(panel);
             this.m_DicUIView.Add(id, panel);
 
             return panel;
