@@ -5,16 +5,16 @@ module dc
      * @author hannibal
      * @time 20174-7-10
      */
-	export class ResourceLoadThread
+	export class LoadQueue
 	{
-		protected m_Active:boolean;
+		protected m_Active:boolean = false;
 		protected m_LoadStrategy:eResLoadStrategy;
 		protected m_LoadThreadType:eResLoadThreadType;
 
 		protected m_IsLoading:boolean = false;
 		protected m_CurLoaderAsset:LoaderAsset = null;
 
-		protected m_LoadQueue:LoaderAsset[] = null;
+		protected m_LoadQueue:Array<LoaderAsset> = null;
 
 		public Setup(strategy:eResLoadStrategy, thread_type:eResLoadThreadType):void
 		{
@@ -71,7 +71,7 @@ module dc
 		/**从加载队列移除未开始加载的资源*/
 		public Remove(url:string):boolean
 		{
-			if (this.m_CurLoaderAsset != null && url == this.m_CurLoaderAsset.Url) return false;
+			if (this.m_CurLoaderAsset && url == this.m_CurLoaderAsset.Url) return false;
 
 			let info:LoaderAsset = null;
 			for (let i = 0; i <this.m_LoadQueue.length; ++i)
@@ -88,7 +88,7 @@ module dc
 
 		public Clear():void
 		{
-			this.m_Active = false;
+			this.Stop();
 			this.m_CurLoaderAsset = null;
 			ArrayUtils.Clear(this.m_LoadQueue)
 		}
@@ -98,7 +98,10 @@ module dc
 			this.m_Active = true;
 			Log.Info("[load]begin load total:" + this.m_LoadQueue.length);
 		}
-
+		public Stop():void
+		{
+			this.m_Active = false;
+		}
 		public Pause():void
 		{
 			this.m_Active = false;
@@ -114,18 +117,28 @@ module dc
 			if(!this.m_Active || this.m_IsLoading || this.m_LoadQueue.length == 0)
 				return;
 
+			//当前需要加载的资源
 			this.m_IsLoading = true;
 			this.m_CurLoaderAsset = this.m_LoadQueue.shift();
 			this.m_CurLoaderAsset.Stage = eResLoadStage.LOADING;
-			Laya.loader.load(
-				this.m_CurLoaderAsset.Url,
-				LayaHandler.create(this, this.OnAssetComplete),
-				LayaHandler.create(this, this.OnAssetProgress),
-				this.m_CurLoaderAsset.Type,
-				this.m_CurLoaderAsset.Priority,
-				this.m_CurLoaderAsset.Cache,
-				this.m_CurLoaderAsset.Group,
-				this.m_CurLoaderAsset.IgnoreCache);	
+
+			//判断是否已经加载过
+			if(ResourceManager.Instance.GetRes(this.m_CurLoaderAsset.Url))
+			{
+				this.OnComplete(this.m_CurLoaderAsset.Url);
+			}
+			else
+			{
+				Laya.loader.load(
+					this.m_CurLoaderAsset.Url,
+					LayaHandler.create(this, this.OnAssetComplete),
+					LayaHandler.create(this, this.OnAssetProgress),
+					this.m_CurLoaderAsset.Type,
+					this.m_CurLoaderAsset.Priority,
+					this.m_CurLoaderAsset.Cache,
+					this.m_CurLoaderAsset.Group,
+					this.m_CurLoaderAsset.IgnoreCache);	
+			}
 		}
 		/**加载完成侦听器:加载失败也会触发*/
 		private OnAssetComplete(asset: any): void 
@@ -142,13 +155,23 @@ module dc
 		/**加载完成侦听器*/
 		protected OnComplete(asset: any): void 
 		{
-			if(this.m_CurLoaderAsset != null)
+			if(this.m_CurLoaderAsset)
 			{
+				Log.Debug("[load]load complete res:" + this.m_CurLoaderAsset.Url);
 				this.m_CurLoaderAsset.Stage = eResLoadStage.LOADED;
-				if(this.m_CurLoaderAsset.Complete != null)
+				if(this.m_CurLoaderAsset.Complete)
 					this.m_CurLoaderAsset.Complete.runWith(this.m_CurLoaderAsset.Url);
 			}
 			this.m_IsLoading = false;
-		}	
+		}
+		/**未加载的数量*/
+		public GetUnloadCount():number
+		{
+			return this.m_LoadQueue.length;
+		}		
+		public get Active():boolean
+		{
+			return this.m_Active;
+		}
 	}
 }

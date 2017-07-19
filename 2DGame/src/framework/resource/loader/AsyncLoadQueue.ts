@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 20174-7-10
      */
-	export class ResourceLoadAsyncThread extends ResourceLoadThread
+	export class AsyncLoadQueue extends LoadQueue
 	{
 		public Setup(strategy:eResLoadStrategy, thread_type:eResLoadThreadType):void
 		{
