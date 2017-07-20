@@ -15,8 +15,6 @@ module dc
             this.m_img.on(Laya.Event.CLICK, this, this.OnImageClickEvt);
             Laya.stage.addChild(this.m_img);
 
-            dc.ResourceManager.Instance.AddAsync("res/atlas/comp.json", LayaLoader.JSON);
-
             //配置表
             let list = [
                 new ConfigTemplate("data/serverList.json", "serverList", ""),
@@ -172,9 +170,10 @@ module dc
             // Log.Debug(a.toString());
 
             //界面显示
-            //var testui:LoginView = new LoginView();
-            //LayerManager.dialogLayer.addChild(testui);
-            UIManager.Instance.Show(GUIID.ID_LOGIN);
+            // var testui:LoginView = new LoginView();
+            // testui.OnLoadComplete();
+            // LayerManager.uiLayer.addChild(testui);
+            //UIManager.Instance.Show(GUIID.ID_LOGIN);
 
             //测试删除
             // let objs:Object = {};

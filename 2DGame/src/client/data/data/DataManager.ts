@@ -17,12 +17,14 @@ module dc
 		/**初始化数据*/
         public Setup():void
         {
-
+            LangManager.Instance.Setup();
+            LoginDataMgr.Instance.Setup();
         }
 		/**释放数据*/
         public Destroy():void
         {
-
+            LangManager.Instance.Destroy();
+            LoginDataMgr.Instance.Destroy();
         }
 	}
 }

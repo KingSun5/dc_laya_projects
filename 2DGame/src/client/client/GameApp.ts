@@ -36,15 +36,22 @@ module dc
 
         private RegisterEvent():void
         {
+
         }
         private UnRegisterEvent():void
         {
+
         }
         
         public StartGame():void
         {
-            new GameMain();
             EventController.DispatchEvent(EventID.BEGIN_GAME);
+            
+            let assets:Array<any> = [];
+            assets.push({url:"res/atlas/comp.json", type:LayaLoader.ATLAS});
+            assets.push({url:"res/atlas/ui/main.json", type:LayaLoader.ATLAS});
+            assets.push({url:"res/atlas/ui/common.json", type:LayaLoader.ATLAS});
+            ResourceManager.Instance.AddSync(assets, this, this.OnDownloadComplate);
         }
         //～～～～～～～～～～～～～～～～～～～～～～～初始化游戏～～～～～～～～～～～～～～～～～～～～～～～//
         private InitScene():void
@@ -81,12 +88,10 @@ module dc
         }
         private InitGUI():void
         {
-            UILoaderRegister.Setup();
             UIShowController.Setup();
         }
         private ReleaseGUI():void
         {
-            UILoaderRegister.Destroy();
             UIShowController.Destroy();
         }
         //～～～～～～～～～～～～～～～～～～～～～～～事件～～～～～～～～～～～～～～～～～～～～～～～//
@@ -102,6 +107,14 @@ module dc
         private OnNetDisconnect():void
         {
 
+        }
+        /**资源加载完成*/
+        private OnDownloadComplate():void
+        {
+            Log.Info("必须资源更新完成");
+            //显示登陆界面
+            UIManager.Instance.Show(GUIID.ID_LOGIN);
+            new GameMain();
         }
     }
 }

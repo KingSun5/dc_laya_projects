@@ -165,23 +165,20 @@ module dc
     export class sUILoaderInfo
     {
         public mID:number;
-        /**资源*/
+        /**ui类*/
         public classDef:any;
         /**层级*/
         public mLayer:number;
-        /**预加载*/
-        public mIsPreLoader:boolean;
         /**隐藏销毁*/
         public mHideDestroy:boolean;
         /**对齐*/
         public mAlige:eAligeType;
 
-        constructor(id:number, classDef:any, layer:number, pre_loader:boolean, destroy:boolean, alige:eAligeType)
+        constructor(id:number, classDef:any, layer:number, destroy:boolean, alige:eAligeType)
         {
             this.mID = id;
             this.classDef = classDef;
             this.mLayer = layer;
-            this.mIsPreLoader = pre_loader;
             this.mHideDestroy = destroy;
             this.mAlige = alige;
         }

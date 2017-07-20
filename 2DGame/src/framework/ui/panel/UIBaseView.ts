@@ -19,10 +19,12 @@ module dc
             this.OnLangChange();
             this.OnCreate();
             this.OnEnable();
+            this.LoadResource();
         }
         /**关闭*/
         public Close():void
         {
+            this.UnregisteGUIEvent();
             this.OnDisable();
             this.OnDestroy();
             this.removeSelf();
@@ -81,16 +83,14 @@ module dc
         }
         protected OnEnable():void
         {
-            this.RegisterEvent();
         }
         protected OnDisable():void
         {
-            this.UnRegisterEvent();
         }
         /**资源加载结束*/
         protected OnLoadComplete():void
         {
-            
+            this.RegisteGUIEvent();
         }
 
         /**多语言;初始化，或语音设定改变时触发*/
@@ -99,16 +99,29 @@ module dc
 
         }
 
-        /**需要提前加载的资源*/
-        protected PreLoaderRes():Array<string>
+        /**需要提前加载的资源
+         * 例:
+         *  return [
+                ["res/image/1.png", Laya.Loader.IMAGE],
+                ["res/image/2.png", Laya.Loader.IMAGE],
+                ["res/image/3.png", Laya.Loader.IMAGE],
+            ];
+        */
+        protected PreLoaderRes():Array<any>
         {
-            return undefined;
+            return null;
         }
 
-        /**UI按钮等注册事件列表，内部会在界面销毁时，自动反注册*/
-        protected RegisterEventMap():Array<any>
+        /**
+         * UI按钮等注册事件列表，内部会在界面销毁时，自动反注册
+         * 例：
+                return [ 
+                    [this.m_LoginBtn, laya.events.Event.CLICK, this.OnPressLogin],
+                ];
+         */
+        protected RegisterGUIEventMap():Array<any>
         {
-            return undefined;
+            return null;
         }
         /**自定义事件注册，用于EventController派发的事件*/
         protected RegisterEvent():void
@@ -156,6 +169,30 @@ module dc
             if(!this.m_IsOpen)return;
 
             this.OnLoadComplete();
+        }
+
+        /**注册界面事件*/
+        private RegisteGUIEvent():void
+        {
+            let event_list:Array<any> = this.RegisterGUIEventMap();
+            if(!event_list)return;
+
+            for(let item of event_list)
+            {
+                let gui_control = <Laya.EventDispatcher>item[0];
+                gui_control.on(item[1], this, item[2]);
+            }
+        }
+        private UnregisteGUIEvent():void
+        {
+            let event_list:Array<any> = this.RegisterGUIEventMap();
+            if(!event_list)return;
+
+            for(let item of event_list)
+            {
+                let gui_control = <Laya.EventDispatcher>item[0];
+                gui_control.off(item[1], this, item[2]);
+            }
         }
 	}
 }

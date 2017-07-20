@@ -10,6 +10,7 @@ module dc
 	export class GUIID
 	{
 		public static readonly ID_LOGIN:number						= 1000;	// 登陆
+		public static readonly ID_SELECT_SERVER:number				= 1001;	// 选服
 	}
 
 }

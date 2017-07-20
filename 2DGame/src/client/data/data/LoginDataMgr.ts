@@ -1,19 +1,19 @@
 module dc
 {
-	/**
-     * 多语言
+    /**
+     * 登陆管理器
      * @author hannibal
-     * @time 20174-7-9
+     * @time 20174-7-20
      */
-	export class LangManager extends Singleton
+	export class LoginDataMgr extends Singleton
 	{
-        private static instance:LangManager = null;
-        public static get Instance():LangManager
+        private static instance:LoginDataMgr = null;
+        public static get Instance():LoginDataMgr
         {
-            if(!this.instance)this.instance = new LangManager();
+            if(!this.instance)this.instance = new LoginDataMgr();
             return this.instance;
         }
-    
+        
         /**在这做数据初始化*/
 		public Setup():void
         {
