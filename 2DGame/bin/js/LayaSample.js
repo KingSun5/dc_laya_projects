@@ -10,7 +10,6 @@ var dc;
             this.m_img.loadImage(this.m_image1_url, 100, 50);
             this.m_img.on(Laya.Event.CLICK, this, this.OnImageClickEvt);
             Laya.stage.addChild(this.m_img);
-            dc.ResourceManager.Instance.AddAsync("res/atlas/comp.json", LayaLoader.JSON);
             //配置表
             var list = [
                 new dc.ConfigTemplate("data/serverList.json", "serverList", ""),
@@ -140,9 +139,10 @@ var dc;
             // let b = FlagUtils.HasFlag(a,2);
             // Log.Debug(a.toString());
             //界面显示
-            //var testui:LoginView = new LoginView();
-            //LayerManager.dialogLayer.addChild(testui);
-            dc.UIManager.Instance.Show(dc.GUIID.ID_LOGIN);
+            // var testui:LoginView = new LoginView();
+            // testui.OnLoadComplete();
+            // LayerManager.uiLayer.addChild(testui);
+            //UIManager.Instance.Show(GUIID.ID_LOGIN);
             //测试删除
             // let objs:Object = {};
             // objs[1] = 1;
