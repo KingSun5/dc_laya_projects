@@ -241,15 +241,8 @@ module dc
             if (this.m_caller) 
             {
                 this.m_caller.OnAlertViewClick(this, nIndex);
-                UIManager.Instance.Close(GUIID.ALERT_VIEW);
             }
-            else 
-            { //如果没设置代理，点了关闭就直接消失吧
-                if (nIndex == eAlertViewButtonIndex.Close) 
-                {
-                    UIManager.Instance.Close(GUIID.ALERT_VIEW);
-                }
-            }
+            UIManager.Instance.Close(GUIID.ALERT_VIEW);
         }
 	}
     /** 

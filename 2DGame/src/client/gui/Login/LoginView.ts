@@ -99,9 +99,9 @@ module dc
         {
             Log.Debug("OnPressRegist");
 
-            AlertViewController.Show(this, "提示", "这是内容1", "bottomTip", "", "确定", null);
-            AlertViewController.Show(this, "提示", "这是内容2", "bottomTip", "取消", "确定", null);
-            AlertViewController.Show(this, "提示", "这是内容3", "bottomTip", "取消", "", null);
+            AlertViewController.ShowAlert("提示", "这是内容1", "bottomTip", "确定", null);
+            AlertViewController.ShowConfirm(this, "提示", "这是内容2", "bottomTip", "取消", "确定", null);
+            AlertViewController.ShowConfirm(this, "提示", "这是内容3", "bottomTip", "取消", "", null);
         }
         /**点击选服*/
         private OnPressSelectServer(event: LayaEvent)

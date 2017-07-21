@@ -7,6 +7,11 @@ module dc
      */
     export class Utils
     {
+        /**打开外部链接，如https://ask.layabox.com/xxx*/
+        public static OpenURL(url:string):void
+        {
+            Laya.Browser.window.location.href=url;
+        }
         /**获取当前地址栏参数*/
         public static GetLocationParams():SDictionary<string>
         {

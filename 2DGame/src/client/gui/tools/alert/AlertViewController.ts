@@ -11,7 +11,7 @@ module dc
         private static m_ListAlert:Queue<sAlertViewInfo> = new Queue<sAlertViewInfo>();
 
         /** 
-            显示弹出框
+            显示带确认的弹出框
             @param caller           代理对象
             @param sTitle           标题，默认是“温馨提示”
             @param sContent         提示内容
@@ -21,7 +21,7 @@ module dc
             @param param            调用方预设的参数，保存在alertView对象中，可以通过getParam方法获取
             @param color_str        默认文本颜色，不传或者传null默认成白色
         */
-        public static Show(caller: AlertView_Delegate,
+        public static ShowConfirm(caller: AlertView_Delegate,
                             sTitle:string="",
                             sContent:string,
                             sBottomTip:string = "",
@@ -34,13 +34,25 @@ module dc
             this.m_ListAlert.Enqueue(alert_info);
             this.CheckAlertNext();
         }
+        /** 
+          *  弹出提示框
+        */
+        public static ShowAlert(sTitle:string="",
+                            sContent:string,
+                            sBottomTip:string = "",
+                            sOkLB:string = "",
+                            param:any = null, 
+                            color_str:string = "" ): void 
+        {
+            this.ShowConfirm(null,sTitle,sContent,sBottomTip,"",sOkLB,param,color_str);
+        }        
 
         private static CheckAlertNext():void
         {
             if(this.m_IsShowing || this.m_ListAlert.Size() <= 0)return;
 
             let alert_info:sAlertViewInfo = this.m_ListAlert.Dequeue();
-            if(!alert_info || !alert_info.caller)return;
+            if(!alert_info)return;
 
             this.m_IsShowing = true;
             this.RegisterEvent();
