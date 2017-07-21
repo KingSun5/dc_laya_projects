@@ -28,7 +28,7 @@ module dc
             this.m_Active = true;
             if(this.m_TotalTime > 0)
             {
-                TimerManager.Instance.AddTimer(this.m_TotalTime, 1, this, this.OnComponentDestroy)
+                TimerManager.Instance.AddOnce(this.m_TotalTime, this, this.OnComponentDestroy)
             }
             if(!StringUtils.IsNullOrEmpty(file))
             {

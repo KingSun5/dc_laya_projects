@@ -9,8 +9,10 @@ module dc
      */	
 	export class GUIID
 	{
-		public static readonly ID_LOGIN:number						= 1000;	// 登陆
-		public static readonly ID_SELECT_SERVER:number				= 1001;	// 选服
+        public static readonly ALERT_VIEW:number				    = 1;	    // 弹出对话框
+
+		public static readonly LOGIN:number						    = 1000;	    // 登陆
+		public static readonly SELECT_SERVER:number				    = 1001;	    // 选服
 	}
 
 }

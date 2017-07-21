@@ -39,14 +39,14 @@ module dc
             }
         }
         /**
-         * 定时重复执行。
+         * 定时重复执行
          * @param	rate	间隔时间(单位毫秒)。
          * @param	ticks	执行次数
          * @param	caller	执行域(this)。
          * @param	method	定时器回调函数：注意，返回函数第一个参数为定时器id，后面参数依次时传入的参数。例OnTime(timer_id:number, args1:any, args2:any,...):void
          * @param	args	回调参数。
          */
-        public AddTimer(rate: number, ticks:number, caller: any, method: Function, args: Array<any>=null):number
+        public AddLoop(rate: number, ticks:number, caller: any, method: Function, args: Array<any>=null):number
         {
             if (ticks <= 0) ticks = 0;
             let newTimer:TimerEntity = ObjectPools.Get(TimerEntity);
@@ -56,6 +56,18 @@ module dc
             this.m_Timers.push(newTimer);
             return newTimer.id;
         }  
+         /**
+         * 单次执行
+         */
+        public AddOnce(rate: number, caller: any, method: Function, args: Array<any>=null):number
+        {
+            let newTimer:TimerEntity = ObjectPools.Get(TimerEntity);
+            ++this.m_idCounter;
+            if(args != null)ArrayUtils.Insert(args, this.m_idCounter, 0);
+            newTimer.Set(this.m_idCounter, rate, 1, LayaHandler.create(caller, method, args, false));
+            this.m_Timers.push(newTimer);
+            return newTimer.id;
+        }         
          /**
          * 移除定时器
          * @param	timerId	定时器id
@@ -69,7 +81,7 @@ module dc
         */
         private Remove():void
         {
-            let timer;
+            let timer:TimerEntity;
             if (this.m_RemovalPending.length > 0)
             {
                 for (let id of this.m_RemovalPending)

@@ -16,12 +16,21 @@ module dc
 	*/
     export enum eUILayer
     {
-        LAYER_ID_BACK = 0,      // 界面背景
-        LAYER_ID_VIEW,          // 全屏界面，会弹出子界面的界面
-        LAYER_ID_DIALOG,        // 弹出式界面
-        LAYER_ID_Loader,        // 加载界面
-        LAYER_ID_MASK,        	// 遮罩
-        LAYER_ID_TOP,        	// 最顶层
-        LAYER_ID_MAX,
+        BACK = 0,      // 界面背景
+        VIEW,          // 全屏界面，会弹出子界面的界面
+        DIALOG,        // 弹出式界面
+        Loader,        // 加载界面
+        MASK,        	// 遮罩
+        TOP,        	// 最顶层
+        MAX,
     }
+
+    /**
+     * 声音事件
+    */
+	export class UIEvent
+	{
+		public static OPEN:string       = "OPEN";		//界面打开
+		public static CLOSE:string      = "CLOSE";		//界面关闭
+	}
 }

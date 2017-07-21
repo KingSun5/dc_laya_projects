@@ -8,10 +8,10 @@ module dc
 	export class LoginView extends client.gui.login.LoginViewUI
 	{
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～重写基类方法～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
-        /**初始化，和onDestroy是一对*/
-        protected OnCreate():void
+        /**初始化*/
+        protected OnCreate(args:any):void
         {
-            super.OnCreate();
+            super.OnCreate(args);
         }
         /**销毁*/
         protected OnDestroy():void
@@ -36,6 +36,10 @@ module dc
         /**资源加载结束*/
         public OnLoadComplete():void
         {
+            let num:UIImageNumber = new UIImageNumber("ui/main/clip_num.png", 29, 33);
+            num.pos(100 ,300);
+            num.SetNum(11222);
+            this.addChild(num);
             super.OnLoadComplete();
         }
 
@@ -94,13 +98,29 @@ module dc
         private OnPressRegister(event: LayaEvent)
         {
             Log.Debug("OnPressRegist");
+
+            AlertViewController.Show(this, "提示", "这是内容1", "bottomTip", "", "确定", null);
+            AlertViewController.Show(this, "提示", "这是内容2", "bottomTip", "取消", "确定", null);
+            AlertViewController.Show(this, "提示", "这是内容3", "bottomTip", "取消", "", null);
         }
         /**点击选服*/
         private OnPressSelectServer(event: LayaEvent)
         {
             Log.Debug("OnPressSelectServer");
-            //UIManager.Instance.Close(GUIID.ID_LOGIN);
-            UIManager.Instance.Show(GUIID.ID_SELECT_SERVER);
+            //UIManager.Instance.Close(GUIID.LOGIN);
+            UIManager.Instance.Show(GUIID.SELECT_SERVER);
+        }
+        /**回调结束后，会自动关闭*/
+        public OnAlertViewClick(alertView: UIAlertView, btnIndex: eAlertViewButtonIndex): void
+        {
+            if (eAlertViewButtonIndex.Ok == btnIndex) 
+            {
+                Log.Debug("点击“确定”按钮");
+            }
+            else if (eAlertViewButtonIndex.Cancel == btnIndex) 
+            {
+                Log.Debug("点击“取消”按钮");
+            }
         }
 	}
 }

@@ -9,9 +9,9 @@ module dc
 	{
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～重写基类方法～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         /**初始化，和onDestroy是一对*/
-        protected OnCreate():void
+        protected OnCreate(args:any):void
         {
-            super.OnCreate();
+            super.OnCreate(args);
         }
         /**销毁*/
         protected OnDestroy():void
@@ -78,7 +78,7 @@ module dc
         private OnPressClose(event: LayaEvent)
         {
             Log.Debug("OnPressClose");
-            UIManager.Instance.Close(GUIID.ID_SELECT_SERVER);
+            UIManager.Instance.Close(GUIID.SELECT_SERVER);
             //UIManager.Instance.Show(GUIID.ID_LOGIN);
         }
 	}

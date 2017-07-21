@@ -46,7 +46,10 @@ module dc
         public StartGame():void
         {
             EventController.DispatchEvent(EventID.BEGIN_GAME);
-            
+            TimerManager.Instance.AddOnce(1000, this, this.LoadMustResource);
+        }
+        private LoadMustResource():void
+        {
             let assets:Array<any> = [];
             assets.push({url:"res/atlas/comp.json", type:LayaLoader.ATLAS});
             assets.push({url:"res/atlas/ui/main.json", type:LayaLoader.ATLAS});
@@ -88,11 +91,9 @@ module dc
         }
         private InitGUI():void
         {
-            UIShowController.Setup();
         }
         private ReleaseGUI():void
         {
-            UIShowController.Destroy();
         }
         //～～～～～～～～～～～～～～～～～～～～～～～事件～～～～～～～～～～～～～～～～～～～～～～～//
         /**玩家自身数据已经下发，初次进入游戏状态*/
@@ -113,7 +114,7 @@ module dc
         {
             Log.Info("必须资源更新完成");
             //显示登陆界面
-            UIManager.Instance.Show(GUIID.ID_LOGIN);
+            UIShowController.Show(GUIID.LOGIN, 111,1112);
             new GameMain();
         }
     }

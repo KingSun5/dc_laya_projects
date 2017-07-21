@@ -29,8 +29,10 @@ module dc
 		private static get ListLoaderInfo():Array<sUILoaderInfo>
 		{
 			return [
-				new sUILoaderInfo(GUIID.ID_LOGIN, LoginView, eUILayer.LAYER_ID_VIEW, true, eAligeType.MID),
-				new sUILoaderInfo(GUIID.ID_SELECT_SERVER, SelectSeverView, eUILayer.LAYER_ID_DIALOG, true, eAligeType.MID),
+				new sUILoaderInfo(GUIID.ALERT_VIEW, 		UIAlertView, 		eUILayer.TOP, 		true, eAligeType.MID),
+
+				new sUILoaderInfo(GUIID.LOGIN, 				LoginView, 			eUILayer.VIEW, 		true, eAligeType.MID),
+				new sUILoaderInfo(GUIID.SELECT_SERVER, 		SelectSeverView, 	eUILayer.DIALOG, 	true, eAligeType.MID),
 			];
 		}
 	}

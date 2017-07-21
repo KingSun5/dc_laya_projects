@@ -13,13 +13,14 @@ module dc
         constructor(){super();}
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～公共方法～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         /**打开*/
-        public Open():void
+        public Open(args:any):void
         {
             this.m_IsOpen = true;
             this.OnLangChange();
-            this.OnCreate();
+            this.OnCreate(args.slice(0));
             this.OnEnable();
             this.LoadResource();
+            EventController.DispatchEvent(UIEvent.OPEN, this.m_ScreenID);
         }
         /**关闭*/
         public Close():void
@@ -29,6 +30,7 @@ module dc
             this.OnDestroy();
             this.removeSelf();
             this.m_IsOpen = false;
+            EventController.DispatchEvent(UIEvent.CLOSE, this.m_ScreenID);
         }
         /**置顶*/
         public SetTopMost():void
@@ -70,7 +72,7 @@ module dc
         }      
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～可重写的方法，注意逻辑层不要再次调用～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         /**初始化，和onDestroy是一对*/
-        protected OnCreate():void
+        protected OnCreate(args:any):void
         {
         }
         /**销毁*/
@@ -180,7 +182,7 @@ module dc
             for(let item of event_list)
             {
                 let gui_control = <Laya.EventDispatcher>item[0];
-                gui_control.on(item[1], this, item[2]);
+                gui_control.on(item[1], this, item[2], item.slice(3));
             }
         }
         private UnregisteGUIEvent():void

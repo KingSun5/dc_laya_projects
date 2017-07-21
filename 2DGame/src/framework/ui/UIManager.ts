@@ -47,9 +47,10 @@ module dc
 	    //～～～～～～～～～～～～～～～～～～～～～～～显示~～～～～～～～～～～～～～～～～～～～～～～～//
         /**
          * 显示界面
-         * @param id    界面id
+         * @param id        界面id
+         * @param args      参数
         */
-        public Show(id:number):UIPanelInterface
+        public Show(id:number,args:any=[]):UIPanelInterface
         {
             //从缓存中查找
             let obj:UIPanelInterface = this.m_DicUIView.GetValue(id);
@@ -69,7 +70,7 @@ module dc
 
             //执行初始操作
             panel.SetScreenID(id);
-            panel.Open();
+            panel.Open(args.slice(0));
 
             let layer:LayaSprite = UILayerUtils.GetLayer(loader_info.mLayer);
             layer.addChild(panel);
@@ -93,8 +94,8 @@ module dc
             //销毁或隐藏
             if(loader_info.mHideDestroy)
             {
-                panel.Close();
                 this.m_DicUIView.Remove(id);
+                panel.Close();
                 return true;
             }
             else

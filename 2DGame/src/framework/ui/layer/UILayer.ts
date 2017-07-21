@@ -93,12 +93,12 @@ module dc
 		{
 			switch(type)
 			{
-				case eUILayer.LAYER_ID_BACK: 	return this.m_backLevelContainer;
-        		case eUILayer.LAYER_ID_VIEW: 	return this.m_viewLevelContainer;
-        		case eUILayer.LAYER_ID_DIALOG: 	return this.m_dialogLevelContainer;
-        		case eUILayer.LAYER_ID_Loader: 	return this.m_loaderLevelContainer;
-        		case eUILayer.LAYER_ID_MASK: 	return this.m_maskLevelContainer;
-        		case eUILayer.LAYER_ID_TOP: 	return this.m_topLevelContainer;
+				case eUILayer.BACK: 	return this.m_backLevelContainer;
+        		case eUILayer.VIEW: 	return this.m_viewLevelContainer;
+        		case eUILayer.DIALOG: 	return this.m_dialogLevelContainer;
+        		case eUILayer.Loader: 	return this.m_loaderLevelContainer;
+        		case eUILayer.MASK: 	return this.m_maskLevelContainer;
+        		case eUILayer.TOP: 	return this.m_topLevelContainer;
 				default:						return this.m_uiRootContainer;
 			}
 		}
