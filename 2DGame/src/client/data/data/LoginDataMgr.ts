@@ -1,7 +1,7 @@
 module dc
 {
     /**
-     * 登陆管理器
+     * 登陆数据管理器
      * @author hannibal
      * @time 20174-7-20
      */
@@ -15,12 +15,12 @@ module dc
         }
         
         /**在这做数据初始化*/
-		public Setup():void
+		public Init():void
         {
 
         }
         /**在这清空数据，尤其是列表等保存的数据*/
-        public Destroy():void
+        public Release():void
         {
 
         }

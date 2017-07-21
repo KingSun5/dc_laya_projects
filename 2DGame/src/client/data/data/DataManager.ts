@@ -14,17 +14,22 @@ module dc
             return this.instance;
         }
 
-		/**初始化数据*/
         public Setup():void
         {
-            LangManager.Instance.Setup();
-            LoginDataMgr.Instance.Setup();
         }
-		/**释放数据*/
         public Destroy():void
         {
-            LangManager.Instance.Destroy();
-            LoginDataMgr.Instance.Destroy();
+        }
+
+        /**在这做数据初始化*/
+        public Init():void
+        {
+            LoginDataMgr.Instance.Init();
+        }
+        /**在这清空数据*/
+        public Release():void
+        {
+            LoginDataMgr.Instance.Release();
         }
 	}
 }

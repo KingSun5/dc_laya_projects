@@ -32,5 +32,6 @@ module dc
 	{
 		public static OPEN:string       = "OPEN";		//界面打开
 		public static CLOSE:string      = "CLOSE";		//界面关闭
+        public static Lang:string       = "LANG";       //语音设置改变
 	}
 }

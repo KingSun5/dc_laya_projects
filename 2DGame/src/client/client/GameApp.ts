@@ -13,7 +13,7 @@ module dc
             if(!this.instance)this.instance = new GameApp();
             return this.instance;
         }
-   
+
         public Setup():void
         {
             this.RegisterEvent();
@@ -81,13 +81,13 @@ module dc
         }
         private InitData():void
         {
-            ConfigManger.Instance.Setup();
-            DataManager.Instance.Setup();
+            ConfigManger.Instance.LoadAll();
+            DataManager.Instance.Init();
         }
         private ReleaseData():void
         {
-            ConfigManger.Instance.Destroy();
-            DataManager.Instance.Destroy();
+            ConfigManger.Instance.UnloadAll();
+            DataManager.Instance.Release();
         }
         private InitGUI():void
         {

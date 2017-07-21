@@ -7,9 +7,9 @@ module dc
      */
 	export class ConfigTemplate
 	{
-		public url:string;
-		public name:string;
-		public key:string;
+		public url:string;	//资源url
+		public name:string;	//名称：用于查找
+		public key:string;	//表的主键
 
 		constructor(url:string, name:string, key:string)
 		{

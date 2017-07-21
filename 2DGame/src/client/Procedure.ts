@@ -29,6 +29,7 @@ module dc
         */
         public Destroy():void
         {
+            Laya.timer.clearAll(this);
             this.ReleaseGameManager();
         }
         /**
@@ -49,17 +50,25 @@ module dc
         private InitGameManager():void
         {
             Framework.Instance.Setup(Laya.stage);
-            
             GameApp.Instance.Setup();
+            
+            ConfigManger.Instance.Setup();
+            LangManager.Instance.Setup();
+            DataManager.Instance.Setup();
             SceneManager.Instance.Setup();
             UILoaderRegister.Setup();
+            //add here
         }
         private ReleaseGameManager():void
         {
-            GameApp.Instance.Destroy();
+            ConfigManger.Instance.Destroy();
+            LangManager.Instance.Destroy();
+            DataManager.Instance.Destroy();
             SceneManager.Instance.Destroy();
             UILoaderRegister.Destroy();
+            //add here
 
+            GameApp.Instance.Destroy();
             Framework.Instance.Destroy();
         }
 

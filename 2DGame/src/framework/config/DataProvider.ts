@@ -23,7 +23,7 @@ module dc
         public static Unload(url:string):void
         {   
             let template = this.m_DicTemplate.GetValue(url);
-            if(template != null)
+            if(template)
             {
                 this.m_DicData.Remove(template.name);
             }
@@ -45,7 +45,7 @@ module dc
         public static GetInfo(table:string, key:any):any
         {
             let data = this.m_DicData.GetValue(table);
-            if(data != null)
+            if(data)
             {
                 let info = data[key];
                 return info;
@@ -57,7 +57,7 @@ module dc
         {
             Log.Debug("[load]加载配置表:" + url);
             let template = this.m_DicTemplate.GetValue(url);
-            if(template != null)
+            if(template)
             {
                 let json_res = ResourceManager.Instance.GetRes(url);
 

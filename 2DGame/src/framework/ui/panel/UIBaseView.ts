@@ -21,6 +21,7 @@ module dc
             this.OnEnable();
             this.LoadResource();
             EventController.DispatchEvent(UIEvent.OPEN, this.m_ScreenID);
+            EventController.AddEventListener(UIEvent.Lang, this, this.OnLangChange);
         }
         /**关闭*/
         public Close():void
@@ -31,6 +32,7 @@ module dc
             this.removeSelf();
             this.m_IsOpen = false;
             EventController.DispatchEvent(UIEvent.CLOSE, this.m_ScreenID);
+            EventController.RemoveEventListener(UIEvent.Lang, this, this.OnLangChange);
         }
         /**置顶*/
         public SetTopMost():void
