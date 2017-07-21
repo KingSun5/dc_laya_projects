@@ -159,6 +159,11 @@ var dc;
             // {
             //     Log.Debug(objs[key]);
             // }
+            //数字组件
+            // let image_number:UIImageNumber = new UIImageNumber("ui/main/clip_num.png", 29, 33);
+            // image_number.SetNum(123456789);
+            // image_number.pos(200,300);
+            // UILayerUtils.top.addChild(image_number);
         };
         GameMain.prototype.Add = function (a) {
             return a + 10;
