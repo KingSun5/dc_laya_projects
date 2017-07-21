@@ -1,0 +1,2 @@
+module:"UIImageNumber"                      //设置组件编译后的分包JS文件名
+path:"src/framework/ui/component/number"    //设置需要分包的组件所在目录路径
