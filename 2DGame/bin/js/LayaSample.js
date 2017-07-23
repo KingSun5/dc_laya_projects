@@ -16,12 +16,19 @@ var dc;
             //     new ConfigTemplate("data/configs/global.json", "global", "Name"),
             // ];
             // DataProvider.Load(list);
-            //Laya.loader.load(["res/image/1.png", "res/image/2.png", "res/image/3.png"]);
+            var handle = LayaHandler.create(this, this.OnEnd);
+            Laya.loader.load(["res/image/1.png", "res/image/2.png"], LayaHandler.create(this, this.OnEnd, [handle, "res/image/1.png", "res/image/2.png"]));
             //dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE);
             //dc.TimerManager.Instance.AddTimer(1000, 3, this, this.OnTime, [11]);
         }
+        GameMain.prototype.OnEnd = function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+        };
         GameMain.prototype.OnTime = function (timer_id, args1) {
             dc.ResourceManager.Instance.AddAsync("res/image/" + this.ii + ".png", LayaLoader.IMAGE);
             this.ii++;

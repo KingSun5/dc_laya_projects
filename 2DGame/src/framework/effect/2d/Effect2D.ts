@@ -49,6 +49,7 @@ module dc
             }
             DisplayUtils.RemoveAllChild(this.m_RootNode);
             this.m_RootNode.removeSelf();
+            this.Dispatch(EffectEvent.EFFECT_DESTROY);
         }
         public Update(elapse:number, game_frame:number):boolean
         {
@@ -80,7 +81,6 @@ module dc
         private OnComponentDestroy()
         {
             this.m_Active = false;
-            this.Dispatch(EffectEvent.EFFECT_DESTROY);
             EffectManager.Instance.RemoveEffect(this.m_ObjectUID);
         }
         public SetParent(node:LayaNode):void

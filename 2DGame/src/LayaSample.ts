@@ -21,13 +21,17 @@ module dc
             //     new ConfigTemplate("data/configs/global.json", "global", "Name"),
             // ];
             // DataProvider.Load(list);
-
-            //Laya.loader.load(["res/image/1.png", "res/image/2.png", "res/image/3.png"]);
+            //let handle:LayaHandler = LayaHandler.create(this, this.OnEnd);
+            //Laya.loader.load(["res/image/1.png","res/image/2.png"], LayaHandler.create(this, this.OnEnd, [handle,"res/image/1.png","res/image/2.png"]));
             //dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE);
 
             //dc.TimerManager.Instance.AddTimer(1000, 3, this, this.OnTime, [11]);
+        }
+        private OnEnd(...args:any[]):void
+        {
+            
         }
         private ii = 1;
         private OnTime(timer_id:number, args1:any):void
