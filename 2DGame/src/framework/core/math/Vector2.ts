@@ -10,6 +10,8 @@ module dc
         public x:number;
         public y:number;
 
+        public static Temp:Vector2 = new Vector2(0,0);
+
         constructor(x?:number, y?:number)
         {
             this.x = x;
