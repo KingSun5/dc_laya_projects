@@ -3,7 +3,7 @@ module dc
     /**
      * html工具类
      * @author hannibal
-     * @time 20174-7-12
+     * @time 2017-7-12
      */
 	export class HtmlUtils
 	{

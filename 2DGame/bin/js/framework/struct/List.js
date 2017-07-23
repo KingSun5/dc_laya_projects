@@ -4,7 +4,7 @@ let dc;
      * 列表
      * TODO:等支持for遍历再实现
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     let List = (function () {
         function List() {

@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-11
      */	
-	export class BaseEffect extends EventDispatcher
+	export class BaseEffect extends EventDispatcher implements IPoolsObject
 	{
         protected m_Active:boolean = false      //是否激活中;
         protected m_ObjectUID:number = 0;       //对象唯一ID
@@ -21,6 +21,10 @@ module dc
             super();
             this.m_OffsetPos = Vector2.zero;
             this.m_RootNode = new LayaSprite();
+        }
+
+        public Init():void
+        {
         }
 
         public Setup(file:string)
@@ -57,7 +61,7 @@ module dc
         {
             if(StringUtils.IsNullOrEmpty(file))return false;
             this.m_IsLoadComplete = false;
-            ResourceManager.Instance.AddAsync(file, Laya.Loader.ATLAS, LayaHandler.create(this, this.OnLoadComplete));
+            ResourceManager.Instance.AddAsync(file, Laya.Loader.ATLAS, this, this.OnLoadComplete);
         }
         protected OnLoadComplete(url:string):void
         {

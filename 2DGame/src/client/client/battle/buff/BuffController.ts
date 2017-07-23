@@ -3,7 +3,7 @@ module dc
 	/**
      * buff管理
      * @author hannibal
-     * @time 20174-7-14
+     * @time 2017-7-14
      */
 	export class BuffController
 	{
@@ -40,7 +40,7 @@ module dc
 			if (this.m_OwnerUnit.IsDead)
 				return;
 
-			let info:any = DataProvider.GetInfo("BuffInfo",buffId);
+			let info:any = DataProvider.Instance.GetInfo("BuffInfo",buffId);
 			if (info == null) return;
 
 			//添加

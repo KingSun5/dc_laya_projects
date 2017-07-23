@@ -3,7 +3,7 @@ module dc
     /**
      * ui层管理
      * @author hannibal
-     * @time 20174-7-19
+     * @time 2017-7-19
      */
 	export class UILayerUtils
 	{

@@ -3,7 +3,7 @@ module dc
     /**
      * 字典工具类
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     export class DicUtils
     {

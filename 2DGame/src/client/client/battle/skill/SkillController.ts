@@ -3,7 +3,7 @@ module dc
 	/**
      * 技能
      * @author hannibal
-     * @time 20174-7-14
+     * @time 2017-7-14
      */
 	export class SkillController
 	{
@@ -53,13 +53,13 @@ module dc
 		/**是否可射击*/
 		public CheckWeaponShoot(weaponId:number):boolean
 		{
-			let stdWeaponInfo = DataProvider.GetInfo("WeaponInfo", weaponId);
+			let stdWeaponInfo = DataProvider.Instance.GetInfo("WeaponInfo", weaponId);
 			if (stdWeaponInfo == null)
 				return false;
 			let skillInfo = this.FindSkill(stdWeaponInfo.SkillId);
 			if (skillInfo == null)
 				return false;
-			let stdBullet = DataProvider.GetInfo("BulletInfo", skillInfo.BulletId);
+			let stdBullet = DataProvider.Instance.GetInfo("BulletInfo", skillInfo.BulletId);
 			if (stdBullet == null)
 				return false;
 			if (this.GetSkillCoolDown(stdWeaponInfo.SkillId) > 0)
@@ -74,13 +74,13 @@ module dc
 		}
 		public LaunchWeaponShoot(weaponId:number, dir:Vector3, target_id:number, target_pos:Vector3):void
 		{
-			let stdWeaponInfo = DataProvider.GetInfo("WeaponInfo", weaponId);
+			let stdWeaponInfo = DataProvider.Instance.GetInfo("WeaponInfo", weaponId);
 			if (stdWeaponInfo == null)
 				return;
 			let skillInfo = this.FindSkill(stdWeaponInfo.SkillId);
 			if (skillInfo == null)
 				return;
-			let stdBullet = DataProvider.GetInfo("BulletInfo", skillInfo.BulletId);
+			let stdBullet = DataProvider.Instance.GetInfo("BulletInfo", skillInfo.BulletId);
 			if (stdBullet == null)
 				return;
 			if (skillInfo.StdSkillInfo.BulletPart.Count == 0)
@@ -120,7 +120,7 @@ module dc
 
 		public static CheckSkillTargetValid(skill_id:number, src_unit_id:number, dst_unit_id:number, src_group:eGroupType, dst_group:eGroupType):boolean
 		{
-			let info = DataProvider.GetInfo("SkillInfo", skill_id);
+			let info = DataProvider.Instance.GetInfo("SkillInfo", skill_id);
 			if (info == null) return false;
 
 			let campType:eUnitCampType = UnitID.GetCampType(src_group, dst_group);

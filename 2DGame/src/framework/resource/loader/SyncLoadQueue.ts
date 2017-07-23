@@ -3,7 +3,7 @@ module dc
     /**
      * 同步加载：可以显示加载进度条
      * @author hannibal
-     * @time 20174-7-10
+     * @time 2017-7-10
      */
 	export class SyncLoadQueue extends LoadQueue
 	{

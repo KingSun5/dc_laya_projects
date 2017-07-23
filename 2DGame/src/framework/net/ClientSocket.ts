@@ -3,7 +3,7 @@ module dc
     /**
      * 客户端socket
      * @author hannibal
-     * @time 20174-7-7
+     * @time 2017-7-7
      */
     export class ClientSocket extends EventDispatcher
     {

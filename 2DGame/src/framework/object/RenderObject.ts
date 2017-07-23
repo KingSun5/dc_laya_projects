@@ -3,7 +3,7 @@ module dc
     /**
      * 显示对象
      * @author hannibal
-     * @time 20174-7-12
+     * @time 2017-7-12
      */
 	export class RenderObject extends GameObject
 	{
@@ -47,7 +47,7 @@ module dc
 		/**加载外部资源*/
 		public LoadResource(res:string):void
 		{
-			ResourceManager.Instance.AddAsync(res, Laya.Loader.IMAGE, LayaHandler.create(this, this.OnLoadComplete));
+			ResourceManager.Instance.AddAsync(res, Laya.Loader.IMAGE, this, this.OnLoadComplete);
 		}
 		/**加载完成回调*/
 		protected OnLoadComplete():void

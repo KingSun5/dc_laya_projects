@@ -10,7 +10,7 @@ module dc
     /**
      * 数字排列组件
      * @author hannibal
-     * @time 20174-7-20
+     * @time 2017-7-20
      */	
 	export class LayaImageNumber extends Box
 	{

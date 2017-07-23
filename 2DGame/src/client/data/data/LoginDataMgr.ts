@@ -3,7 +3,7 @@ module dc
     /**
      * 登陆数据管理器
      * @author hannibal
-     * @time 20174-7-20
+     * @time 2017-7-20
      */
 	export class LoginDataMgr extends Singleton
 	{

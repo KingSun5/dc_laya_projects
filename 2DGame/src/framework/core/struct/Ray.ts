@@ -3,7 +3,7 @@ module dc
     /**
      * 射线
      * @author hannibal
-     * @time 20174-7-9
+     * @time 2017-7-9
      */
     export class Ray
     {

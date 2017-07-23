@@ -4,7 +4,7 @@ let dc;
      * 字典-键为number
      * TODO:Object的键不支持泛型
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     let NDictionary = (function () {
         function NDictionary() {
@@ -34,7 +34,7 @@ let dc;
     /**
      * 字典-键为string
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     let SDictionary = (function () {
         function SDictionary() {

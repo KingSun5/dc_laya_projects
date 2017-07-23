@@ -3,7 +3,7 @@ module dc
     /**
      * 队列：先入先出
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     export class Queue<T>
     {

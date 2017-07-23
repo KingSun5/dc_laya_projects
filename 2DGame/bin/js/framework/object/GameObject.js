@@ -3,7 +3,7 @@ var dc;
     /**
      * 游戏对象基类
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     var GameObject = (function () {
         function GameObject() {
@@ -50,6 +50,9 @@ var dc;
         Object.defineProperty(GameObject.prototype, "ObjectServerID", {
             get: function () {
                 return this.m_ObjectServerID;
+            },
+            set: function (id) {
+                this.m_ObjectServerID = id;
             },
             enumerable: true,
             configurable: true

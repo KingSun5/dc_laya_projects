@@ -3,7 +3,7 @@ module dc
     /**
      * 本地数据
      * @author hannibal
-     * @time 20174-7-15
+     * @time 2017-7-15
      */
 	export class LocalValue
 	{

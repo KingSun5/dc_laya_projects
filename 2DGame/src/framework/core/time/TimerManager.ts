@@ -3,7 +3,7 @@ module dc
     /**
      * 定时器
      * @author hannibal
-     * @time 20174-7-11
+     * @time 2017-7-11
      */
 	export class TimerManager extends Singleton
 	{
@@ -104,7 +104,7 @@ module dc
         }  
 	}
 
-    class TimerEntity
+    class TimerEntity implements IPoolsObject 
     {
         public id:number;
         public isActive:boolean;
@@ -119,6 +119,10 @@ module dc
         constructor()
         {
             this.mTime = new IntervalTime();
+        }
+
+        public Init():void
+        {
         }
 
         public Clear():void

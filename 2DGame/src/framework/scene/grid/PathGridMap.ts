@@ -3,7 +3,7 @@ module dc
     /**
      * 地图格子信息
      * @author hannibal
-     * @time 20174-7-12
+     * @time 2017-7-12
      */
 	export class PathGridMap extends Singleton
 	{

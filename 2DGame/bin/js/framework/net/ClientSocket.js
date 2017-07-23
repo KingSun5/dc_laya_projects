@@ -13,7 +13,7 @@ var dc;
     /**
      * 客户端socket
      * @author hannibal
-     * @time 20174-7-7
+     * @time 2017-7-7
      */
     var ClientSocket = (function (_super) {
         __extends(ClientSocket, _super);

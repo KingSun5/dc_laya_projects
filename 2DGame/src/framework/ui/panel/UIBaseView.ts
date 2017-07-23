@@ -3,7 +3,7 @@ module dc
     /**
      * 非可拖动界面基类
      * @author hannibal
-     * @time 20174-7-19
+     * @time 2017-7-19
      */	
 	export class UIBaseView extends LayaView implements UIPanelInterface
 	{

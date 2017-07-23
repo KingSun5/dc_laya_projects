@@ -3,7 +3,7 @@ module dc
     /**
      * 特效
      * @author hannibal
-     * @time 20174-7-14
+     * @time 2017-7-14
      */
 	export class EffectID
 	{

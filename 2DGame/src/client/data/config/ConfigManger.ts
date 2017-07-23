@@ -3,7 +3,7 @@ module dc
 	/**
      * 配置表管理器
      * @author hannibal
-     * @time 20174-7-9
+     * @time 2017-7-9
      */
 	export class ConfigManger extends Singleton
 	{
@@ -22,18 +22,25 @@ module dc
             this.m_ListTables =  [
                 new ConfigTemplate("data/serverList.json", ConfigTable.serverList, ""),
                 new ConfigTemplate("data/configs/global.json", ConfigTable.global, "Name"),
+                // new ConfigTemplate("data/configs/BuffInfo.json", ConfigTable.BuffInfo, "Name"),
+                // new ConfigTemplate("data/configs/FeatureInfo.json", ConfigTable.FeatureInfo, "Name"),
+                // new ConfigTemplate("data/configs/WeaponInfo.json", ConfigTable.WeaponInfo, "Name"),
+                // new ConfigTemplate("data/configs/BulletInfo.json", ConfigTable.BulletInfo, "Name"),
+                // new ConfigTemplate("data/configs/SkillInfo.json", ConfigTable.SkillInfo, "Name"),
+                // new ConfigTemplate("data/configs/UnitInfo.json", ConfigTable.UnitInfo, "Name"),
             ];
         }
 		/**释放数据*/
         public Destroy():void
         {
             this.UnloadAll();
+            this.m_ListTables = null;
         }
         /**开始加载*/
 		public LoadAll():void
 		{
             if(this.m_ListTables.length > 0)
-                DataProvider.Load(this.m_ListTables);
+                DataProvider.Instance.Load(this.m_ListTables);
 		}
         /**清空*/
         public UnloadAll():void
@@ -42,11 +49,15 @@ module dc
 
             for(let info of this.m_ListTables)
             {
-                DataProvider.Unload(info.url);
+                DataProvider.Instance.Unload(info.url);
             }
             ArrayUtils.Clear(this.m_ListTables);
         }
-
+        public GetInfo(table:string, key:any):any
+        {
+            let info = DataProvider.Instance.GetInfo(table, key);
+            return info;
+        }
         public get ListTables():Array<ConfigTemplate>
         {
             return this.m_ListTables;
@@ -59,5 +70,12 @@ module dc
     {
         public static global:string = "global";
         public static serverList:string = "serverList";
+
+        public static BuffInfo:string = "BuffInfo";
+        public static FeatureInfo:string = "FeatureInfo";
+        public static WeaponInfo:string = "WeaponInfo";
+        public static BulletInfo:string = "BulletInfo";
+        public static SkillInfo:string = "SkillInfo";
+        public static UnitInfo:string = "UnitInfo";
     }
 }

@@ -3,7 +3,7 @@ module dc
 	/**
      * 特性
      * @author hannibal
-     * @time 20174-7-14
+     * @time 2017-7-14
      */
 	export class FeatureController
 	{
@@ -19,7 +19,7 @@ module dc
 		/**增加特性*/
 		public AddFeature(feature_id:number):void
 		{
-			let stdFeatureInfo = DataProvider.GetInfo("FeatureInfo",feature_id);
+			let stdFeatureInfo = DataProvider.Instance.GetInfo("FeatureInfo",feature_id);
 			if (stdFeatureInfo == null)
 				return;
 
@@ -91,7 +91,7 @@ module dc
 		private ResolveFeatureAbil(type:eFeatureType, feature_id:number, value:number):number
 		{
 			let result = value;
-			let stdFeatureInfo = DataProvider.GetInfo("FeatureInfo",feature_id);
+			let stdFeatureInfo = DataProvider.Instance.GetInfo("FeatureInfo",feature_id);
 			if (stdFeatureInfo == null || stdFeatureInfo.Type != type)
 				return result;
 			switch (type)

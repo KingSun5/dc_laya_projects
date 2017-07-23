@@ -3,7 +3,7 @@ module dc
     /**
      * 弹出式对话框
      * @author hannibal
-     * @time 20174-7-20
+     * @time 2017-7-20
      * 例：
         UIAlertView.Show(this, "提示", "这是内容", "bottomTip", "", "确定", null);
         public OnAlertViewClick(alertView: UIAlertView, btnIndex: eAlertViewButtonIndex): void
@@ -75,7 +75,7 @@ module dc
                             {
             let panel: UIAlertView = UIManager.Instance.Show(GUIID.ALERT_VIEW) as UIAlertView;
             //标题
-            panel.lbTitle.text = StringUtils.IsNullOrEmpty(sTitle) ? "Title" : sTitle;//TODO
+            panel.lbTitle.text = StringUtils.IsNullOrEmpty(sTitle) ? "Title" : GetLangText(3);
             if (!StringUtils.IsNullOrEmpty(color_str)) 
             {
                 panel.htmlTextField.style.color = color_str;
@@ -182,14 +182,14 @@ module dc
             let arrBtns = [];
             if (!StringUtils.IsNullOrEmpty(sCancelBtnLb)) 
             {
-                this.btnCancel.label = "default" == sCancelBtnLb ? "cancel" : sCancelBtnLb;//TODO
+                this.btnCancel.label = "default" == sCancelBtnLb ? GetLangText(2) : sCancelBtnLb;
                 arrBtns.push(this.btnCancel);
             }
             this.btnCancel.visible = !StringUtils.IsNullOrEmpty(sCancelBtnLb);
 
             if (!StringUtils.IsNullOrEmpty(sOkBtnLb)) 
             {
-                this.btnConfirm.label = "default" == sOkBtnLb ? "ok" : sOkBtnLb;
+                this.btnConfirm.label = "default" == sOkBtnLb ? GetLangText(1) : sOkBtnLb;
                 arrBtns.push(this.btnConfirm);
             }
             this.btnConfirm.visible = !StringUtils.IsNullOrEmpty(sOkBtnLb);

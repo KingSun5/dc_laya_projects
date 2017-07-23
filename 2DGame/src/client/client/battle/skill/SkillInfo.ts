@@ -3,7 +3,7 @@ module dc
 	/**
      * 技能信息
      * @author hannibal
-     * @time 20174-7-14
+     * @time 2017-7-14
      */
 	export class SkillInfo
 	{
@@ -21,14 +21,14 @@ module dc
         {
             this.m_OwnerUnit = obj;
             this.m_SkillID = skill_id;
-            this.m_StdSkillInfo = DataProvider.GetInfo("SkillInfo", this.m_SkillID);
+            this.m_StdSkillInfo = DataProvider.Instance.GetInfo("SkillInfo", this.m_SkillID);
             if (this.m_StdSkillInfo.WeaponId > 0)
             {
-                this.m_StdWeaponInfo = DataProvider.GetInfo("WeaponInfo",this.m_StdSkillInfo.WeaponId);
+                this.m_StdWeaponInfo = DataProvider.Instance.GetInfo("WeaponInfo",this.m_StdSkillInfo.WeaponId);
             }
             if(this.m_StdSkillInfo.BulletId > 0)
             {
-                this.m_StdBulletInfo = DataProvider.GetInfo("BulletInfo",this.m_StdSkillInfo.BulletId);
+                this.m_StdBulletInfo = DataProvider.Instance.GetInfo("BulletInfo",this.m_StdSkillInfo.BulletId);
             }
         }
 

@@ -3,7 +3,7 @@ module dc
     /**
      * 显示对象
      * @author hannibal
-     * @time 20174-7-13
+     * @time 2017-7-13
      */
 	export class DisplayUtils
 	{

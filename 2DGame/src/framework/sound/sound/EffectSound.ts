@@ -3,7 +3,7 @@ module dc
     /**
      * 音效
      * @author hannibal
-     * @time 20174-7-11
+     * @time 2017-7-11
      */
 	export class EffectSound extends Sound
 	{

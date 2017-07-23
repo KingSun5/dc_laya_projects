@@ -33,7 +33,7 @@ module dc
 			else
 			{
 				this.ShowProxy(proxy);
-				ResourceManager.Instance.AddAsync(url, type, LayaHandler.create(this, this.OnLoadComplete));
+				ResourceManager.Instance.AddAsync(url, type, this, this.OnLoadComplete);
 			}
 		}
 

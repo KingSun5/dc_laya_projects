@@ -3,7 +3,7 @@ module dc
     /**
      * 登陆界面
      * @author hannibal
-     * @time 20174-7-19
+     * @time 2017-7-19
      */
 	export class SelectSeverView extends client.gui.login.SelectServerPanelUI
 	{

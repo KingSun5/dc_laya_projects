@@ -3,9 +3,9 @@ module dc
     /**
      * 游戏对象基类
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
-    export class GameObject
+    export class GameObject implements IPoolsObject
     {
         protected m_Active:boolean        //是否激活中
         protected m_ObjectType:string;    //对象类型
@@ -67,6 +67,11 @@ module dc
         {
             return this.m_ObjectServerID;
         }
+        set ObjectServerID(id:string)
+        {
+            this.m_ObjectServerID = id;
+        }
+
         get ObjectType():string
         {
             return this.m_ObjectType;

@@ -3,9 +3,9 @@ module dc
 	/**
      * Buff
      * @author hannibal
-     * @time 20174-7-14
+     * @time 2017-7-14
      */
-	export class Buff
+	export class Buff implements IPoolsObject
 	{
         private m_Active:boolean;
         private m_OwnerUnit:UnitObject;
@@ -16,10 +16,14 @@ module dc
 
         private m_ListEffect:Array<number> = [];
 
+        public Init():void
+        {
+        }
+
         public Setup(obj:UnitObject, type:eBuffType):void
         {
             this.m_OwnerUnit = obj;
-            this.m_StdBuffInfo = DataProvider.GetInfo("BuffInfo",type);
+            this.m_StdBuffInfo = DataProvider.Instance.GetInfo("BuffInfo",type);
             this.m_BufferType = type;
             this.m_LeaveTime = this.m_StdBuffInfo.Time;
             this.m_Active = true;

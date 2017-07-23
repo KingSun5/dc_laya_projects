@@ -3,7 +3,7 @@ module dc
     /**
      * 技能id
      * @author hannibal
-     * @time 20174-7-14
+     * @time 2017-7-14
      */
 	export class SkillID
 	{
@@ -12,20 +12,40 @@ module dc
 		public static Feature_Operate_Add:string = "+";    //操作数：+
 		public static Feature_Operate_Sub:string = "-";    //操作数：-
 	}
-	/// <summary>
-	/// 技能消耗
-	/// </summary>
+	/**
+	 * 技能消耗
+	*/
 	export enum eSkillCostType
 	{
-		ESkillCostType_None,	        //无
-		ESkillCostType_Hp,		        //Hp
-		ESkillCostType_Sp,		        //SP
-		ESkillCostType_Power,	        //技能能量值
+		None,	        //无
+		Hp,		        //Hp
+		Sp,		        //SP
+		Power,	        //技能能量值
 	}
-
-	/// <summary>
-	/// 技能目标类型
-	/// </summary>
+	/**
+	 * 攻击阶段
+	 */
+	export enum eAttackStage
+	{
+		Begin = 0,
+		Prepear,
+		Launch,
+		Continue,
+		End,
+	}
+	/**
+	 * 子弹锁定目标方式
+	*/
+	export enum eBulletLockType
+	{
+		Unguided = 0,   //非制导，直线
+		Guided_Pos,     //跟踪-定点位置
+		Guided_Obj,     //跟踪-目标单位
+		Guided_Rect,    //区域
+	}
+	/**
+	 * 技能目标类型
+	*/
 	export enum eSkillTargetType
 	{
 		All = 0,
@@ -34,8 +54,10 @@ module dc
 		Self = 3,
 		Camp = 4,           //当前阵营
 	}
-
-	export enum ESkillFlags
+	/**
+	 * 技能标记
+	*/
+	export enum eSkillFlags
 	{
 		None,
 		HideWeapon = 0x000001,      //释放该技能时隐藏武器1
@@ -47,10 +69,9 @@ module dc
 		LockupDragScreen = 0x000040,//是否可以旋转屏幕64
 		LockupSkill = 0x000080,     //是否可以释放技能128
 	}
-
-	/// <summary>
-	/// 技能效果
-	/// </summary>
+	/**
+	 * 技能效果
+	*/
 	export enum eSkillEffectType
 	{
 		None,
@@ -68,19 +89,18 @@ module dc
 		Range = 15,	        //技能范围		
 		CDTime = 16,	    //技能CD
 	}
-
-	/// <summary>
-	/// 特性叠加方式
-	/// </summary>
+	/**
+	 * 特性叠加方式
+	*/
 	export enum eFeatureOverlayType
 	{
 		Replace = 0,                //覆盖
 		Overlay,                    //叠加次数
 		Ignore,		                //忽视
 	}
-	/// <summary>
-	/// 技能特效
-	/// </summary>
+	/**
+	 * 技能特效
+	*/
 	export enum eFeatureType
 	{
 		None,

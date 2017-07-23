@@ -3,7 +3,7 @@ module dc
     /**
      * 管理器
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     export class Framework extends Singleton
     {        
@@ -28,6 +28,7 @@ module dc
             ObjectManager.Instance.Setup();
             SoundManager.Instance.Setup();
             ResourceManager.Instance.Setup();
+            DataProvider.Instance.Setup();
         }
 
         public Destroy():void
@@ -37,6 +38,7 @@ module dc
             ObjectManager.Instance.Destroy();   
             SoundManager.Instance.Destroy();    
             ResourceManager.Instance.Destroy();  
+            DataProvider.Instance.Destroy();
             LayerManager.Destroy();
         }
 

@@ -3,7 +3,7 @@ module dc
     /**
      * 数字排列组件
      * @author hannibal
-     * @time 20174-7-20
+     * @time 2017-7-20
      * 例:
         let num:UIImageNumber = new UIImageNumber("ui/main/clip_num.png", 29, 33);
         num.pos(100 ,300);

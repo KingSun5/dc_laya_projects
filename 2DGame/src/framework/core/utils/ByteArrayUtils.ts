@@ -3,7 +3,7 @@ module dc
     /**
      * 字节工具类
      * @author hannibal
-     * @time 20174-7-7
+     * @time 2017-7-7
      */
     export class ByteArrayUtils
     {

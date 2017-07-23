@@ -3,7 +3,7 @@ var dc;
     /**
      * 单列
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     var Singleton = (function () {
         function Singleton() {
@@ -21,10 +21,10 @@ var dc;
                 Singleton.classValues.push(this);
             }
         }
+        Singleton.classKeys = [];
+        Singleton.classValues = [];
         return Singleton;
     }());
-    Singleton.classKeys = [];
-    Singleton.classValues = [];
     dc.Singleton = Singleton;
 })(dc || (dc = {}));
 //# sourceMappingURL=Singleton.js.map

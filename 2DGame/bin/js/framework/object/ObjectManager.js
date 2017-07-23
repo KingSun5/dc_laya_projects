@@ -13,7 +13,7 @@ var dc;
     /**
      * 对象管理
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     var ObjectManager = (function (_super) {
         __extends(ObjectManager, _super);
@@ -115,9 +115,9 @@ var dc;
         ObjectManager.prototype.ShareObjectGUID = function () {
             return ++this.m_shareObjID;
         };
+        ObjectManager.instance = null;
         return ObjectManager;
     }(dc.Singleton));
-    ObjectManager.instance = null;
     dc.ObjectManager = ObjectManager;
 })(dc || (dc = {}));
 //# sourceMappingURL=ObjectManager.js.map

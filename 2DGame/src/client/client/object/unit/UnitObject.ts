@@ -3,7 +3,7 @@ module dc
 	/**
      * 单位
      * @author hannibal
-     * @time 20174-7-14
+     * @time 2017-7-14
      */
 	export class UnitObject extends MapObject
 	{
@@ -24,6 +24,7 @@ module dc
         protected m_UnitBuff:BuffController;        //buff
         protected m_UnitWeapon:Weapon;              //武器
 
+        protected  m_BulletProcessList:Array<BulletShotInfo>;//子弹逻辑序列
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～基础方法～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         constructor()
         {
@@ -32,6 +33,7 @@ module dc
             this.m_UnitSkill = new SkillController(this);
             this.m_UnitBuff = new BuffController(this);
             this.m_UnitWeapon = new Weapon(this);
+            this.m_BulletProcessList = new Array<BulletShotInfo>();
         }
         public Init():void
         {
@@ -65,7 +67,7 @@ module dc
             this.m_UnitInfo = info;
 
             //初始数据
-            this.m_StdUnitInfo = DataProvider.GetInfo("UnitInfo",this.m_UnitTypeID);
+            this.m_StdUnitInfo = DataProvider.Instance.GetInfo("UnitInfo",this.m_UnitTypeID);
             this.m_GroupType = this.m_UnitInfo.Group;
             this.HpMax = this.m_StdUnitInfo.Hp;
             this.WeaponID = this.m_StdUnitInfo.WeaponID;
@@ -88,12 +90,14 @@ module dc
         public RegisterEvent():void
         {
             super.RegisterEvent();
+            EventController.AddEventListener(EventID.UNIT_FEATURE, this, this.OnUnitEvt);
         }
         public UnRegisterEvent():void
         {
+            EventController.RemoveEventListener(EventID.UNIT_FEATURE, this, this.OnUnitEvt);
             super.UnRegisterEvent();
         }
-        private OnRoleEvt(evt:EventArgs):void
+        private OnUnitEvt(evt:EventArgs):void
         {
             switch (evt.Type)
             {
@@ -115,9 +119,23 @@ module dc
                     break;
             }
         }
+        public AddBullet(bulletInfo:BulletShotInfo):void
+        {
+            bulletInfo.OwnerID = this.ObjectGUID;
+            bulletInfo.Group = this.m_GroupType;
+            this.m_BulletProcessList.push(bulletInfo);
+        }
+        public OnByContact(info:any, hitInfo:sHurtInfo):boolean
+        {
+            return false;
+        }
+        public HandleBAttack(info:sHurtInfo):void
+        {
+        }        
         /**死亡*/
         public HandleDie():void
         {
+            ArrayUtils.Clear(this.m_BulletProcessList);
             this.m_UnitBuff.ClearAllBuff();
             EventController.DispatchEvent(EventID.UNIT_DIE, this.m_ObjectGUID);
             ObjectManager.Instance.RemoveObject(this, false);
@@ -211,7 +229,7 @@ module dc
         public set WeaponID(value:number)
         {
             this.m_WeaponID = value;
-            this.m_StdWeaponInfo = DataProvider.GetInfo("WeaponInfo", this.m_WeaponID);
+            this.m_StdWeaponInfo = DataProvider.Instance.GetInfo("WeaponInfo", this.m_WeaponID);
         }
 
         public get WeaponInfo():any

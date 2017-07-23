@@ -4,7 +4,7 @@ module dc
      * 字典-键为number
      * TODO:Object的键不支持泛型
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     export class NDictionary<TValue>
     {
@@ -77,7 +77,7 @@ module dc
     /**
      * 字典-键为string
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     export class SDictionary<TValue>
     {

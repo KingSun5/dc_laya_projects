@@ -3,7 +3,7 @@ module dc
     /**
      * 64位整形
      * @author hannibal
-     * @time 20174-7-10
+     * @time 2017-7-10
      */
 	export class ULong 
 	{

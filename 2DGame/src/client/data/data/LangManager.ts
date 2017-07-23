@@ -3,7 +3,7 @@ module dc
 	/**
      * 多语言
      * @author hannibal
-     * @time 20174-7-9
+     * @time 2017-7-9
      */
 	export class LangManager extends Singleton
 	{
@@ -25,29 +25,51 @@ module dc
         }
         public Destroy():void
         {
-
+            this.UnloadAll();
+            this.m_ListTables = null;
         }
         /**开始加载*/
 		public LoadAll():void
 		{
-            DataProvider.Load(this.m_ListTables);
+            DataProvider.Instance.Load(this.m_ListTables);
 		}
         /**清空*/
         public UnloadAll():void
         {
+            if(!this.m_ListTables)return;
+
+            for(let info of this.m_ListTables)
+            {
+                DataProvider.Instance.Unload(info.url);
+            }
+            ArrayUtils.Clear(this.m_ListTables);
         } 
         public get ListTables():Array<ConfigTemplate>
         {
             return this.m_ListTables;
         }   
-
-        public SetLang(type:eLangType):void
+        /**
+         * 切换语言
+         * @param type  语言类型
+        */
+        public SwitchLang(type:eLangType):void
         {
             if(type == this.m_CurLangType)return;
 
             this.m_CurLangType = type;
             EventController.DispatchEvent(UIEvent.Lang, this.m_CurLangType);
         }
+        /**
+         * 获取语言包
+         * @param   idx     位置
+        */
+        public GetText(idx:number):string
+        {
+            let info = DataProvider.Instance.GetInfo("lang", idx);
+            let key = this.GetLangFlagByType(this.m_CurLangType);
+            return info[key];
+        }
+        /**当前语言类型*/
         public GetCurLang():eLangType
         {
             return this.m_CurLangType;
@@ -59,9 +81,15 @@ module dc
                 case eLangType.zh_cn:   return "zh-cn";
                 case eLangType.zh_tw:   return "zh-tw";
                 case eLangType.en:      return "en";
+                default:                return "en";
             }
         }
 	}
+    /**提供简易获取语言包的方式*/
+    export function GetLangText(idx:number):string
+    {
+        return LangManager.Instance.GetText(idx);
+    }
 
     /**
      * 语音类型

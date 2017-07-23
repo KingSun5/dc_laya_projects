@@ -13,7 +13,7 @@ var dc;
     /**
      * 全局事件
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     var EventController = (function (_super) {
         __extends(EventController, _super);

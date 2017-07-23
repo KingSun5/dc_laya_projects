@@ -3,7 +3,7 @@ module dc
     /**
      * 游戏逻辑层管理器
      * @author hannibal
-     * @time 20174-7-9
+     * @time 2017-7-9
      */
     export class GameApp extends Singleton
     {        
@@ -50,6 +50,7 @@ module dc
         }
         private LoadMustResource():void
         {
+
             let assets:Array<any> = [];
             assets.push({url:"res/atlas/comp.json", type:LayaLoader.ATLAS});
             assets.push({url:"res/atlas/ui/main.json", type:LayaLoader.ATLAS});
@@ -81,12 +82,12 @@ module dc
         }
         private InitData():void
         {
-            ConfigManger.Instance.LoadAll();
             DataManager.Instance.Init();
         }
         private ReleaseData():void
         {
             ConfigManger.Instance.UnloadAll();
+            LangManager.Instance.UnloadAll();
             DataManager.Instance.Release();
         }
         private InitGUI():void
@@ -112,6 +113,9 @@ module dc
         /**资源加载完成*/
         private OnDownloadComplate():void
         {
+            LangManager.Instance.SwitchLang(eLangType.en);
+            ConfigManger.Instance.LoadAll();
+            LangManager.Instance.LoadAll();
             Log.Info("必须资源更新完成");
             //显示登陆界面
             UIShowController.Show(GUIID.LOGIN, 111,1112);

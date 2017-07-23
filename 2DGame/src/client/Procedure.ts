@@ -3,7 +3,7 @@ module dc
     /**
      * 游戏主逻辑
      * @author hannibal
-     * @time 20174-7-9
+     * @time 2017-7-9
      */
     export class Procedure extends Singleton
     {
@@ -51,13 +51,13 @@ module dc
         {
             Framework.Instance.Setup(Laya.stage);
             GameApp.Instance.Setup();
-            
             ConfigManger.Instance.Setup();
             LangManager.Instance.Setup();
             DataManager.Instance.Setup();
             SceneManager.Instance.Setup();
             UILoaderRegister.Setup();
             //add here
+            
         }
         private ReleaseGameManager():void
         {

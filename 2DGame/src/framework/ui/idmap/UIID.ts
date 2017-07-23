@@ -3,7 +3,7 @@ module dc
     /**
      * ui
      * @author hannibal
-     * @time 20174-7-19
+     * @time 2017-7-19
      */
 	export class UIID
 	{    

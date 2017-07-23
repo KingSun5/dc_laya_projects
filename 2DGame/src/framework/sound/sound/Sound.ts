@@ -3,15 +3,20 @@ module dc
     /**
      * 声音播放基类
      * @author hannibal
-     * @time 20174-7-11
+     * @time 2017-7-11
      */
-	export class Sound
+	export class Sound implements IPoolsObject
 	{
 		protected m_Active:boolean;
 		protected m_SoundFile:string;
 		protected m_IsPlaying:boolean;
 		protected m_PlayCount:number;
 		protected m_SoundChannel:Laya.SoundChannel = null;
+
+        public Init():void
+        {
+
+        }
 
 		public Setup(file_name:string, count:number):void
 		{
@@ -81,7 +86,7 @@ module dc
 
 		private LoadResource():void
 		{
-			ResourceManager.Instance.AddAsync(this.m_SoundFile, Laya.Loader.SOUND, LayaHandler.create(this, this.OnLoadComplete));
+			ResourceManager.Instance.AddAsync(this.m_SoundFile, Laya.Loader.SOUND, this, this.OnLoadComplete);
 		}
 
 		private OnLoadComplete():void

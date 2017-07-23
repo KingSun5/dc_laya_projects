@@ -1,48 +1,77 @@
 module dc
 {
     /**
-     * 配置表
+     * json配置表
      * @author hannibal
-     * @time 20174-7-11
+     * @time 2017-7-11
      */	
 	export class DataProvider extends Singleton
 	{
-        private static m_DicTemplate:SDictionary<ConfigTemplate> = new SDictionary<ConfigTemplate>();
-        private static m_DicData:SDictionary<any> = new SDictionary<any>();
+        private m_DicTemplate:SDictionary<ConfigTemplate> = null;
+        private m_DicData:SDictionary<any> = null;
 
-        public static Load(list:ConfigTemplate[]):void
+        private static instance:DataProvider = null;
+        public static get Instance():DataProvider
+        {
+            if(!this.instance)this.instance = new DataProvider();
+            return this.instance;
+        }
+
+        public Setup():void
+        {
+            this.m_DicTemplate = new SDictionary<ConfigTemplate>();
+            this.m_DicData = new SDictionary<any>();
+        }
+        public Destroy():void
+        {
+            this.UnloadAll();
+            this.m_DicTemplate.Clear();
+            this.m_DicData.Clear();
+            this.m_DicTemplate = null;
+            this.m_DicData = null;
+        }
+    
+        public Load(list:ConfigTemplate[]):void
         {
             let res:ConfigTemplate;
             for(let i = 0; i < list.length; ++i)
             {
                 res = list[i];
                 this.m_DicTemplate.Add(res.url, res);
-                ResourceManager.Instance.AddAsync(res.url, Laya.Loader.JSON, LayaHandler.create(this, this.OnLoadComplete));
+                ResourceManager.Instance.AddAsync(res.url, Laya.Loader.JSON, this, this.OnLoadComplete);
             }
         }
-        public static Unload(url:string):void
+        public Unload(url:string):void
         {   
             let template = this.m_DicTemplate.GetValue(url);
             if(template)
             {
                 this.m_DicData.Remove(template.name);
             }
+            ResourceManager.Instance.ClearRes(url);
             this.m_DicTemplate.Remove(url);
         }
-        public static UnloadAll():void
+        public UnloadAll():void
         {
+            if(!this.m_DicTemplate)return;
+            
+            this.m_DicTemplate.Foreach(function(key, value)
+            {
+                this.Unload(key);
+                return true;
+            });
             this.m_DicData.Clear();
             this.m_DicTemplate.Clear();
         }
 
         /**返回表*/
-        public static GetConfig(table:string):any
+        public GetConfig(table:string):any
         {
             let data = this.m_DicData.GetValue(table);
             return data;
         }
         /**返回一行*/
-        public static GetInfo(table:string, key:any):any
+        public GetInfo(table:string, key:any):any
         {
             let data = this.m_DicData.GetValue(table);
             if(data)
@@ -53,7 +82,7 @@ module dc
             return null;
         }
 
-        private static OnLoadComplete(url:string):void
+        private OnLoadComplete(url:string):void
         {
             Log.Debug("[load]加载配置表:" + url);
             let template = this.m_DicTemplate.GetValue(url);

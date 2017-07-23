@@ -3,13 +3,13 @@ module dc
 	/**
      * 单位
      * @author hannibal
-     * @time 20174-7-9
+     * @time 2017-7-9
      */
 	export class UnitID
 	{
-		/// <summary>
-		/// 获取敌对关系
-		/// </summary>
+		/**
+		 * 获取敌对关系
+		*/
 		public static GetCampType(srcCamp:eGroupType,  destCamp:eGroupType):eUnitCampType
 		{
 			if (srcCamp == eGroupType.TYPE_NONE || destCamp == eGroupType.TYPE_NONE)
@@ -21,9 +21,9 @@ module dc
 			return eUnitCampType.Enemy;
 		}
 	}
-	/// <summary>
-	/// 对象类型
-	/// </summary>
+	/**
+	 * 对象类型
+	*/
 	export enum eObjType
 	{
 		INVALID = 0, //无效	
@@ -31,9 +31,9 @@ module dc
 		MainPlayer,
 		Monster,
 	}	
-	/// <summary>
-	/// 队伍
-	/// </summary>
+	/**
+	 * 阵营
+	*/
 	export enum eGroupType
 	{
 		TYPE_Enemy = -1,//不与任何方为友军
@@ -48,13 +48,27 @@ module dc
 		Neutral = 0,//中立
 		Friend = 1, //友军
 	};	
-	/// <summary>
-	/// 角色状态
-	/// </summary>
+	/**
+	 * 角色状态
+	*/
 	export enum eObjStatus
 	{
 		NONE = 0,
 		MOVE,           //移动
 		ATTACK,         //攻击
 	}
+	/**
+	 * 逻辑命令ID
+	*/
+	export enum eCommandType
+	{
+		NONE = 0,
+		IDLE,
+		MOVE,
+		KEYBOARD_MOVE,
+		ATTACK,
+		SKILL,
+		BATTACK,
+		DIE,
+	}	
 }

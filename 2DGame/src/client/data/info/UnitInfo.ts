@@ -3,7 +3,7 @@ module dc
     /**
      * 单位信息
      * @author hannibal
-     * @time 20174-7-14
+     * @time 2017-7-14
      */
 	export class UnitInfo
 	{
@@ -22,7 +22,7 @@ module dc
 
 		private CopyAbil():void
 		{
-			let info = DataProvider.GetInfo("UnitInfo", this.m_UnitID);
+			let info = DataProvider.Instance.GetInfo("UnitInfo", this.m_UnitID);
 			if (info == null) return;
 
 			this.m_UnitAbil.Set(eAbilType.Attack, info.Attack);

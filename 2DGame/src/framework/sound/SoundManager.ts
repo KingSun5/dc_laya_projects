@@ -3,7 +3,7 @@ module dc
     /**
      * 声音管理器
      * @author hannibal
-     * @time 20174-7-8
+     * @time 2017-7-8
      */
     export class SoundManager extends Singleton
     {

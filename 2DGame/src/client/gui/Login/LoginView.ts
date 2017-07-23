@@ -3,7 +3,7 @@ module dc
     /**
      * 登陆界面
      * @author hannibal
-     * @time 20174-7-19
+     * @time 2017-7-19
      */
 	export class LoginView extends client.gui.login.LoginViewUI
 	{
@@ -100,8 +100,8 @@ module dc
             Log.Debug("OnPressRegist");
 
             AlertViewController.ShowAlert("提示", "这是内容1", "bottomTip", "确定", null);
-            AlertViewController.ShowConfirm(this, "提示", "这是内容2", "bottomTip", "取消", "确定", null);
-            AlertViewController.ShowConfirm(this, "提示", "这是内容3", "bottomTip", "取消", "", null);
+            AlertViewController.ShowConfirm(this, "提示", "这是内容2", "bottomTip", "default", "default", null);
+            AlertViewController.ShowConfirm(this, "提示", "这是内容3", "bottomTip", "default", "", null);
         }
         /**点击选服*/
         private OnPressSelectServer(event: LayaEvent)

@@ -3,7 +3,7 @@ module dc
     /**
      * 对象管理
      * @author hannibal
-     * @time 20174-7-6
+     * @time 2017-7-6
      */
     export class ObjectManager extends Singleton
     {

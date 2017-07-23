@@ -10,12 +10,12 @@ var dc;
             this.m_img.loadImage(this.m_image1_url, 100, 50);
             this.m_img.on(Laya.Event.CLICK, this, this.OnImageClickEvt);
             Laya.stage.addChild(this.m_img);
-            //配置表
-            var list = [
-                new dc.ConfigTemplate("data/serverList.json", "serverList", ""),
-                new dc.ConfigTemplate("data/configs/global.json", "global", "Name"),
-            ];
-            dc.DataProvider.Load(list);
+            // //配置表
+            // let list = [
+            //     new ConfigTemplate("data/serverList.json", "serverList", ""),
+            //     new ConfigTemplate("data/configs/global.json", "global", "Name"),
+            // ];
+            // DataProvider.Load(list);
             //Laya.loader.load(["res/image/1.png", "res/image/2.png", "res/image/3.png"]);
             //dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE);

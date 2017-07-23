@@ -1,9 +1,9 @@
 module dc
 {
 	 /**
-     * 对象缓存
+     * 对象缓存，使用这个类，需要继承IPoolsObject，并实现Init接口函数
      * @author hannibal
-     * @time 20174-7-11
+     * @time 2017-7-11
      */
 	export class ObjectPools
 	{
@@ -14,7 +14,7 @@ module dc
         public static Get(classDef: any):any
         {
             let sign:string = "dc." + classDef.name;
-            let obj:any = Laya.Pool.getItem(sign);
+            let obj:IPoolsObject = Laya.Pool.getItem(sign) as IPoolsObject;
             if(obj == null)
             {
                 if(Laya.ClassUtils.getRegClass(sign) == null)
@@ -24,6 +24,7 @@ module dc
                 }
                 obj = Laya.ClassUtils.getInstance(sign);
             }
+            obj.Init();
             return obj;
         }
 
@@ -31,7 +32,7 @@ module dc
          * 回收对象
          * @param obj  对象实例
          */
-        public static Recover(obj: any):void
+        public static Recover(obj: IPoolsObject):void
         {
             if(obj == null)return;
 
@@ -41,4 +42,9 @@ module dc
             Laya.Pool.recover(sign, obj);
         }
 	}
+    /**对象池基类*/
+    export interface IPoolsObject
+    {
+        Init();
+    }
 }
