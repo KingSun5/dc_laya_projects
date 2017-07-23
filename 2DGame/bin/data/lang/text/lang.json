@@ -1,4 +1,5 @@
 ﻿[
 	{"key":"1","zh-cn":"确定","zh-tw":"确定","en":"ok"},
 	{"key":"2","zh-cn":"取消","zh-tw":"取消","en":"cancel"},
+	{"key":"3","zh-cn":"提示","zh-tw":"提示","en":"info"}
 ]

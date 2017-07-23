@@ -1,4 +1,15 @@
 ﻿[
-	{"key":"1","zh-cn":"确定","zh-tw":"确定","en":"ok"},
-	{"key":"2","zh-cn":"取消","zh-tw":"取消","en":"cancel"},
+	{"serverId":"3","name":"Ray的服务器","host":"192.168.0.49","port":8080,"status":2},
+	{"serverId":"4","name":"健健的服务器","host":"192.168.0.108","port":8080,"status":2},
+	{"serverId":"5","name":"斌斌的服务器","host":"192.168.0.154","port":8080,"status":3},
+	{"serverId":"6","name":"聪聪的服务器","host":"192.168.0.8","port":8080,"status":3},
+	{"serverId":"2","name":"扬帆启程","host":"127.0.0.1","port":8080,"status":0},
+	{"serverId":"7","name":"钢明的服务器","host":"192.168.0.63","port":8080,"status":1},
+    {"serverId":"8","name":"贵杰的服务器","host":"192.168.0.81","port":8080,"status":1},
+    {"serverId":"11","name":"小黄的服务器","host":"192.168.0.130","port":8080,"status":1},
+
+
+	{"serverId":"9","name":"内网测试服务器","host":"192.168.0.246","port":8081,"status":1},	
+	{"serverId":"10","name":"外网测试服务器","host":"113.107.234.101","port":6061,"status":1},	
+	{"serverId":"1","name":"本机","host":"127.0.0.1","port":8080,"status":1}
 ]
