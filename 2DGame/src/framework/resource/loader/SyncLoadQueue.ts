@@ -61,9 +61,9 @@ module dc
 		}
 
 		/**加载完成侦听器*/
-		protected OnComplete(asset: any): void 
+		protected OnComplete(url: string): void 
 		{
-			super.OnComplete(asset);
+			super.OnComplete(url);
 			this.m_TotalCount++;
 			EventController.DispatchEvent(LoaderID.RESOURCE_LOAD_PROGRESS, this.m_TotalCount, this.m_TotalCount+this.m_LoadQueue.length);
 			this.CheckLoadComplate();

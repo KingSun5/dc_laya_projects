@@ -131,8 +131,8 @@ module dc
 			{
 				Laya.loader.load(
 					this.m_CurLoaderAsset.Url,
-					LayaHandler.create(this, this.OnAssetComplete),
-					LayaHandler.create(this, this.OnAssetProgress),
+					LayaHandler.create(this, this.OnAssetComplete, [this.m_CurLoaderAsset.Url]),
+					null,
 					this.m_CurLoaderAsset.Type,
 					this.m_CurLoaderAsset.Priority,
 					this.m_CurLoaderAsset.Cache,
@@ -141,23 +141,22 @@ module dc
 			}
 		}
 		/**加载完成侦听器:加载失败也会触发*/
-		private OnAssetComplete(asset: any): void 
+		private OnAssetComplete(url: string): void 
 		{
-			this.OnComplete(asset);
-		}
-
-		/**加载进度侦听器*/
-		private OnAssetProgress(progress: number): void
-		{
-			//undo
+			this.OnComplete(url);
 		}
 
 		/**加载完成侦听器*/
-		protected OnComplete(asset: any): void 
+		protected OnComplete(url: string): void 
 		{
+			Log.Debug("[load]load complete res:" + url);
+
 			if(this.m_CurLoaderAsset)
 			{
-				Log.Debug("[load]load complete res:" + this.m_CurLoaderAsset.Url);
+				if(this.m_CurLoaderAsset.Url != url)
+				{
+					Log.Error("[load]内部错误，当前资源并非加载的资源:" + url);
+				}
 				this.m_CurLoaderAsset.Stage = eResLoadStage.LOADED;
 				if(this.m_CurLoaderAsset.Complete)
 					this.m_CurLoaderAsset.Complete.runWith(this.m_CurLoaderAsset.Url);

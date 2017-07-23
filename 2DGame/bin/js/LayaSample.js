@@ -16,8 +16,8 @@ var dc;
             //     new ConfigTemplate("data/configs/global.json", "global", "Name"),
             // ];
             // DataProvider.Load(list);
-            var handle = LayaHandler.create(this, this.OnEnd);
-            Laya.loader.load(["res/image/1.png", "res/image/2.png"], LayaHandler.create(this, this.OnEnd, [handle, "res/image/1.png", "res/image/2.png"]));
+            //let handle:LayaHandler = LayaHandler.create(this, this.OnEnd);
+            //Laya.loader.load(["res/image/1.png","res/image/2.png"], LayaHandler.create(this, this.OnEnd, [handle,"res/image/1.png","res/image/2.png"]));
             //dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE);
