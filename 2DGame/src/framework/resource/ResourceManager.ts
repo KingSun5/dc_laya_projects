@@ -43,30 +43,8 @@ module dc
 		public GetRes(url:string):any
 		{
 			//修改访问时间
-			let loader_info:sLoaderUrl = this.m_DicLoaderUrl.GetValue(url);
-			if(loader_info)
-			{
-				loader_info.utime = Time.timeSinceStartup;
-			}
+			this.RefreshResourceTime(url, false);
 			return Laya.loader.getRes(url);
-		}
-		/**
-         * 释放指定资源
-         * @param	url	资源路径
-		 */
-		public ClearRes(url:string):any
-		{
-			this.m_DicLoaderUrl.Remove(url);
-			Laya.loader.clearRes(url);
-			Log.Info("[res]释放资源:" + url);
-		}
-		/**
-         * 释放资源
-         * @param	type	释放策略
-		 */		
-		public ClearUnusedAssets(type:eClearStrategy):void
-		{
-			this.ClearAsset(type);
 		}
 		private ShareGUID():number
 		{
@@ -76,7 +54,7 @@ module dc
         /**
          * 加载资源。
          * @param	url 单个资源地址
-         * @param	complete 结束回调，如果加载失败，则返回 null 。
+         * @param	complete 结束回调(参数：string 加载的资源url)
          * @param	type 资源类型。比如：Loader.IMAGE
          * @param	priority 优先级，0-4，5个优先级，0优先级最高，默认为1。
          * @param	cache 是否缓存加载结果。
@@ -92,20 +70,26 @@ module dc
 					ignoreCache: boolean = false):void
 		{
 			//添加到加载目录
-			if(!this.m_DicLoaderUrl.ContainsKey(url))
-			{
-				this.m_DicLoaderUrl.Add(url, new sLoaderUrl(url));
-			}
+			this.RefreshResourceTime(url, true);
 			Laya.loader.load(
 				url, 
 				LayaHandler.create(this, this.OnLoadComplete, [complete, [url]]), 
-				LayaHandler.create(this, this.OnLoadProgress),
+				LayaHandler.create(this, this.OnLoadProgress, [1], false),
 				type,
 				priority,
 				cache,
 				group,
 				ignoreCache);
 		}
+        /**
+         * 批量加载资源
+         * @param	arr_res 需要加载的资源数组
+         * @param	complete 结束回调(参数：Array<string>，加载的url数组)
+         * @param	priority 优先级，0-4，5个优先级，0优先级最高，默认为1。
+         * @param	cache 是否缓存加载结果。
+         * @param	group 分组，方便对资源进行管理。
+         * @param	ignoreCache 是否忽略缓存，强制重新加载
+         */			
 		public LoadArrayRes(arr_res: Array<{ url:string, type:string}>, 
 					complete: LayaHandler = null, 
 					priority: number = 1, 
@@ -120,15 +104,12 @@ module dc
                 assets.push({ url: res.url, type: res.type });
 				urls.push(res.url);
 				//添加到加载目录
-				if(!this.m_DicLoaderUrl.ContainsKey(res.url))
-				{
-					this.m_DicLoaderUrl.Add(res.url, new sLoaderUrl(res.url));
-				}
+				this.RefreshResourceTime(res.url, true);
             }			
 			Laya.loader.load(
 				assets, 
 				LayaHandler.create(this, this.OnLoadComplete, [complete, urls]), 
-				LayaHandler.create(this, this.OnLoadProgress),
+				LayaHandler.create(this, this.OnLoadProgress, [assets.length], false),
 				undefined,
 				priority,
 				cache,
@@ -142,6 +123,16 @@ module dc
 		 */
 		public OnLoadComplete(handle:LayaHandler, ...args:any[]):void
 		{
+			//显示加载日志
+			if(CommonID.LOG_LOAD_RES)
+			{
+				if(args)
+				{
+					let arr:Array<string> = args[0];
+					for(let url of arr)Log.Debug("[load]加载完成url:" + url);
+				}
+			}
+			//加载完成回调
 			if(handle)
 			{
 				if(args && args.length > 0)
@@ -156,12 +147,60 @@ module dc
 					handle.run();
 			}
 		}
-		public OnLoadProgress():void
+		/**
+		 * 加载进度
+		 * @param	total		总共需要加载的资源数量
+		 * @param	progress	已经加载的数量，百分比；注意，有可能相同进度会下发多次
+		*/
+		public OnLoadProgress(total:number, progress:number):void
 		{
-			
+			if(CommonID.LOG_LOAD_RES)
+			{
+				Log.Debug("[load]进度:" + NumberUtils.toInt(Math.floor(progress*total)) + ", total:" + total);
+			}
 		}
-
+		/**更新资源使用时间*/
+		private RefreshResourceTime(url:string, is_create:boolean)
+		{
+			if(is_create)
+			{
+				let loader_info:sLoaderUrl = this.m_DicLoaderUrl.GetValue(url);
+				if(!loader_info)
+				{
+					loader_info = new sLoaderUrl(url);
+					this.m_DicLoaderUrl.Add(url, loader_info);
+				}
+				else
+					loader_info.ctime = Time.timeSinceStartup;
+			}
+			else
+			{
+				let loader_info:sLoaderUrl = this.m_DicLoaderUrl.GetValue(url);
+				if(loader_info)
+				{
+					loader_info.utime = Time.timeSinceStartup;
+				}
+			}
+		}
  		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～资源释放～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
+		/**
+         * 释放资源
+         * @param	type	释放策略
+		 */		
+		public ClearUnusedAssets(type:eClearStrategy):void
+		{
+			this.ClearAsset(type);
+		}
+		/**
+         * 释放指定资源
+         * @param	url	资源路径
+		 */
+		public ClearRes(url:string):any
+		{
+			this.m_DicLoaderUrl.Remove(url);
+			Laya.loader.clearRes(url);
+			Log.Info("[res]释放资源:" + url);
+		}
 		private ClearAsset(type:eClearStrategy):void
 		{
 			switch(type)

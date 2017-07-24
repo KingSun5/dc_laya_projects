@@ -23,7 +23,7 @@ module dc
 			obj.Setup(null);
 			//obj.LoadData(unit_info);
 			obj.LoadResource([{url:"res/atlas/anim/monster/001/DJ.atlas", type:LayaLoader.ATLAS},
-								{url:"res/atlas/anim/monster/001/YD.atlas", type:LayaLoader.ATLAS},
+								{url:"res/atlas/anim/monster/001/YD1.atlas", type:LayaLoader.ATLAS},
 								{url:"res/atlas/anim/monster/001/SW.atlas", type:LayaLoader.ATLAS},
 								{url:"res/atlas/anim/monster/001/GJ.atlas", type:LayaLoader.ATLAS}]);
 			SceneLayerUtils.role.addChild(obj.RootNode);
