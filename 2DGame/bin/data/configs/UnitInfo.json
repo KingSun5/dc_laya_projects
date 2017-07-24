@@ -1,3 +1,3 @@
 [
-	{"id":"1","name":"玩家","hp":1000,"WeaponID":1000,"MoveSpeed":100}
+	{"id":1,"name":"玩家","Hp":1000,"Sp":100,"HpSpeed":1,"SpSpeed":1,"WeaponID":1000,"MoveSpeed":100,"Attack":1,"DefVal":1,"Crit":1,"Decrit":1,"EyeRange":100,"EyeHide":50,"CritDmg":1}
 ]
