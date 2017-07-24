@@ -7,7 +7,7 @@ var dc;
             this.ii = 1;
             this.aa = 0;
             this.m_img = new LayaSprite();
-            this.m_img.loadImage(this.m_image1_url, 100, 50);
+            this.m_img.loadImage(this.m_image1_url, 100, 300);
             this.m_img.on(Laya.Event.CLICK, this, this.OnImageClickEvt);
             Laya.stage.addChild(this.m_img);
             // //配置表
@@ -21,7 +21,7 @@ var dc;
             //dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE);
-            //dc.TimerManager.Instance.AddTimer(1000, 3, this, this.OnTime, [11]);
+            dc.TimerManager.Instance.AddLoop(1000, 3, this, this.OnTime, [11]);
         }
         GameMain.prototype.OnEnd = function () {
             var args = [];
@@ -30,7 +30,7 @@ var dc;
             }
         };
         GameMain.prototype.OnTime = function (timer_id, args1) {
-            dc.ResourceManager.Instance.AddAsync("res/image/" + this.ii + ".png", LayaLoader.IMAGE);
+            dc.ResourceManager.Instance.LoadRes("res/image/" + this.ii + ".png", LayaLoader.IMAGE);
             this.ii++;
         };
         GameMain.prototype.OnImageClickEvt = function () {
@@ -94,7 +94,7 @@ var dc;
             // this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
             // this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected);
             //声音
-            //SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
+            dc.SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
             //加载
             // dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnAsyncComplete));
             // dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnAsyncComplete));
@@ -121,7 +121,7 @@ var dc;
             // s = info.IntegerValue;
             // n = info.DoubleValue;
             //effect
-            //EffectManager.Instance.CreateEffect_Position("res/effect/actEffect.json", SceneLayerUtils.effectLevelContainer,100,100, 0);
+            //EffectManager.Instance.CreateEffect_Position("res/effect/actEffect.json", SceneLayerUtils.effect,100,100, 0);
             //缓存
             // LocalValue.SetGlobalKey("123456789");
             // LocalValue.Set("name", "test");

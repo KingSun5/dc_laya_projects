@@ -1,2 +1,2 @@
-module:"dc"                             //设置组件编译后的分包JS文件名
-path:"src/framework/ui/laya/number"     //设置需要分包的组件所在目录路径
+module:"component"          //组件包名
+path:"src/component"        //组建目录
