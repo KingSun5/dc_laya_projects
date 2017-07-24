@@ -2,7 +2,6 @@
 import View=laya.ui.View;
 import Dialog=laya.ui.Dialog;
 import UIBaseView=dc.UIBaseView;
-import LayaImageNumber=dc.LayaImageNumber;
 module client.gui.common {
     export class AlertViewUI extends UIBaseView {
 		public mainBox:Laya.Box;

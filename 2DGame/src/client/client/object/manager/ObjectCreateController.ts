@@ -21,7 +21,12 @@ module dc
 			obj.ObjectServerID = "";
 			obj.UnitTypeID = unit_info.UnitID;
 			obj.Setup(null);
-			obj.LoadData(unit_info);
+			//obj.LoadData(unit_info);
+			obj.LoadResource([{url:"res/atlas/anim/monster/001/DJ.atlas", type:LayaLoader.ATLAS},
+								{url:"res/atlas/anim/monster/001/YD.atlas", type:LayaLoader.ATLAS},
+								{url:"res/atlas/anim/monster/001/SW.atlas", type:LayaLoader.ATLAS},
+								{url:"res/atlas/anim/monster/001/GJ.atlas", type:LayaLoader.ATLAS}]);
+			SceneLayerUtils.role.addChild(obj.RootNode);
 			ObjectManager.Instance.AttachObject(obj);
 			MainObjCmdFacade.Instance.AttackRole = obj;
 

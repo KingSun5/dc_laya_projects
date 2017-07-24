@@ -55,7 +55,7 @@ module dc
             assets.push({url:"res/atlas/comp.json", type:LayaLoader.ATLAS});
             assets.push({url:"res/atlas/ui/main.json", type:LayaLoader.ATLAS});
             assets.push({url:"res/atlas/ui/common.json", type:LayaLoader.ATLAS});
-            ResourceManager.Instance.AddSync(assets, this, this.OnDownloadComplate);
+            ResourceManager.Instance.LoadArrayRes(assets, LayaHandler.create(this, this.OnDownloadComplate));
         }
         //～～～～～～～～～～～～～～～～～～～～～～～初始化游戏～～～～～～～～～～～～～～～～～～～～～～～//
         private InitScene():void
@@ -111,7 +111,7 @@ module dc
 
         }
         /**资源加载完成*/
-        private OnDownloadComplate():void
+        private OnDownloadComplate(args:Array<string>):void
         {
             LangManager.Instance.SwitchLang(eLangType.en);
             ConfigManger.Instance.LoadAll();

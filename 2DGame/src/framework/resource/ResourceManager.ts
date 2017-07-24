@@ -8,9 +8,6 @@ module dc
 	export class ResourceManager extends Singleton
 	{
 		private m_ShareGUID:number = 0;
-		private m_FrontLoadThread:LoadQueue = null;   //同步加载线程
-		private m_BackLoadThread:LoadQueue = null;    //异步加载线程
-		private m_SyncLoadBatch:SyncLoadBatch = null;
 
 		private m_DicLoaderUrl:SDictionary<sLoaderUrl> = null;	//加载过的信息，方便资源释放
 
@@ -25,13 +22,6 @@ module dc
 		{
 			this.m_ShareGUID = 0;
 
-			this.m_FrontLoadThread = new SyncLoadQueue();
-			this.m_BackLoadThread = new AsyncLoadQueue();
-			this.m_SyncLoadBatch = new SyncLoadBatch();
-			this.m_BackLoadThread.Setup(eResLoadStrategy.FIFO, eResLoadThreadType.ASYNC);
-			this.m_FrontLoadThread.Setup(eResLoadStrategy.FIFO, eResLoadThreadType.SYNC);
-			this.m_SyncLoadBatch.Setup(this.m_FrontLoadThread);
-
 			this.m_DicLoaderUrl = new SDictionary<sLoaderUrl>();
 
 			Laya.loader.maxLoader = 2;
@@ -39,21 +29,6 @@ module dc
 
 		public Destroy():void
 		{
-			if (this.m_FrontLoadThread != null)
-			{
-				this.m_FrontLoadThread.Destroy();
-				this.m_FrontLoadThread = null;
-			}
-			if (this.m_BackLoadThread != null)
-			{
-				this.m_BackLoadThread.Destroy();
-				this.m_BackLoadThread = null;
-			}
-			if (this.m_SyncLoadBatch != null)
-			{
-				this.m_SyncLoadBatch.Destroy();
-				this.m_SyncLoadBatch = null;
-			}
 			if(this.m_DicLoaderUrl != null)
 			{
 				this.m_DicLoaderUrl.Clear();
@@ -62,18 +37,6 @@ module dc
 		}
 		public Tick(elapse:number, game_frame:number):void
 		{
-			if (this.m_FrontLoadThread != null)
-			{
-				this.m_FrontLoadThread.Update();
-			}
-			if (this.m_BackLoadThread != null)
-			{
-				this.m_BackLoadThread.Update();
-			}
-			if (this.m_SyncLoadBatch != null)
-			{
-				this.m_SyncLoadBatch.Update();
-			}
 		}	
 
 		/**获取资源*/
@@ -109,111 +72,95 @@ module dc
 		{
 			return ++this.m_ShareGUID;
 		}	
-
- 		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～同步加载～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
-		/**
-         * 增加多个同步资源加载。
-         * @param	assets		资源数组[{url,type},{url,type},...]
-         * @param	caller		调用对象实例
-         * @param	complete	加载完成，回调函数参数[无]
-         * @param	progress	加载进度，回调函数参数[已经加载数量，总共需要加载数量]
-		 * 例
-		    let assets = [];
-            assets.push({url:"res/image/1.png", type:Laya.Loader.IMAGE});
-            assets.push({url:"res/image/2.png", type:Laya.Loader.IMAGE});
-            assets.push({url:"res/image/3.png", type:Laya.Loader.IMAGE});
-            dc.ResourceManager.Instance.AddSync(assets, this, this.OnComplete, this.OnProgress);
-		 */
-		public AddSync(assets:Array<any>, caller:any=null, complete:Function=null, progress:Function=null):void
+		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～加载～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
+        /**
+         * 加载资源。
+         * @param	url 单个资源地址
+         * @param	complete 结束回调，如果加载失败，则返回 null 。
+         * @param	type 资源类型。比如：Loader.IMAGE
+         * @param	priority 优先级，0-4，5个优先级，0优先级最高，默认为1。
+         * @param	cache 是否缓存加载结果。
+         * @param	group 分组，方便对资源进行管理。
+         * @param	ignoreCache 是否忽略缓存，强制重新加载
+         */		
+		public LoadRes(url: string, 
+					type: string = "", 
+					complete: LayaHandler = null, 
+					priority: number = 1, 
+					cache: boolean = true, 
+					group: string = "dc", 
+					ignoreCache: boolean = false):void
 		{
-			if (this.m_FrontLoadThread == null || !assets || assets.length <= 0)
-			{
-				if(complete)complete.call(caller);
-				return;
-			}
-
-			//加载
-			let batch:LoadBatchInfo = new LoadBatchInfo();
-			for(let asset of assets)
-			{
-				let url:string = asset.url;
-				let type:string = asset.type;		
-				let id:number = this.ShareGUID();
-				let info:LoaderAsset = new LoaderAsset(url, type, null, eResLoadPriority.HIGH, true, "sync", false);
-				info.ID = id;
-				batch.Add(info);
-				//添加到加载目录
-				if(!this.m_DicLoaderUrl.ContainsKey(url))
-				{
-					this.m_DicLoaderUrl.Add(url, new sLoaderUrl(url));
-				}
-			}	
-			if(caller)
-			{
-				if(complete)batch.CompleteFun = LayaHandler.create(caller, complete);
-				if(progress)batch.ProgressFun = LayaHandler.create(caller, progress, null, false);
-			}
-			this.m_SyncLoadBatch.AddBatch(batch);
-		}
-		public RemoveSync(url:string):void
-		{
-			if (!this.m_FrontLoadThread) return;
-			this.m_FrontLoadThread.Remove(url);
-		}
-
-		public ClearSync():void
-		{
-			if (!this.m_FrontLoadThread) return;
-			this.m_FrontLoadThread.Clear();
-		}
-
-		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～异步加载～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
-		/**
-         * 添加异步资源加载
-         * @param	url		资源路径
-         * @param	type	资源类型
-         * @param	callback 资源成功或失败回调函数
-		 */
-		public AddAsync(url:string, type:string, caller:any=null, complete:Function=null):number
-		{
-			if (this.m_BackLoadThread == null || StringUtils.IsNullOrEmpty(url)) return 0;
-
-			//判断是否已经加载过
-			let res:any = this.GetRes(url);
-			if (res != null)
-			{
-				if (complete != null) complete.call(caller, url);
-				return 0;
-			}
-			//加载
-			let id:number = this.ShareGUID();
-			let info:LoaderAsset = new LoaderAsset(url, type, LayaHandler.create(caller, complete), eResLoadPriority.LOW, true, "sync", false);
-			info.ID = id;
-			this.m_BackLoadThread.Add(info);
 			//添加到加载目录
 			if(!this.m_DicLoaderUrl.ContainsKey(url))
 			{
 				this.m_DicLoaderUrl.Add(url, new sLoaderUrl(url));
 			}
-
-			return id;
+			Laya.loader.load(
+				url, 
+				LayaHandler.create(this, this.OnLoadComplete, [complete, [url]]), 
+				LayaHandler.create(this, this.OnLoadProgress),
+				type,
+				priority,
+				cache,
+				group,
+				ignoreCache);
 		}
-
-		public RemoveAsync(url:string):void
+		public LoadArrayRes(arr_res: Array<{ url:string, type:string}>, 
+					complete: LayaHandler = null, 
+					priority: number = 1, 
+					cache: boolean = true, 
+					group: string = "dc", 
+					ignoreCache: boolean = false):void
 		{
-			if (this.m_BackLoadThread == null) return;
-
-			if(this.m_BackLoadThread.Remove(url))
+            let assets = [];
+			let urls = [];
+            for (let res of arr_res)
 			{
-				this.m_DicLoaderUrl.Remove(url);
+                assets.push({ url: res.url, type: res.type });
+				urls.push(res.url);
+				//添加到加载目录
+				if(!this.m_DicLoaderUrl.ContainsKey(res.url))
+				{
+					this.m_DicLoaderUrl.Add(res.url, new sLoaderUrl(res.url));
+				}
+            }			
+			Laya.loader.load(
+				assets, 
+				LayaHandler.create(this, this.OnLoadComplete, [complete, urls]), 
+				LayaHandler.create(this, this.OnLoadProgress),
+				undefined,
+				priority,
+				cache,
+				group,
+				ignoreCache);
+		}
+		/**
+		 * 加载完成
+		 * @param handle 	加载时，传入的回调函数
+		 * @param args		第一个参数为加载的资源url列表；第二个参数为是否加载成功
+		 */
+		public OnLoadComplete(handle:LayaHandler, ...args:any[]):void
+		{
+			if(handle)
+			{
+				if(args && args.length > 0)
+				{
+					let arr:Array<string> = args[0];
+					if(!arr || arr.length > 1)
+						handle.runWith(args);
+					else
+						handle.runWith(arr[0]);
+				}
+				else
+					handle.run();
 			}
 		}
-
-		public ClearAsync():void
+		public OnLoadProgress():void
 		{
-			if (this.m_BackLoadThread == null) return;
-			this.m_BackLoadThread.Clear();
+			
 		}
+
  		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～资源释放～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
 		private ClearAsset(type:eClearStrategy):void
 		{

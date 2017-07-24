@@ -27,7 +27,7 @@ module dc
                 // new ConfigTemplate("data/configs/WeaponInfo.json", ConfigTable.WeaponInfo, "Name"),
                 // new ConfigTemplate("data/configs/BulletInfo.json", ConfigTable.BulletInfo, "Name"),
                 // new ConfigTemplate("data/configs/SkillInfo.json", ConfigTable.SkillInfo, "Name"),
-                // new ConfigTemplate("data/configs/UnitInfo.json", ConfigTable.UnitInfo, "Name"),
+                new ConfigTemplate("data/configs/UnitInfo.json", ConfigTable.UnitInfo, "id"),
             ];
         }
 		/**释放数据*/

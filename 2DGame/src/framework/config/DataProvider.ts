@@ -38,7 +38,7 @@ module dc
             {
                 res = list[i];
                 this.m_DicTemplate.Add(res.url, res);
-                ResourceManager.Instance.AddAsync(res.url, Laya.Loader.JSON, this, this.OnLoadComplete);
+                ResourceManager.Instance.LoadRes(res.url, Laya.Loader.JSON, LayaHandler.create(this, this.OnLoadComplete));
             }
         }
         public Unload(url:string):void

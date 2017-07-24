@@ -86,10 +86,10 @@ module dc
 
 		private LoadResource():void
 		{
-			ResourceManager.Instance.AddAsync(this.m_SoundFile, Laya.Loader.SOUND, this, this.OnLoadComplete);
+			ResourceManager.Instance.LoadRes(this.m_SoundFile, Laya.Loader.SOUND, LayaHandler.create(this, this.OnLoadComplete));
 		}
 
-		private OnLoadComplete():void
+		private OnLoadComplete(url:string):void
 		{
 			if(!this.m_Active)return;
 

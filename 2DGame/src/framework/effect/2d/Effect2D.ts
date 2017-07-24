@@ -62,7 +62,7 @@ module dc
         {
             if(StringUtils.IsNullOrEmpty(file))return false;
             this.m_IsLoadComplete = false;
-            ResourceManager.Instance.AddAsync(file, Laya.Loader.ATLAS, this, this.OnLoadComplete);
+            ResourceManager.Instance.LoadRes(file, Laya.Loader.ATLAS, LayaHandler.create(this, this.OnLoadComplete));
         }
         protected OnLoadComplete(url:string):void
         {

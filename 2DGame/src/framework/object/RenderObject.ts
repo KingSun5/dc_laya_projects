@@ -45,12 +45,12 @@ module dc
             return super.Update(elapse, game_frame);     
         }
 		/**加载外部资源*/
-		public LoadResource(res:string):void
+		public LoadResource(arr_res: Array<{ url:string, type:string}>):void
 		{
-			ResourceManager.Instance.AddAsync(res, Laya.Loader.IMAGE, this, this.OnLoadComplete);
+			ResourceManager.Instance.LoadArrayRes(arr_res, LayaHandler.create(this, this.OnLoadComplete));
 		}
 		/**加载完成回调*/
-		protected OnLoadComplete():void
+		protected OnLoadComplete(args:Array<string>):void
 		{
 			this.m_IsLoadComplete = true;
 		}
@@ -92,5 +92,9 @@ module dc
 		{
 			return this.m_RootNode.y;
 		}	
+		public get RootNode():LayaSprite
+		{
+			return this.m_RootNode;
+		}
 	}
 }

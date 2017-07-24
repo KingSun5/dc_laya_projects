@@ -16,6 +16,8 @@ module dc
 		protected m_PoseType:string = "";					//当前动作
 		protected m_ListStatus:Array<eObjStatus> = null;	//角色状态
 
+		protected m_Animation:LayaAnimation = null;			//动画
+
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～基础方法～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         constructor()
         {
@@ -58,12 +60,66 @@ module dc
 			}
             return super.Update(elapse, game_frame);
         }
-
 		/**加载完成回调*/
-		protected OnLoadComplete():void
+		protected OnLoadComplete(args:Array<string>):void
 		{
-			super.OnLoadComplete();
+			this.m_Animation = new LayaAnimation();
+			if(args && args.length > 0)
+			{
+				for(let url of args)
+				{
+					this.m_Animation.loadAtlas(url, LayaHandler.create(this,this.OnLoadAnimation));
+				}
+			}
+			super.OnLoadComplete(args);
 		}
+		protected OnLoadAnimation():void
+		{
+			//添加到舞台
+			this.m_RootNode.addChild(this.m_Animation);
+			//创建动画模板dizziness
+			Laya.Animation.createFrames(this.BuildAniUrls("DJ/M111_DJ2_1_000",4),"DJ2_1");
+			Laya.Animation.createFrames(this.BuildAniUrls("DJ/M111_DJ2_2_000",4),"DJ2_2");
+			Laya.Animation.createFrames(this.BuildAniUrls("DJ/M111_DJ2_3_000",4),"DJ2_3");
+			Laya.Animation.createFrames(this.BuildAniUrls("DJ/M111_DJ2_4_000",4),"DJ2_4");
+			Laya.Animation.createFrames(this.BuildAniUrls("DJ/M111_DJ2_5_000",4),"DJ2_5");
+			
+			Laya.Animation.createFrames(this.BuildAniUrls("GJ/M111_GJ_1_000",3),"GJ_1");
+			Laya.Animation.createFrames(this.BuildAniUrls("GJ/M111_GJ_2_000",3),"GJ_2");
+			Laya.Animation.createFrames(this.BuildAniUrls("GJ/M111_GJ_3_000",3),"GJ_3");
+			Laya.Animation.createFrames(this.BuildAniUrls("GJ/M111_GJ_4_000",3),"GJ_4");
+			Laya.Animation.createFrames(this.BuildAniUrls("GJ/M111_GJ_5_000",3),"GJ_5");
+			
+			Laya.Animation.createFrames(this.BuildAniUrls("SW/M111_SW_1_000",3),"SW_1");
+			Laya.Animation.createFrames(this.BuildAniUrls("SW/M111_SW_2_000",3),"SW_2");
+			Laya.Animation.createFrames(this.BuildAniUrls("SW/M111_SW_3_000",3),"SW_3");
+			Laya.Animation.createFrames(this.BuildAniUrls("SW/M111_SW_4_000",3),"SW_4");
+			Laya.Animation.createFrames(this.BuildAniUrls("SW/M111_SW_5_000",3),"SW_5");
+			
+			Laya.Animation.createFrames(this.BuildAniUrls("YD/M111_YD_1_000",4),"YD_1");
+			Laya.Animation.createFrames(this.BuildAniUrls("YD/M111_YD_2_000",4),"YD_2");
+			Laya.Animation.createFrames(this.BuildAniUrls("YD/M111_YD_3_000",4),"YD_3");
+			Laya.Animation.createFrames(this.BuildAniUrls("YD/M111_YD_4_000",4),"YD_4");
+			Laya.Animation.createFrames(this.BuildAniUrls("YD/M111_YD_5_000",4),"YD_5");
+			
+			//播放动画
+			this.m_Animation.play(0,true,"YD_1");
+		}
+		/**
+		 * 创建一组动画的url数组（美术资源地址数组）
+		 * aniName  动作的名称，用于生成url
+		 * length   动画最后一帧的索引值，
+		 */    
+		private BuildAniUrls(aniName:string,length:number):any
+		{
+			var urls:any = [];
+			for(var i:number = 1;i<=length;i++)
+			{
+				//动画资源路径要和动画图集打包前的资源命名对应起来
+				urls.push("anim/monster/001/"+aniName+i+".png");
+			}
+			return urls;
+		}		
         /**加载数据*/
         public LoadData(info:UnitInfo):void
         {

@@ -161,7 +161,7 @@ module dc
             }
             if (assets.length > 0)
             {
-                ResourceManager.Instance.AddSync(assets, this, this.OnAssetLoaded);
+                ResourceManager.Instance.LoadArrayRes(assets, LayaHandler.create(this, this.OnAssetLoaded));
             }
             else
             {
