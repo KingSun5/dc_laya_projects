@@ -3,7 +3,7 @@ module dc
 	export class CommonID
 	{
 		/**显示加载资源日志*/
-		public static LOG_LOAD_RES:boolean = true;
+		public static LOG_LOAD_RES:boolean = false;
 	}
 
     /**对齐方式*/

@@ -89,8 +89,6 @@ module dc
             let account: string = this.txtAccount.text;
             let password: string = this.txtPassword.text; 
             Log.Debug("请求登陆 account:" + account);
-
-            UnitAIManager.Instance.CreateMainPlayer();
         }
         /**点击注册*/
         private OnPressRegister(event: LayaEvent)

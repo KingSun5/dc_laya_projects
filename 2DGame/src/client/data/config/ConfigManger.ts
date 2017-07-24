@@ -58,6 +58,15 @@ module dc
             let info = DataProvider.Instance.GetInfo(table, key);
             return info;
         }
+        /**定义需要前期加载的资源*/
+        public get PreLoadRes():Array<{url:string, type:string}>
+        {
+            return [
+                {url:"data/serverList.json", type:LayaLoader.JSON},
+                {url:"data/configs/global.json", type:LayaLoader.JSON},
+                {url:"data/configs/UnitInfo.json", type:LayaLoader.JSON}
+            ];
+        }
         public get ListTables():Array<ConfigTemplate>
         {
             return this.m_ListTables;

@@ -87,11 +87,11 @@ module dc
 		 * 从数组中产生随机数[-1,1,2]
 		 * 结果：-1/1/2中的一个
 		 */	
-		public static RandRange_Array(arr:any[]) : number
+		public static RandRange_Array<T>(arr:Array<T>) : T
 		{
 			if(arr.length == 0)
-				return -1;
-			let loc:number = arr[MathUtils.RandRange_Int(0, arr.length-1)];
+				return null;
+			let loc:T = arr[MathUtils.RandRange_Int(0, arr.length-1)];
 			return loc;
 		}
 		/**

@@ -77,7 +77,9 @@ module dc
 		{
 			//添加到舞台
 			this.m_RootNode.addChild(this.m_Animation);
-			//创建动画模板dizziness
+			let rect:LayaRectangle = this.m_Animation.getBounds();
+			this.m_RootNode.pivot(rect.width*0.5,rect.height*0.5);
+			//创建动画模板
 			Laya.Animation.createFrames(this.BuildAniUrls("DJ/M111_DJ2_1_000",4),"DJ2_1");
 			Laya.Animation.createFrames(this.BuildAniUrls("DJ/M111_DJ2_2_000",4),"DJ2_2");
 			Laya.Animation.createFrames(this.BuildAniUrls("DJ/M111_DJ2_3_000",4),"DJ2_3");
@@ -103,7 +105,8 @@ module dc
 			Laya.Animation.createFrames(this.BuildAniUrls("YD/M111_YD_5_000",4),"YD_5");
 			
 			//播放动画
-			this.m_Animation.play(0,true,"YD_1");
+			let anims = ["DJ2_1","DJ2_2","DJ2_3","DJ2_4","DJ2_5","GJ_1","GJ_2","GJ_3","GJ_4","GJ_5","SW_1","SW_2","SW_3","SW_4","SW_5","YD_1","YD_2","YD_3","YD_4","YD_5"]
+			this.m_Animation.play(0,true,MathUtils.RandRange_Array<string>(anims));
 		}
 		/**
 		 * 创建一组动画的url数组（美术资源地址数组）

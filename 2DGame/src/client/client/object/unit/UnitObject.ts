@@ -77,11 +77,11 @@ module dc
             //TODO
 
             //技能
-            this.m_UnitSkill.AddSkill(this.m_StdWeaponInfo.SkillId);
+            //this.m_UnitSkill.AddSkill(this.m_StdWeaponInfo.SkillId);
 
             //特性
-            this.m_UnitFeature.Resolve();
-            this.m_UnitFeature.AddFeature(1);
+            //this.m_UnitFeature.Resolve();
+            //this.m_UnitFeature.AddFeature(1);
         }
 
         /**

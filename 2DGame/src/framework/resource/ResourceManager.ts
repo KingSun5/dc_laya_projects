@@ -52,7 +52,7 @@ module dc
 		}	
 		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～加载～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         /**
-         * 加载资源。
+         * 加载资源，如果资源在此之前已经加载过，则当前帧会调用complete
          * @param	url 单个资源地址
          * @param	complete 结束回调(参数：string 加载的资源url)
          * @param	type 资源类型。比如：Loader.IMAGE
@@ -82,7 +82,7 @@ module dc
 				ignoreCache);
 		}
         /**
-         * 批量加载资源
+         * 批量加载资源，如果所有资源在此之前已经加载过，则当前帧会调用complete
          * @param	arr_res 需要加载的资源数组
          * @param	complete 结束回调(参数：Array<string>，加载的url数组)
          * @param	priority 优先级，0-4，5个优先级，0优先级最高，默认为1。

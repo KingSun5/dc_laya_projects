@@ -15,10 +15,28 @@ module dc
             return this.instance;
         }
 
+        public CreateTestRobot()
+        {
+            for(let row = 0; row < 10; ++row)
+            {
+                for(let col = 0; col < 10; ++col)
+                {
+                    let unit_info:UnitInfo = new UnitInfo(1);
+                    unit_info.Group = eGroupType.TYPE_1;
+                    unit_info.Pos = new Vector3(col*60,row*100,0);
+                    unit_info.Dir = Vector3.forward;
+                    ObjectCreateController.CreatePlayer(unit_info);
+                }
+            }
+        }
+        /**创建主玩家*/
 		public CreateMainPlayer():Role
 		{
 			let unit_info:UnitInfo = new UnitInfo(1);
-			let role:Role = ObjectCreateController.CreateMainPlayer(unit_info);
+            unit_info.Group = eGroupType.TYPE_1;
+            unit_info.Pos = new Vector3(0,0,0);
+            unit_info.Dir = Vector3.forward;
+			let role:Role = ObjectCreateController.CreatePlayer(unit_info);
 
 			return role;
 		}

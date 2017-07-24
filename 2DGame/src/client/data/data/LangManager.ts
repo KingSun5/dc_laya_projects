@@ -48,6 +48,13 @@ module dc
         {
             return this.m_ListTables;
         }   
+        /**定义需要前期加载的资源*/
+        public get PreLoadRes():Array<{url:string, type:string}>
+        {
+            return [
+                {url:"data/lang/text/lang.json", type:LayaLoader.JSON}
+            ];
+        }
         /**
          * 切换语言
          * @param type  语言类型
