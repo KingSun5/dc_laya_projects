@@ -73,7 +73,11 @@ module dc
         {
             super.UnRegisterEvent();
         }
-
+        /**静态缓存表*/
+        protected StaticCacheUI(): any[] 
+        {
+            return [this];
+        }
         /**是否显示加载界面*/
         protected IsShowLoading():boolean
         {

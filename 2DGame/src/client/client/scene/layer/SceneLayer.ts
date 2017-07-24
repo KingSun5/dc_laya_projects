@@ -11,23 +11,23 @@ module dc
 		private static m_sceneRootContainer:LayaSprite;	
 
 		/**最高层*/
-		private static m_topLevelContainer:LayaSprite;	
+		private static m_topContainer:LayaSprite;	
 		/**特效*/
-		private static m_effectLevelContainer:LayaSprite;
+		private static m_effectContainer:LayaSprite;
 		/**玩家*/
-		private static m_playerLevelContainer:LayaSprite;	
+		private static m_playerContainer:LayaSprite;	
 		/**角色 */
-		private static m_roleLevelContainer:LayaSprite;		
+		private static m_roleContainer:LayaSprite;		
 		/**子弹*/
-		private static m_bulletLevelContainer:LayaSprite;
+		private static m_bulletContainer:LayaSprite;
 		/**物品*/
-		private static m_mapItemLevelContainer:LayaSprite;
+		private static m_mapItemContainer:LayaSprite;
 		/**物件*/
-		private static m_mapObjLevelContainer:LayaSprite;		
+		private static m_mapObjContainer:LayaSprite;		
 		/**地面特效*/
-		private static m_terrainEffectLevelContainer:LayaSprite;
+		private static m_terrainEffectContainer:LayaSprite;
 		/**地形*/
-		private static m_terrainLevelContainer:LayaSprite;	
+		private static m_terrainContainer:LayaSprite;	
 		
 		public static Setup():void
 		{
@@ -35,118 +35,118 @@ module dc
 			this.m_sceneRootContainer.name = "sceneRootContainer";
 			this.m_sceneRootContainer.mouseEnabled = false;
 
-			this.m_topLevelContainer = new LayaSprite();
-			this.m_topLevelContainer.name = "topLevelContainer";
-			this.m_topLevelContainer.mouseEnabled = false;
-			this.m_effectLevelContainer = new LayaSprite();
-			this.m_effectLevelContainer.name = "effectLevelContainer";
-			this.m_effectLevelContainer.mouseEnabled = false;
-			this.m_playerLevelContainer = new LayaSprite();
-			this.m_playerLevelContainer.name = "playerLevelContainer";
-			this.m_playerLevelContainer.mouseEnabled = false;
-			this.m_roleLevelContainer = new LayaSprite();
-			this.m_roleLevelContainer.name = "roleLevelContainer";
-			this.m_roleLevelContainer.mouseEnabled = false;
-			this.m_bulletLevelContainer = new LayaSprite();
-			this.m_bulletLevelContainer.name = "bulletLevelContainer";
-			this.m_bulletLevelContainer.mouseEnabled = false;
-			this.m_mapItemLevelContainer = new LayaSprite();
-			this.m_mapItemLevelContainer.name = "mapItemLevelContainer";
-			this.m_mapItemLevelContainer.mouseEnabled = false;
-			this.m_mapObjLevelContainer = new LayaSprite();
-			this.m_mapObjLevelContainer.name = "mapObjLevelContainer";
-			this.m_mapObjLevelContainer.mouseEnabled = false;
-			this.m_terrainEffectLevelContainer = new LayaSprite();
-			this.m_terrainEffectLevelContainer.name = "terrainEffectLevelContainer";
-			this.m_terrainEffectLevelContainer.mouseEnabled = false;
-			this.m_terrainLevelContainer = new LayaSprite();
-			this.m_terrainLevelContainer.name = "terrainLevelContainer";
-			this.m_terrainLevelContainer.mouseEnabled = false;
+			this.m_topContainer = new LayaSprite();
+			this.m_topContainer.name = "topContainer";
+			this.m_topContainer.mouseEnabled = false;
+			this.m_effectContainer = new LayaSprite();
+			this.m_effectContainer.name = "effectContainer";
+			this.m_effectContainer.mouseEnabled = false;
+			this.m_playerContainer = new LayaSprite();
+			this.m_playerContainer.name = "playerContainer";
+			this.m_playerContainer.mouseEnabled = false;
+			this.m_roleContainer = new LayaSprite();
+			this.m_roleContainer.name = "roleContainer";
+			this.m_roleContainer.mouseEnabled = false;
+			this.m_bulletContainer = new LayaSprite();
+			this.m_bulletContainer.name = "bulletContainer";
+			this.m_bulletContainer.mouseEnabled = false;
+			this.m_mapItemContainer = new LayaSprite();
+			this.m_mapItemContainer.name = "mapItemContainer";
+			this.m_mapItemContainer.mouseEnabled = false;
+			this.m_mapObjContainer = new LayaSprite();
+			this.m_mapObjContainer.name = "mapObjContainer";
+			this.m_mapObjContainer.mouseEnabled = false;
+			this.m_terrainEffectContainer = new LayaSprite();
+			this.m_terrainEffectContainer.name = "terrainEffectContainer";
+			this.m_terrainEffectContainer.mouseEnabled = false;
+			this.m_terrainContainer = new LayaSprite();
+			this.m_terrainContainer.name = "terrainContainer";
+			this.m_terrainContainer.mouseEnabled = false;
 			
 			LayerManager.gameLayer.addChild(this.m_sceneRootContainer);
-			this.m_sceneRootContainer.addChild(this.m_terrainLevelContainer);
-			this.m_sceneRootContainer.addChild(this.m_terrainEffectLevelContainer);
-			this.m_sceneRootContainer.addChild(this.m_mapObjLevelContainer);
-			this.m_sceneRootContainer.addChild(this.m_mapItemLevelContainer);
-			this.m_sceneRootContainer.addChild(this.m_bulletLevelContainer);
-			this.m_sceneRootContainer.addChild(this.m_roleLevelContainer);
-			this.m_sceneRootContainer.addChild(this.m_playerLevelContainer);
-			this.m_sceneRootContainer.addChild(this.m_effectLevelContainer);
-			this.m_sceneRootContainer.addChild(this.m_topLevelContainer);
+			this.m_sceneRootContainer.addChild(this.m_terrainContainer);
+			this.m_sceneRootContainer.addChild(this.m_terrainEffectContainer);
+			this.m_sceneRootContainer.addChild(this.m_mapObjContainer);
+			this.m_sceneRootContainer.addChild(this.m_mapItemContainer);
+			this.m_sceneRootContainer.addChild(this.m_bulletContainer);
+			this.m_sceneRootContainer.addChild(this.m_roleContainer);
+			this.m_sceneRootContainer.addChild(this.m_playerContainer);
+			this.m_sceneRootContainer.addChild(this.m_effectContainer);
+			this.m_sceneRootContainer.addChild(this.m_topContainer);
 		}	
 		public static Destroy():void
 		{
-			DisplayUtils.RemoveAllChild(this.m_terrainLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_terrainEffectLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_mapObjLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_mapItemLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_bulletLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_roleLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_playerLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_effectLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_topLevelContainer);
+			DisplayUtils.RemoveAllChild(this.m_terrainContainer);
+			DisplayUtils.RemoveAllChild(this.m_terrainEffectContainer);
+			DisplayUtils.RemoveAllChild(this.m_mapObjContainer);
+			DisplayUtils.RemoveAllChild(this.m_mapItemContainer);
+			DisplayUtils.RemoveAllChild(this.m_bulletContainer);
+			DisplayUtils.RemoveAllChild(this.m_roleContainer);
+			DisplayUtils.RemoveAllChild(this.m_playerContainer);
+			DisplayUtils.RemoveAllChild(this.m_effectContainer);
+			DisplayUtils.RemoveAllChild(this.m_topContainer);
 			
 			DisplayUtils.RemoveAllChild(this.m_sceneRootContainer);
 			this.m_sceneRootContainer.removeSelf();
 
 			this.m_sceneRootContainer = null;
-			this.m_terrainLevelContainer = null;
-			this.m_terrainEffectLevelContainer = null;
-			this.m_mapObjLevelContainer = null;
-			this.m_mapItemLevelContainer = null;
-			this.m_bulletLevelContainer = null;
-			this.m_roleLevelContainer = null;
-			this.m_playerLevelContainer = null;
-			this.m_effectLevelContainer = null;
-			this.m_topLevelContainer = null;
+			this.m_terrainContainer = null;
+			this.m_terrainEffectContainer = null;
+			this.m_mapObjContainer = null;
+			this.m_mapItemContainer = null;
+			this.m_bulletContainer = null;
+			this.m_roleContainer = null;
+			this.m_playerContainer = null;
+			this.m_effectContainer = null;
+			this.m_topContainer = null;
 		}
 		public static Clear():void
 		{
-			DisplayUtils.RemoveAllChild(this.m_terrainLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_terrainEffectLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_mapObjLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_mapItemLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_bulletLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_roleLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_playerLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_effectLevelContainer);
-			DisplayUtils.RemoveAllChild(this.m_topLevelContainer);
+			DisplayUtils.RemoveAllChild(this.m_terrainContainer);
+			DisplayUtils.RemoveAllChild(this.m_terrainEffectContainer);
+			DisplayUtils.RemoveAllChild(this.m_mapObjContainer);
+			DisplayUtils.RemoveAllChild(this.m_mapItemContainer);
+			DisplayUtils.RemoveAllChild(this.m_bulletContainer);
+			DisplayUtils.RemoveAllChild(this.m_roleContainer);
+			DisplayUtils.RemoveAllChild(this.m_playerContainer);
+			DisplayUtils.RemoveAllChild(this.m_effectContainer);
+			DisplayUtils.RemoveAllChild(this.m_topContainer);
 		}
 		public static get player():LayaSprite
 		{
-			return this.m_playerLevelContainer;
+			return this.m_playerContainer;
 		}
 		public static get role():LayaSprite
 		{
-			return this.m_roleLevelContainer;
+			return this.m_roleContainer;
 		}
 		public static get bullet():LayaSprite
 		{
-			return this.m_bulletLevelContainer;
+			return this.m_bulletContainer;
 		}
 		public static get mapItem():LayaSprite
 		{
-			return this.m_mapItemLevelContainer;
+			return this.m_mapItemContainer;
 		}
 		public static get mapObj():LayaSprite
 		{
-			return this.m_mapObjLevelContainer;
+			return this.m_mapObjContainer;
 		}
 		public static get terrain():LayaSprite
 		{
-			return this.m_terrainLevelContainer;
+			return this.m_terrainContainer;
 		}
 		public static get effect():LayaSprite
 		{
-			return this.m_effectLevelContainer;
+			return this.m_effectContainer;
 		}
 		public static get terrainEffect():LayaSprite
 		{
-			return this.m_terrainEffectLevelContainer;
+			return this.m_terrainEffectContainer;
 		}
 		public static get top():LayaSprite
 		{
-			return this.m_topLevelContainer;
+			return this.m_topContainer;
 		}
 	}
 }

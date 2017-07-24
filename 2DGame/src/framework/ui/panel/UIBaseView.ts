@@ -94,13 +94,11 @@ module dc
         /**资源加载结束*/
         protected OnLoadComplete():void
         {
-            this.RegisteGUIEvent();
         }
 
         /**多语言;初始化，或语音设定改变时触发*/
         protected OnLangChange():void
         {
-
         }
 
         /**需要提前加载的资源
@@ -136,7 +134,17 @@ module dc
         {
             
         }
-
+        /**
+         * 是否优化界面显示,原则：
+         * 1.对于容器内有大量静态内容或者不经常变化的内容（比如按钮），可以对整个容器设置cacheAs属性，能大量减少Sprite的数量，显著提高性能。
+         * 2.如果有动态内容，最好和静态内容分开，以便只缓存静态内
+         * 3.容器内有经常变化的内容，比如容器内有一个动画或者倒计时，如果再对这个容器设置cacheAs=”bitmap”，会损失性能。
+         * 4.对象非常简单，比如一个字或者一个图片，设置cacheAs=”bitmap”不但不提高性能，反而会损失性能。
+         */
+        protected StaticCacheUI(): any[] 
+        {
+            return null;
+        }
         /**是否显示加载界面*/
         protected IsShowLoading():boolean
         {
@@ -172,6 +180,17 @@ module dc
         {
             if(!this.m_IsOpen)return;
 
+            //静态缓存
+            let staticCacheUI = this.StaticCacheUI();
+            if (staticCacheUI) 
+            {
+                for (let i = 0; i < staticCacheUI.length; ++i) 
+                {
+                    let ui = staticCacheUI[i];
+                    ui.cacheAs = "bitmap";
+                }
+            }
+            this.RegisteGUIEvent();
             this.OnLoadComplete();
         }
 

@@ -63,8 +63,13 @@ module dc
         private InitScene():void
         {
             Laya.Stat.show(0, 0);
+            //调试面板
+            //Laya.DebugPanel.init();
+            //调用DebugTool调试面板
+            //Laya.DebugTool.init();
+
             Laya.stage.frameRate = Laya.Stage.FRAME_MOUSE;
-            Laya.stage.size(640,960);
+            Laya.stage.size(UIID.DEFAULT_WIDTH,UIID.DEFAULT_HEIGHT);
             //Laya.stage.fullScreenEnabled = true;
 
             Laya.stage.scaleMode = laya.display.Stage.SCALE_EXACTFIT;

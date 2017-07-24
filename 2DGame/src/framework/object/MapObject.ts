@@ -51,10 +51,10 @@ module dc
             return super.Update(elapse, game_frame);     
         }
 		/**位置*/
-		public SetPosition(x:number, y:number):void
+		public SetPosition(x:number, y:number, z:number):void
 		{
-			super.SetPosition(x, y);
-			EventController.DispatchEvent(ObjectEvent.MAP_POSITION, this.m_ObjectGUID, this.x, this.y);
+			super.SetPosition(x, y, z);
+			EventController.DispatchEvent(ObjectEvent.MAP_POSITION, this.m_ObjectGUID, this.x, this.y, this.z);
 
 			let map_col:number = PathGridMap.Instance.getNodeColByPos(this.x);
 			let map_row:number = PathGridMap.Instance.getNodeRowByPos(this.y);

@@ -72,7 +72,7 @@ module dc
             this.HpMax = this.m_StdUnitInfo.Hp;
             this.WeaponID = this.m_StdUnitInfo.WeaponID;
             this.SetSpeed(this.m_UnitInfo.AbilInfo.Get(eAbilType.MoveSpeed));
-            this.SetPosition(this.m_UnitInfo.Pos.x, this.m_UnitInfo.Pos.y);
+            this.SetPosition(this.m_UnitInfo.Pos.x, this.m_UnitInfo.Pos.y, this.m_UnitInfo.Pos.z);
             //朝向
             //TODO
 

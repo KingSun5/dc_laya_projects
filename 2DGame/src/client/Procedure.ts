@@ -18,7 +18,9 @@ module dc
         */
         public Setup():void
         {
-            Laya.init(640,960, Laya.WebGL);
+            UIID.DEFAULT_WIDTH = 640;
+            UIID.DEFAULT_HEIGHT = 960;
+            Laya.init(UIID.DEFAULT_WIDTH,UIID.DEFAULT_HEIGHT, Laya.WebGL);
             
             Log.Info("Procedure::setup");
             this.InitGameManager();

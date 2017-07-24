@@ -35,6 +35,7 @@ module dc
 			if(this.m_RootNode != null)
 			{
 				this.m_RootNode.removeSelf();
+				this.m_RootNode.destroy();
 				this.m_RootNode = null;
 			}
 			super.Destroy();
@@ -55,7 +56,7 @@ module dc
 			this.m_IsLoadComplete = true;
 		}
 		/**位置*/
-		public SetPosition(x:number, y:number):void
+		public SetPosition(x:number, y:number, z:number):void
 		{
 			this.m_RootNode.pos(x, y);
 		}
@@ -80,9 +81,9 @@ module dc
 		{
 			return this.m_IsLoadComplete;
 		}	
-		public get Position():Vector2
+		public get Position():Vector3
 		{
-			return new Vector2(this.m_RootNode.x, this.m_RootNode.y);
+			return new Vector3(this.m_RootNode.x, this.m_RootNode.y, 0);
 		}		
 		public get x():number
 		{
@@ -91,6 +92,10 @@ module dc
 		public get y():number
 		{
 			return this.m_RootNode.y;
+		}		
+		public get z():number
+		{
+			return 0;
 		}	
 		public get RootNode():LayaSprite
 		{

@@ -29,7 +29,7 @@ module dc
             this.m_root.addChild(this.m_gameLayer);
 
             this.m_uiLayer = new LayaSprite();
-            this.m_uiLayer.name = "toolsLayer";
+            this.m_uiLayer.name = "uiLayer";
 			this.m_uiLayer.mouseEnabled = true;
             this.m_root.addChild(this.m_uiLayer);
 

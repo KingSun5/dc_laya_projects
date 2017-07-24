@@ -47,6 +47,13 @@ module dc
 			this.DetachAllStatus();
         	this.ClearLogicCommand();
 
+			if(this.m_Animation != null)
+			{
+				this.m_Animation.removeSelf();
+				this.m_Animation.destroy();
+				this.m_Animation = null;
+			}
+
             super.Destroy();
         }
         public Update(elapse:number, game_frame:number):boolean
@@ -143,9 +150,9 @@ module dc
         private OnRoleEvt(evt:EventArgs):void
         {
         }
-		public SetPosition(x:number, y:number):void
+		public SetPosition(x:number, y:number, z:number):void
 		{
-			super.SetPosition(x, y);
+			super.SetPosition(x, y, z);
 		}
 		/// <summary>
 		/// 是否移动中
