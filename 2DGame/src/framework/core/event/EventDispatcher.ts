@@ -22,7 +22,7 @@ module dc
         */
         public AddEventListener(type:string, caller:any, fun:Function):void
         {
-            if(this.m_DicFuns[type] == null)
+            if(!this.m_DicFuns[type])
             {
                 this.m_DicFuns[type] = [];
                 this.m_DicFuns[type].push(LayaHandler.create(caller, fun, null, false));
@@ -43,7 +43,7 @@ module dc
         public RemoveEventListener(type:string, caller:any,fun:Function):void
         {
             let arr:LayaHandler[] = this.m_DicFuns[type];
-            if(arr == null)return;
+            if(!arr)return;
             for(let i = 0; i < arr.length; ++i)
             {
                 let item:LayaHandler = arr[i];
@@ -62,7 +62,7 @@ module dc
         {
             args.Type = type;
             let arr:LayaHandler[] = this.m_DicFuns[type];
-            if(arr == null)return;
+            if(!arr)return;
             for(let item of arr)
             {
                 item.runWith(args);

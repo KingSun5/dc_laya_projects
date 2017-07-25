@@ -1,7 +1,7 @@
 module dc
 {
     /**
-     * 工具类
+     * 对象工具类
      * @author hannibal
      * @time 2017-7-11
      */

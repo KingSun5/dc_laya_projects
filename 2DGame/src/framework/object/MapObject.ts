@@ -13,7 +13,7 @@ module dc
 		protected m_RowIndex:number;	//所在地图的行
 		protected m_ColIndex:number;	//所在地图的列
 
-		protected m_PathGrid:PathGrid;	//对象所在的格子
+		protected m_PathGrid:PathGrid = null;	//对象所在的格子
 
         constructor()
         {
@@ -38,7 +38,7 @@ module dc
 
         public Destroy():void
         {
-			if(this.m_RootNode != null)
+			if(this.m_RootNode)
 			{
 				this.m_RootNode.removeSelf();
 				this.m_RootNode = null;
@@ -54,7 +54,7 @@ module dc
 		public SetPosition(x:number, y:number, z:number):void
 		{
 			super.SetPosition(x, y, z);
-			EventController.DispatchEvent(ObjectEvent.MAP_POSITION, this.m_ObjectGUID, this.x, this.y, this.z);
+			EventController.DispatchEvent(GameObjectEvent.MAP_POSITION, this.m_ObjectGUID, this.x, this.y, this.z);
 
 			let map_col:number = PathGridMap.Instance.getNodeColByPos(this.x);
 			let map_row:number = PathGridMap.Instance.getNodeRowByPos(this.y);
@@ -74,7 +74,7 @@ module dc
 		/**格子改变*/
 		protected OnMapGridChangle(new_row:number, new_col:number):void
 		{
-			if(this.m_PathGrid != null)
+			if(this.m_PathGrid)
 			{
 				this.m_PathGrid.removeObject(this);
 				this.m_PathGrid = null;
@@ -82,10 +82,10 @@ module dc
 			
 			this.m_ColIndex = new_col;
 			this.m_RowIndex = new_row;
-			EventController.DispatchEvent(ObjectEvent.MAP_GRID, this.m_ObjectGUID, this.m_RowIndex, this.m_ColIndex);
+			EventController.DispatchEvent(GameObjectEvent.MAP_GRID, this.m_ObjectGUID, this.m_RowIndex, this.m_ColIndex);
 			
 			this.m_PathGrid = PathGridMap.Instance.getNode(this.m_ColIndex, this.m_RowIndex);
-			if(this.m_PathGrid != null)
+			if(this.m_PathGrid)
 			{
 				this.m_PathGrid.addObject(this);
 			}

@@ -85,7 +85,7 @@ module dc
         }
         public SetParent(node:LayaNode):void
         {
-            if(node != null)node.addChild(this.m_RootNode);
+            if(node)node.addChild(this.m_RootNode);
         }
         public SetPos(x:number, y:number)
         {

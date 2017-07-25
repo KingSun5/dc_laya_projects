@@ -7,7 +7,7 @@ module dc
      */
 	export class RenderObject extends GameObject
 	{
-		protected m_RootNode:LayaSprite;
+		protected m_RootNode:LayaSprite = null;
 		protected m_IsVisible:boolean;		//是否可见
 		protected m_IsLoadComplete:boolean;	//是否准备完成
 
@@ -32,7 +32,7 @@ module dc
 
         public Destroy():void
         {
-			if(this.m_RootNode != null)
+			if(this.m_RootNode)
 			{
 				this.m_RootNode.removeSelf();
 				this.m_RootNode.destroy();

@@ -88,7 +88,7 @@ module dc
         public RemoveEffect(eff_id:number):void
         {
             let eff:BaseEffect = this.m_DicEffect.GetValue(eff_id);
-            if(eff != null)
+            if(eff)
             {
                 this.m_DicEffect.Remove(eff_id);
                 eff.Destroy();

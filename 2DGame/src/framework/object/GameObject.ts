@@ -12,7 +12,7 @@ module dc
         protected m_ObjectGUID:number;    //对象唯一ID
         protected m_ObjectServerID:string;//服务器id在客户端的备份
 
-        protected m_Observer:EventDispatcher;
+        protected m_Observer:EventDispatcher = null;
 
         constructor()
         {
@@ -35,6 +35,7 @@ module dc
         public Destroy():void
         {
             this.m_Active = false;
+            this.m_Observer.Clear();
             this.UnRegisterEvent();
         }
 
@@ -55,32 +56,32 @@ module dc
             this.m_Active = b;
         }
 
-        get Active():boolean
+        public get Active():boolean
         {
             return this.m_Active;
         }
-        get ObjectGUID():number
+        public get ObjectGUID():number
         {
             return this.m_ObjectGUID;
         }
-        get ObjectServerID():string
+        public get ObjectServerID():string
         {
             return this.m_ObjectServerID;
         }
-        set ObjectServerID(id:string)
+        public set ObjectServerID(id:string)
         {
             this.m_ObjectServerID = id;
         }
 
-        get ObjectType():string
+        public get ObjectType():string
         {
             return this.m_ObjectType;
         }
-        set ObjectType(type:string)
+        public set ObjectType(type:string)
         {
             this.ObjectType = type;
         }
-        get Observer():EventDispatcher
+        public get Observer():EventDispatcher
         {
             return this.m_Observer;
         }

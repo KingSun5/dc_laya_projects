@@ -5,11 +5,11 @@ module dc
      * @author hannibal
      * @time 2017-7-12
      */
-	export class ObjectID
+	export class GameObjectID
 	{		
 	}
 
-	export class ObjectEvent
+	export class GameObjectEvent
 	{
 		public static MAP_POSITION:string      	= "MAP_POSITION";		//地图位置
 		public static MAP_GRID:string      		= "MAP_GRID";			//地图格子

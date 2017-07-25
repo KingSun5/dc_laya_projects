@@ -64,12 +64,12 @@ module dc
         private OnSocketOpen(): void 
         {
 			Log.Info("Socket Connected");
-            this.Dispatch(SocketID.SOCKET_CONNECTED);
+            this.Dispatch(SocketEvent.SOCKET_CONNECTED);
 		}
 		private OnSocketClose(): void 
         {
 			Log.Info("Socket closed");
-            this.Dispatch(SocketID.SOCKET_CLOSE);
+            this.Dispatch(SocketEvent.SOCKET_CLOSE);
 		}
 		private OnMessageReveived(msg: any): void
         {
@@ -84,7 +84,7 @@ module dc
 		private OnConnectError(e: Event): void
         {
 			Log.Info("Socket Error");
-            this.Dispatch(SocketID.SOCKET_ERROR);
+            this.Dispatch(SocketEvent.SOCKET_ERROR);
 		}
         private m_IsReadHead:boolean = true;
         private m_DataLength:number = 0;
@@ -142,12 +142,12 @@ module dc
         /**主动关闭连接*/
         public Close()
         {
-            if(this.m_RecvCallback != null)
+            if(this.m_RecvCallback)
             {
                 this.m_RecvCallback.recover();
                 this.m_RecvCallback = null;
             }
-            if(this.m_Socket != null)
+            if(this.m_Socket)
             {
                 this.m_Socket.close();
                 this.m_Socket = null;
@@ -156,7 +156,7 @@ module dc
         /**是否连接正常*/
         public IsConnected():boolean
         {
-            if(this.m_Socket != null && this.m_Socket.connected)
+            if(this.m_Socket && this.m_Socket.connected)
                 return true;
             return false;
         }  

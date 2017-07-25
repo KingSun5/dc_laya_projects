@@ -25,10 +25,16 @@ module dc
         public Destroy():void
         {
             this.UnloadAll();
-            this.m_DicTemplate.Clear();
-            this.m_DicData.Clear();
-            this.m_DicTemplate = null;
-            this.m_DicData = null;
+            if(this.m_DicTemplate)
+            {
+                this.m_DicTemplate.Clear();
+                this.m_DicTemplate = null;
+            }
+            if(this.m_DicData)
+            {
+                this.m_DicData.Clear();
+                this.m_DicData = null;
+            }
         }
     
         public Load(list:ConfigTemplate[]):void

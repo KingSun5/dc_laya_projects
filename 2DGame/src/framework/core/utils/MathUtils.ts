@@ -186,6 +186,5 @@ module dc
             }
             return (current + (MathUtils.Sign(target - current) * maxDelta));
         }
-	
     }
 }

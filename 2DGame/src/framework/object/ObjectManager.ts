@@ -31,10 +31,11 @@ module dc
 
         public Tick(elapse:number, game_frame:number):void
         {
+            let obj:GameObject = null;
             for(let key in this.m_DicObject)
             {
-                let obj:GameObject = this.m_DicObject[key];
-                if(obj != null && obj.Active && obj.Update(elapse, game_frame))
+                obj = this.m_DicObject[key];
+                if(obj && obj.Active && obj.Update(elapse, game_frame))
                 {
                     
                 }
@@ -51,7 +52,7 @@ module dc
         /**移除对象*/
         public RemoveObject(obj:GameObject, force:boolean):void
         {
-            if(obj == null)return;
+            if(!obj)return;
             if(force)
             {
                 this.ReleaseObject(obj);
@@ -73,7 +74,7 @@ module dc
         /**释放对象*/
         private ReleaseObject(obj:GameObject):void
         {
-            if(obj == null)return;
+            if(!obj)return;
 
             this.DetachObject(obj);
             obj.Destroy();
@@ -82,12 +83,11 @@ module dc
         /**加入对象管理器*/
         public AttachObject(obj:GameObject):void
         {
-            if(obj == null)return;
-            if(this.m_DicObject[obj.ObjectGUID] != null)return;
+            if(!obj)return;
+            if(this.m_DicObject[obj.ObjectGUID])return;
 
             this.m_DicObject[obj.ObjectGUID] = obj;
-
-            if(obj.ObjectServerID != "")
+            if(obj.ObjectServerID !== "")
             {
 			    this.m_DicServerObject[obj.ObjectServerID] = obj;
             }
@@ -95,10 +95,10 @@ module dc
 
         public DetachObject(obj:GameObject):void
         {
-            if(obj == null)return;
+            if(!obj)return;
 
-            if(this.m_DicObject[obj.ObjectGUID] != null)delete this.m_DicObject[obj.ObjectGUID];
-            if(this.m_DicServerObject[obj.ObjectServerID] != null)delete this.m_DicServerObject[obj.ObjectServerID];
+            if(this.m_DicObject[obj.ObjectGUID])delete this.m_DicObject[obj.ObjectGUID];
+            if(this.m_DicServerObject[obj.ObjectServerID])delete this.m_DicServerObject[obj.ObjectServerID];
         }
 
         public ProcessReleaseObject():void

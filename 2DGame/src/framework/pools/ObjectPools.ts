@@ -15,9 +15,9 @@ module dc
         {
             let sign:string = "dc." + classDef.name;
             let obj:IPoolsObject = Laya.Pool.getItem(sign) as IPoolsObject;
-            if(obj == null)
+            if(!obj)
             {
-                if(Laya.ClassUtils.getRegClass(sign) == null)
+                if(!Laya.ClassUtils.getRegClass(sign))
                 {
                     Log.Debug("[pools]注册对象池:" + sign);
                     Laya.ClassUtils.regClass(sign, classDef);
@@ -34,7 +34,7 @@ module dc
          */
         public static Recover(obj: IPoolsObject):void
         {
-            if(obj == null)return;
+            if(!obj)return;
 
             let proto:any = Object.getPrototypeOf(obj);
             let clazz: any = proto["constructor"];

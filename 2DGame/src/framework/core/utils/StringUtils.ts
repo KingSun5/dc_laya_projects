@@ -33,7 +33,7 @@ module dc
 		 * 1.普通数组，字符占1字节；汉子占两个字节
 		 * 2.如果变成编码，可能计算接口不对
 		 */
-		public static GetStrLength(str:string):number 
+		public static GetNumBytes(str:string):number 
 		{
 			let realLength = 0, len = str.length, charCode = -1;
 			for (var i = 0; i < len; i++) 
@@ -94,7 +94,7 @@ module dc
 		 * @param input
 		 * @return 
 		 */		
-		public static leftTrim(input:string):string
+		public static trimLeft(input:string):string
 		{
 			if (input == null)
 			{
@@ -108,7 +108,7 @@ module dc
 		 * @param input
 		 * @return 
 		 */
-		public static rightTrim(input:string):string
+		public static trimRight(input:string):string
 		{
 			if (input == null)
 			{
