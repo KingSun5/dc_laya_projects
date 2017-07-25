@@ -9,7 +9,7 @@ module dc
 	{
 		public col:number = 0;   
 		public row:number = 0;  
-		public rect:Rect = new Rect();
+		public rect:Rect = null;
 		
 		public f:number = 0;   
 		public g:number = 0;   
@@ -29,7 +29,7 @@ module dc
 		{     
 			this.row = row;
 			this.col = col; 
-			this.rect.Set(col*w,row*h,w,h);
+			this.rect = new Rect(col*w,row*h,w,h);
 		} 
 		
 		public reset():void
@@ -38,15 +38,13 @@ module dc
 			this.f = this.g = this.h = 0;
 			this.parent = null;
 			this.costMultiplier = 1;
-			this.rect.x = 0;
-			this.rect.y = 0;
-			this.rect.width = 0;
-			this.rect.height = 0;
+			this.rect.Set(0,0,0,0);
+			this.m_arr_grid_obj.length = 0;
 		}
 		
 		public equal(g:PathGrid):boolean
 		{
-			return ((this.col == g.col && this.row == g.row) ? true : false);
+			return ((this.col === g.col && this.row === g.row) ? true : false);
 		}
 		
 		public get costMultiplier():number
@@ -80,13 +78,13 @@ module dc
 		}
 		public addObject(obj:any):void
 		{
-			if(obj == null)return;
+			if(!obj)return;
 			if(ArrayUtils.ContainsValue(this.m_arr_grid_obj, obj))return;
 			this.m_arr_grid_obj.push(obj);
 		}
 		public removeObject(obj:any):void
 		{
-			if(obj == null)return;
+			if(!obj)return;
 			ArrayUtils.RemoveValue(this.m_arr_grid_obj, obj);
 		}
 	}

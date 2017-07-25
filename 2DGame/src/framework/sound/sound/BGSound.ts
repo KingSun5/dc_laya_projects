@@ -26,7 +26,7 @@ module dc
 		{
 			if(StringUtils.IsNullOrEmpty(this.m_SoundFile))return;
 
-			if(this.m_SoundChannel == null)
+			if(!this.m_SoundChannel)
 			{
 				this.m_SoundChannel = Laya.SoundManager.playSound(this.m_SoundFile, this.m_PlayCount, LayaHandler.create(this, this.OnPlayComplete), null, 0);
 			}

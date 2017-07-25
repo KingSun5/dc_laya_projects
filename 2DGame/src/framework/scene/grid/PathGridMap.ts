@@ -9,7 +9,7 @@ module dc
 	{
 		private m_startNode:PathGrid = null; 
 		private m_endNode:PathGrid = null; 
-		private m_nodes:DoubleArray;
+		private m_nodes:DoubleArray = null;
 		private m_alige:eAligeType = eAligeType.LEFT_BOTTOM;
 		/**单个格子大小*/
 		private m_gridWidth:number = 1;
@@ -63,7 +63,7 @@ module dc
 		{
 			this.m_startNode = null;
 			this.m_endNode = null;
-			if(this.m_nodes != null)
+			if(this.m_nodes)
 			{
 				this.m_nodes.Clear();
 				this.m_nodes = null;

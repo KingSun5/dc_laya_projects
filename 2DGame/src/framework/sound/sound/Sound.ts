@@ -29,8 +29,10 @@ module dc
 		}
 		public Destroy():void
 		{
+			if(!this.m_Active)return;
+			
 			this.m_Active = false;
-			if(this.m_SoundChannel != null)
+			if(this.m_SoundChannel)
 			{
 				this.m_SoundChannel.stop();
 				this.m_SoundChannel = null;
@@ -45,7 +47,7 @@ module dc
 
 		public Play():void
 		{			
-			if(this.m_SoundChannel != null)
+			if(this.m_SoundChannel)
 			{
 				this.m_SoundChannel.play();
 			}
@@ -54,7 +56,7 @@ module dc
 
 		public Stop():void
 		{
-			if(this.m_SoundChannel != null)
+			if(this.m_SoundChannel)
 			{
 				this.m_SoundChannel.stop();
 			}
@@ -62,7 +64,7 @@ module dc
 
 		public Pause():void
 		{
-			if(this.m_SoundChannel != null)
+			if(this.m_SoundChannel)
 			{
 				this.m_SoundChannel.pause();
 			}
@@ -70,7 +72,7 @@ module dc
 
 		public Resume():void
 		{
-			if(this.m_SoundChannel != null)
+			if(this.m_SoundChannel)
 			{
 				this.m_SoundChannel.resume();
 			}
@@ -78,7 +80,7 @@ module dc
 
 		public SetVolume(volume:number):void
 		{
-			if(this.m_SoundChannel != null)
+			if(this.m_SoundChannel)
 			{
 				this.m_SoundChannel.volume = volume;
 			}
@@ -86,7 +88,7 @@ module dc
 
 		private LoadResource():void
 		{
-			ResourceManager.Instance.LoadRes(this.m_SoundFile, Laya.Loader.SOUND, LayaHandler.create(this, this.OnLoadComplete));
+			ResourceManager.Instance.LoadRes(this.m_SoundFile, LayaLoader.SOUND, LayaHandler.create(this, this.OnLoadComplete));
 		}
 
 		private OnLoadComplete(url:string):void

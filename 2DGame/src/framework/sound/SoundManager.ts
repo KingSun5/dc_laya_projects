@@ -24,12 +24,12 @@ module dc
 
         public Setup():void
         {
-            
             this.RegisterEvent();
         }
 
         public Destroy():void
         {
+            this.StopAll();
             this.UnRegisterEvent();
         }
 
@@ -60,28 +60,28 @@ module dc
         }
         public StopBGSound():void
         {
-            if(this.m_CurBGSound != null)
+            if(this.m_CurBGSound)
             {
                 this.m_CurBGSound.Stop();
             }
         }
         public PauseBGSound():void
         {
-            if(this.m_CurBGSound != null)
+            if(this.m_CurBGSound)
             {
                 this.m_CurBGSound.Pause();
             }
         }
         public ResumeBGSound():void
         {
-            if(this.m_CurBGSound != null)
+            if(this.m_CurBGSound)
             {
                 this.m_CurBGSound.Resume();
             }  
         }
         public SetBGSoundVolume(volume:number):void
         {
-            if(this.m_CurBGSound != null)
+            if(this.m_CurBGSound)
             {
                 this.m_CurBGSound.SetVolume(volume);
             }
@@ -100,7 +100,7 @@ module dc
         }
         public StopSoundEffect(sound:EffectSound):void
         {
-            if(sound != null)
+            if(sound)
             {
                 sound.Stop();
             }
