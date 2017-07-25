@@ -7,6 +7,7 @@ var dc;
      */
     var GameObject = (function () {
         function GameObject() {
+            this.m_Observer = null;
             this.m_ObjectGUID = 0;
             this.m_Observer = new dc.EventDispatcher();
         }
@@ -20,6 +21,7 @@ var dc;
         };
         GameObject.prototype.Destroy = function () {
             this.m_Active = false;
+            this.m_Observer.Clear();
             this.UnRegisterEvent();
         };
         GameObject.prototype.Update = function (elapse, game_frame) {

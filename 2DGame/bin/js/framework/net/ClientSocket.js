@@ -61,11 +61,11 @@ var dc;
         };
         ClientSocket.prototype.OnSocketOpen = function () {
             dc.Log.Info("Socket Connected");
-            this.Dispatch(dc.SocketID.SOCKET_CONNECTED);
+            this.Dispatch(dc.SocketEvent.SOCKET_CONNECTED);
         };
         ClientSocket.prototype.OnSocketClose = function () {
             dc.Log.Info("Socket closed");
-            this.Dispatch(dc.SocketID.SOCKET_CLOSE);
+            this.Dispatch(dc.SocketEvent.SOCKET_CLOSE);
         };
         ClientSocket.prototype.OnMessageReveived = function (msg) {
             if (msg instanceof ArrayBuffer) {
@@ -77,7 +77,7 @@ var dc;
         };
         ClientSocket.prototype.OnConnectError = function (e) {
             dc.Log.Info("Socket Error");
-            this.Dispatch(dc.SocketID.SOCKET_ERROR);
+            this.Dispatch(dc.SocketEvent.SOCKET_ERROR);
         };
         ClientSocket.prototype.DispatcherData = function () {
             while (this.m_ReadBuff.bytesAvailable > 0) {
@@ -121,18 +121,18 @@ var dc;
         };
         /**主动关闭连接*/
         ClientSocket.prototype.Close = function () {
-            if (this.m_RecvCallback != null) {
+            if (this.m_RecvCallback) {
                 this.m_RecvCallback.recover();
                 this.m_RecvCallback = null;
             }
-            if (this.m_Socket != null) {
+            if (this.m_Socket) {
                 this.m_Socket.close();
                 this.m_Socket = null;
             }
         };
         /**是否连接正常*/
         ClientSocket.prototype.IsConnected = function () {
-            if (this.m_Socket != null && this.m_Socket.connected)
+            if (this.m_Socket && this.m_Socket.connected)
                 return true;
             return false;
         };

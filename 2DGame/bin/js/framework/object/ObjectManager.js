@@ -40,9 +40,10 @@ var dc;
             this.RemoveAll();
         };
         ObjectManager.prototype.Tick = function (elapse, game_frame) {
+            var obj = null;
             for (var key in this.m_DicObject) {
-                var obj = this.m_DicObject[key];
-                if (obj != null && obj.Active && obj.Update(elapse, game_frame)) {
+                obj = this.m_DicObject[key];
+                if (obj && obj.Active && obj.Update(elapse, game_frame)) {
                 }
                 else {
                     this.m_ListReleaseObject.push(obj);
@@ -53,7 +54,7 @@ var dc;
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～对象集合～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         /**移除对象*/
         ObjectManager.prototype.RemoveObject = function (obj, force) {
-            if (obj == null)
+            if (!obj)
                 return;
             if (force) {
                 this.ReleaseObject(obj);
@@ -71,7 +72,7 @@ var dc;
         };
         /**释放对象*/
         ObjectManager.prototype.ReleaseObject = function (obj) {
-            if (obj == null)
+            if (!obj)
                 return;
             this.DetachObject(obj);
             obj.Destroy();
@@ -79,21 +80,21 @@ var dc;
         };
         /**加入对象管理器*/
         ObjectManager.prototype.AttachObject = function (obj) {
-            if (obj == null)
+            if (!obj)
                 return;
-            if (this.m_DicObject[obj.ObjectGUID] != null)
+            if (this.m_DicObject[obj.ObjectGUID])
                 return;
             this.m_DicObject[obj.ObjectGUID] = obj;
-            if (obj.ObjectServerID != "") {
+            if (obj.ObjectServerID !== "") {
                 this.m_DicServerObject[obj.ObjectServerID] = obj;
             }
         };
         ObjectManager.prototype.DetachObject = function (obj) {
-            if (obj == null)
+            if (!obj)
                 return;
-            if (this.m_DicObject[obj.ObjectGUID] != null)
+            if (this.m_DicObject[obj.ObjectGUID])
                 delete this.m_DicObject[obj.ObjectGUID];
-            if (this.m_DicServerObject[obj.ObjectServerID] != null)
+            if (this.m_DicServerObject[obj.ObjectServerID])
                 delete this.m_DicServerObject[obj.ObjectServerID];
         };
         ObjectManager.prototype.ProcessReleaseObject = function () {
