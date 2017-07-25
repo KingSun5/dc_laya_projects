@@ -133,6 +133,24 @@ module dc
             //new GameMain();
             //压力测试
             //UnitAIManager.Instance.CreateTestRobot();
+
+            let n:number = NumberUtils.reserveNumber(1.0021,3);
+            let n1:string = NumberUtils.reserveNumberWithZero(1.0021,3);
+            
+            n = NumberUtils.reserveNumber(1,3);
+            n1 = NumberUtils.reserveNumberWithZero(1,3);
+
+            n = NumberUtils.reserveNumber(1.12,3);
+            n1 = NumberUtils.reserveNumberWithZero(1.12,3);
+
+            n = NumberUtils.reserveNumber(1.121,3);
+            n1 = NumberUtils.reserveNumberWithZero(1.121,3);
+
+            n1 = StringUtils.GetGUIDString();
+
+            n1 = ClassUtils.CopyObject(n1);
+
+            n = StringUtils.GetStrLength("撒地方dsf2都锁定方式");
         }
     }
 }

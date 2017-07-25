@@ -34,6 +34,21 @@ module dc
             newInstance.constructor.apply(newInstance, args);
             return newInstance;
         }
+        /**深复制一个对象*/
+        public static CopyObject(obj:any):any
+        {
+            let js = JSON.stringify(obj);
+            return JSON.parse(js);
+        }
+        /**获取一个对象里的值*/
+        public static GetObjectValue(obj: any, key: string, defVal?: any): any 
+        {
+            if (obj[key]) 
+            {
+                return obj[key];
+            }
+            return defVal;
+        }
         //TODO
         public static CallClassMethod(className: string, funName: string, data?: any) 
         {

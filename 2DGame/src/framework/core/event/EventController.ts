@@ -7,8 +7,22 @@ module dc
      */
     export class EventController extends Singleton
     {
-        private static m_Event:EventDispatcher = new EventDispatcher();
-        private static m_EvtArgs:EventArgs = new EventArgs();
+        private m_Event:EventDispatcher = null;
+        private m_EvtArgs:EventArgs = null;
+
+        private static instance:EventController = null;
+        public static get Instance():EventController
+        {
+            if(!this.instance)this.instance = new EventController();
+            return this.instance;
+        }
+
+        constructor()
+        {
+            super();
+            this.m_Event = new EventDispatcher();
+            this.m_EvtArgs = new EventArgs();
+        }
 
         /**
          * 添加监听
@@ -18,7 +32,7 @@ module dc
         */
         public static AddEventListener(type:string, caller:any, fun:Function):void
         {
-            this.m_Event.AddEventListener(type, caller, fun);
+            EventController.Instance.m_Event.AddEventListener(type, caller, fun);
         }
 
         /**
@@ -26,20 +40,20 @@ module dc
         */
         public static RemoveEventListener(type:string, caller:any, fun:Function):void
         {
-            this.m_Event.RemoveEventListener(type, caller, fun);
+            EventController.Instance.m_Event.RemoveEventListener(type, caller, fun);
         }
         /**
          * 派发事件
         */
         public static DispatchEvent(type:string, ...args:any[]):void
         {
-            this.m_EvtArgs.Init(args);
-            this.m_Event.DispatchEvent(type, this.m_EvtArgs);
+            EventController.Instance.m_EvtArgs.Init(args);
+            EventController.Instance.m_Event.DispatchEvent(type, EventController.Instance.m_EvtArgs);
         }
         
         public static Clear():void
         {
-            this.m_Event.Clear();
+            EventController.Instance.m_Event.Clear();
         }
     }
 }

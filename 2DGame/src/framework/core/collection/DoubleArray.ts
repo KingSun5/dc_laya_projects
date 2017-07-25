@@ -25,13 +25,13 @@ module dc
 
         public Set(row:number, col:number, value:any):void
         {
-            if(this.m_Array[row] == null)
+            if(!this.m_Array[row])
                 this.m_Array[row] = [];
             this.m_Array[row][col] = value;
         }
         public Get(row:number, col:number):any
         {
-            if(this.m_Array[row] == null)
+            if(!this.m_Array[row])
                 return null;
             return this.m_Array[row][col];
         }

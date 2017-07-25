@@ -21,16 +21,16 @@ module dc
 			}
 		}
 		/**获得子节点*/
-		public static GetChildWithName(parent:LayaNode, name:string):LayaNode
+		public static GetChildByName(parent:LayaNode, name:string):LayaNode
 		{
-			if(parent == null)return null;
-			if(parent.name == name)return parent;
+			if(!parent)return null;
+			if(parent.name === name)return parent;
 			let child:LayaNode = null;
-			for(let i = 0; i < parent.numChildren; ++i)
+			let num:number = parent.numChildren;
+			for(let i = 0; i < num; ++i)
 			{
-				child = DisplayUtils.GetChildWithName(parent.getChildAt(i), name);
-				if(child != null) 
-					return child;
+				child = DisplayUtils.GetChildByName(parent.getChildAt(i), name);
+				if(child) return child;
 			}
 			return null;
 		}
@@ -40,7 +40,7 @@ module dc
 		*/
 		public static SetAlige(node:LayaSprite, alige:eAligeType, w:number=0, h:number=0)
 		{
-			if(node == null)return;
+			if(!node)return;
 			let rect:LayaRectangle;
 			if(w <= 0 || h  <= 0)rect = node.getBounds();
 			let width:number = w > 0 ? w : rect.width;

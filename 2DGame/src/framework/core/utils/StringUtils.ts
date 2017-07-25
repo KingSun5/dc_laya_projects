@@ -28,6 +28,22 @@ module dc
 			if(!str || str.length == 0)return 0;
 			return parseFloat(str);
 		}
+    	/**
+		 * 获取字符串真实长度,注：
+		 * 1.普通数组，字符占1字节；汉子占两个字节
+		 * 2.如果变成编码，可能计算接口不对
+		 */
+		public static GetStrLength(str:string):number 
+		{
+			let realLength = 0, len = str.length, charCode = -1;
+			for (var i = 0; i < len; i++) 
+			{
+				charCode = str.charCodeAt(i);
+				if (charCode >= 0 && charCode <= 128) realLength += 1;
+				else realLength += 2;
+			}
+			return realLength;
+		}		
         /**
 		 * 补零
 		 * @param str
@@ -73,7 +89,7 @@ module dc
 			}
 			return input.replace(/^\s+|\s+$""^\s+|\s+$/g, "");
 		} 
-        		/**
+        /**
 		 * 去除左侧空格
 		 * @param input
 		 * @return 
@@ -155,5 +171,19 @@ module dc
 		{
 			return suffix == input.substring(input.length - suffix.length);
 		}
+		/**guid*/
+		public static GetGUIDString():string 
+		{
+			let d = Date.now();
+			if (window.performance && typeof window.performance.now === "function") 
+			{
+				d += performance.now(); //use high-precision timer if available
+			}
+			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+				let r = (d + Math.random() * 16) % 16 | 0;
+				d = Math.floor(d / 16);
+				return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+			});
+		}		
     }
 }
