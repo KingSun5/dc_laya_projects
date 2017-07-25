@@ -40,7 +40,7 @@ module dc
         {
             this.m_List.length = 0;
         }
-        public Size():number
+        public get length():number
         {
             return this.m_List.length;
         }

@@ -69,7 +69,7 @@ module dc
                     break;
             }
         }
-        public get Length():number
+        public get length():number
         {
             return DicUtils.GetLength(this.m_Dic);
         }

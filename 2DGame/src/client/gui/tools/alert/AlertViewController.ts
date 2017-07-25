@@ -49,7 +49,7 @@ module dc
 
         private static CheckAlertNext():void
         {
-            if(this.m_IsShowing || this.m_ListAlert.Size() <= 0)return;
+            if(this.m_IsShowing || this.m_ListAlert.length <= 0)return;
 
             let alert_info:sAlertViewInfo = this.m_ListAlert.Dequeue();
             if(!alert_info)return;

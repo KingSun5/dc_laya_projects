@@ -7,8 +7,6 @@ module dc
      */
 	export class ResourceManager extends Singleton
 	{
-		private m_ShareGUID:number = 0;
-
 		private m_DicLoaderUrl:SDictionary<sLoaderUrl> = null;	//加载过的信息，方便资源释放
 
         private static instance:ResourceManager = null;
@@ -20,16 +18,12 @@ module dc
 
 		public Setup():void
 		{
-			this.m_ShareGUID = 0;
-
 			this.m_DicLoaderUrl = new SDictionary<sLoaderUrl>();
-
-			Laya.loader.maxLoader = 2;
 		}
 
 		public Destroy():void
 		{
-			if(this.m_DicLoaderUrl != null)
+			if(this.m_DicLoaderUrl)
 			{
 				this.m_DicLoaderUrl.Clear();
 				this.m_DicLoaderUrl = null;
@@ -45,25 +39,23 @@ module dc
 			//修改访问时间
 			this.RefreshResourceTime(url, false);
 			return Laya.loader.getRes(url);
-		}
-		private ShareGUID():number
-		{
-			return ++this.m_ShareGUID;
 		}	
 		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～加载～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         /**
          * 加载资源，如果资源在此之前已经加载过，则当前帧会调用complete
-         * @param	url 单个资源地址
-         * @param	complete 结束回调(参数：string 加载的资源url)
-         * @param	type 资源类型。比如：Loader.IMAGE
-         * @param	priority 优先级，0-4，5个优先级，0优先级最高，默认为1。
-         * @param	cache 是否缓存加载结果。
-         * @param	group 分组，方便对资源进行管理。
+         * @param	url 		单个资源地址
+         * @param	type 		资源类型
+         * @param	complete 	结束回调(参数：string 加载的资源url)
+         * @param	viewType 	加载界面
+         * @param	priority 	优先级，0-4，5个优先级，0优先级最高，默认为1。
+         * @param	cache 		是否缓存加载结果。
+         * @param	group 		分组，方便对资源进行管理。
          * @param	ignoreCache 是否忽略缓存，强制重新加载
          */		
 		public LoadRes(url: string, 
 					type: string = "", 
 					complete: LayaHandler = null, 
+					viewType: eLoadViewType = eLoadViewType.None,
 					priority: number = 1, 
 					cache: boolean = true, 
 					group: string = "dc", 
@@ -71,10 +63,22 @@ module dc
 		{
 			//添加到加载目录
 			this.RefreshResourceTime(url, true);
+
+			//判断是否需要显示加载界面
+			if(viewType != eLoadViewType.None)
+			{
+				if(Laya.loader.getRes(url))viewType = eLoadViewType.None;
+			}
+			//显示加载界面
+			if(viewType != eLoadViewType.None)
+			{
+				EventController.DispatchEvent(LoaderEvent.LOADVIEW_OPEN, viewType, 1);
+			}
+			//加载
 			Laya.loader.load(
 				url, 
-				LayaHandler.create(this, this.OnLoadComplete, [complete, [url]]), 
-				LayaHandler.create(this, this.OnLoadProgress, [1], false),
+				LayaHandler.create(this, this.OnLoadComplete, [viewType, complete, [url]]), 
+				LayaHandler.create(this, this.OnLoadProgress, [viewType, 1], false),
 				type,
 				priority,
 				cache,
@@ -83,33 +87,49 @@ module dc
 		}
         /**
          * 批量加载资源，如果所有资源在此之前已经加载过，则当前帧会调用complete
-         * @param	arr_res 需要加载的资源数组
-         * @param	complete 结束回调(参数：Array<string>，加载的url数组)
-         * @param	priority 优先级，0-4，5个优先级，0优先级最高，默认为1。
-         * @param	cache 是否缓存加载结果。
-         * @param	group 分组，方便对资源进行管理。
+         * @param	arr_res 	需要加载的资源数组
+         * @param	complete 	结束回调(参数：Array<string>，加载的url数组)
+         * @param	viewType 	加载界面
+         * @param	priority 	优先级，0-4，5个优先级，0优先级最高，默认为1。
+         * @param	cache 		是否缓存加载结果。
+         * @param	group 		分组，方便对资源进行管理。
          * @param	ignoreCache 是否忽略缓存，强制重新加载
          */			
 		public LoadArrayRes(arr_res: Array<{ url:string, type:string}>, 
 					complete: LayaHandler = null, 
+					viewType: eLoadViewType = eLoadViewType.None,
 					priority: number = 1, 
 					cache: boolean = true, 
 					group: string = "dc", 
 					ignoreCache: boolean = false):void
 		{
+			let has_unload:boolean = false;
             let assets = [];
 			let urls = [];
             for (let res of arr_res)
 			{
                 assets.push({ url: res.url, type: res.type });
 				urls.push(res.url);
+				//判断是否有未加载资源
+				if(!has_unload && !Laya.loader.getRes(res.url))has_unload = true;
 				//添加到加载目录
 				this.RefreshResourceTime(res.url, true);
-            }			
+            }
+			//判断是否需要显示加载界面
+			if(!has_unload && viewType != eLoadViewType.None)
+			{
+				viewType = eLoadViewType.None;
+			}
+			//显示加载界面
+			if(viewType != eLoadViewType.None)
+			{
+				EventController.DispatchEvent(LoaderEvent.LOADVIEW_OPEN, viewType, assets.length);
+			}
+			//加载
 			Laya.loader.load(
 				assets, 
-				LayaHandler.create(this, this.OnLoadComplete, [complete, urls]), 
-				LayaHandler.create(this, this.OnLoadProgress, [assets.length], false),
+				LayaHandler.create(this, this.OnLoadComplete, [viewType, complete, urls]), 
+				LayaHandler.create(this, this.OnLoadProgress, [viewType, assets.length], false),
 				undefined,
 				priority,
 				cache,
@@ -118,10 +138,11 @@ module dc
 		}
 		/**
 		 * 加载完成
-		 * @param handle 	加载时，传入的回调函数
-		 * @param args		第一个参数为加载的资源url列表；第二个参数为是否加载成功
+		 * @param	viewType	显示的加载界面类型
+		 * @param 	handle 		加载时，传入的回调函数
+		 * @param 	args		第一个参数为加载的资源url列表；第二个参数为是否加载成功
 		 */
-		public OnLoadComplete(handle:LayaHandler, ...args:any[]):void
+		public OnLoadComplete(viewType:eLoadViewType, handle:LayaHandler, ...args:any[]):void
 		{
 			//显示加载日志
 			if(CommonID.LOG_LOAD_RES)
@@ -146,17 +167,27 @@ module dc
 				else
 					handle.run();
 			}
+			if(viewType != eLoadViewType.None)
+			{
+				EventController.DispatchEvent(LoaderEvent.LOADVIEW_COMPLATE, viewType);
+			}
 		}
 		/**
 		 * 加载进度
+		 * @param	viewType	显示的加载界面类型
 		 * @param	total		总共需要加载的资源数量
 		 * @param	progress	已经加载的数量，百分比；注意，有可能相同进度会下发多次
 		*/
-		public OnLoadProgress(total:number, progress:number):void
+		public OnLoadProgress(viewType:eLoadViewType, total:number, progress:number):void
 		{
+			let cur:number = NumberUtils.toInt(Math.floor(progress*total));
 			if(CommonID.LOG_LOAD_RES)
 			{
-				Log.Debug("[load]进度:" + NumberUtils.toInt(Math.floor(progress*total)) + ", total:" + total);
+				Log.Debug("[load]进度:" + cur + ", total:" + total);
+			}
+			if(viewType != eLoadViewType.None)
+			{
+				EventController.DispatchEvent(LoaderEvent.LOADVIEW_PROGRESS, viewType, cur, total);
 			}
 		}
 		/**更新资源使用时间*/

@@ -14,13 +14,13 @@ module dc
 		private static m_topContainer:LayaSprite;	
 		/**特效*/
 		private static m_maskContainer:LayaSprite;	
-		/**玩家名字*/
+		/**加载*/
 		private static m_loaderContainer:LayaSprite;	
-		/**玩家*/
+		/**弹出式对话框*/
 		private static m_dialogContainer:LayaSprite;	
-		/**角色 */
+		/**普通界面*/
 		private static m_viewContainer:LayaSprite;		
-		/**子弹*/
+		/**主城等主界面*/
 		private static m_backContainer:LayaSprite;
 		
 		public static Setup():void

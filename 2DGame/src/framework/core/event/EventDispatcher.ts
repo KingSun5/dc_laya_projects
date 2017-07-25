@@ -8,7 +8,12 @@ module dc
     export class EventDispatcher
     {
         private m_DicFuns:Object = {};
-        private m_EvtArgs:EventArgs = new EventArgs();
+        private m_EvtArgs:EventArgs = null;
+
+        constructor()
+        {
+            this.m_EvtArgs = new EventArgs();
+        }
         /**
          * 添加监听
          * @param type      事件类型

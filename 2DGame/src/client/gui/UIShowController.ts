@@ -55,7 +55,7 @@ module dc
 		*/
         private static CheckAlertNext():void
         {
-            if(this.m_CurShowPanelID > 0 || this.m_ListPanels.Size() <= 0)return;
+            if(this.m_CurShowPanelID > 0 || this.m_ListPanels.length <= 0)return;
 
             let panel_info:sShowPanelInfo = this.m_ListPanels.Dequeue();
 

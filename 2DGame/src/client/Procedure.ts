@@ -57,6 +57,7 @@ module dc
             LangManager.Instance.Setup();
             DataManager.Instance.Setup();
             SceneManager.Instance.Setup();
+            LoadViewManager.Instance.Setup();
             UILoaderRegister.Setup();
             //add here
             
@@ -67,6 +68,7 @@ module dc
             LangManager.Instance.Destroy();
             DataManager.Instance.Destroy();
             SceneManager.Instance.Destroy();
+            LoadViewManager.Instance.Destroy();
             UILoaderRegister.Destroy();
             //add here
 

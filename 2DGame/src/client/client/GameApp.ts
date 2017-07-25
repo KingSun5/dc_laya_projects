@@ -57,7 +57,11 @@ module dc
             assets.push({url:"res/atlas/ui/common.json", type:LayaLoader.ATLAS});
             assets = assets.concat(ConfigManger.Instance.PreLoadRes);
             assets = assets.concat(LangManager.Instance.PreLoadRes);
-            ResourceManager.Instance.LoadArrayRes(assets, LayaHandler.create(this, this.OnDownloadComplate));
+            assets.push({url:"res/atlas/anim/monster/001/DJ.atlas", type:LayaLoader.ATLAS});
+			assets.push({url:"res/atlas/anim/monster/001/YD.atlas", type:LayaLoader.ATLAS});
+			assets.push({url:"res/atlas/anim/monster/001/SW.atlas", type:LayaLoader.ATLAS});
+			assets.push({url:"res/atlas/anim/monster/001/GJ.atlas", type:LayaLoader.ATLAS});
+            ResourceManager.Instance.LoadArrayRes(assets, LayaHandler.create(this, this.OnDownloadComplate), eLoadViewType.Window);
         }
         //～～～～～～～～～～～～～～～～～～～～～～～初始化游戏～～～～～～～～～～～～～～～～～～～～～～～//
         private InitScene():void
@@ -125,10 +129,10 @@ module dc
             LangManager.Instance.LoadAll();
             Log.Info("必须资源更新完成");
             //显示登陆界面
-            //UIShowController.Show(GUIID.LOGIN, 111,1112);
+            UIShowController.Show(GUIID.LOGIN, 111,1112);
             //new GameMain();
             //压力测试
-            UnitAIManager.Instance.CreateTestRobot();
+            //UnitAIManager.Instance.CreateTestRobot();
         }
     }
 }

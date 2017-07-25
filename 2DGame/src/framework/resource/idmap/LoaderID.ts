@@ -2,10 +2,18 @@ module dc
 {
 	export class LoaderID
 	{
+	}
+	export class LoaderEvent
+	{
 		//加载事件
 		public static RESOURCE_LOAD_COMPLATE:string      	= "RESOURCE_LOAD_COMPLATE";                     //资源加载完成
 		public static RESOURCE_LOAD_PROGRESS:string      	= "RESOURCE_LOAD_PROGRESS";                     //资源加载进度
 		public static RESOURCE_LOAD_FAILED:string        	= "RESOURCE_LOAD_FAILED";                       //资源加载失败
+		
+		//加载界面事件
+		public static LOADVIEW_OPEN:string      			= "LOADVIEW_OPEN";                     			//加载界面打开
+		public static LOADVIEW_COMPLATE:string      		= "LOADVIEW_COMPLATE";                     		//加载进度完成
+		public static LOADVIEW_PROGRESS:string      		= "LOADVIEW_PROGRESS";                     		//加载进度
 	}
 	///加载线程作用方式
 	export enum eResLoadThreadType
