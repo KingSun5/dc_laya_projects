@@ -10,7 +10,7 @@ module dc
         constructor()
         {
             super();
-			this.m_cameraType = eCameraType.THIRD;
+			this.m_CameraType = eCameraType.THIRD;
         }
         public Setup():void
 		{
@@ -45,8 +45,6 @@ module dc
 			{
 				Scene2D.Instance.ScrollScene(Scene2D.Instance.sceneOffsetX, Scene2D.Instance.sceneOffsetY);
 			}
-			//屏幕中心
-			super.SetPosition(Viewport2D.clientWidth*0.5, Viewport2D.clientHeight*0.5);
 		}
 	}
 }

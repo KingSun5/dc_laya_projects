@@ -58,7 +58,7 @@ module dc
 			{
 				this.m_RootScene.size(w, h);
 			}
-		}	
+		}
 		/**
 		 * 点是否在场景
 		 * @param x

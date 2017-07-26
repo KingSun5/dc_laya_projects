@@ -7,10 +7,7 @@ module dc
      */
 	export class Camera2D
 	{
-		protected m_cameraType:eCameraType;
-
-		protected m_curPos_X:number;
-		protected m_curPos_Y:number;
+		protected m_CameraType:eCameraType;
 
 		constructor()
 		{
@@ -36,23 +33,9 @@ module dc
 		{
 			
 		}
-		protected SetPosition(x:number, y:number):void
-		{
-			this.m_curPos_X = x;
-			this.m_curPos_Y = y;
-		}	
-		
-		public get curPosX():number
-		{
-			return this.m_curPos_X;
-		}
-		public get curPosY():number
-		{
-			return this.m_curPos_Y;
-		}
 		public get cameraType():eCameraType
 		{
-			return this.m_cameraType;
+			return this.m_CameraType;
 		}
 		
 		/**
