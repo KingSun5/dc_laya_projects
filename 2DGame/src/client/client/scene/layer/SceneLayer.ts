@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-14
      */
-	export class SceneLayerUtils
+	export class SceneLayers
 	{
 		/**场景根容器*/
 		private static m_sceneRootContainer:LayaSprite;	

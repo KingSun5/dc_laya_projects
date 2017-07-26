@@ -103,7 +103,11 @@ module dc
         {
             return (this.m_YMin + this.m_Height);
         }  
-        public Contains(point:Vector2):boolean
+        public Contains(x:number, y:number):boolean
+        {
+            return ((((x >= this.m_XMin) && (x < this.right)) && (y >= this.m_YMin)) && (y < this.bottom));
+        }
+        public ContainsPoint(point:Vector2):boolean
         {
             return ((((point.x >= this.m_XMin) && (point.x < this.right)) && (point.y >= this.m_YMin)) && (point.y < this.bottom));
         }

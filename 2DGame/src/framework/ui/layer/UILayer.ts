@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-19
      */
-	export class UILayerUtils
+	export class UILayers
 	{
 		/**ui根容器*/
 		private static m_uiRootContainer:LayaSprite;	

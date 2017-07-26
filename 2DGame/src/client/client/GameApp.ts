@@ -91,11 +91,11 @@ module dc
             //设置垂直对齐
             Laya.stage.alignV = laya.display.Stage.ALIGN_MIDDLE;
 
-            SceneLayerUtils.Setup();
+            SceneLayers.Setup();
         }
         private ReleaseScene():void
         {
-            SceneLayerUtils.Destroy();
+            SceneLayers.Destroy();
         }
         private InitData():void
         {
@@ -130,13 +130,13 @@ module dc
         /**资源加载完成*/
         private OnDownloadComplate(args:Array<string>):void
         {
-            // Log.Info("必须资源更新完成");
-            // LangManager.Instance.SwitchLang(eLangType.en);
-            // ConfigManger.Instance.LoadAll();
-            // LangManager.Instance.LoadAll();
-            // //显示登陆界面
-            // UIShowController.Show(GUIID.LOGIN, 111,1112);
-            // //new GameMain();
+            Log.Info("必须资源更新完成");
+            LangManager.Instance.SwitchLang(eLangType.en);
+            ConfigManger.Instance.LoadAll();
+            LangManager.Instance.LoadAll();
+            //显示登陆界面
+            UIShowController.Show(GUIID.LOGIN, 111,1112);
+            // new GameMain();
             // //压力测试
             // //UnitAIManager.Instance.CreateTestRobot();
         }

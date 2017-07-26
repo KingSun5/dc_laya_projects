@@ -10,10 +10,12 @@ module dc
         public OnEnter(type:eSceneType, scene_id:number, info:any):void
         {
             super.OnEnter(type, scene_id, info);
+            Log.Info("enter city scene");
         }
 
         public OnExit()
         {
+            Log.Info("exit battle scene");
             super.OnExit();
         }
 

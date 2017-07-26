@@ -74,6 +74,35 @@ var dc;
             //     if(value == 2)return false;
             //     return true;
             // });
+            var list = new dc.LinkList();
+            // list.Add(1);
+            // list.Add(2);
+            // list.Del(0);
+            // list.Add(3);
+            // list.Add(4);
+            // list.Del(1);
+            // list.Foreach(function(value)
+            // {
+            //     Log.Debug(value.toString());
+            //     return true;
+            // });
+            dc.Log.Debug(dc.DateUtils.GetNow().toString());
+            for (var i = 0; i < 1000000; ++i) {
+                list.Append(list.length, i); //每次在中间插入
+            }
+            while (list.length > 2) {
+                list.Del(list.length - 1); //每次在中间插入
+            }
+            dc.Log.Debug(dc.DateUtils.GetNow().toString());
+            var arr = [];
+            dc.Log.Debug(dc.DateUtils.GetNow().toString());
+            for (var i = 0; i < 1000000; ++i) {
+                arr.splice(arr.length - 1, 0, i); //每次在中间插入
+            }
+            while (list.length > 2) {
+                arr.splice(arr.length - 1, 1); //每次在中间插入
+            }
+            dc.Log.Debug(dc.DateUtils.GetNow().toString());
             //dc.Log.Debug(dc.StringUtils.minuteFormat(123));
             //dc.Log.Debug(dc.StringUtils.formate("杰卫，这里有{0}个苹果，和{1}个香蕉！", 5,10));
             //dc.Log.Debug(dc.NumberUtils.toFixed(100.01111, 3).toString());
@@ -94,7 +123,7 @@ var dc;
             // this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
             // this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected);
             //声音
-            dc.SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
+            //SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
             //加载
             // dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnAsyncComplete));
             // dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnAsyncComplete));

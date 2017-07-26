@@ -101,7 +101,7 @@ module dc
 					default:return;
 				}
 				view.Open([]);
-				UILayerUtils.loader.addChild(view);
+				UILayers.loader.addChild(view);
 				this.m_DicLoadView.Add(type, view);
 			}
 			view.OnOpen(total);
@@ -118,13 +118,13 @@ module dc
 		}
 		private Close(type:eLoadViewType):void
 		{
-			// let view:any = this.m_DicLoadView.GetValue(type);
-			// if(!view)
-			// {
-			// 	return;
-			// }	
-			// view.OnClose();
-			// view.SetVisible(false);
+			let view:any = this.m_DicLoadView.GetValue(type);
+			if(!view)
+			{
+				return;
+			}	
+			view.OnClose();
+			view.SetVisible(false);
 		}
 	}
 	/**

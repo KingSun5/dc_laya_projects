@@ -26,14 +26,14 @@ module dc
    
         public Setup():void
         {
-            UILayerUtils.Setup();
+            UILayers.Setup();
         }
 
         public Destroy():void
         {
             this.CloseAll();
             this.ClearLoaderInfo();
-            UILayerUtils.Destroy();
+            UILayers.Destroy();
         }
 
         public Tick(elapse:number, game_frame:number):void
@@ -72,7 +72,7 @@ module dc
             panel.SetScreenID(id);
             panel.Open(args.slice(0));
 
-            let layer:LayaSprite = UILayerUtils.GetLayer(loader_info.mLayer);
+            let layer:LayaSprite = UILayers.GetLayer(loader_info.mLayer);
             layer.addChild(panel);
             this.m_DicUIView.Add(id, panel);
 
@@ -113,7 +113,7 @@ module dc
             this.m_DicUIView.Foreach(function(key, value)
             {
                 if (exclude_list && ArrayUtils.ContainsValue(exclude_list, key)) return true;
-                this.Close(key);
+                UIManager.Instance.Close(key);
                 return true;
             });
         }

@@ -26,7 +26,7 @@ module dc
 								{url:"res/atlas/anim/monster/001/YD.atlas", type:LayaLoader.ATLAS},
 								{url:"res/atlas/anim/monster/001/SW.atlas", type:LayaLoader.ATLAS},
 								{url:"res/atlas/anim/monster/001/GJ.atlas", type:LayaLoader.ATLAS}]);
-			SceneLayerUtils.role.addChild(obj.RootNode);
+			SceneLayers.role.addChild(obj.RootNode);
 			ObjectManager.Instance.AttachObject(obj);
 			//MainObjCmdFacade.Instance.AttackRole = obj;
 

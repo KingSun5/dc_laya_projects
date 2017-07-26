@@ -84,6 +84,41 @@ module dc
             //     return true;
             // });
 
+            let list:LinkList<number> = new LinkList<number>();
+            // list.Add(1);
+            // list.Add(2);
+            // list.Del(0);
+            // list.Add(3);
+            // list.Add(4);
+            // list.Del(1);
+            // list.Foreach(function(value)
+            // {
+            //     Log.Debug(value.toString());
+            //     return true;
+            // });
+            Log.Debug(DateUtils.GetNow().toString());
+            for(let i = 0; i < 1000000; ++i)
+            {
+                list.Append(list.length, i);//每次在中间插入
+            }
+            while(list.length > 2)
+            {
+                list.Del(list.length-1);//每次在中间插入
+            }
+            Log.Debug(DateUtils.GetNow().toString());
+
+            let arr:Array<number> = [];
+            Log.Debug(DateUtils.GetNow().toString());
+            for(let i = 0; i < 1000000; ++i)
+            {
+                arr.splice(arr.length-1, 0, i);//每次在中间插入
+            }
+            while(list.length > 2)
+            {
+                arr.splice(arr.length-1, 1);//每次在中间插入
+            }
+            Log.Debug(DateUtils.GetNow().toString());
+
             //dc.Log.Debug(dc.StringUtils.minuteFormat(123));
             //dc.Log.Debug(dc.StringUtils.formate("杰卫，这里有{0}个苹果，和{1}个香蕉！", 5,10));
 
@@ -109,7 +144,7 @@ module dc
             // this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected);
 
             //声音
-            SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
+            //SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
 
             //加载
             // dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE, Laya.Handler.create(this, this.OnAsyncComplete));

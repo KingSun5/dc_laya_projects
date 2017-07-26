@@ -16,9 +16,10 @@ module dc
 
         public OnExit()
         {
+            UIShowController.CloseAll([]);
             ObjectManager.Instance.RemoveAll();
             SoundManager.Instance.StopAll();
-            SceneLayerUtils.Clear();
+            SceneLayers.Clear();
             this.UnRegisterEvent();
         }
 
