@@ -29,7 +29,7 @@ module dc
             this.UnregisteGUIEvent();
             this.OnDisable();
             this.OnDestroy();
-            this.removeSelf();
+            this.destroy();
             this.m_IsOpen = false;
             EventController.DispatchEvent(UIEvent.CLOSE, this.m_ScreenID);
             EventController.RemoveEventListener(UIEvent.Lang, this, this.OnLangChange);
@@ -169,7 +169,9 @@ module dc
             }
             if (assets.length > 0)
             {
-                ResourceManager.Instance.LoadArrayRes(assets, LayaHandler.create(this, this.OnAssetLoaded));
+                let load_view = eLoadViewType.None;
+                if(this.IsShowLoading())load_view = eLoadViewType.Window;
+                ResourceManager.Instance.LoadArrayRes(assets, LayaHandler.create(this, this.OnAssetLoaded),load_view);
             }
             else
             {

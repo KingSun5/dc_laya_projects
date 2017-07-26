@@ -119,7 +119,7 @@ module dc
         /**是否显示加载界面*/
         protected IsShowLoading():boolean
         {
-            return false;
+            return false;//这里必须设置为false，否则会导致逻辑错误
         }
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～重写方法～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
 		/**

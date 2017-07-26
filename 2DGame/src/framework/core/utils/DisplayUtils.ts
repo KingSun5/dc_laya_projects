@@ -20,6 +20,15 @@ module dc
 				container.removeChildAt(0)
 			}
 		}
+		public static DestroyUINode(node:LayaNode):void
+		{
+			if(node)
+			{
+				node.removeSelf();
+				node.destroy();
+				node = null;
+			}
+		}
 		/**获得子节点*/
 		public static GetChildByName(parent:LayaNode, name:string):LayaNode
 		{

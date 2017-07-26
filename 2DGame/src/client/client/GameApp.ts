@@ -46,22 +46,28 @@ module dc
         public StartGame():void
         {
             EventController.DispatchEvent(EventID.BEGIN_GAME);
-            TimerManager.Instance.AddOnce(1000, this, this.LoadMustResource);
+            this.LoadCoreResource();
+        }
+        /**
+         * 需要加载的核心资源，资源尽量不要放在这加载，不会显示加载进度界面
+         */
+        private LoadCoreResource():void
+        {
+            Log.Info("开始加载核心资源");
+            let assets:Array<any> = [];
+            assets.push({url:"data/bg/image_loading_bg.jpg", type:LayaLoader.IMAGE});//这个是加载界面需要的资源，需要提前加载
+            assets.push({url:"res/atlas/ui/common.json", type:LayaLoader.ATLAS});
+            ResourceManager.Instance.LoadArrayRes(assets, LayaHandler.create(this, this.LoadMustResource), eLoadViewType.None);
         }
         private LoadMustResource():void
         {
-
+            Log.Info("开始加载必须资源");
             let assets:Array<any> = [];
             assets.push({url:"res/atlas/comp.json", type:LayaLoader.ATLAS});
             assets.push({url:"res/atlas/ui/main.json", type:LayaLoader.ATLAS});
-            assets.push({url:"res/atlas/ui/common.json", type:LayaLoader.ATLAS});
             assets = assets.concat(ConfigManger.Instance.PreLoadRes);
             assets = assets.concat(LangManager.Instance.PreLoadRes);
-            assets.push({url:"res/atlas/anim/monster/001/DJ.atlas", type:LayaLoader.ATLAS});
-			assets.push({url:"res/atlas/anim/monster/001/YD.atlas", type:LayaLoader.ATLAS});
-			assets.push({url:"res/atlas/anim/monster/001/SW.atlas", type:LayaLoader.ATLAS});
-			assets.push({url:"res/atlas/anim/monster/001/GJ.atlas", type:LayaLoader.ATLAS});
-            ResourceManager.Instance.LoadArrayRes(assets, LayaHandler.create(this, this.OnDownloadComplate), eLoadViewType.Window);
+            ResourceManager.Instance.LoadArrayRes(assets, LayaHandler.create(this, this.OnDownloadComplate), eLoadViewType.FullScreen);
         }
         //～～～～～～～～～～～～～～～～～～～～～～～初始化游戏～～～～～～～～～～～～～～～～～～～～～～～//
         private InitScene():void
@@ -124,10 +130,10 @@ module dc
         /**资源加载完成*/
         private OnDownloadComplate(args:Array<string>):void
         {
+            Log.Info("必须资源更新完成");
             LangManager.Instance.SwitchLang(eLangType.en);
             ConfigManger.Instance.LoadAll();
             LangManager.Instance.LoadAll();
-            Log.Info("必须资源更新完成");
             //显示登陆界面
             UIShowController.Show(GUIID.LOGIN, 111,1112);
             //new GameMain();

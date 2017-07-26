@@ -7,17 +7,16 @@ module dc
      */	
 	export class DisplayProxy
 	{
-		protected m_RootNode:LayaSprite;
+		protected m_RootNode:LayaSprite = null;
 
 		protected m_Url:string;
 		protected m_Alige:eAligeType;
-		protected m_Callback:LayaHandler;
+		protected m_Callback:LayaHandler = null;
 
 		constructor()
 		{
 
 		}
-
 		protected Load(url:string, type:string, callback:LayaHandler=null, alige:eAligeType=eAligeType.MID, proxy:LayaSprite=null):void
 		{
 			this.m_Url = url;
@@ -25,10 +24,14 @@ module dc
 			this.m_Callback = callback;
 
 			let res:any = ResourceManager.Instance.GetRes(url);
-			if(res != null)
+			if(res)
 			{//已经存在资源
 				this.ShowReal(url);
-				if(callback != null)callback.runWith(url);
+				if(this.m_Callback)
+				{
+					this.m_Callback.runWith(url);
+					this.m_Callback = null;
+				}
 			}
 			else
 			{
@@ -42,17 +45,35 @@ module dc
 			if(this.m_Url != url)return;
 
 			this.ShowReal(url);
-			if(this.m_Callback != null)this.m_Callback.runWith(this.m_Url);
+			if(this.m_Callback)
+			{
+				this.m_Callback.runWith(this.m_Url);
+				this.m_Callback = null;
+			}
 		}
 		protected ShowReal(url:string):void
 		{
 		}
 		protected ShowProxy(proxy:LayaSprite):void
 		{
-			if(proxy != null)
+			if(proxy)
 			{
 				DisplayUtils.SetAlige(proxy, this.m_Alige);
 				this.m_RootNode.addChild(proxy);
+			}
+		}
+		public Destroy():void
+		{
+			if(this.m_Callback)
+			{
+				this.m_Callback.recover();
+				this.m_Callback = null;
+			}
+			if(this.m_RootNode)
+			{
+				this.m_RootNode.removeSelf();
+				this.m_RootNode.destroy();
+				this.m_RootNode = null;
 			}
 		}
 
@@ -102,9 +123,8 @@ module dc
 			var t: LayaTexture = Laya.loader.getRes(url);
 			if(t == null)return;
 
-			DisplayUtils.RemoveAllChild(this.m_RootNode);
-			this.m_RootNode.graphics.clear();
-			this.m_RootNode.graphics.drawTexture(t, 0, 0);
+			DisplayUtils.DestroyUINode(this.m_RootNode);
+			this.m_RootNode = null;
 		}
 	}
     /**
@@ -128,7 +148,7 @@ module dc
 			super.ShowReal(url);
 
 			var res: any = Laya.loader.getRes(url);
-			if(res == null)return;
+			if(!res)return;
 
 			DisplayUtils.RemoveAllChild(this.m_RootNode);
 			this.m_RootNode.graphics.clear();

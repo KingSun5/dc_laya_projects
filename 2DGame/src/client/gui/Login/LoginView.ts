@@ -81,7 +81,7 @@ module dc
         /**是否显示加载界面*/
         protected IsShowLoading():boolean
         {
-            return false;
+            return true;
         }
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～内部方法～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         /**点击登录*/

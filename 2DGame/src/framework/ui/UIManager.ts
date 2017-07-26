@@ -112,7 +112,7 @@ module dc
         {
             this.m_DicUIView.Foreach(function(key, value)
             {
-                if (exclude_list != null && ArrayUtils.ContainsValue(exclude_list, key)) return true;
+                if (exclude_list && ArrayUtils.ContainsValue(exclude_list, key)) return true;
                 this.Close(key);
                 return true;
             });
@@ -127,7 +127,7 @@ module dc
         public IsPanelOpen(id:number):boolean
         {
             let panel:UIPanelInterface = this.m_DicUIView.GetValue(id);
-            if(panel != null)
+            if(panel)
                 return true;
             else
                 return false;

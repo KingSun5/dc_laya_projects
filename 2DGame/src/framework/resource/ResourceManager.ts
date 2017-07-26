@@ -153,6 +153,11 @@ module dc
 					for(let url of arr)Log.Debug("[load]加载完成url:" + url);
 				}
 			}
+			//关闭加载界面
+			if(viewType != eLoadViewType.None)
+			{
+				EventController.DispatchEvent(LoaderEvent.LOADVIEW_COMPLATE, viewType);
+			}
 			//加载完成回调
 			if(handle)
 			{
@@ -167,10 +172,6 @@ module dc
 				else
 					handle.run();
 			}
-			if(viewType != eLoadViewType.None)
-			{
-				EventController.DispatchEvent(LoaderEvent.LOADVIEW_COMPLATE, viewType);
-			}
 		}
 		/**
 		 * 加载进度
@@ -181,10 +182,10 @@ module dc
 		public OnLoadProgress(viewType:eLoadViewType, total:number, progress:number):void
 		{
 			let cur:number = NumberUtils.toInt(Math.floor(progress*total));
-			if(CommonID.LOG_LOAD_RES)
-			{
-				Log.Debug("[load]进度:" + cur + ", total:" + total);
-			}
+			// if(CommonID.LOG_LOAD_RES)
+			// {
+			// 	Log.Debug("[load]进度:" + cur + ", total:" + total);
+			// }
 			if(viewType != eLoadViewType.None)
 			{
 				EventController.DispatchEvent(LoaderEvent.LOADVIEW_PROGRESS, viewType, cur, total);

@@ -61,7 +61,7 @@ module dc
 			{
 				case LoaderEvent.LOADVIEW_OPEN:
 				{
-					//Log.Debug("显示加载界面");
+					Log.Debug("显示加载界面");
 					let total:number = args.Get(1);
 					this.Show(viewType, total);
 				}
@@ -76,7 +76,7 @@ module dc
 				break;
 				case LoaderEvent.LOADVIEW_COMPLATE:
 				{
-					//Log.Debug("加载界面关闭");
+					Log.Debug("加载界面关闭");
 					this.Close(viewType);
 				}
 				break;
