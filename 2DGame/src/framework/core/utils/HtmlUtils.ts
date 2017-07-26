@@ -13,7 +13,7 @@ module dc
 			html.y = y;
 			html.x = x;
 			html.size(width, height);
-			html.style.fontFamily = "黑体";//TODO
+			html.style.fontFamily = CommonID.DefaultFont;
 			html.style.fontSize = fontSize;
 			html.style.color = fontColor;
 			html.style.bold = true;

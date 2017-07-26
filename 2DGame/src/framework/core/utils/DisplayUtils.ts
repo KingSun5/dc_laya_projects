@@ -98,6 +98,21 @@ module dc
 		{
 			let color = new Laya.ColorFilter(mat);
 			return [color];
-		}		
+		}	
+		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～UI组件～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/	
+		/**
+		 * 创建文本组件
+		*/
+		public static NewLabel(fontSize:number, fontColor:string, width:number, height:number, align?:string, font?:string, bold:boolean = true):LayaLabel
+		{
+			let lblNew: LayaLabel = new LayaLabel();
+			lblNew.font = font || CommonID.DefaultFont;
+			lblNew.fontSize = fontSize;
+			lblNew.color = fontColor;
+			lblNew.size(width, height);
+			lblNew.align = align || CommonID.AligeCenter;
+			lblNew.bold = bold;
+			return lblNew;
+		}
 	}
 }

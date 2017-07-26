@@ -2,8 +2,18 @@ module dc
 {
 	export class CommonID
 	{
+		/**默认字体*/
+		public static DefaultFont:string = "黑体";
 		/**显示加载资源日志*/
 		public static LOG_LOAD_RES:boolean = true;
+
+		/**对齐方式:左*/
+		public static AligeLeft:string 		= "left";
+		public static AligeCenter:string 	= "center";
+		public static AligeRight:string 	= "right";
+		public static AligeTop:string 		= "top";
+		public static AligeMiddle:string 	= "middle";
+		public static AligeBottom:string 	= "bottom";		
 	}
 
     /**对齐方式*/

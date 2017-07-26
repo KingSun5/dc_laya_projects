@@ -85,7 +85,7 @@ module dc
             Laya.stage.scaleMode = laya.display.Stage.SCALE_EXACTFIT;
             //设置横竖屏
             Laya.stage.screenMode = laya.display.Stage.SCREEN_VERTICAL;
-      
+
             //设置水平对齐
             Laya.stage.alignH =laya.display.Stage.ALIGN_CENTER;
             //设置垂直对齐
@@ -130,15 +130,15 @@ module dc
         /**资源加载完成*/
         private OnDownloadComplate(args:Array<string>):void
         {
-            Log.Info("必须资源更新完成");
-            LangManager.Instance.SwitchLang(eLangType.en);
-            ConfigManger.Instance.LoadAll();
-            LangManager.Instance.LoadAll();
-            //显示登陆界面
-            UIShowController.Show(GUIID.LOGIN, 111,1112);
-            //new GameMain();
-            //压力测试
-            //UnitAIManager.Instance.CreateTestRobot();
+            // Log.Info("必须资源更新完成");
+            // LangManager.Instance.SwitchLang(eLangType.en);
+            // ConfigManger.Instance.LoadAll();
+            // LangManager.Instance.LoadAll();
+            // //显示登陆界面
+            // UIShowController.Show(GUIID.LOGIN, 111,1112);
+            // //new GameMain();
+            // //压力测试
+            // //UnitAIManager.Instance.CreateTestRobot();
         }
     }
 }

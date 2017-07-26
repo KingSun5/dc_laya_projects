@@ -118,13 +118,13 @@ module dc
 		}
 		private Close(type:eLoadViewType):void
 		{
-			let view:any = this.m_DicLoadView.GetValue(type);
-			if(!view)
-			{
-				return;
-			}	
-			view.OnClose();
-			view.SetVisible(false);
+			// let view:any = this.m_DicLoadView.GetValue(type);
+			// if(!view)
+			// {
+			// 	return;
+			// }	
+			// view.OnClose();
+			// view.SetVisible(false);
 		}
 	}
 	/**

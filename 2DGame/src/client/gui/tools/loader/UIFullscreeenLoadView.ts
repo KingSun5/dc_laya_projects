@@ -7,8 +7,11 @@ module dc
      */
 	export class UIFullscreeenLoadView extends UIBaseView implements ILoadView
 	{
-        private m_imgBg: LayaImage = null;
-        private m_progressBar: LayaProgressBar = null;
+        private m_imgBg:LayaImage = null;
+        private m_progressBar:LayaProgressBar = null;
+        private m_healthTip1:LayaLabel = null;
+        private m_healthTip2:LayaLabel = null;
+
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～重写方法～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         /**初始化，和onDestroy是一对*/
         protected OnCreate(args:any):void
@@ -87,7 +90,7 @@ module dc
         */
         public OnOpen(total: number): void
         {
-            this.m_progressBar.value = 0;         
+            this.m_progressBar.value = 0;
         }  
         /**
 		 * 加载进度
@@ -128,6 +131,29 @@ module dc
             this.m_progressBar.value = 0;
 
             this.addChild(this.m_progressBar);
-        }          
+        } 
+        /**
+         * 健康提示
+        */
+        private ShowHealthTip(): void 
+        {
+            if (!this.m_healthTip1) 
+            {
+                this.m_healthTip1 = DisplayUtils.NewLabel(22, "#FFFFFF", 640, 24, null, null, false);
+                this.addChild(this.m_healthTip1);
+                this.m_healthTip1.centerX = 0;
+                this.m_healthTip1.bottom = 50;
+            }
+            if (!this.m_healthTip2) 
+            {
+                this.m_healthTip2 = DisplayUtils.NewLabel(22, "#FFFFFF", 640, 24, null, null, false);
+                this.addChild(this.m_healthTip2);
+                this.m_healthTip2.centerX = 0;
+                this.m_healthTip2.bottom = 15;
+            }
+
+            this.m_healthTip1.text = "提示：缓存语言表文字";
+            this.m_healthTip2.text = "提示：缓存语言表文字";
+        }         
 	}
 }

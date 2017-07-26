@@ -100,24 +100,24 @@ module dc
         /** 设置内容align */
         public SetHAlign(type: eHAligeType): void 
         {
-            let sAlign:string = "center";
+            let sAlign:string = CommonID.AligeCenter;
             switch(type)
             {
-                case eHAligeType.LEFT:  sAlign = "left";break;
-                case eHAligeType.CENTER:sAlign = "center";break;
-                case eHAligeType.RIGHT: sAlign = "right";break;
+                case eHAligeType.LEFT:  sAlign = CommonID.AligeLeft;break;
+                case eHAligeType.CENTER:sAlign = CommonID.AligeCenter;break;
+                case eHAligeType.RIGHT: sAlign = CommonID.AligeRight;break;
             }
             this.htmlTextField.style.align = sAlign;
             this.htmlTextField.innerHTML = this.m_content;
         }
         public SetVAlign(type: eVAligeType): void 
         {
-            let sAlign:string = "center";
+            let sAlign:string = CommonID.AligeMiddle;
             switch(type)
             {
-                case eVAligeType.UP:    sAlign = "top";break;
-                case eVAligeType.MID:   sAlign = "middle";break;
-                case eVAligeType.DOWN:  sAlign = "bottom";break;
+                case eVAligeType.UP:    sAlign = CommonID.AligeTop;break;
+                case eVAligeType.MID:   sAlign = CommonID.AligeMiddle;break;
+                case eVAligeType.DOWN:  sAlign = CommonID.AligeBottom;break;
             }
             this.htmlTextField.style.valign = sAlign;
             this.htmlTextField.innerHTML = this.m_content;
@@ -162,18 +162,18 @@ module dc
                 let tAlign = sContent.charAt(tIndex + 11);
                 if ("c" == tAlign) 
                 {
-                    return "center";
+                    return CommonID.AligeCenter;
                 }
                 else if ("l" == tAlign) 
                 {
-                    return "left";
+                    return CommonID.AligeLeft;
                 }
                 else if ("r" == tAlign) 
                 {
-                    return "right";
+                    return CommonID.AligeRight;
                 }
             }
-            return "center";
+            return CommonID.AligeCenter;
         }
 
         /** 设置按钮 */
