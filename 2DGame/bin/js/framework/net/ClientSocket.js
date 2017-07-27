@@ -68,7 +68,12 @@ var dc;
             this.Dispatch(dc.SocketEvent.SOCKET_CLOSE);
         };
         ClientSocket.prototype.OnMessageReveived = function (msg) {
-            if (msg instanceof ArrayBuffer) {
+            if (typeof msg == "string") {
+                console.log(msg);
+                this.m_Socket.send(msg);
+                this.m_Socket.flush();
+            }
+            else if (msg instanceof ArrayBuffer) {
                 this.m_ReadBuff.writeArrayBuffer(msg);
                 this.m_ReadBuff.pos = 0;
                 this.DispatcherData();
