@@ -87,12 +87,20 @@ module dc
 			Laya.stage.on(LayaEvent.KEY_DOWN, this, this.OnKeyDownEvt);
 			Laya.stage.on(LayaEvent.KEY_UP, this, this.OnKeyUpEvt);
 			Laya.stage.on(LayaEvent.FOCUS_CHANGE, this, this.OnFocusChange);
+			
+			Laya.stage.on(LayaEvent.MOUSE_DOWN, this, this.OnMouseDown);
+			Laya.stage.on(LayaEvent.MOUSE_UP, this, this.OnMouseUp);
+			Laya.stage.on(LayaEvent.CLICK, this, this.OnMouseClick);
         }
         private static UnRegisterEvent():void
         {
 			Laya.stage.off(LayaEvent.KEY_DOWN, this, this.OnKeyDownEvt);
 			Laya.stage.off(LayaEvent.KEY_UP, this, this.OnKeyUpEvt);
 			Laya.stage.off(LayaEvent.FOCUS_CHANGE, this, this.OnFocusChange);
+			
+			Laya.stage.off(LayaEvent.MOUSE_DOWN, this, this.OnMouseDown);
+			Laya.stage.off(LayaEvent.MOUSE_UP, this, this.OnMouseUp);
+			Laya.stage.off(LayaEvent.CLICK, this, this.OnMouseClick);
         }		
 		/**
 		 * 按下事件
@@ -102,7 +110,7 @@ module dc
 			var keyCode: number = evt["keyCode"];
             if(!this.m_ListKeyPress[keyCode])
 			{
-				Log.Debug("按下:" + keyCode + ", frame:" + Time.frameCount);
+				//Log.Debug("按下:" + keyCode + ", frame:" + Time.frameCount);
 				this.m_ListKeyDown[keyCode] = true;
 				this.m_ListKeyPress[keyCode] = true;
 			}
@@ -110,7 +118,7 @@ module dc
 		private static OnKeyUpEvt(evt:Event):void
 		{      
 			var keyCode: number = evt["keyCode"];  
-			Log.Debug("松开:" + keyCode + ", frame:" + Time.frameCount);
+			//Log.Debug("松开:" + keyCode + ", frame:" + Time.frameCount);
 			this.m_ListKeyUp[keyCode] = true;
 			this.m_ListKeyPress[keyCode] = false;  
 		}	
@@ -121,6 +129,22 @@ module dc
 		{
 			Log.Info("OnFocusChange");
 			this.Clear();
+		}
+		
+		/**
+		 * 触摸
+		*/
+		private static OnMouseDown(evt:any):void
+		{
+			//TODO:触摸
+		}
+		private static OnMouseUp(evt:any):void
+		{
+			//TODO:触摸
+		}
+		private static OnMouseClick(evt:any):void
+		{
+			//TODO:触摸
 		}
 	}
 }

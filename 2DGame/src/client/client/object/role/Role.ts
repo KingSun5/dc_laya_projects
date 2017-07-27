@@ -153,6 +153,7 @@ module dc
 		public SetPosition(x:number, y:number, z:number):void
 		{
 			super.SetPosition(x, y, z);
+			Scene2D.Instance.UpdateCameraPosition(x, y);
 		}
 		/// <summary>
 		/// 是否移动中
@@ -413,10 +414,13 @@ module dc
 			let cmd:KeyboardMoveCommand = pCmd as KeyboardMoveCommand;
 
 			//动作
-			if (ArrayUtils.ContainsValue(this.m_StdUnitInfo.ListMotion, AnimationID.Move))
-			{
-				this.PlayPose(AnimationID.Move, false);
-			}
+			// if (ArrayUtils.ContainsValue(this.m_StdUnitInfo.ListMotion, AnimationID.Move))
+			// {
+			// 	this.PlayPose(AnimationID.Move, false);
+			// }
+			//移动
+			let move_diff:Vector3 = cmd.Direction.normalized.Mul(this.MoveSpeed * Time.deltaTime);
+			this.SetPosition(this.x+move_diff.x, this.y+move_diff.y, this.z+move_diff.z);
 
 			this.AttachStatus(eObjStatus.MOVE);
 

@@ -68,14 +68,10 @@ module dc
 		/** 移动 */
 		private enter_Move(dir:Vector3):boolean
 		{
-			let direction:Vector3 = dir;
-
 			//目标位置
-			let target_pos:Vector3 = new Vector3(this.m_AttackObj.x, this.m_AttackObj.y, 0);
-
 			let cmd:KeyboardMoveCommand = ObjectPools.Get(KeyboardMoveCommand);;
-			cmd.TargetPos = target_pos;
-			cmd.Direction = direction;
+			cmd.TargetPos = new Vector3(this.m_AttackObj.x+dir.x, this.m_AttackObj.y+dir.y, 0);
+			cmd.Direction = new Vector3(dir.x, dir.y, dir.z);
 			this.m_AttackObj.PushCommand(cmd);
 			return true;
 		}

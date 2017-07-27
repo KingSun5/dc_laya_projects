@@ -8,6 +8,7 @@ module dc
 	export class BattleScene extends BaseScene
 	{
         private m_Terrain:Terrain = null;
+        private m_Input:BattleInput = null;
 
         public OnEnter(type:eSceneType, scene_id:number, info:any):void
         {
@@ -18,12 +19,20 @@ module dc
             this.m_Terrain = new Terrain();
             this.m_Terrain.Setup(0);
 
+            this.m_Input = new BattleInput();
+            this.m_Input.Setup();
+
             UnitAIManager.Instance.CreateMainPlayer();
         }
 
         public OnExit()
         {
             Log.Info("exit battle scene");
+            if(this.m_Input)
+            {
+                this.m_Input.Destroy();
+                this.m_Input = null;
+            }
             if(this.m_Terrain)
             {
                 this.m_Terrain.Destroy();
@@ -33,7 +42,11 @@ module dc
         }
 
         public Update():void
-        {            
+        {       
+            if(this.m_Input)
+            {
+                this.m_Input.Update();
+            }       
             if(this.m_Terrain)
             {
                 this.m_Terrain.Update();

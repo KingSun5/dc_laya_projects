@@ -43,7 +43,9 @@ module dc
 			
 			if(offsetX!=0 || offsetY!=0)
 			{
-				Scene2D.Instance.ScrollScene(Scene2D.Instance.sceneOffsetX, Scene2D.Instance.sceneOffsetY);
+				let new_x:number = Scene2D.Instance.sceneOffsetX + offsetX;
+				let new_y:number = Scene2D.Instance.sceneOffsetY + offsetY;
+				Scene2D.Instance.ScrollScene(new_x, new_y);
 			}
 		}
 	}

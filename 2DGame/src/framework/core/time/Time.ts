@@ -13,10 +13,10 @@ module dc
            this.m_StartTime = Laya.timer.currTimer;
         }
 
-        /**两帧之间的时间间隔,单位毫秒*/
+        /**两帧之间的时间间隔,单位秒*/
         public static get deltaTime():number
         { 
-            return Laya.timer.delta; 
+            return Laya.timer.delta*0.001; 
         }
         /**固定两帧之间的时间间隔*/
         public static get fixedDeltaTime():number

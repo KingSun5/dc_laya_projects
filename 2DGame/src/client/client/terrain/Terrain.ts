@@ -30,18 +30,6 @@ module dc
 		}
 		public Update():void
 		{
-			if(Input.GetKeyDown(eKeyCode.A))
-			{
-				Log.Debug("KeyDown:A");
-			}
-			if(Input.GetKey(eKeyCode.A))
-			{
-				Log.Debug("KeyPress:A");
-			}
-			if(Input.GetKeyUp(eKeyCode.A))
-			{
-				Log.Debug("KeyUp:A");
-			}
 		}
 	}
 }
