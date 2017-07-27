@@ -33,7 +33,8 @@ module dc
 			this.RegisterEvent();
 			this.m_RootScene = node;
 			this.m_CurCamera = null;
-			this.CreateCamera(type);	
+			this.CreateCamera(type);
+			this.OnScreenResize();	
 		}
 		public Destroy():void
 		{
