@@ -5,7 +5,7 @@ module dc
 	 * 1.管理相机
 	 * 2.rpg游戏的滚屏
      * @author hannibal
-     * @time 2017-7-9
+     * @time 2017-7-26
      */
 	export class Scene2D extends Singleton
 	{		

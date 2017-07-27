@@ -22,6 +22,7 @@ module dc
             this.PrintDeviceInfo();
 
             Time.Start();
+            Input.Setup();
             LayerManager.Setup(root);
             TimerManager.Instance.Setup();
             UIManager.Instance.Setup();
@@ -40,10 +41,12 @@ module dc
             ResourceManager.Instance.Destroy();  
             DataProvider.Instance.Destroy();
             LayerManager.Destroy();
+            Input.Destroy();
         }
 
         public Tick(elapse:number, game_frame:number):void
         {
+            Input.Tick(elapse, game_frame);//放最前面
             TimerManager.Instance.Tick(elapse, game_frame);
             UIManager.Instance.Tick(elapse, game_frame);
             ObjectManager.Instance.Tick(elapse, game_frame);

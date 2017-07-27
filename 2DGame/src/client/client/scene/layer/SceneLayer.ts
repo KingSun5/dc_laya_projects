@@ -33,7 +33,7 @@ module dc
 		{
 			this.m_sceneRootContainer = new LayaSprite();
 			this.m_sceneRootContainer.name = "sceneRootContainer";
-			this.m_sceneRootContainer.mouseEnabled = false;
+			this.m_sceneRootContainer.mouseEnabled = true;
 
 			this.m_topContainer = new LayaSprite();
 			this.m_topContainer.name = "topContainer";
@@ -43,25 +43,25 @@ module dc
 			this.m_effectContainer.mouseEnabled = false;
 			this.m_playerContainer = new LayaSprite();
 			this.m_playerContainer.name = "playerContainer";
-			this.m_playerContainer.mouseEnabled = false;
+			this.m_playerContainer.mouseEnabled = true;
 			this.m_roleContainer = new LayaSprite();
 			this.m_roleContainer.name = "roleContainer";
-			this.m_roleContainer.mouseEnabled = false;
+			this.m_roleContainer.mouseEnabled = true;
 			this.m_bulletContainer = new LayaSprite();
 			this.m_bulletContainer.name = "bulletContainer";
 			this.m_bulletContainer.mouseEnabled = false;
 			this.m_mapItemContainer = new LayaSprite();
 			this.m_mapItemContainer.name = "mapItemContainer";
-			this.m_mapItemContainer.mouseEnabled = false;
+			this.m_mapItemContainer.mouseEnabled = true;
 			this.m_mapObjContainer = new LayaSprite();
 			this.m_mapObjContainer.name = "mapObjContainer";
-			this.m_mapObjContainer.mouseEnabled = false;
+			this.m_mapObjContainer.mouseEnabled = true;
 			this.m_terrainEffectContainer = new LayaSprite();
 			this.m_terrainEffectContainer.name = "terrainEffectContainer";
 			this.m_terrainEffectContainer.mouseEnabled = false;
 			this.m_terrainContainer = new LayaSprite();
 			this.m_terrainContainer.name = "terrainContainer";
-			this.m_terrainContainer.mouseEnabled = false;
+			this.m_terrainContainer.mouseEnabled = true;
 			
 			LayerManager.gameLayer.addChild(this.m_sceneRootContainer);
 			this.m_sceneRootContainer.addChild(this.m_terrainContainer);

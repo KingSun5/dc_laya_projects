@@ -14,7 +14,7 @@ module dc
 		{	
 			this.m_MapId = map_id;
 			this.m_TerrainView = new TerrainView();
-			this.m_TerrainView.Show(map_id);
+			this.m_TerrainView.Setup(map_id);
 
 			Scene2D.Instance.Setup(this.m_TerrainView, eCameraType.THIRD);
 		}
@@ -22,6 +22,7 @@ module dc
 		{
 			if(this.m_TerrainView)
 			{
+				this.m_TerrainView.Destroy();
 				this.m_TerrainView.destroy();
 				this.m_TerrainView = null;
 			}
@@ -29,6 +30,18 @@ module dc
 		}
 		public Update():void
 		{
+			if(Input.GetKeyDown(eKeyCode.A))
+			{
+				Log.Debug("KeyDown:A");
+			}
+			if(Input.GetKey(eKeyCode.A))
+			{
+				Log.Debug("KeyPress:A");
+			}
+			if(Input.GetKeyUp(eKeyCode.A))
+			{
+				Log.Debug("KeyUp:A");
+			}
 		}
 	}
 }

@@ -3,7 +3,7 @@ module dc
     /**
      * 2d相机
      * @author hannibal
-     * @time 2017-7-9
+     * @time 2017-7-26
      */
 	export class Camera2D
 	{
@@ -50,9 +50,9 @@ module dc
 			{
 				offsetX = -Scene2D.Instance.sceneOffsetX;
 			}
-			else if((Scene2D.Instance.sceneOffsetX + offsetX)+Scene2D.Instance.sceneWidth <= Viewport2D.clientWidth)
+			else if((Scene2D.Instance.sceneOffsetX + offsetX)+Scene2D.Instance.sceneWidth <= Viewport2D.Width)
 			{
-				offsetX = Viewport2D.clientWidth-Scene2D.Instance.sceneWidth-Scene2D.Instance.sceneOffsetX;
+				offsetX = Viewport2D.Width-Scene2D.Instance.sceneWidth-Scene2D.Instance.sceneOffsetX;
 			}
 			return offsetX;
 		}
@@ -68,9 +68,9 @@ module dc
 			{
 				offsetY = -Scene2D.Instance.sceneOffsetY;
 			}
-			else if((Scene2D.Instance.sceneOffsetY + offsetY)+Scene2D.Instance.sceneHeight <= Viewport2D.clientHeight)
+			else if((Scene2D.Instance.sceneOffsetY + offsetY)+Scene2D.Instance.sceneHeight <= Viewport2D.Height)
 			{
-				offsetY = Viewport2D.clientHeight-Scene2D.Instance.sceneHeight-Scene2D.Instance.sceneOffsetY;
+				offsetY = Viewport2D.Height-Scene2D.Instance.sceneHeight-Scene2D.Instance.sceneOffsetY;
 			}
 			return offsetY;
 		}			

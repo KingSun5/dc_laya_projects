@@ -4,7 +4,7 @@ module dc
      * 2d视口
 	 * 不同于D3D等3D引擎的视口，Viewport2D只是维护一个可见区域(客户端游戏屏幕)
      * @author hannibal
-     * @time 2017-7-9
+     * @time 2017-7-26
      */
 	export class Viewport2D
 	{
@@ -32,11 +32,11 @@ module dc
 			this.m_clientHeight = h;
 		}
 
-		public static get clientWidth():number
+		public static get Width():number
 		{
 			return this.m_clientWidth;
 		}
-		public static get clientHeight():number
+		public static get Height():number
 		{
 			return this.m_clientHeight;
 		}        

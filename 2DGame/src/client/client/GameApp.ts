@@ -67,7 +67,7 @@ module dc
             assets.push({url:"res/atlas/ui/main.json", type:LayaLoader.ATLAS});
             assets = assets.concat(ConfigManger.Instance.PreLoadRes);
             assets = assets.concat(LangManager.Instance.PreLoadRes);
-            ResourceManager.Instance.LoadArrayRes(assets, LayaHandler.create(this, this.OnDownloadComplate), eLoadViewType.FullScreen);
+            ResourceManager.Instance.LoadArrayRes(assets, LayaHandler.create(this, this.OnDownloadComplate), eLoadViewType.None);
         }
         //～～～～～～～～～～～～～～～～～～～～～～～初始化游戏～～～～～～～～～～～～～～～～～～～～～～～//
         private InitScene():void
@@ -135,10 +135,15 @@ module dc
             ConfigManger.Instance.LoadAll();
             LangManager.Instance.LoadAll();
             //显示登陆界面
-            UIShowController.Show(GUIID.LOGIN, 111,1112);
+            //UIShowController.Show(GUIID.LOGIN, 111,1112);
             // new GameMain();
             // //压力测试
             // //UnitAIManager.Instance.CreateTestRobot();
+
+            
+            let info:SceneTransmitInfo = new SceneTransmitInfo();
+            info.sceneId = 1000;
+            EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
         }
     }
 }

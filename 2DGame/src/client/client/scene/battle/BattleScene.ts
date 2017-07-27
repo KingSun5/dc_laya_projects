@@ -17,6 +17,8 @@ module dc
             UIShowController.CloseAll([]);
             this.m_Terrain = new Terrain();
             this.m_Terrain.Setup(0);
+
+            UnitAIManager.Instance.CreateMainPlayer();
         }
 
         public OnExit()
