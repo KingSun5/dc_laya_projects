@@ -7,6 +7,8 @@ module dc
      */
     export class Framework extends Singleton
     {        
+        private m_MainloopHandle:LayaHandler = null;
+
         private static instance:Framework = null;
         public static get Instance():Framework
         {
@@ -17,10 +19,12 @@ module dc
          * 初始化
          * @param	root	根节点，可以是stage
          */
-        public Setup(root:LayaSprite):void
+        public Setup(root:LayaSprite, main_loop:LayaHandler):void
         {
             this.PrintDeviceInfo();
 
+            this.m_MainloopHandle = main_loop;
+            Laya.timer.frameLoop(1, this, this.MainLoop);
             Time.Start();
             Input.Setup();
             LayerManager.Setup(root);
@@ -43,15 +47,33 @@ module dc
             LayerManager.Destroy();
             Input.Destroy();
         }
-
-        public Tick(elapse:number, game_frame:number):void
+        /**
+         * 游戏主循环
+        */
+        private MainLoop():void
         {
-            Input.Tick(elapse, game_frame);//放最前面
+            this.PreTick(Time.deltaTime,Time.frameCount);
+            this.Tick(Time.deltaTime,Time.frameCount);
+            this.EndTick(Time.deltaTime,Time.frameCount);
+        }
+        public PreTick(elapse:number, game_frame:number):void
+        {
             TimerManager.Instance.Tick(elapse, game_frame);
             UIManager.Instance.Tick(elapse, game_frame);
             ObjectManager.Instance.Tick(elapse, game_frame);
             SoundManager.Instance.Tick(elapse, game_frame);
             ResourceManager.Instance.Tick(elapse, game_frame);
+        }
+        public Tick(elapse:number, game_frame:number):void
+        {
+            if(this.m_MainloopHandle)
+            {
+                this.m_MainloopHandle.runWith([elapse, game_frame]);
+            }
+        }
+        public EndTick(elapse:number, game_frame:number):void
+        {
+            Input.Tick(elapse, game_frame);//放最后
         }
         /**打印设备信息*/
         private PrintDeviceInfo() 

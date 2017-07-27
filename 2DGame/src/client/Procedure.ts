@@ -24,7 +24,6 @@ module dc
             
             Log.Info("Procedure::setup");
             this.InitGameManager();
-            Laya.timer.frameLoop(1, this, this.MainLoop);
         }
         /**
          * 销毁
@@ -41,17 +40,10 @@ module dc
         {
             GameApp.Instance.StartGame();    
         }
-        /**
-         * 游戏主循环
-        */
-        private MainLoop():void
-        {
-            this.Tick(Time.deltaTime,Time.frameCount);
-        }
 
         private InitGameManager():void
         {
-            Framework.Instance.Setup(Laya.stage);
+            Framework.Instance.Setup(Laya.stage, LayaHandler.create(this, this.Tick, null, false));
             GameApp.Instance.Setup();
             ConfigManger.Instance.Setup();
             LangManager.Instance.Setup();
@@ -78,8 +70,6 @@ module dc
 
         private Tick(elapse:number, game_frame:number):void
         {
-            Framework.Instance.Tick(elapse, game_frame);
-
             GameApp.Instance.Tick(elapse, game_frame);
             SceneManager.Instance.Tick(elapse, game_frame);
         }
