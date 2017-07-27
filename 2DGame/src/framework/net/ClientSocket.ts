@@ -72,8 +72,14 @@ module dc
             this.Dispatch(SocketEvent.SOCKET_CLOSE);
 		}
 		private OnMessageReveived(msg: any): void
-        {
-			if (msg instanceof ArrayBuffer) 
+        {			
+            if (typeof msg == "string")
+            {
+				console.log(msg);
+                this.m_Socket.send(msg);
+			    this.m_Socket.flush();
+			}
+			else if (msg instanceof ArrayBuffer) 
             {
                 this.m_ReadBuff.writeArrayBuffer(msg);
                 this.m_ReadBuff.pos = 0;

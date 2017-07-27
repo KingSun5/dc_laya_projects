@@ -136,14 +136,14 @@ module dc
             LangManager.Instance.LoadAll();
             //显示登陆界面
             //UIShowController.Show(GUIID.LOGIN, 111,1112);
-            // new GameMain();
+            new GameMain();
             // //压力测试
             // //UnitAIManager.Instance.CreateTestRobot();
 
             
-            let info:SceneTransmitInfo = new SceneTransmitInfo();
-            info.sceneId = 1000;
-            EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
+            // let info:SceneTransmitInfo = new SceneTransmitInfo();
+            // info.sceneId = 1000;
+            // EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
         }
     }
 }

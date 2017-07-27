@@ -96,28 +96,28 @@ module dc
             //     Log.Debug(value.toString());
             //     return true;
             // });
-            Log.Debug(DateUtils.GetNow().toString());
-            for(let i = 0; i < 1000000; ++i)
-            {
-                list.Append(list.length, i);//每次在中间插入
-            }
-            while(list.length > 2)
-            {
-                list.Del(list.length-1);//每次在中间插入
-            }
-            Log.Debug(DateUtils.GetNow().toString());
+            // Log.Debug(DateUtils.GetNow().toString());
+            // for(let i = 0; i < 1000000; ++i)
+            // {
+            //     list.Append(list.length, i);//每次在中间插入
+            // }
+            // while(list.length > 2)
+            // {
+            //     list.Del(list.length-1);//每次在中间插入
+            // }
+            // Log.Debug(DateUtils.GetNow().toString());
 
-            let arr:Array<number> = [];
-            Log.Debug(DateUtils.GetNow().toString());
-            for(let i = 0; i < 1000000; ++i)
-            {
-                arr.splice(arr.length-1, 0, i);//每次在中间插入
-            }
-            while(list.length > 2)
-            {
-                arr.splice(arr.length-1, 1);//每次在中间插入
-            }
-            Log.Debug(DateUtils.GetNow().toString());
+            // let arr:Array<number> = [];
+            // Log.Debug(DateUtils.GetNow().toString());
+            // for(let i = 0; i < 1000000; ++i)
+            // {
+            //     arr.splice(arr.length-1, 0, i);//每次在中间插入
+            // }
+            // while(list.length > 2)
+            // {
+            //     arr.splice(arr.length-1, 1);//每次在中间插入
+            // }
+            // Log.Debug(DateUtils.GetNow().toString());
 
             //dc.Log.Debug(dc.StringUtils.minuteFormat(123));
             //dc.Log.Debug(dc.StringUtils.formate("杰卫，这里有{0}个苹果，和{1}个香蕉！", 5,10));
@@ -138,10 +138,10 @@ module dc
             // dc.Log.Debug(dc.Vector3.Project(vec1, vec2).ToString());
 
             //net
-            // this.m_socket = new dc.ClientSocket();
-            // this.m_socket.ConnectUrl("ws://echo.websocket.org:80");
-            // this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
-            // this.m_socket.AddEventListener(dc.SocketID.SOCKET_CONNECTED, this, this.OnConnected);
+            this.m_socket = new dc.ClientSocket();
+            this.m_socket.ConnectUrl("ws://127.0.0.1:8181");//ws://echo.websocket.org:80
+            this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
+            this.m_socket.AddEventListener(SocketEvent.SOCKET_CONNECTED, this, this.OnConnected);
 
             //声音
             //SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
