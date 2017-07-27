@@ -14,23 +14,16 @@ module dc
 		public static Setup():void
 		{
 			this.RegisterEvent();	
-			this.Reset();
+			this.Clear();
 		}
 		public static Destroy():void
 		{
-			this.m_ListKeyDown.length = 0;
-			this.m_ListKeyUp.length = 0;
-			this.m_ListKeyPress.length = 0;	
+			this.Clear();
 			this.UnRegisterEvent();
 		}
 		public static Tick(elapse:number, game_frame:number):void
 		{
 			this.Reset();
-		}
-		public static Update():void
-		{
-			Log.Debug("Update");
-			//this.Reset();
 		}
 		public static Reset():void
 		{
@@ -45,28 +38,29 @@ module dc
 		}
 		public static Clear():void
 		{
+			this.Reset();
 			for(let i = 0; i < eKeyCode.MAX; ++i)
 			{
 				this.m_ListKeyPress[i] = false;
 			}
-			for(let i = 0; i < eKeyCode.MAX; ++i)
-			{
-				this.m_ListKeyDown[i] = false;
-			}
-			for(let i = 0; i < eKeyCode.MAX; ++i)
-			{
-				this.m_ListKeyUp[i] = false;
-			}
 		}
-        //～～～～～～～～～～～～～～～～～～～～～～～获取键盘操作~～～～～～～～～～～～～～～～～～～～～～～～// 
+        //～～～～～～～～～～～～～～～～～～～～～～～查询键盘操作~～～～～～～～～～～～～～～～～～～～～～～～// 
 		/**任意键按下着*/
 		public static get anyKey():boolean
 		{
+			for(let i = 0; i < eKeyCode.MAX; ++i)
+			{
+				if(this.m_ListKeyPress[i])return true;
+			}
 			return false;
 		}
 		/**任意键按下*/
 		public static get anyKeyDown():boolean
 		{
+			for(let i = 0; i < eKeyCode.MAX; ++i)
+			{
+				if(this.m_ListKeyDown[i])return true;
+			}
 			return false;
 		}
         /**获取键是否按下着*/

@@ -15,6 +15,12 @@ module dc
             if(!this.instance)this.instance = new Framework();
             return this.instance;
         }
+
+        constructor()
+        {
+            super();
+            Time.Start();
+        }
         /**
          * 初始化
          * @param	root	根节点，可以是stage
@@ -25,7 +31,7 @@ module dc
 
             this.m_MainloopHandle = main_loop;
             Laya.timer.frameLoop(1, this, this.MainLoop);
-            Time.Start();
+
             Input.Setup();
             LayerManager.Setup(root);
             TimerManager.Instance.Setup();
@@ -38,6 +44,8 @@ module dc
 
         public Destroy():void
         {
+            Laya.timer.clearAll(this);
+            
             TimerManager.Instance.Destroy();
             UIManager.Instance.Destroy();
             ObjectManager.Instance.Destroy();   
