@@ -5,7 +5,6 @@ var dc;
         function GameMain() {
             this.m_image1_url = "res/image/1.png";
             this.ii = 1;
-            this.aa = 0;
             this.m_img = new LayaSprite();
             this.m_img.loadImage(this.m_image1_url, 100, 300);
             this.m_img.on(Laya.Event.CLICK, this, this.OnImageClickEvt);
@@ -229,8 +228,8 @@ var dc;
             this.m_socket.Send(by);
         };
         GameMain.prototype.OnRecvData = function (by) {
-            dc.Log.Debug("接收数据:" + this.aa.toString());
-            this.aa++;
+            var ii = by.getInt32();
+            dc.Log.Debug("接收数据:" + ii.toString());
         };
         GameMain.prototype.callback = function (args) {
             dc.Log.Debug(args.Type, args.Get(0));
