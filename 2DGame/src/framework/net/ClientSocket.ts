@@ -76,7 +76,10 @@ module dc
             if (typeof msg == "string")
             {
 				console.log(msg);
-                this.m_Socket.send(msg);
+                let by:LayaByte = new LayaByte();
+                by.writeInt32(123456);          
+                this.m_OutBuff.writeArrayBuffer(by.buffer, 0, by.length);
+                //this.m_Socket.send(msg);
 			    this.m_Socket.flush();
 			}
 			else if (msg instanceof ArrayBuffer) 
@@ -108,7 +111,7 @@ module dc
                     else
                     {//数据接收不全，等待。。。
                         this.CacheUnreadByte();
-                        break;
+                        return;
                     }
                 }
                 else
@@ -116,9 +119,8 @@ module dc
                     if(this.m_ReadBuff.bytesAvailable >= this.m_DataLength)
                     {
                         this.m_TempBuff.clear();
-                        this.m_TempBuff.writeArrayBuffer(this.m_ReadBuff, this.m_ReadBuff.pos, this.m_DataLength);
+                        this.m_TempBuff.writeArrayBuffer(this.m_ReadBuff.buffer, this.m_ReadBuff.pos, this.m_DataLength);
                         this.m_TempBuff.pos = 0;
-
                         //派发数据
                         if(this.m_RecvCallback != null)this.m_RecvCallback.runWith(this.m_TempBuff);
                         
@@ -128,10 +130,12 @@ module dc
                     else
                     {//数据接收不全，等待。。。
                         this.CacheUnreadByte();
-                        break;
+                        return;
                     }
                 }
             }
+            //能到这里，说明数据已经处理完成，清理读缓存
+            this.m_ReadBuff.clear();
         }
         /**把剩余未读的移到前面*/
         private CacheUnreadByte():void
@@ -139,10 +143,10 @@ module dc
             if(this.m_ReadBuff.bytesAvailable > 0)
             {
                 this.m_TempBuff.clear();
-                this.m_TempBuff.writeArrayBuffer(this.m_ReadBuff, this.m_ReadBuff.pos, this.m_ReadBuff.bytesAvailable);
+                this.m_TempBuff.writeArrayBuffer(this.m_ReadBuff.buffer, this.m_ReadBuff.pos, this.m_ReadBuff.bytesAvailable);
                 this.m_TempBuff.pos = 0;
                 this.m_ReadBuff.clear();
-                this.m_ReadBuff.writeArrayBuffer(this.m_TempBuff, this.m_TempBuff.pos, this.m_TempBuff.bytesAvailable);
+                this.m_ReadBuff.writeArrayBuffer(this.m_TempBuff.buffer, this.m_TempBuff.pos, this.m_TempBuff.bytesAvailable);
             }
         }
         /**主动关闭连接*/

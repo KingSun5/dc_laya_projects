@@ -266,11 +266,10 @@ module dc
             by.writeFloat32(0.123);
             this.m_socket.Send(by);
         }
-        private aa:number = 0;
-        private OnRecvData(by:Laya.Byte):void
+        private OnRecvData(by:LayaByte):void
         {
-            dc.Log.Debug("接收数据:" + this.aa.toString());
-            this.aa++;
+            let ii:number = by.getInt32();
+            dc.Log.Debug("接收数据:" + ii.toString());
         }
         private callback(args:dc.EventArgs):void
         {
