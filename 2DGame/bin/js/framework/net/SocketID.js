@@ -8,10 +8,10 @@ var dc;
     var SocketID = (function () {
         function SocketID() {
         }
+        //包头大小
+        SocketID.HEADER_SIZE = 2;
         return SocketID;
     }());
-    //包头大小
-    SocketID.HEADER_SIZE = 2;
     dc.SocketID = SocketID;
     /**
      * 网络事件
@@ -19,11 +19,11 @@ var dc;
     var SocketEvent = (function () {
         function SocketEvent() {
         }
+        SocketEvent.SOCKET_CONNECTED = "SOCKET_CONNECTED";
+        SocketEvent.SOCKET_CLOSE = "SOCKET_CLOSE";
+        SocketEvent.SOCKET_ERROR = "SOCKET_ERROR";
         return SocketEvent;
     }());
-    SocketEvent.SOCKET_CONNECTED = "SOCKET_CONNECTED";
-    SocketEvent.SOCKET_CLOSE = "SOCKET_CLOSE";
-    SocketEvent.SOCKET_ERROR = "SOCKET_ERROR";
     dc.SocketEvent = SocketEvent;
 })(dc || (dc = {}));
 //# sourceMappingURL=SocketID.js.map

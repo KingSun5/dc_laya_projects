@@ -65,6 +65,11 @@ module dc
         {
 			Log.Info("Socket Connected");
             this.Dispatch(SocketEvent.SOCKET_CONNECTED);
+
+            // let by:LayaByte = new LayaByte();
+            // by.writeInt32(123456);          
+            // this.m_OutBuff.writeArrayBuffer(by.buffer, 0, by.length);
+            // this.m_Socket.flush();
 		}
 		private OnSocketClose(): void 
         {

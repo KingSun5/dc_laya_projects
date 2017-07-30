@@ -62,6 +62,10 @@ var dc;
         ClientSocket.prototype.OnSocketOpen = function () {
             dc.Log.Info("Socket Connected");
             this.Dispatch(dc.SocketEvent.SOCKET_CONNECTED);
+            var by = new LayaByte();
+            by.writeInt32(123456);
+            this.m_OutBuff.writeArrayBuffer(by.buffer, 0, by.length);
+            this.m_Socket.flush();
         };
         ClientSocket.prototype.OnSocketClose = function () {
             dc.Log.Info("Socket closed");
