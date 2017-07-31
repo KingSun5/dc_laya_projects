@@ -15,10 +15,6 @@ module dc
         None = 0,
         Encrypt,        //加密
         Login,          //登陆
-
-        EnterRoom,      //进入房间
-        LeaveRoom,      //离开房间
-        KickoutRoom,    //踢出房间
     }
 
     export enum S2CMsg
@@ -26,9 +22,5 @@ module dc
         None = 0,
         Encrypt,        //加密
         Login,          //登陆结果
-
-        EnterRoom,      //进入房间
-        LeaveRoom,      //离开房间
-        KickoutRoom,    //踢出房间
     }
 }

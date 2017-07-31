@@ -17,12 +17,26 @@ module dc
         /**在这做数据初始化*/
 		public Init():void
         {
-
+            NetManager.Instance.RegisterPacketHandler(S2CMsg.Encrypt, this, this.OnNetEvt);
+            NetManager.Instance.RegisterPacketHandler(S2CMsg.Login, this, this.OnNetEvt);
         }
         /**在这清空数据，尤其是列表等保存的数据*/
         public Release():void
         {
+            NetManager.Instance.UnregisterPacketHandler(S2CMsg.Encrypt, this, this.OnNetEvt);
+            NetManager.Instance.UnregisterPacketHandler(S2CMsg.Login, this, this.OnNetEvt);
+        }
+        private OnNetEvt(msg_id:number, by:LayaByte):void
+        {
+            switch(msg_id)
+            {
+                case S2CMsg.Encrypt:
 
+                break;
+                case S2CMsg.Login:
+
+                break;
+            }
         }
 	}
 }

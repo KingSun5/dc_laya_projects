@@ -121,10 +121,10 @@ var dc;
             // let vec2:dc.Vector3 = new dc.Vector3(1,1,0);
             // dc.Log.Debug(dc.Vector3.Project(vec1, vec2).ToString());
             //net
-            this.m_socket = new dc.ClientSocket();
-            this.m_socket.ConnectUrl("ws://127.0.0.1:8181"); //ws://echo.websocket.org:80
-            this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
-            this.m_socket.AddEventListener(dc.SocketEvent.SOCKET_CONNECTED, this, this.OnConnected);
+            // this.m_socket = new dc.ClientSocket();
+            // this.m_socket.ConnectUrl("ws://127.0.0.1:8181");//ws://echo.websocket.org:80
+            // this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
+            dc.NetManager.Instance.ConnectUrl("ws://127.0.0.1:8181");
             //声音
             //SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
             //加载
@@ -218,13 +218,6 @@ var dc;
         };
         GameMain.prototype.OnSyncProgress = function (cur, total) {
             dc.Log.Debug("同步加载进度:" + cur + ", " + total);
-        };
-        GameMain.prototype.OnConnected = function (args) {
-            dc.Log.Debug("连接成功");
-            var by = dc.ByteArrayUtils.CreateSocketByte(dc.C2SMsg.Encrypt);
-            by.writeUTFString("dc");
-            by.writeInt32(1);
-            this.m_socket.Send(by);
         };
         GameMain.prototype.OnRecvData = function (by) {
             var header = by.getUint16();

@@ -138,11 +138,10 @@ module dc
             // dc.Log.Debug(dc.Vector3.Project(vec1, vec2).ToString());
 
             //net
-            this.m_socket = new dc.ClientSocket();
-            this.m_socket.ConnectUrl("ws://127.0.0.1:8181");//ws://echo.websocket.org:80
-            this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
-            this.m_socket.AddEventListener(SocketEvent.SOCKET_CONNECTED, this, this.OnConnected);
-
+            // this.m_socket = new dc.ClientSocket();
+            // this.m_socket.ConnectUrl("ws://127.0.0.1:8181");//ws://echo.websocket.org:80
+            // this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
+            NetManager.Instance.ConnectUrl("ws://127.0.0.1:8181");
             //声音
             //SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
 
@@ -256,19 +255,6 @@ module dc
         private OnSyncProgress(cur:number, total:number):void
         {
             Log.Debug("同步加载进度:" + cur + ", " + total);
-        }
-        private OnConnected(args:dc.EventArgs):void
-        {
-            dc.Log.Debug("连接成功");
-            let by:Laya.Byte = dc.ByteArrayUtils.CreateSocketByte(C2SMsg.Encrypt);
-            by.writeUTFString("dc");
-            by.writeInt32(1);
-            this.m_socket.Send(by);
-            
-            by = dc.ByteArrayUtils.CreateSocketByte(C2SMsg.Login);
-            by.writeUTFString("dc");
-            by.writeUTFString("123456");
-            this.m_socket.Send(by);
         }
         private OnRecvData(by:LayaByte):void
         {

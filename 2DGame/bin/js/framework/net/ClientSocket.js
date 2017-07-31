@@ -1,13 +1,3 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var dc;
 (function (dc) {
     /**
@@ -15,13 +5,8 @@ var dc;
      * @author hannibal
      * @time 2017-7-7
      */
-    var ClientSocket = (function (_super) {
-        __extends(ClientSocket, _super);
+    var ClientSocket = (function () {
         function ClientSocket() {
-            var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.m_IsReadHead = true;
-            _this.m_DataLength = 0;
-            return _this;
         }
         /**请求连接:主机*/
         ClientSocket.prototype.ConnectHost = function (host, port) {
@@ -40,7 +25,7 @@ var dc;
         };
         /**发数据*/
         ClientSocket.prototype.Send = function (by) {
-            if (!this.IsConnected())
+            if (!this.IsConnected() || by.length <= 0)
                 return;
             by.pos = 0;
             by.writeUint16(by.bytesAvailable - dc.SocketID.HEADER_SIZE);
@@ -51,84 +36,9 @@ var dc;
         };
         ClientSocket.prototype.HandleConnect = function () {
             this.m_ReadBuff = new Laya.Byte();
-            this.m_WriteBuff = new Laya.Byte();
-            this.m_TempBuff = new Laya.Byte();
             this.m_OutBuff = this.m_Socket.output;
-            this.m_OutBuff.endian = Laya.Socket.LITTLE_ENDIAN;
-            this.m_Socket.on(Laya.Event.OPEN, this, this.OnSocketOpen);
-            this.m_Socket.on(Laya.Event.CLOSE, this, this.OnSocketClose);
-            this.m_Socket.on(Laya.Event.MESSAGE, this, this.OnMessageReveived);
-            this.m_Socket.on(Laya.Event.ERROR, this, this.OnConnectError);
-        };
-        ClientSocket.prototype.OnSocketOpen = function () {
-            dc.Log.Info("Socket Connected");
-            this.Dispatch(dc.SocketEvent.SOCKET_CONNECTED);
-        };
-        ClientSocket.prototype.OnSocketClose = function () {
-            dc.Log.Info("Socket closed");
-            this.Dispatch(dc.SocketEvent.SOCKET_CLOSE);
-        };
-        ClientSocket.prototype.OnMessageReveived = function (msg) {
-            if (typeof msg == "string") {
-                console.log(msg);
-                var by = new LayaByte();
-                by.writeInt32(123456);
-                this.m_OutBuff.writeArrayBuffer(by.buffer, 0, by.length);
-                //this.m_Socket.send(msg);
-                this.m_Socket.flush();
-            }
-            else if (msg instanceof ArrayBuffer) {
-                this.m_ReadBuff.writeArrayBuffer(msg);
-                this.m_ReadBuff.pos = 0;
-                this.DispatcherData();
-            }
-            this.m_Socket.input.clear();
-        };
-        ClientSocket.prototype.OnConnectError = function (e) {
-            dc.Log.Info("Socket Error");
-            this.Dispatch(dc.SocketEvent.SOCKET_ERROR);
-        };
-        ClientSocket.prototype.DispatcherData = function () {
-            while (this.m_ReadBuff.bytesAvailable > 0) {
-                if (this.m_IsReadHead) {
-                    if (this.m_ReadBuff.bytesAvailable >= dc.SocketID.HEADER_SIZE) {
-                        this.m_DataLength = this.m_ReadBuff.getUint16();
-                        this.m_IsReadHead = false;
-                    }
-                    else {
-                        this.CacheUnreadByte();
-                        return;
-                    }
-                }
-                else {
-                    if (this.m_ReadBuff.bytesAvailable >= this.m_DataLength) {
-                        this.m_TempBuff.clear();
-                        this.m_TempBuff.writeArrayBuffer(this.m_ReadBuff.buffer, this.m_ReadBuff.pos, this.m_DataLength);
-                        this.m_TempBuff.pos = 0;
-                        //派发数据
-                        if (this.m_RecvCallback != null)
-                            this.m_RecvCallback.runWith(this.m_TempBuff);
-                        this.m_ReadBuff.pos += this.m_DataLength;
-                        this.m_IsReadHead = true;
-                    }
-                    else {
-                        this.CacheUnreadByte();
-                        return;
-                    }
-                }
-            }
-            //能到这里，说明数据已经处理完成，清理读缓存
-            this.m_ReadBuff.clear();
-        };
-        /**把剩余未读的移到前面*/
-        ClientSocket.prototype.CacheUnreadByte = function () {
-            if (this.m_ReadBuff.bytesAvailable > 0) {
-                this.m_TempBuff.clear();
-                this.m_TempBuff.writeArrayBuffer(this.m_ReadBuff.buffer, this.m_ReadBuff.pos, this.m_ReadBuff.bytesAvailable);
-                this.m_TempBuff.pos = 0;
-                this.m_ReadBuff.clear();
-                this.m_ReadBuff.writeArrayBuffer(this.m_TempBuff.buffer, this.m_TempBuff.pos, this.m_TempBuff.bytesAvailable);
-            }
+            this.m_Socket.endian = Laya.Socket.LITTLE_ENDIAN;
+            this.RegisterEvent();
         };
         /**主动关闭连接*/
         ClientSocket.prototype.Close = function () {
@@ -137,6 +47,7 @@ var dc;
                 this.m_RecvCallback = null;
             }
             if (this.m_Socket) {
+                this.UnRegisterEvent();
                 this.m_Socket.close();
                 this.m_Socket = null;
             }
@@ -150,8 +61,64 @@ var dc;
         ClientSocket.prototype.BindRecvCallback = function (fun) {
             this.m_RecvCallback = fun;
         };
+        //～～～～～～～～～～～～～～～～～～～～～～～事件～～～～～～～～～～～～～～～～～～～～～～～//
+        ClientSocket.prototype.RegisterEvent = function () {
+            this.m_Socket.on(Laya.Event.OPEN, this, this.OnSocketOpen);
+            this.m_Socket.on(Laya.Event.CLOSE, this, this.OnSocketClose);
+            this.m_Socket.on(Laya.Event.MESSAGE, this, this.OnMessageReveived);
+            this.m_Socket.on(Laya.Event.ERROR, this, this.OnConnectError);
+        };
+        ClientSocket.prototype.UnRegisterEvent = function () {
+            this.m_Socket.off(Laya.Event.OPEN, this, this.OnSocketOpen);
+            this.m_Socket.off(Laya.Event.CLOSE, this, this.OnSocketClose);
+            this.m_Socket.off(Laya.Event.MESSAGE, this, this.OnMessageReveived);
+            this.m_Socket.off(Laya.Event.ERROR, this, this.OnConnectError);
+        };
+        ClientSocket.prototype.OnSocketOpen = function () {
+            dc.Log.Info("Socket Connected");
+            dc.EventController.DispatchEvent(dc.SocketEvent.SOCKET_CONNECTED, this.m_Host);
+        };
+        ClientSocket.prototype.OnSocketClose = function () {
+            dc.Log.Info("Socket closed");
+            dc.EventController.DispatchEvent(dc.SocketEvent.SOCKET_CLOSE, this.m_Host);
+        };
+        ClientSocket.prototype.OnMessageReveived = function (msg) {
+            if (typeof msg == "string") {
+                console.log(msg);
+                var by = new LayaByte();
+                by.writeInt32(123456);
+                this.m_OutBuff.writeArrayBuffer(by.buffer, 0, by.length);
+                //this.m_Socket.send(msg);
+                this.m_Socket.flush();
+            }
+            else if (msg instanceof ArrayBuffer && this.m_Socket.input.length > 0) {
+                this.DispatcherData();
+            }
+        };
+        ClientSocket.prototype.OnConnectError = function (e) {
+            dc.Log.Info("Socket Error");
+            dc.EventController.DispatchEvent(dc.SocketEvent.SOCKET_ERROR, this.m_Host);
+        };
+        ClientSocket.prototype.DispatcherData = function () {
+            var buff = this.m_Socket.input;
+            while (buff.bytesAvailable > dc.SocketID.HEADER_SIZE) {
+                var dataLen = buff.getUint16();
+                if (buff.bytesAvailable < dataLen) {
+                    buff.pos -= dc.SocketID.HEADER_SIZE;
+                    break;
+                }
+                var beginPos = buff.pos;
+                this.m_ReadBuff.clear();
+                this.m_ReadBuff.writeArrayBuffer(buff.buffer, buff.pos, dataLen);
+                this.m_ReadBuff.pos = 0;
+                //派发数据
+                if (this.m_RecvCallback != null)
+                    this.m_RecvCallback.runWith(this.m_ReadBuff);
+                buff.pos = beginPos + dataLen;
+            }
+        };
         return ClientSocket;
-    }(dc.EventDispatcher));
+    }());
     dc.ClientSocket = ClientSocket;
 })(dc || (dc = {}));
 //# sourceMappingURL=ClientSocket.js.map

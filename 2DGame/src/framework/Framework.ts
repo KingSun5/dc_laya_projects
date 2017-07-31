@@ -40,6 +40,7 @@ module dc
             SoundManager.Instance.Setup();
             ResourceManager.Instance.Setup();
             DataProvider.Instance.Setup();
+            NetManager.Instance.Setup();
         }
 
         public Destroy():void
@@ -52,6 +53,7 @@ module dc
             SoundManager.Instance.Destroy();    
             ResourceManager.Instance.Destroy();  
             DataProvider.Instance.Destroy();
+            NetManager.Instance.Destroy();
             LayerManager.Destroy();
             Input.Destroy();
         }
@@ -71,6 +73,7 @@ module dc
             ObjectManager.Instance.Tick(elapse, game_frame);
             SoundManager.Instance.Tick(elapse, game_frame);
             ResourceManager.Instance.Tick(elapse, game_frame);
+            NetManager.Instance.Tick(elapse, game_frame);
         }
         public Tick(elapse:number, game_frame:number):void
         {

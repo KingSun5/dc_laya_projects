@@ -10,8 +10,8 @@ module dc
         public static CreateSocketByte(id:number):Laya.Byte
         {
             let by:Laya.Byte = new Laya.Byte();
-            by.writeUint16(0);
-            by.writeUint16(id);
+            by.writeUint16(0);//协议头，预留
+            by.writeUint16(id);//协议id
             return by;
         }
     }
