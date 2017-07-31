@@ -145,7 +145,6 @@ module dc
                 this.m_ReadBuff.pos = 0;
                 //派发数据
                 if(this.m_RecvCallback != null)this.m_RecvCallback.runWith(this.m_ReadBuff);
-                    
 
                 buff.pos = beginPos + dataLen;
             }

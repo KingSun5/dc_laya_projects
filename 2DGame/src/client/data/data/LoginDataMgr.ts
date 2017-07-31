@@ -31,10 +31,10 @@ module dc
             switch(msg_id)
             {
                 case S2CMsg.Encrypt:
-
+                let key = by.getInt32();
                 break;
                 case S2CMsg.Login:
-
+                let result = by.getByte();
                 break;
             }
         }
