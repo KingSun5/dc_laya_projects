@@ -264,6 +264,11 @@ module dc
             by.writeUTFString("dc");
             by.writeInt32(1);
             this.m_socket.Send(by);
+            
+            by = dc.ByteArrayUtils.CreateSocketByte(C2SMsg.Login);
+            by.writeUTFString("dc");
+            by.writeUTFString("123456");
+            this.m_socket.Send(by);
         }
         private OnRecvData(by:LayaByte):void
         {
