@@ -260,16 +260,15 @@ module dc
         private OnConnected(args:dc.EventArgs):void
         {
             dc.Log.Debug("连接成功");
-            let by:Laya.Byte = dc.ByteArrayUtils.CreateSocketByte();
-            by.writeInt32(85555555);
-            by.writeUTFString("1234");
-            by.writeFloat32(0.123);
+            let by:Laya.Byte = dc.ByteArrayUtils.CreateSocketByte(C2SMsg.Encrypt);
+            by.writeUTFString("dc");
+            by.writeInt32(1);
             this.m_socket.Send(by);
         }
         private OnRecvData(by:LayaByte):void
         {
-            let ii:number = by.getInt32();
-            dc.Log.Debug("接收数据:" + ii.toString());
+            let header:number = by.getUint16();
+            dc.Log.Debug("接收数据,id:" + header.toString());
         }
         private callback(args:dc.EventArgs):void
         {

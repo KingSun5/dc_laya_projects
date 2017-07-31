@@ -7,10 +7,11 @@ module dc
      */
     export class ByteArrayUtils
     {
-        public static CreateSocketByte():Laya.Byte
+        public static CreateSocketByte(id:number):Laya.Byte
         {
             let by:Laya.Byte = new Laya.Byte();
             by.writeUint16(0);
+            by.writeUint16(id);
             return by;
         }
     }

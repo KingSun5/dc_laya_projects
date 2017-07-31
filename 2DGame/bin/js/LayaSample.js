@@ -221,15 +221,14 @@ var dc;
         };
         GameMain.prototype.OnConnected = function (args) {
             dc.Log.Debug("连接成功");
-            var by = dc.ByteArrayUtils.CreateSocketByte();
-            by.writeInt32(85555555);
-            by.writeUTFString("1234");
-            by.writeFloat32(0.123);
+            var by = dc.ByteArrayUtils.CreateSocketByte(dc.C2SMsg.Encrypt);
+            by.writeUTFString("dc");
+            by.writeInt32(1);
             this.m_socket.Send(by);
         };
         GameMain.prototype.OnRecvData = function (by) {
-            var ii = by.getInt32();
-            dc.Log.Debug("接收数据:" + ii.toString());
+            var header = by.getUint16();
+            dc.Log.Debug("接收数据,id:" + header.toString());
         };
         GameMain.prototype.callback = function (args) {
             dc.Log.Debug(args.Type, args.Get(0));
