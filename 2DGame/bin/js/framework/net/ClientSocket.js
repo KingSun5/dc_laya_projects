@@ -35,7 +35,7 @@ var dc;
             return 0;
         };
         ClientSocket.prototype.HandleConnect = function () {
-            this.m_ReadBuff = new Laya.Byte();
+            this.m_ReadBuff = new LayaByte();
             this.m_OutBuff = this.m_Socket.output;
             this.m_Socket.endian = Laya.Socket.LITTLE_ENDIAN;
             this.RegisterEvent();

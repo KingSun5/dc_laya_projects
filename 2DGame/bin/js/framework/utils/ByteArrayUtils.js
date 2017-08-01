@@ -9,7 +9,7 @@ var dc;
         function ByteArrayUtils() {
         }
         ByteArrayUtils.CreateSocketByte = function () {
-            var by = new Laya.Byte();
+            var by = new LayaByte();
             by.writeUint16(0);
             return by;
         };
