@@ -42,7 +42,6 @@ module dc
 		{
 			
 		}
-
         //～～～～～～～～～～～～～～～～～～～～～～～连接～～～～～～～～～～～～～～～～～～～～～～～//
         /**请求连接:主机*/
         public ConnectHost(host:string, port:number):void
@@ -120,7 +119,7 @@ module dc
 					Log.Info("连接成功:" + host);
 
 					let socket:ClientSocket = this.m_DicSockets.GetValue(host);
-					let by:Laya.Byte = dc.ByteArrayUtils.CreateSocketByte(C2SMsg.Encrypt);
+					let by:LayaByte = dc.ByteArrayUtils.CreateSocketByte(C2SMsg.Encrypt);
 					by.writeUTFString("dc");
 					by.writeInt32(1);
 					socket.Send(by);

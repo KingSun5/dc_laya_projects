@@ -279,12 +279,12 @@ module dc
             return new ULong(this.lo, this.hi);
         };
 
-		public ReadExternal(input:Laya.Byte):void
+		public ReadExternal(input:LayaByte):void
 		{
 			this.hi = input.getUint32();
 			this.lo = input.getUint32();
 		}
-		public WriteExternal(output:Laya.Byte):void 
+		public WriteExternal(output:LayaByte):void 
 		{
 			output.writeUint32(this.hi);
 			output.writeUint32(this.lo);
@@ -396,12 +396,12 @@ module dc
             return new Long(num.lo, num.hi);
         }
 		
-		public ReadExternal(input:Laya.Byte):void
+		public ReadExternal(input:LayaByte):void
 		{
 			this.hi = input.getInt32();
 			this.lo = input.getInt32();
 		}
-		public WriteExternal(output:Laya.Byte):void 
+		public WriteExternal(output:LayaByte):void 
 		{
 			output.writeInt32(this.hi);
 			output.writeInt32(this.lo);

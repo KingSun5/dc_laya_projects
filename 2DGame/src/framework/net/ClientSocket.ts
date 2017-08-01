@@ -10,9 +10,9 @@ module dc
         private m_Host:string;
         private m_Port:number;
         private m_Socket:Laya.Socket;
-        private m_OutBuff:Laya.Byte;
+        private m_OutBuff:LayaByte;
         
-        private m_ReadBuff:Laya.Byte;
+        private m_ReadBuff:LayaByte;
 
         private m_RecvCallback:LayaHandler;
 
@@ -36,7 +36,7 @@ module dc
             this.HandleConnect();
         }
         /**发数据*/
-        public Send(by:Laya.Byte):number
+        public Send(by:LayaByte):number
         {
             if(!this.IsConnected() || by.length <= 0)return;
 
@@ -49,7 +49,7 @@ module dc
         }
         private HandleConnect()
         {
-            this.m_ReadBuff = new Laya.Byte();
+            this.m_ReadBuff = new LayaByte();
             this.m_OutBuff = this.m_Socket.output;
             this.m_Socket.endian = Laya.Socket.LITTLE_ENDIAN;
             this.RegisterEvent();
