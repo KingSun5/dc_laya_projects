@@ -14,21 +14,16 @@ module dc
             return this.instance;
         }
 
-        public Setup():void
-        {
-        }
-        public Destroy():void
-        {
-        }
-
         /**在这做数据初始化*/
         public Init():void
         {
+            PlayerDataMgr.Instance.Init();
             LoginDataMgr.Instance.Init();
         }
         /**在这清空数据*/
         public Release():void
         {
+            PlayerDataMgr.Instance.Release();
             LoginDataMgr.Instance.Release();
         }
 	}

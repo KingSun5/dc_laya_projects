@@ -45,9 +45,6 @@ module dc
         {
             Framework.Instance.Setup(Laya.stage, LayaHandler.create(this, this.Tick, null, false));
             GameApp.Instance.Setup();
-            ConfigManger.Instance.Setup();
-            LangManager.Instance.Setup();
-            DataManager.Instance.Setup();
             SceneManager.Instance.Setup();
             LoadViewManager.Instance.Setup();
             UILoaderRegister.Setup();
@@ -56,9 +53,6 @@ module dc
         }
         private ReleaseGameManager():void
         {
-            ConfigManger.Instance.Destroy();
-            LangManager.Instance.Destroy();
-            DataManager.Instance.Destroy();
             SceneManager.Instance.Destroy();
             LoadViewManager.Instance.Destroy();
             UILoaderRegister.Destroy();

@@ -17,24 +17,13 @@ module dc
             return this.instance;
         }
     
-		public Setup():void
+		public Init():void
         {
             this.m_ListTables =  [
                 new ConfigTemplate("data/lang/text/lang.json", "lang", "key"),
             ];
         }
-        public Destroy():void
-        {
-            this.UnloadAll();
-            this.m_ListTables = null;
-        }
-        /**开始加载*/
-		public LoadAll():void
-		{
-            DataProvider.Instance.Load(this.m_ListTables);
-		}
-        /**清空*/
-        public UnloadAll():void
+        public Release():void
         {
             if(!this.m_ListTables)return;
 
@@ -43,7 +32,14 @@ module dc
                 DataProvider.Instance.Unload(info.url);
             }
             ArrayUtils.Clear(this.m_ListTables);
-        } 
+            this.m_ListTables = null;
+        }
+        /**开始加载*/
+		public LoadAll():void
+		{
+            DataProvider.Instance.Load(this.m_ListTables);
+		}
+
         public get ListTables():Array<ConfigTemplate>
         {
             return this.m_ListTables;

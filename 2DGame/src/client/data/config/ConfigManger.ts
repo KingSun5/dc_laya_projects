@@ -17,7 +17,7 @@ module dc
         }
 
 		/**初始化数据*/
-        public Setup():void
+        public Init():void
         {
             this.m_ListTables =  [
                 new ConfigTemplate("data/serverList.json", ConfigTable.serverList, ""),
@@ -31,19 +31,7 @@ module dc
             ];
         }
 		/**释放数据*/
-        public Destroy():void
-        {
-            this.UnloadAll();
-            this.m_ListTables = null;
-        }
-        /**开始加载*/
-		public LoadAll():void
-		{
-            if(this.m_ListTables.length > 0)
-                DataProvider.Instance.Load(this.m_ListTables);
-		}
-        /**清空*/
-        public UnloadAll():void
+        public Release():void
         {
             if(!this.m_ListTables)return;
 
@@ -52,7 +40,15 @@ module dc
                 DataProvider.Instance.Unload(info.url);
             }
             ArrayUtils.Clear(this.m_ListTables);
+            this.m_ListTables = null;
         }
+        /**开始加载*/
+		public LoadAll():void
+		{
+            if(this.m_ListTables.length > 0)
+                DataProvider.Instance.Load(this.m_ListTables);
+		}
+
         public GetInfo(table:string, key:any):any
         {
             let info = DataProvider.Instance.GetInfo(table, key);

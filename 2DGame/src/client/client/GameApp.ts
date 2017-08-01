@@ -100,12 +100,14 @@ module dc
         private InitData():void
         {
             DataManager.Instance.Init();
+            LangManager.Instance.Init();
+            ConfigManger.Instance.Init();
         }
         private ReleaseData():void
         {
-            ConfigManger.Instance.UnloadAll();
-            LangManager.Instance.UnloadAll();
             DataManager.Instance.Release();
+            ConfigManger.Instance.Release();
+            LangManager.Instance.Release();
         }
         private InitGUI():void
         {
