@@ -138,7 +138,7 @@ module dc
             LangManager.Instance.LoadAll();
             //显示登陆界面
             //UIShowController.Show(GUIID.LOGIN, 111,1112);
-            new GameMain();
+            //new GameMain();
             // //压力测试
             // //UnitAIManager.Instance.CreateTestRobot();
 
@@ -146,6 +146,30 @@ module dc
             // let info:SceneTransmitInfo = new SceneTransmitInfo();
             // info.sceneId = 1000;
             // EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
+
+            ObjectPools.Get(Scene2D);
+            ObjectPools.Get(Role);
+
+            Scene3D.Instance.Setup();
+            Scene3D.Instance.CreateScene("");
+            //Scene3D.Instance.CreateScene("res/scene/Arena/Arena.ls");
+            Scene3D.Instance.CreateMainCamera(new Vector3(0, 3, 3), new Vector3(0, 0, 0), 0, 0.1, 100);
+            Scene3D.Instance.CreateMainLight(new Vector3(1, -1, 0),new Vector3(0.6, 0.6, 0.6),new Vector3(1.6, 1.6, 1.6),new Vector3(0.6, 0.6, 0.6));
+            Scene3D.Instance.SetSkybox("res/skyBox/skyBox2/skyCube.ltc");
+
+            //添加自定义模型
+            var box: Laya.MeshSprite3D = new Laya.MeshSprite3D(new Laya.BoxMesh(1, 1, 1));
+            Scene3D.Instance.AddChild(box);
+            box.transform.rotate(new Vector3(0, 45, 0), false, false);
+            var material: StandardMaterial = new StandardMaterial();
+            material.diffuseTexture = Texture2D.load("res/image/1.png");
+            box.meshRender.material = material;
+
+            var vect:Laya.Vector3 = new Laya.Vector3(1,1,0);
+            //每10毫秒旋转一次
+            Laya.timer.loop(10,null,function(){
+                box.transform.rotate(vect,true,false);
+            });
         }
     }
 }

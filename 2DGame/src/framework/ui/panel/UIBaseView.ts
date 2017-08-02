@@ -29,7 +29,7 @@ module dc
             this.UnregisteGUIEvent();
             this.OnDisable();
             this.OnDestroy();
-            this.destroy();
+            this.destroy(true);
             this.m_IsOpen = false;
             EventController.DispatchEvent(UIEvent.CLOSE, this.m_ScreenID);
             EventController.RemoveEventListener(UIEvent.Lang, this, this.OnLangChange);

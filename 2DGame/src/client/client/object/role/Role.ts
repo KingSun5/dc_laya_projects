@@ -419,7 +419,7 @@ module dc
 			// 	this.PlayPose(AnimationID.Move, false);
 			// }
 			//移动
-			let move_diff:Vector3 = cmd.Direction.normalized.Mul(this.MoveSpeed * Time.deltaTime);
+			let move_diff:Vector3 = Vec3Mul(Vec3Normalized(cmd.Direction),this.MoveSpeed * Time.deltaTime);
 			this.SetPosition(this.x+move_diff.x, this.y+move_diff.y, this.z+move_diff.z);
 
 			this.AttachStatus(eObjStatus.MOVE);

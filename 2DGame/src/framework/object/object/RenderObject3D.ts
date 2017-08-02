@@ -5,10 +5,9 @@ module dc
      * @author hannibal
      * @time 2017-7-12
      */
-	export class RenderObject extends GameObject
+	export class RenderObject3D extends GameObject
 	{
-		protected m_RootNode:LayaSprite = null;
-		protected m_IsVisible:boolean;		//是否可见
+		protected m_RootNode:LayaSprite3D = null;
 		protected m_IsLoadComplete:boolean;	//是否准备完成
 
         constructor()
@@ -20,9 +19,8 @@ module dc
         {
 			super.Init();
 
-			this.m_IsVisible = true;
 			this.m_IsLoadComplete = false;
-           	this.m_RootNode = new LayaSprite();
+           	this.m_RootNode = new LayaSprite3D();
         }
 
         public Setup(info:any):void
@@ -34,7 +32,6 @@ module dc
         {
 			if(this.m_RootNode)
 			{
-				this.m_RootNode.removeSelf();
 				this.m_RootNode.destroy();
 				this.m_RootNode = null;
 			}
@@ -58,12 +55,12 @@ module dc
 		/**位置*/
 		public SetPosition(x:number, y:number, z:number):void
 		{
-			this.m_RootNode.pos(x, y);
+			this.m_RootNode.transform.localPosition = new Vector3(x, y, z);
 		}
 		/**是否可见*/
 		public SetVisible(b:boolean):void
 		{
-			this.m_RootNode.visible = b;
+			this.m_RootNode.active = b;
 		}
 		/**移除所有子节点*/
 		public RemoveAllChild():void
@@ -75,7 +72,7 @@ module dc
 		}
 		public get IsVisible():boolean
 		{
-			return this.m_IsVisible;
+			return this.m_RootNode.active;
 		}
 		public get IsLoadComplete():boolean
 		{
@@ -83,21 +80,21 @@ module dc
 		}	
 		public get Position():Vector3
 		{
-			return new Vector3(this.m_RootNode.x, this.m_RootNode.y, 0);
-		}		
+			return this.m_RootNode.transform.position;
+		}	
 		public get x():number
 		{
-			return this.m_RootNode.x;
+			return this.m_RootNode.transform.position.x;
 		}		
 		public get y():number
 		{
-			return this.m_RootNode.y;
+			return this.m_RootNode.transform.position.y;
 		}		
 		public get z():number
 		{
-			return 0;
+			return this.m_RootNode.transform.position.z;
 		}	
-		public get RootNode():LayaSprite
+		public get RootNode():LayaSprite3D
 		{
 			return this.m_RootNode;
 		}

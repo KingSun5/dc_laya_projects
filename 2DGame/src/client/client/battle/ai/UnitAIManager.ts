@@ -24,7 +24,7 @@ module dc
                     let unit_info:UnitInfo = new UnitInfo(1);
                     unit_info.Group = eGroupType.TYPE_1;
                     unit_info.Pos = new Vector3(col*60,row*100,0);
-                    unit_info.Dir = Vector3.forward;
+                    unit_info.Dir = Vector3.ForwardRH;
                     ObjectCreateController.CreatePlayer(unit_info);
                 }
             }
@@ -35,7 +35,7 @@ module dc
 			let unit_info:UnitInfo = new UnitInfo(1);
             unit_info.Group = eGroupType.TYPE_1;
             unit_info.Pos = new Vector3(Laya.stage.width*0.5,Laya.stage.width*0.5,0);
-            unit_info.Dir = Vector3.forward;
+            unit_info.Dir = Vector3.ForwardRH;
 			let role:Role = ObjectCreateController.CreatePlayer(unit_info);
 
 			return role;

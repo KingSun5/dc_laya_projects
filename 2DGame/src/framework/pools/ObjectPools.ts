@@ -1,7 +1,8 @@
 module dc
 {
 	 /**
-     * 对象缓存，使用这个类，需要继承IPoolsObject，并实现Init接口函数
+     * 对象缓存
+     * 1.如果继承IPoolsObject，并实现Init接口函数；创建时会自动调用Init函数
      * @author hannibal
      * @time 2017-7-11
      */
@@ -14,7 +15,7 @@ module dc
         public static Get(classDef: any):any
         {
             let sign:string = "dc." + classDef.name;
-            let obj:IPoolsObject = Laya.Pool.getItem(sign) as IPoolsObject;
+            let obj:any = Laya.Pool.getItem(sign);
             if(!obj)
             {
                 if(!Laya.ClassUtils.getRegClass(sign))
@@ -24,7 +25,7 @@ module dc
                 }
                 obj = Laya.ClassUtils.getInstance(sign);
             }
-            obj.Init();
+            if(obj && obj["Init"])obj.Init();
             return obj;
         }
 
@@ -32,7 +33,7 @@ module dc
          * 回收对象
          * @param obj  对象实例
          */
-        public static Recover(obj: IPoolsObject):void
+        public static Recover(obj: any):void
         {
             if(!obj)return;
 

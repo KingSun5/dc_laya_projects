@@ -31,3 +31,28 @@ import LayaClip = laya.ui.Clip;
 import LayaHTMLDivElement = laya.html.dom.HTMLDivElement;
 import LayaTextInput = laya.ui.TextInput;
 import LayaUIGroup = laya.ui.UIGroup;
+
+//math
+import Point = laya.d3.math.Vector2;
+import Vector2 = laya.d3.math.Vector2;
+import Vector3 = laya.d3.math.Vector3;
+import Vector4 = laya.d3.math.Vector4;
+import Matrix3x3 = laya.d3.math.Matrix3x3;
+import Matrix4x4 = laya.d3.math.Matrix4x4;
+import Quaternion = laya.d3.math.Quaternion;
+import Plane = laya.d3.math.Plane;
+import Rect = laya.maths.Rectangle;
+import BoundBox = laya.d3.math.BoundBox;
+import BoundSphere = laya.d3.math.BoundSphere;
+import OrientedBoundBox = laya.d3.math.OrientedBoundBox;
+import Ray = laya.d3.math.Ray;
+
+//3d
+import LayaSprite3D = laya.d3.core.Sprite3D;
+import LayaScene = laya.d3.core.scene.Scene;
+import LayaCamera = laya.d3.core.Camera;
+import DirectionLight = laya.d3.core.light.DirectionLight;
+import PointLight = laya.d3.core.light.PointLight;
+import Transform = laya.d3.core.Transform3D;
+import StandardMaterial = laya.d3.core.material.StandardMaterial;
+import Texture2D = laya.d3.resource.Texture2D;

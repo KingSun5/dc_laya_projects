@@ -41,8 +41,8 @@ module dc
 			}
 			if(offset_x != 0 || offset_y != 0)
 			{
-				Vector3.Temp.Set(offset_x, offset_y, 0);
-				MainObjCmdFacade.Instance.pushCommand_KeyboardMove(Vector3.Temp);
+				Vec3Set(Math3DUtils.TempVec3, offset_x, offset_y, 0);
+				MainObjCmdFacade.Instance.pushCommand_KeyboardMove(Math3DUtils.TempVec3);
 			}
 		}
 		private HandleMouse():void

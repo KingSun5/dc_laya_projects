@@ -5,9 +5,9 @@ module dc
      * @author hannibal
      * @time 2017-7-12
      */
-	export class MapObject extends RenderObject
+	export class MapObject3D extends RenderObject3D
 	{
-		protected m_Direction:Vector2;	//移动方向
+		protected m_Direction:Vector3;	//移动方向
 		protected m_MoveSpeed:number;	//移动速度
 
 		protected m_RowIndex:number;	//所在地图的行
@@ -24,7 +24,7 @@ module dc
         {
 			super.Init();
 
-			this.m_Direction = Vector2.zero;
+			this.m_Direction = Vector3.ZERO;
 			this.m_MoveSpeed = 0;
            	this.m_RowIndex = Number.MIN_VALUE;
            	this.m_ColIndex = Number.MIN_VALUE;
@@ -57,15 +57,15 @@ module dc
 			EventController.DispatchEvent(GameObjectEvent.MAP_POSITION, this.m_ObjectGUID, this.x, this.y, this.z);
 
 			let map_col:number = PathGridMap.Instance.getNodeColByPos(this.x);
-			let map_row:number = PathGridMap.Instance.getNodeRowByPos(this.y);
+			let map_row:number = PathGridMap.Instance.getNodeRowByPos(this.z);
 			if(map_col != this.m_ColIndex || map_row != this.m_RowIndex)
 			{//节点改变
 				this.OnMapGridChangle(map_row, map_col);
 			}
 		}
-		public SetDirection(x:number, y:number)
+		public SetDirection(x:number, y:number, z:number)
 		{
-			this.m_Direction.Set(x, y);
+			Vec3Set(this.m_Direction, x, y, z);
 		}
 		public SetSpeed(s:number)
 		{
@@ -90,7 +90,7 @@ module dc
 				this.m_PathGrid.addObject(this);
 			}
 		}
-		public get Direction():Vector2
+		public get Direction():Vector3
 		{
 			return this.m_Direction;
 		}

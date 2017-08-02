@@ -38,7 +38,7 @@ module dc
 			this.f = this.g = this.h = 0;
 			this.parent = null;
 			this.costMultiplier = 1;
-			this.rect.Set(0,0,0,0);
+			this.rect.setTo(0,0,0,0);
 			this.m_arr_grid_obj.length = 0;
 		}
 		

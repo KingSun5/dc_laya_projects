@@ -53,7 +53,7 @@ module dc
 		private OnMouseClick(evt:any):void
 		{
 			Log.Debug("OnMouseClick x:" + evt.stageX + " y:" + evt.stageY);
-			Vector3.Temp.Set(evt.x,evt.y, 0);
+			Vec3Set(Math3DUtils.TempVec3, evt.x,evt.y, 0);
 			//MainObjCmdFacade.Instance.pushCommand_KeyboardMove(Vector3.Temp);
 		}
 	}

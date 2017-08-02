@@ -19,7 +19,7 @@ module dc
         constructor()
         {
             super();
-            this.m_OffsetPos = Vector2.zero;
+            this.m_OffsetPos = Vector2.ZERO;
             this.m_RootNode = new LayaSprite();
         }
 
@@ -96,7 +96,7 @@ module dc
         /// </summary>
         public SetOffset(x:number, y:number)
         {
-            this.m_OffsetPos.Set(x, y);
+            Vec2Set(this.m_OffsetPos, x, y);
         }
         public SetVisible(b:boolean):void
         {

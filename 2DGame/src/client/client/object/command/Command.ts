@@ -80,9 +80,9 @@ module dc
 		{
 			super.Init();
 			this.m_SkillInfo = null;
-			this.m_Direction = Vector3.zero;     //方向
+			this.m_Direction = Vector3.ZERO;     //方向
 			this.m_TargetId = 0;                 //目标id
-			this.m_TargetPos = Vector3.zero;     //目标位置
+			this.m_TargetPos = Vector3.ZERO;     //目标位置
 			this.m_AttackStage = eAttackStage.Begin; //攻击阶段
 			this.m_StageTime = 0;	
         	this.m_CmdType = eCommandType.ATTACK;
@@ -151,8 +151,8 @@ module dc
 		public Init():void
 		{
 			super.Init();
-			this.m_Direction = Vector3.zero;     //方向
-			this.m_TargetPos = Vector3.zero;     //目标位置
+			this.m_Direction = Vector3.ZERO;     //方向
+			this.m_TargetPos = Vector3.ZERO;     //目标位置
         	this.m_CmdType = eCommandType.KEYBOARD_MOVE;
 		}
 		public get Direction():Vector3
@@ -182,7 +182,7 @@ module dc
 		public Init():void
 		{
 			super.Init();
-			this.m_TargetPos = Vector3.zero;     //目标位置
+			this.m_TargetPos = Vector3.ZERO;     //目标位置
         	this.m_CmdType = eCommandType.MOVE;
 		}
 		
