@@ -8,7 +8,7 @@ module dc
 	export class ComponentBase
 	{
 		/**组件持有者，外部使用时，不要set*/
-		//public Owner:DCObject = null;
+		public Owner:DCObject = null;
 
 		/**添加成功执行：当前帧*/
 		public Start():void{}
