@@ -30,16 +30,16 @@
     <script type="text/javascript" src="libs/laya.html.js"></script>
 	<!--粒子类库-->
     <script type="text/javascript" src="libs/laya.particle.js"></script>
-	<!--提供tileMap解析支持-->
-    <script type="text/javascript" src="libs/laya.tiledmap.js"></script>
 	<!--提供了制作UI的各种组件实现-->
     <script type="text/javascript" src="libs/laya.ui.js"></script>
-	<!-- 物理引擎matter.js -->
+	<!--提供LayaAir3D接口-->
+	<script type="text/javascript" src="libs/laya.d3.js"></script>
 	<!-- 调试.js -->
 	<script type="text/javascript" src="libs/laya.debugtool.js"></script>
 	<!--用户自定义顺序文件添加到这里-->
 	<!--jsfile--Custom-->
 	<script src="js/framework/core/Singleton.js"></script>
+	<script src="js/framework/core/IComponent.js"></script>
 	<script src="js/framework/core/collection/Stack.js"></script>
 	<script src="js/framework/core/collection/Queue.js"></script>
 	<script src="js/framework/core/collection/List.js"></script>
@@ -47,16 +47,12 @@
 	<script src="js/framework/core/collection/Dictionary.js"></script>
 	<script src="js/framework/core/struct/Color.js"></script>
 	<script src="js/framework/core/struct/Long.js"></script>
-	<script src="js/framework/core/math/Vector4.js"></script>
-	<script src="js/framework/core/math/Vector3.js"></script>
-	<script src="js/framework/core/math/Vector2.js"></script>
-	<script src="js/framework/core/math/Rect.js"></script>
-	<script src="js/framework/core/math/Ray.js"></script>
 	<script src="js/framework/core/utils/Utils.js"></script>
 	<script src="js/framework/core/utils/UrlUtils.js"></script>
 	<script src="js/framework/core/utils/StringUtils.js"></script>
 	<script src="js/framework/core/utils/NumberUtils.js"></script>
 	<script src="js/framework/core/utils/MathUtils.js"></script>
+	<script src="js/framework/core/utils/Math3DUtils.js"></script>
 	<script src="js/framework/core/utils/HtmlUtils.js"></script>
 	<script src="js/framework/core/utils/DisplayUtils.js"></script>
 	<script src="js/framework/core/utils/DicUtils.js"></script>
@@ -83,11 +79,14 @@
 	<script src="js/framework/net/SocketID.js"></script>
 	<script src="js/framework/net/ClientSocket.js"></script>
 	<script src="js/framework/net/NetManager.js"></script>
-	<script src="js/framework/object/ObjectID.js"></script>
-	<script src="js/framework/object/ObjectManager.js"></script>
-	<script src="js/framework/object/GameObject.js"></script>
-	<script src="js/framework/object/RenderObject.js"></script>
-	<script src="js/framework/object/MapObject.js"></script>
+	<script src="js/framework/object/idmap/ObjectID.js"></script>
+	<script src="js/framework/object/object/RenderObject.js"></script>
+	<script src="js/framework/object/object/MapObject.js"></script>
+	<script src="js/framework/object/object/GameObject.js"></script>
+	<script src="js/framework/object/object/RenderObject3D.js"></script>
+	<script src="js/framework/object/object/MapObject3D.js"></script>
+	<script src="js/framework/object/object/ObjectManager.js"></script>
+	<script src="js/framework/object/componet/ObjectComponent.js"></script>
 	<script src="js/framework/pools/ObjectPools.js"></script>
 	<script src="js/framework/resource/info/LoaderInfo.js"></script>
 	<script src="js/framework/resource/idmap/ResourceID.js"></script>
@@ -102,6 +101,7 @@
 	<script src="js/framework/scene/camera/ThirdFollowCamera2D.js"></script>
 	<script src="js/framework/scene/scene/Viewport2D.js"></script>
 	<script src="js/framework/scene/scene/Scene2D.js"></script>
+	<script src="js/framework/scene3d/Scene3D.js"></script>
 	<script src="js/framework/sound/idmap/SoundID.js"></script>
 	<script src="js/framework/sound/sound/Sound.js"></script>
 	<script src="js/framework/sound/sound/BGSound.js"></script>
