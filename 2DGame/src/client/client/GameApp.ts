@@ -146,9 +146,6 @@ module dc
             // let info:SceneTransmitInfo = new SceneTransmitInfo();
             // info.sceneId = 1000;
             // EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
-            //let role = new RenderObject();
-            ObjectPools.Get(Scene2D);
-            ObjectPools.Get(RenderObject);
 
             Scene3D.Instance.Setup();
             Scene3D.Instance.CreateScene("");
