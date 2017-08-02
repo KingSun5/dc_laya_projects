@@ -38,7 +38,7 @@ module dc
 			DicUtils.ClearDic(this.m_PacketHandles);
 			this.UnRegisterEvent();
         }
-		public Tick(elapse:number, game_frame:number):void
+		public Tick():void
 		{
 			
 		}

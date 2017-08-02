@@ -36,7 +36,7 @@ module dc
             UILayers.Destroy();
         }
 
-        public Tick(elapse:number, game_frame:number):void
+        public Tick():void
         {
             this.m_DicUIView.Foreach(function(key, value)
             {

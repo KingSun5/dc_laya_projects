@@ -45,13 +45,13 @@ module dc
             super.Setup(info);
             EventController.DispatchEvent(EventID.UNIT_ENTER, this.m_ObjectGUID);
         }
-        public Update(elapse:number, game_frame:number):boolean
+        public Update():boolean
         {
             if (!this.m_IsDie)
             {
-                this.m_UnitBuff.ProcessBuff(elapse, game_frame);
+                this.m_UnitBuff.ProcessBuff();
             }
-            return super.Update(elapse, game_frame);
+            return super.Update();
         }
         public Destroy():void
         {

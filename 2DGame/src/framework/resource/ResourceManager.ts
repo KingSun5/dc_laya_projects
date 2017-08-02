@@ -29,7 +29,7 @@ module dc
 				this.m_DicLoaderUrl = null;
 			}
 		}
-		public Tick(elapse:number, game_frame:number):void
+		public Tick():void
 		{
 		}	
 

@@ -62,10 +62,10 @@ module dc
             Framework.Instance.Destroy();
         }
 
-        private Tick(elapse:number, game_frame:number):void
+        private Tick():void
         {
-            GameApp.Instance.Tick(elapse, game_frame);
-            SceneManager.Instance.Tick(elapse, game_frame);
+            GameApp.Instance.Tick();
+            SceneManager.Instance.Tick();
         }
     }
 }

@@ -27,7 +27,7 @@ module dc
             this.UnRegisterEvent();
         }
 
-        public Tick(elapse:number, game_frame:number):void
+        public Tick():void
         {
             if(this.m_CurScene != null)
             {

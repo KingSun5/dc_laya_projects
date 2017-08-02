@@ -32,7 +32,7 @@ module dc
             }
         }
 
-        public Update(elapse:number, game_frame:number):void
+        public Update():void
         {
 
         }

@@ -21,7 +21,7 @@ module dc
 			this.Clear();
 			this.UnRegisterEvent();
 		}
-		public static Tick(elapse:number, game_frame:number):void
+		public static Tick():void
 		{
 			this.Reset();
 		}

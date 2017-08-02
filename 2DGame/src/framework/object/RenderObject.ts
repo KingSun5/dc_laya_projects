@@ -40,9 +40,9 @@ module dc
 			super.Destroy();
         }
 
-        public Update(elapse:number, game_frame:number):boolean
+        public Update():boolean
         {
-            return super.Update(elapse, game_frame);     
+            return super.Update();     
         }
 		/**加载外部资源*/
 		public LoadResource(arr_res: Array<{ url:string, type:string}>):void

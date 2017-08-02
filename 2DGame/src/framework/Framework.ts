@@ -62,29 +62,29 @@ module dc
         */
         private MainLoop():void
         {
-            this.PreTick(Time.deltaTime,Time.frameCount);
-            this.Tick(Time.deltaTime,Time.frameCount);
-            this.EndTick(Time.deltaTime,Time.frameCount);
+            this.PreTick();
+            this.Tick();
+            this.EndTick();
         }
-        public PreTick(elapse:number, game_frame:number):void
+        public PreTick():void
         {
-            TimerManager.Instance.Tick(elapse, game_frame);
-            UIManager.Instance.Tick(elapse, game_frame);
-            ObjectManager.Instance.Tick(elapse, game_frame);
-            SoundManager.Instance.Tick(elapse, game_frame);
-            ResourceManager.Instance.Tick(elapse, game_frame);
-            NetManager.Instance.Tick(elapse, game_frame);
+            TimerManager.Instance.Tick();
+            UIManager.Instance.Tick();
+            ObjectManager.Instance.Tick();
+            SoundManager.Instance.Tick();
+            ResourceManager.Instance.Tick();
+            NetManager.Instance.Tick();
         }
-        public Tick(elapse:number, game_frame:number):void
+        public Tick():void
         {
             if(this.m_MainloopHandle)
             {
-                this.m_MainloopHandle.runWith([elapse, game_frame]);
+                this.m_MainloopHandle.runWith([]);
             }
         }
-        public EndTick(elapse:number, game_frame:number):void
+        public EndTick():void
         {
-            Input.Tick(elapse, game_frame);//放最后
+            Input.Tick();//放最后
         }
         /**打印设备信息*/
         private PrintDeviceInfo() 

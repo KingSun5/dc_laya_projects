@@ -46,9 +46,9 @@ module dc
 			super.Destroy();
         }
 
-        public Update(elapse:number, game_frame:number):boolean
+        public Update():boolean
         {
-            return super.Update(elapse, game_frame);     
+            return super.Update();     
         }
 		/**位置*/
 		public SetPosition(x:number, y:number, z:number):void

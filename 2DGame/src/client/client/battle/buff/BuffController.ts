@@ -107,12 +107,12 @@ module dc
 			this.m_DicBuff.Clear();
 			this.DetachAllBuffStatus();
 		}
-		public ProcessBuff(elapse:number, game_frame:number):void
+		public ProcessBuff():void
 		{
 			this.m_DicBuff.Foreach(function(key, value)
 			{
 				if (value.Active)
-					value.Update(elapse, game_frame);
+					value.Update();
 				return true;
 			});
 			//删除无效的

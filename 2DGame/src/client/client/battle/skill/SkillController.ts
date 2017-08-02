@@ -16,11 +16,11 @@ module dc
 			this.m_DicID2Skill = new NDictionary<SkillInfo>();
 		}
 
-		public Update(elapse:number, game_frame:number):void
+		public Update():void
 		{
 			this.m_DicID2Skill.Foreach(function(key, value)
 			{
-				value.Update(elapse, game_frame);
+				value.Update();
 				return true;
 			});
 		}

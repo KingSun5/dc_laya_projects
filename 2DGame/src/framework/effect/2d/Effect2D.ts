@@ -51,7 +51,7 @@ module dc
             this.m_RootNode.removeSelf();
             this.Dispatch(EffectEvent.EFFECT_DESTROY);
         }
-        public Update(elapse:number, game_frame:number):boolean
+        public Update():boolean
         {
             return true;
         }

@@ -29,13 +29,13 @@ module dc
             ArrayUtils.Clear(this.m_Timers);
         }
 
-        public Tick(elapse:number, game_frame:number):void
+        public Tick():void
         {
             this.Remove();
 
             for (let i = 0; i < this.m_Timers.length; i++)
             {
-                this.m_Timers[i].Update(elapse);
+                this.m_Timers[i].Update();
             }
         }
         /**
@@ -145,9 +145,9 @@ module dc
             this.mTime.Init(this.mRate, false);
         }
 
-        public Update(elapse:number):void
+        public Update():void
         {
-            if (this.isActive && this.mTime.Update(elapse))
+            if (this.isActive && this.mTime.Update(Time.deltaTime))
             {
                 if(this.handle != null)this.handle.run();
 

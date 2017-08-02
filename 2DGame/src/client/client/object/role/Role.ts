@@ -56,16 +56,16 @@ module dc
 
             super.Destroy();
         }
-        public Update(elapse:number, game_frame:number):boolean
+        public Update():boolean
         {
 			{
 				//执行逻辑命令
 				this.ProcessLogicCommand();
 
 				//执行具体的命令
-				this.Tick_Action(elapse, game_frame);
+				this.Tick_Action();
 			}
-            return super.Update(elapse, game_frame);
+            return super.Update();
         }
 		/**加载完成回调*/
 		protected OnLoadComplete(args:Array<string>):void
@@ -497,17 +497,17 @@ module dc
 			super.HandleDie();
 		}
 
-		public Tick_Action(elapse:number, game_frame:number):void
+		public Tick_Action():void
 		{
 			///1.技能cmd
 			if (this.m_CurAttackCmd != null)
 			{
-				this.m_CurAttackCmd.ElapseTime += elapse;
+				this.m_CurAttackCmd.ElapseTime += Time.deltaTime;
 				let ret:boolean = true;
 				switch (this.m_CurAttackCmd.CmdType)
 				{
 					case eCommandType.ATTACK:
-						ret = this.Tick_Attack(elapse, game_frame);
+						ret = this.Tick_Attack();
 						break;
 				}
 				if (!ret)
@@ -519,7 +519,7 @@ module dc
 			///2.特殊cmd
 			if (this.m_CurSpecialCmd != null)
 			{
-				this.m_CurSpecialCmd.ElapseTime += elapse;
+				this.m_CurSpecialCmd.ElapseTime += Time.deltaTime;
 				let ret:boolean = true;
 				switch (this.m_CurSpecialCmd.CmdType)
 				{
@@ -541,15 +541,15 @@ module dc
 				switch (this.m_CurBaseCmd.CmdType)
 				{
 					case eCommandType.IDLE:
-						ret = this.Tick_Idle(elapse, game_frame);
+						ret = this.Tick_Idle();
 						break;
 
 					case eCommandType.BATTACK:
-						ret = this.Tick_BAttack(elapse, game_frame);
+						ret = this.Tick_BAttack();
 						break;
 
 					case eCommandType.DIE:
-						ret = this.Tick_Die(elapse, game_frame);
+						ret = this.Tick_Die();
 						break;
 				}
 				if (!ret)
@@ -570,23 +570,23 @@ module dc
 				this.SetCurBaseCmd(null);
 			}
 		}
-		public Tick_Idle(elapse:number, game_frame:number):boolean
+		public Tick_Idle():boolean
 		{
 			return false;
 		}
 
-		public Tick_Attack(elapse:number, game_frame:number):boolean
+		public Tick_Attack():boolean
 		{
 			if (this.m_CurAttackCmd == null) return false;
 
 			return true;
 		}
 
-		public Tick_BAttack(elapse:number, game_frame:number):boolean
+		public Tick_BAttack():boolean
 		{
 			return true;
 		}
-		public Tick_Die(elapse:number, game_frame:number):boolean
+		public Tick_Die():boolean
 		{
 			return true;
 		}

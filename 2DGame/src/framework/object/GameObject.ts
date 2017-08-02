@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-6
      */
-    export class GameObject implements IPoolsObject
+    export class GameObject// extends DCObject
     {
         protected m_Active:boolean        //是否激活中
         protected m_ObjectType:string;    //对象类型
@@ -16,19 +16,22 @@ module dc
 
         constructor()
         {
-             this.m_ObjectGUID = 0; 
-             this.m_Observer = new EventDispatcher(); 
+            //super();
+            this.m_ObjectGUID = 0; 
+            this.m_Observer = new EventDispatcher(); 
         }
 
         public Init():void
         {
-             this.m_Active = true;
-             this.m_ObjectType = "";
-             this.m_ObjectServerID = ""; 
+            //super.Init();
+            this.m_Active = true;
+            this.m_ObjectType = "";
+            this.m_ObjectServerID = ""; 
         }
 
         public Setup(info:any):void
         {
+            //super.Setup(info);
             this.RegisterEvent();
         }
 
@@ -37,10 +40,15 @@ module dc
             this.m_Active = false;
             this.m_Observer.Clear();
             this.UnRegisterEvent();
+            //super.Destroy();
         }
 
-        public Update(elapse:number, game_frame:number):boolean
+        public Update():boolean
         {
+            if(this.m_Active)
+            {
+                //super.Update();
+            }
             return true;     
         }
         /**注册事件*/
@@ -56,6 +64,7 @@ module dc
             this.m_Active = b;
         }
 
+        //～～～～～～～～～～～～～～～～～～～～～～～get/set～～～～～～～～～～～～～～～～～～～～～～～//
         public get Active():boolean
         {
             return this.m_Active;

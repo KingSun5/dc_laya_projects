@@ -29,13 +29,13 @@ module dc
             this.RemoveAll();
         }
 
-        public Tick(elapse:number, game_frame:number):void
+        public Tick():void
         {
             let obj:GameObject = null;
             for(let key in this.m_DicObject)
             {
                 obj = this.m_DicObject[key];
-                if(obj && obj.Active && obj.Update(elapse, game_frame))
+                if(obj && obj.Active && obj.Update())
                 {
                     
                 }

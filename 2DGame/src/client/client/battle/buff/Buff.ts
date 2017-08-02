@@ -41,11 +41,11 @@ module dc
             }
         }
 
-        public Update(elapse:number, game_frame:number):boolean
+        public Update():boolean
         {
             if(this.m_Active)
             {
-                this.m_LeaveTime -= elapse;
+                this.m_LeaveTime -= Time.deltaTime;
                 if(this.m_LeaveTime > 0)
                 {
                     return true;

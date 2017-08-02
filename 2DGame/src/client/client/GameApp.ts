@@ -30,7 +30,7 @@ module dc
             this.UnRegisterEvent();
         }
 
-        public Tick(elapse:number, game_frame:number):void
+        public Tick():void
         {
         }
 
@@ -146,9 +146,9 @@ module dc
             // let info:SceneTransmitInfo = new SceneTransmitInfo();
             // info.sceneId = 1000;
             // EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
-
+            //let role = new RenderObject();
             ObjectPools.Get(Scene2D);
-            ObjectPools.Get(Role);
+            ObjectPools.Get(RenderObject);
 
             Scene3D.Instance.Setup();
             Scene3D.Instance.CreateScene("");
