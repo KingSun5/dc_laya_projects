@@ -39,11 +39,11 @@ var dc;
         ObjectManager.prototype.Destroy = function () {
             this.RemoveAll();
         };
-        ObjectManager.prototype.Tick = function (elapse, game_frame) {
+        ObjectManager.prototype.Tick = function () {
             var obj = null;
             for (var key in this.m_DicObject) {
                 obj = this.m_DicObject[key];
-                if (obj && obj.Active && obj.Update(elapse, game_frame)) {
+                if (obj && obj.Active && obj.Update()) {
                 }
                 else {
                     this.m_ListReleaseObject.push(obj);
@@ -116,9 +116,9 @@ var dc;
         ObjectManager.prototype.ShareObjectGUID = function () {
             return ++this.m_shareObjID;
         };
+        ObjectManager.instance = null;
         return ObjectManager;
     }(dc.Singleton));
-    ObjectManager.instance = null;
     dc.ObjectManager = ObjectManager;
 })(dc || (dc = {}));
 //# sourceMappingURL=ObjectManager.js.map

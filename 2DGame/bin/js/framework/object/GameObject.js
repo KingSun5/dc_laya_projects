@@ -5,26 +5,34 @@ var dc;
      * @author hannibal
      * @time 2017-7-6
      */
-    var GameObject = (function () {
+    var GameObject // extends DCObject
+     = (function () {
         function GameObject() {
             this.m_Observer = null;
+            //super();
             this.m_ObjectGUID = 0;
             this.m_Observer = new dc.EventDispatcher();
         }
         GameObject.prototype.Init = function () {
+            //super.Init();
             this.m_Active = true;
             this.m_ObjectType = "";
             this.m_ObjectServerID = "";
         };
         GameObject.prototype.Setup = function (info) {
+            //super.Setup(info);
             this.RegisterEvent();
         };
         GameObject.prototype.Destroy = function () {
             this.m_Active = false;
             this.m_Observer.Clear();
             this.UnRegisterEvent();
+            //super.Destroy();
         };
-        GameObject.prototype.Update = function (elapse, game_frame) {
+        GameObject.prototype.Update = function () {
+            if (this.m_Active) {
+                //super.Update();
+            }
             return true;
         };
         /**注册事件*/
@@ -36,6 +44,7 @@ var dc;
             this.m_Active = b;
         };
         Object.defineProperty(GameObject.prototype, "Active", {
+            //～～～～～～～～～～～～～～～～～～～～～～～get/set～～～～～～～～～～～～～～～～～～～～～～～//
             get: function () {
                 return this.m_Active;
             },

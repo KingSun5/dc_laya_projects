@@ -21,10 +21,10 @@ var dc;
                 Singleton.classValues.push(this);
             }
         }
+        Singleton.classKeys = [];
+        Singleton.classValues = [];
         return Singleton;
     }());
-    Singleton.classKeys = [];
-    Singleton.classValues = [];
     dc.Singleton = Singleton;
 })(dc || (dc = {}));
 //# sourceMappingURL=Singleton.js.map
