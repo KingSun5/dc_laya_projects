@@ -50,9 +50,9 @@ module dc
 			{
 				offsetX = -Scene2D.Instance.sceneOffsetX;
 			}
-			else if((Scene2D.Instance.sceneOffsetX + offsetX)+Scene2D.Instance.sceneWidth <= Viewport2D.Width)
+			else if((Scene2D.Instance.sceneOffsetX + offsetX)+Scene2D.Instance.sceneWidth <= Laya.stage.width)
 			{
-				offsetX = Viewport2D.Width-Scene2D.Instance.sceneWidth-Scene2D.Instance.sceneOffsetX;
+				offsetX = Laya.stage.width-Scene2D.Instance.sceneWidth-Scene2D.Instance.sceneOffsetX;
 			}
 			return offsetX;
 		}
@@ -68,9 +68,9 @@ module dc
 			{
 				offsetY = -Scene2D.Instance.sceneOffsetY;
 			}
-			else if((Scene2D.Instance.sceneOffsetY + offsetY)+Scene2D.Instance.sceneHeight <= Viewport2D.Height)
+			else if((Scene2D.Instance.sceneOffsetY + offsetY)+Scene2D.Instance.sceneHeight <= Laya.stage.height)
 			{
-				offsetY = Viewport2D.Height-Scene2D.Instance.sceneHeight-Scene2D.Instance.sceneOffsetY;
+				offsetY = Laya.stage.height-Scene2D.Instance.sceneHeight-Scene2D.Instance.sceneOffsetY;
 			}
 			return offsetY;
 		}			

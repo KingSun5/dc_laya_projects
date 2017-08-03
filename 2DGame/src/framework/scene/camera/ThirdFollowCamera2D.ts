@@ -34,8 +34,8 @@ module dc
 			var offsetX:number = 0;
 			var offsetY:number = 0;
 			
-			offsetX = Viewport2D.Width*0.5 - (x+Scene2D.Instance.sceneOffsetX);
-			offsetY = Viewport2D.Height*0.5 - (y+Scene2D.Instance.sceneOffsetY);
+			offsetX = Laya.stage.width*0.5 - (x+Scene2D.Instance.sceneOffsetX);
+			offsetY = Laya.stage.height*0.5 - (y+Scene2D.Instance.sceneOffsetY);
 			
 			//夹取到有效位置
 			offsetX = Camera2D.clampOffsetX(offsetX);

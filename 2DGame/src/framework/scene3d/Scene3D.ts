@@ -153,10 +153,7 @@ module dc
 		 */		
 		private OnScreenResize():void
 		{
-			let width:number = Laya.Browser.clientWidth;
-			let height:number = Laya.Browser.clientHeight;
-			Log.Info("界面大小改变：" + width + "*" + height + ",client:"+Laya.Browser.clientWidth+"*"+Laya.Browser.clientHeight+",stage:"+Laya.stage.width+"*"+Laya.stage.height);
-			Viewport2D.SetSize(width, height);
+			Log.Info("界面大小改变：client:"+Laya.Browser.clientWidth+"*"+Laya.Browser.clientHeight+",stage:"+Laya.stage.width+"*"+Laya.stage.height);
 		}	
         //～～～～～～～～～～～～～～～～～～～～～～～get/sedt～～～～～～～～～～～～～～～～～～～～～～～//	
 		public get MainScene():LayaScene
