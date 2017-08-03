@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-6
      */
-    export class GameObject extends DCObject
+    export class GameObject implements IPoolsObject, IObject, IComponentObject
     {
         protected m_Active:boolean        //是否激活中
         protected m_ObjectType:string;    //对象类型
@@ -13,16 +13,16 @@ module dc
         protected m_ObjectServerID:string;//服务器id在客户端的备份
 
         protected m_Observer:EventDispatcher = null;
+        protected m_Component:ComponentCenter = null;
 
         constructor()
         {
-            super();
             this.m_Observer = new EventDispatcher(); 
+            this.m_Component = new ComponentCenter();
         }
 
         public Init():void
         {
-            super.Init();
             this.m_ObjectGUID = ObjectManager.Instance.ShareObjectGUID(); 
             this.m_Active = true;
             this.m_ObjectType = "";
@@ -31,7 +31,7 @@ module dc
 
         public Setup(info:any):void
         {
-            super.Setup(info);
+            this.m_Component.Setup();
             this.RegisterEvent();
         }
 
@@ -40,14 +40,14 @@ module dc
             this.m_Active = false;
             this.m_Observer.Clear();
             this.UnRegisterEvent();
-            super.Destroy();
+            this.m_Component.Destroy();
         }
 
         public Update():boolean
         {
             if(this.m_Active)
             {
-                //super.Update();
+                this.m_Component.Update();
             }
             return true;     
         }
@@ -61,9 +61,31 @@ module dc
 
         public SetActive(b:boolean)
         {
+            let old:boolean = this.m_Active;
             this.m_Active = b;
+            if(old != this.m_Active)
+            {
+                this.m_Component.OnChangeActive(this.m_Active);
+            }
         }
 
+        //～～～～～～～～～～～～～～～～～～～～～～～组件～～～～～～～～～～～～～～～～～～～～～～～//
+        public AddComponent(classDef:any):ComponentBase
+        {
+            return this.m_Component.AddComponent(classDef, this);
+        }
+		public RemoveComponent(classDef:any):void
+        {
+            this.m_Component.RemoveComponent(classDef);
+        }
+		public RemoveAllComponent():void
+        {
+            this.m_Component.RemoveAllComponent();
+        }
+        public GetComponent(classDef:any):ComponentBase
+        {
+            return this.m_Component.GetComponent(classDef);
+        }
         //～～～～～～～～～～～～～～～～～～～～～～～get/set～～～～～～～～～～～～～～～～～～～～～～～//
         public get Active():boolean
         {

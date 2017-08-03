@@ -8,18 +8,18 @@ module dc
 	export class BGSound extends Sound
 	{
 
-		public Setup(file_name:string, count:number):void
+		public Setup(info:any):void
 		{
-			super.Setup(file_name, count);
+			super.Setup(info);
 		}
 		public Destroy():void
 		{
 			super.Destroy();
 		}
 
-		public Update():void
+		public Update():boolean
 		{
-			super.Update();
+			return super.Update();
 		}
 
 		public Play():void

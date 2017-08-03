@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-11
      */
-	export class Sound implements IPoolsObject
+	export class Sound implements IPoolsObject, IObject, IComponentObject
 	{
 		protected m_Active:boolean;
 		protected m_SoundFile:string;
@@ -13,18 +13,26 @@ module dc
 		protected m_PlayCount:number;
 		protected m_SoundChannel:Laya.SoundChannel = null;
 
+        protected m_Component:ComponentCenter = null;
+		
+        constructor()
+        { 
+            this.m_Component = new ComponentCenter();
+        }
+
         public Init():void
         {
 
         }
 
-		public Setup(file_name:string, count:number):void
+		public Setup(info:any):void
 		{
 			this.m_Active = true;
-			this.m_SoundFile = file_name;
-			this.m_PlayCount = count;
+			this.m_SoundFile = info.file;
+			this.m_PlayCount = info.time;
 			this.m_IsPlaying = false;
 			this.m_SoundChannel = null;
+            this.m_Component.Setup();
 			this.LoadResource();
 		}
 		public Destroy():void
@@ -37,12 +45,17 @@ module dc
 				this.m_SoundChannel.stop();
 				this.m_SoundChannel = null;
 			}
+            this.m_Component.Destroy();
 			ObjectPools.Recover(this);
 		}
 
-		public Update():void
+		public Update():boolean
 		{
-
+            if(this.m_Active)
+            {
+                this.m_Component.Update();
+            }
+			return true;
 		}
 
 		public Play():void
@@ -107,5 +120,23 @@ module dc
 		{
 			return this.m_IsPlaying;
 		}
+		
+        //～～～～～～～～～～～～～～～～～～～～～～～组件～～～～～～～～～～～～～～～～～～～～～～～//
+        public AddComponent(classDef:any):ComponentBase
+        {
+            return this.m_Component.AddComponent(classDef, this);
+        }
+		public RemoveComponent(classDef:any):void
+        {
+            this.m_Component.RemoveComponent(classDef);
+        }
+		public RemoveAllComponent():void
+        {
+            this.m_Component.RemoveAllComponent();
+        }
+        public GetComponent(classDef:any):ComponentBase
+        {
+            return this.m_Component.GetComponent(classDef);
+        }
 	}
 }

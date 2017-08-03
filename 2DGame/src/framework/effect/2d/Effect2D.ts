@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-11
      */	
-	export class BaseEffect extends EventDispatcher implements IPoolsObject
+	export class BaseEffect extends EventDispatcher implements IPoolsObject, IObject, IComponentObject
 	{
         protected m_Active:boolean = false      //是否激活中;
         protected m_ObjectUID:number = 0;       //对象唯一ID
@@ -16,11 +16,14 @@ module dc
         protected m_RootNode:LayaSprite = null;
         protected m_Animation:LayaAnimation = null;
 
+        protected m_Component:ComponentCenter = null;
+
         constructor()
         {
             super();
             this.m_OffsetPos = Vector2.ZERO;
             this.m_RootNode = new LayaSprite();
+            this.m_Component = new ComponentCenter();
         }
 
         public Init():void
@@ -29,10 +32,11 @@ module dc
 
         public Setup(file:string)
         {
+            this.m_Component.Setup();
             this.m_Active = true;
             if(this.m_TotalTime > 0)
             {
-                TimerManager.Instance.AddOnce(this.m_TotalTime, this, this.OnComponentDestroy)
+                TimerManager.Instance.AddOnce(this.m_TotalTime, this, this.OnTimeEnd)
             }
             if(!StringUtils.IsNullOrEmpty(file))
             {
@@ -49,15 +53,18 @@ module dc
             }
             DisplayUtils.RemoveAllChild(this.m_RootNode);
             this.m_RootNode.removeSelf();
+            this.m_Component.Destroy();
             this.Dispatch(EffectEvent.EFFECT_DESTROY);
         }
         public Update():boolean
         {
+            if(this.m_Active)
+            {
+                this.m_Component.Update();
+            }
             return true;
         }
-        /// <summary>
-        /// 加载内部资源
-        /// </summary>
+        /**加载内部资源*/
         private LoadResource(file:string):boolean
         {
             if(StringUtils.IsNullOrEmpty(file))return false;
@@ -75,14 +82,31 @@ module dc
             this.m_RootNode.addChild(this.m_Animation);
             this.m_Animation.pos(this.m_OffsetPos.x, this.m_OffsetPos.y);
         }
-        /// <summary>
-        /// 组件自动销毁回调
-        /// </summary>
-        private OnComponentDestroy()
+        /**自动销毁回调*/
+        private OnTimeEnd()
         {
             this.m_Active = false;
             EffectManager.Instance.RemoveEffect(this.m_ObjectUID);
         }
+
+        //～～～～～～～～～～～～～～～～～～～～～～～组件～～～～～～～～～～～～～～～～～～～～～～～//
+        public AddComponent(classDef:any):ComponentBase
+        {
+            return this.m_Component.AddComponent(classDef, this);
+        }
+		public RemoveComponent(classDef:any):void
+        {
+            this.m_Component.RemoveComponent(classDef);
+        }
+		public RemoveAllComponent():void
+        {
+            this.m_Component.RemoveAllComponent();
+        }
+        public GetComponent(classDef:any):ComponentBase
+        {
+            return this.m_Component.GetComponent(classDef);
+        }
+        //～～～～～～～～～～～～～～～～～～～～～～～get/set～～～～～～～～～～～～～～～～～～～～～～～//        
         public SetParent(node:LayaNode):void
         {
             if(node)node.addChild(this.m_RootNode);

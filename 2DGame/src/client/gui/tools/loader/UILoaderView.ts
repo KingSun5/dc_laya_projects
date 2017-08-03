@@ -62,9 +62,9 @@ module dc
             super.OnDestroy();
         }
         /**每帧循环*/
-        public Update():void
+        public Update():boolean
         {
-            super.Update();
+            return super.Update();
         }
         protected OnEnable():void
         {

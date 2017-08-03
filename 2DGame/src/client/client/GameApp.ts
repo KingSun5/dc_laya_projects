@@ -78,7 +78,7 @@ module dc
             //调用DebugTool调试面板
             //Laya.DebugTool.init();
 
-            Laya.stage.frameRate = Laya.Stage.FRAME_MOUSE;
+            //Laya.stage.frameRate = Laya.Stage.FRAME_MOUSE;
             Laya.stage.size(UIID.DEFAULT_WIDTH,UIID.DEFAULT_HEIGHT);
             //Laya.stage.fullScreenEnabled = true;
 
@@ -136,24 +136,30 @@ module dc
             LangManager.Instance.SwitchLang(eLangType.en);
             ConfigManger.Instance.LoadAll();
             LangManager.Instance.LoadAll();
+
             //显示登陆界面
             //UIShowController.Show(GUIID.LOGIN, 111,1112);
-            //new GameMain();
+            
+            new GameMain();
             // //压力测试
             // //UnitAIManager.Instance.CreateTestRobot();
 
-            
             let info:SceneTransmitInfo = new SceneTransmitInfo();
             info.sceneId = 1000;
             EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
 
-            // Scene3D.Instance.Setup();
-            // Scene3D.Instance.CreateScene("");
-            // //Scene3D.Instance.CreateScene("res/scene/Arena/Arena.ls");
-            // Scene3D.Instance.CreateMainCamera(new Vector3(0, 3, 3), new Vector3(0, 0, 0), 0, 0.1, 100);
-            // Scene3D.Instance.CreateMainLight(new Vector3(1, -1, 0),new Vector3(0.6, 0.6, 0.6),new Vector3(1.6, 1.6, 1.6),new Vector3(0.6, 0.6, 0.6));
-            // Scene3D.Instance.SetSkybox("res/skyBox/skyBox2/skyCube.ltc");
+            //this.Test3D();
+        }
 
+        private Test3D():void
+        {
+            Scene3D.Instance.Setup();
+            //Scene3D.Instance.CreateScene("");
+            Scene3D.Instance.CreateScene("res/scene/Arena/Arena.ls");
+            Scene3D.Instance.CreateMainCamera(new Vector3(0, 3, 3), new Vector3(0, 0, 0), 0, 0.1, 100);
+            Scene3D.Instance.CreateMainLight(new Vector3(1, -1, 0),new Vector3(0.6, 0.6, 0.6),new Vector3(1.6, 1.6, 1.6),new Vector3(0.6, 0.6, 0.6));
+            Scene3D.Instance.SetSkybox("res/skyBox/skyBox2/skyCube.ltc");
+            
             // //添加自定义模型
             // var box: Laya.MeshSprite3D = new Laya.MeshSprite3D(new Laya.BoxMesh(1, 1, 1));
             // Scene3D.Instance.AddChild(box);

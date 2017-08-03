@@ -100,7 +100,7 @@ module dc
 						break;
 					default:return;
 				}
-				view.Open([]);
+				view.Setup([]);
 				UILayers.loader.addChild(view);
 				this.m_DicLoadView.Add(type, view);
 			}

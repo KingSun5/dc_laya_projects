@@ -30,7 +30,40 @@ module dc
 			ObjectManager.Instance.AttachObject(obj);
 			MainObjCmdFacade.Instance.AttackRole = obj;
 
+			obj.AddComponent(RoleScript);
+			//obj.RemoveCompnent(RoleScript);
+
 			return obj;
+		}
+	}
+
+	export class RoleScript  extends ComponentBase
+	{
+		/**添加成功执行：当前帧*/
+		public Start():void
+		{
+			Log.Debug("Start");
+		}
+		/**激活执行：当前帧*/
+		public OnEnable():void
+		{
+			Log.Debug("OnEnable");
+		}
+		/**失效*/
+		public OnDisable():void
+		{
+			Log.Debug("OnDisable");
+		}
+		/**每帧执行*/
+		public Update():void
+		{
+			let role:Role = this.Owner as Role;
+			role.SetPosition(role.x+1, role.y, role.z);
+		}
+		/**销毁执行*/
+		public OnDestroy():void
+		{
+			Log.Debug("OnDestroy");
 		}
 	}
 }

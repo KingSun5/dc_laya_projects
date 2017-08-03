@@ -54,7 +54,7 @@ module dc
             if(this.m_CurBGSound == null)
                 this.m_CurBGSound = new BGSound();
             
-            this.m_CurBGSound.Setup(file_name, count);
+            this.m_CurBGSound.Setup({file:file_name, time:count});
 
             return this.m_CurBGSound;
         }
@@ -94,7 +94,7 @@ module dc
         public PlaySoundEffect(file_name:string, count:number):EffectSound
         {
             let sound:EffectSound = ObjectPools.Get(EffectSound);
-            sound.Setup(file_name, count);
+            sound.Setup({file:file_name, time:count});
 
             return sound;
         }

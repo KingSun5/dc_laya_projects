@@ -8,9 +8,9 @@ module dc
 	export interface UIPanelInterface
 	{
 		/**打开*/
-        Open(...args:any[]):void;
+        Setup(...args:any[]):void;
         /**关闭：如果是用UIManager打开的，则关闭一定要通过UIManager关闭*/
-        Close():void
+        Destroy():void
         /**置顶*/
         SetTopMost():void;
         /**置底*/
@@ -19,6 +19,6 @@ module dc
         SetVisible(bVisible: boolean):void 
         /**设置界面唯一id*/
         SetScreenID(id:number):void; 
-        Update():void;
+        Update():boolean;
 	}
 }

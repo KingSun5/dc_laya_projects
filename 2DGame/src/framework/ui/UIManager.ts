@@ -70,7 +70,7 @@ module dc
 
             //执行初始操作
             panel.SetScreenID(id);
-            panel.Open(args.slice(0));
+            panel.Setup(args.slice(0));
 
             let layer:LayaSprite = UILayers.GetLayer(loader_info.mLayer);
             layer.addChild(panel);
@@ -95,7 +95,7 @@ module dc
             if(loader_info.mHideDestroy)
             {
                 this.m_DicUIView.Remove(id);
-                panel.Close();
+                panel.Destroy();
                 return true;
             }
             else

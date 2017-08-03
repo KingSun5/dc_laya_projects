@@ -26,6 +26,8 @@ module dc
 			if(Input.GetKey(eKeyCode.A))
 			{
 				offset_x = -Force_X;
+				let script:RoleScript = MainObjCmdFacade.Instance.AttackRole.GetComponent(RoleScript);
+				MainObjCmdFacade.Instance.AttackRole.RemoveComponent(RoleScript);
 			}
 			else if(Input.GetKey(eKeyCode.D))
 			{
@@ -47,7 +49,6 @@ module dc
 		}
 		private HandleMouse():void
 		{
-
 		}
 	}
 }

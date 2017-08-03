@@ -5,28 +5,35 @@ module dc
      * @author hannibal
      * @time 2017-7-19
      */	
-	export class UIBaseView extends LayaView implements UIPanelInterface
+	export class UIBaseView extends LayaView implements UIPanelInterface, IComponentObject, IObject
 	{
         protected m_IsOpen:boolean = false;
         protected m_ScreenID:number = 0;
+        protected m_Component:ComponentCenter = null;
         
-        constructor(){super();}
+        constructor()
+        {
+            super();
+            this.m_Component = new ComponentCenter();
+        }
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～公共方法～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         /**打开*/
-        public Open(args:any):void
+        public Setup(args:any):void
         {
             this.m_IsOpen = true;
             this.OnLangChange();
             this.OnCreate(args.slice(0));
             this.OnEnable();
             this.LoadResource();
+            this.m_Component.Setup();
             EventController.DispatchEvent(UIEvent.OPEN, this.m_ScreenID);
             EventController.AddEventListener(UIEvent.Lang, this, this.OnLangChange);
         }
         /**关闭*/
-        public Close():void
+        public Destroy():void
         {
             this.UnregisteGUIEvent();
+            this.m_Component.Destroy();
             this.OnDisable();
             this.OnDestroy();
             this.destroy(true);
@@ -65,6 +72,7 @@ module dc
                     this.OnEnable();
                 else
                     this.OnDisable();
+                this.m_Component.OnChangeActive(this.visible);
             }
         }  
         /**设置界面唯一id，只在UIManager设置，其他地方不要再次设置*/
@@ -81,9 +89,14 @@ module dc
         protected OnDestroy():void
         {
         }
-        /**每帧循环*/
-        public Update():void
+        /**每帧循环：如果覆盖，必须调用super.Update()*/
+        public Update():boolean
         {
+            if(this.visible)
+            {
+                this.m_Component.Update();
+            }
+            return true;
         }
         protected OnEnable():void
         {
@@ -150,6 +163,24 @@ module dc
         {
             return false;
         }
+
+        //～～～～～～～～～～～～～～～～～～～～～～～组件～～～～～～～～～～～～～～～～～～～～～～～//
+        public AddComponent(classDef:any):ComponentBase
+        {
+            return this.m_Component.AddComponent(classDef, this);
+        }
+		public RemoveComponent(classDef:any):void
+        {
+            this.m_Component.RemoveComponent(classDef);
+        }
+		public RemoveAllComponent():void
+        {
+            this.m_Component.RemoveAllComponent();
+        }
+        public GetComponent(classDef:any):ComponentBase
+        {
+            return this.m_Component.GetComponent(classDef);
+        }        
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～内部方法～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         /**处理需要提前加载的资源*/
         private LoadResource():void
