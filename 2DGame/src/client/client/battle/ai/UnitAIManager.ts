@@ -34,7 +34,7 @@ module dc
 		{
 			let unit_info:UnitInfo = new UnitInfo(1);
             unit_info.Group = eGroupType.TYPE_1;
-            unit_info.Pos = new Vector3(Laya.stage.width*0.5,Laya.stage.width*0.5,0);
+            unit_info.Pos = new Vector3(0,0,0);
             unit_info.Dir = Vector3.ForwardRH;
 			let role:Role = ObjectCreateController.CreatePlayer(unit_info);
 

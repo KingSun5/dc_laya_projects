@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-6
      */
-    export class GameObject// extends DCObject
+    export class GameObject extends DCObject
     {
         protected m_Active:boolean        //是否激活中
         protected m_ObjectType:string;    //对象类型
@@ -16,14 +16,14 @@ module dc
 
         constructor()
         {
-            //super();
-            this.m_ObjectGUID = 0; 
+            super();
             this.m_Observer = new EventDispatcher(); 
         }
 
         public Init():void
         {
-            //super.Init();
+            super.Init();
+            this.m_ObjectGUID = ObjectManager.Instance.ShareObjectGUID(); 
             this.m_Active = true;
             this.m_ObjectType = "";
             this.m_ObjectServerID = ""; 
@@ -31,7 +31,7 @@ module dc
 
         public Setup(info:any):void
         {
-            //super.Setup(info);
+            super.Setup(info);
             this.RegisterEvent();
         }
 
@@ -40,7 +40,7 @@ module dc
             this.m_Active = false;
             this.m_Observer.Clear();
             this.UnRegisterEvent();
-            //super.Destroy();
+            super.Destroy();
         }
 
         public Update():boolean

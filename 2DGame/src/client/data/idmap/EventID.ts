@@ -19,6 +19,8 @@ module dc
 		public static LEAVE_BATTLE:string 						= "LEAVE_BATTLE";                          		//离开战场
 
 		public static CHANGE_SCENE:string                       = "CHANGE_SCENE";								//切换场景
+
+		public static TERRAIN_LOADED:string                     = "TERRAIN_LOADED";								//地图资源加载完成
 		//主玩家
 		public static MAIN_OBJ_LEAVE:string                   	= "MAIN_OBJ_LEAVE";								//主玩家离开
 		public static MAIN_OBJ_ENTER:string                     = "MAIN_OBJ_ENTER";							    //主玩家进入

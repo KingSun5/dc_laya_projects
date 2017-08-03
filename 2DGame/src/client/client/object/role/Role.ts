@@ -85,7 +85,8 @@ module dc
 			//添加到舞台
 			this.m_RootNode.addChild(this.m_Animation);
 			let rect:LayaRectangle = this.m_Animation.getBounds();
-			this.m_RootNode.pivot(rect.width*0.5,rect.height*0.5);
+			this.m_RootNode.size(rect.width,rect.height);
+			DisplayUtils.SetAlige(this.m_RootNode, this.m_AligeType, rect.width,rect.height);
 			//创建动画模板
 			Laya.Animation.createFrames(this.BuildAniUrls("DJ/M111_DJ2_1_000",4),"DJ2_1");
 			Laya.Animation.createFrames(this.BuildAniUrls("DJ/M111_DJ2_2_000",4),"DJ2_2");

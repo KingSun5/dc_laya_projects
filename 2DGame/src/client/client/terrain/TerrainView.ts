@@ -7,13 +7,22 @@ module dc
      */
 	export class TerrainView extends LayaSprite
 	{
+		private m_MapID:number = 0;
+
+		constructor()
+		{
+			super();
+		}
+
 		public Setup(map_id:number):void
 		{	
+			this.m_MapID = map_id;
 			ResourceManager.Instance.LoadRes("res/image/map/1001.jpg", LayaLoader.IMAGE, LayaHandler.create(this, this.OnLoadComplete));
 		}
 
 		public Destroy():void
 		{
+			this.destroy();
 			this.UnRegisterEvent();
 		}
 
@@ -26,6 +35,8 @@ module dc
 			this.pivot(0, 0);
 			SceneLayers.terrain.addChild(this);
 			this.RegisterEvent();
+
+			EventController.DispatchEvent(EventID.TERRAIN_LOADED,this.m_MapID);
 		}
 
 

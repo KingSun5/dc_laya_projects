@@ -84,7 +84,7 @@ module dc
 
             Laya.stage.scaleMode = laya.display.Stage.SCALE_EXACTFIT;
             //设置横竖屏
-            Laya.stage.screenMode = laya.display.Stage.SCREEN_VERTICAL;
+            Laya.stage.screenMode = laya.display.Stage.SCREEN_HORIZONTAL;
 
             //设置水平对齐
             Laya.stage.alignH =laya.display.Stage.ALIGN_CENTER;
@@ -143,30 +143,30 @@ module dc
             // //UnitAIManager.Instance.CreateTestRobot();
 
             
-            // let info:SceneTransmitInfo = new SceneTransmitInfo();
-            // info.sceneId = 1000;
-            // EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
+            let info:SceneTransmitInfo = new SceneTransmitInfo();
+            info.sceneId = 1000;
+            EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
 
-            Scene3D.Instance.Setup();
-            Scene3D.Instance.CreateScene("");
-            //Scene3D.Instance.CreateScene("res/scene/Arena/Arena.ls");
-            Scene3D.Instance.CreateMainCamera(new Vector3(0, 3, 3), new Vector3(0, 0, 0), 0, 0.1, 100);
-            Scene3D.Instance.CreateMainLight(new Vector3(1, -1, 0),new Vector3(0.6, 0.6, 0.6),new Vector3(1.6, 1.6, 1.6),new Vector3(0.6, 0.6, 0.6));
-            Scene3D.Instance.SetSkybox("res/skyBox/skyBox2/skyCube.ltc");
+            // Scene3D.Instance.Setup();
+            // Scene3D.Instance.CreateScene("");
+            // //Scene3D.Instance.CreateScene("res/scene/Arena/Arena.ls");
+            // Scene3D.Instance.CreateMainCamera(new Vector3(0, 3, 3), new Vector3(0, 0, 0), 0, 0.1, 100);
+            // Scene3D.Instance.CreateMainLight(new Vector3(1, -1, 0),new Vector3(0.6, 0.6, 0.6),new Vector3(1.6, 1.6, 1.6),new Vector3(0.6, 0.6, 0.6));
+            // Scene3D.Instance.SetSkybox("res/skyBox/skyBox2/skyCube.ltc");
 
-            //添加自定义模型
-            var box: Laya.MeshSprite3D = new Laya.MeshSprite3D(new Laya.BoxMesh(1, 1, 1));
-            Scene3D.Instance.AddChild(box);
-            box.transform.rotate(new Vector3(0, 45, 0), false, false);
-            var material: StandardMaterial = new StandardMaterial();
-            material.diffuseTexture = Texture2D.load("res/image/1.png");
-            box.meshRender.material = material;
+            // //添加自定义模型
+            // var box: Laya.MeshSprite3D = new Laya.MeshSprite3D(new Laya.BoxMesh(1, 1, 1));
+            // Scene3D.Instance.AddChild(box);
+            // box.transform.rotate(new Vector3(0, 45, 0), false, false);
+            // var material: StandardMaterial = new StandardMaterial();
+            // material.diffuseTexture = Texture2D.load("res/image/1.png");
+            // box.meshRender.material = material;
 
-            var vect:Laya.Vector3 = new Laya.Vector3(1,1,0);
-            //每10毫秒旋转一次
-            Laya.timer.loop(10,null,function(){
-                box.transform.rotate(vect,true,false);
-            });
+            // var vect:Laya.Vector3 = new Laya.Vector3(1,1,0);
+            // //每10毫秒旋转一次
+            // Laya.timer.loop(10,null,function(){
+            //     box.transform.rotate(vect,true,false);
+            // });
         }
     }
 }

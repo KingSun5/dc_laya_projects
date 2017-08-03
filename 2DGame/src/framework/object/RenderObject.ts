@@ -10,6 +10,7 @@ module dc
 		protected m_RootNode:LayaSprite = null;
 		protected m_IsLoadComplete:boolean;	//是否准备完成
 		protected m_Position:Vector3;
+		protected m_AligeType:eAligeType;
 
         constructor()
         {
@@ -22,7 +23,9 @@ module dc
 
 			this.m_IsLoadComplete = false;
            	this.m_RootNode = new LayaSprite();
+			this.m_RootNode.name = "object:" + this.m_ObjectGUID;
 			this.m_Position = Vector3.ZERO;
+			this.m_AligeType = eAligeType.MID;
         }
 
         public Setup(info:any):void
@@ -54,32 +57,29 @@ module dc
 		{
 			this.m_IsLoadComplete = true;
 		}
-		/**位置*/
-		public SetPosition(x:number, y:number, z:number):void
+		/**移除所有子节点*/
+		public RemoveAllChild():void
 		{
-			this.m_RootNode.pos(x, y);
+			this.m_RootNode.removeChildren();
+		}
+		public SetAlige(alige:eAligeType):void
+		{
+			this.m_AligeType = alige;
 		}
 		/**是否可见*/
 		public SetVisible(b:boolean):void
 		{
 			this.m_RootNode.visible = b;
 		}
-		/**移除所有子节点*/
-		public RemoveAllChild():void
-		{
-			while(this.m_RootNode._childs.length > 0)
-			{
-				this.m_RootNode.removeChildAt(0);
-			}
-		}
 		public get IsVisible():boolean
 		{
 			return this.m_RootNode.visible;
 		}
-		public get IsLoadComplete():boolean
+		/**位置*/
+		public SetPosition(x:number, y:number, z:number):void
 		{
-			return this.m_IsLoadComplete;
-		}	
+			this.m_RootNode.pos(x, y);
+		}
 		public get Position():Vector3
 		{
 			this.m_Position.x = this.m_RootNode.x;
@@ -98,9 +98,26 @@ module dc
 		{
 			return 0;
 		}	
+		public SetSize(w:number, h:number):void
+		{
+			if(w<0 || h<0)return;
+			this.m_RootNode.size(w, h);
+		}
+		public get width():number
+		{
+			return this.m_RootNode.width;
+		}
+		public get height():number
+		{
+			return this.m_RootNode.height;
+		}
 		public get RootNode():LayaSprite
 		{
 			return this.m_RootNode;
 		}
+		public get IsLoadComplete():boolean
+		{
+			return this.m_IsLoadComplete;
+		}	
 	}
 }

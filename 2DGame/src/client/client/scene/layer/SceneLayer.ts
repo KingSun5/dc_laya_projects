@@ -8,7 +8,7 @@ module dc
 	export class SceneLayers
 	{
 		/**场景根容器*/
-		private static m_sceneRootContainer:LayaSprite;	
+		private static m_rootContainer:LayaSprite;	
 
 		/**最高层*/
 		private static m_topContainer:LayaSprite;	
@@ -31,9 +31,9 @@ module dc
 		
 		public static Setup():void
 		{
-			this.m_sceneRootContainer = new LayaSprite();
-			this.m_sceneRootContainer.name = "sceneRootContainer";
-			this.m_sceneRootContainer.mouseEnabled = true;
+			this.m_rootContainer = new LayaSprite();
+			this.m_rootContainer.name = "rootContainer";
+			this.m_rootContainer.mouseEnabled = true;
 
 			this.m_topContainer = new LayaSprite();
 			this.m_topContainer.name = "topContainer";
@@ -63,16 +63,16 @@ module dc
 			this.m_terrainContainer.name = "terrainContainer";
 			this.m_terrainContainer.mouseEnabled = true;
 			
-			LayerManager.gameLayer.addChild(this.m_sceneRootContainer);
-			this.m_sceneRootContainer.addChild(this.m_terrainContainer);
-			this.m_sceneRootContainer.addChild(this.m_terrainEffectContainer);
-			this.m_sceneRootContainer.addChild(this.m_mapObjContainer);
-			this.m_sceneRootContainer.addChild(this.m_mapItemContainer);
-			this.m_sceneRootContainer.addChild(this.m_bulletContainer);
-			this.m_sceneRootContainer.addChild(this.m_roleContainer);
-			this.m_sceneRootContainer.addChild(this.m_playerContainer);
-			this.m_sceneRootContainer.addChild(this.m_effectContainer);
-			this.m_sceneRootContainer.addChild(this.m_topContainer);
+			LayerManager.gameLayer.addChild(this.m_rootContainer);
+			this.m_rootContainer.addChild(this.m_terrainContainer);
+			this.m_rootContainer.addChild(this.m_terrainEffectContainer);
+			this.m_rootContainer.addChild(this.m_mapObjContainer);
+			this.m_rootContainer.addChild(this.m_mapItemContainer);
+			this.m_rootContainer.addChild(this.m_bulletContainer);
+			this.m_rootContainer.addChild(this.m_roleContainer);
+			this.m_rootContainer.addChild(this.m_playerContainer);
+			this.m_rootContainer.addChild(this.m_effectContainer);
+			this.m_rootContainer.addChild(this.m_topContainer);
 		}	
 		public static Destroy():void
 		{
@@ -86,10 +86,10 @@ module dc
 			DisplayUtils.RemoveAllChild(this.m_effectContainer);
 			DisplayUtils.RemoveAllChild(this.m_topContainer);
 			
-			DisplayUtils.RemoveAllChild(this.m_sceneRootContainer);
-			this.m_sceneRootContainer.removeSelf();
+			DisplayUtils.RemoveAllChild(this.m_rootContainer);
+			this.m_rootContainer.removeSelf();
 
-			this.m_sceneRootContainer = null;
+			this.m_rootContainer = null;
 			this.m_terrainContainer = null;
 			this.m_terrainEffectContainer = null;
 			this.m_mapObjContainer = null;
@@ -111,6 +111,10 @@ module dc
 			DisplayUtils.RemoveAllChild(this.m_playerContainer);
 			DisplayUtils.RemoveAllChild(this.m_effectContainer);
 			DisplayUtils.RemoveAllChild(this.m_topContainer);
+		}
+		public static get root():LayaSprite
+		{
+			return this.m_rootContainer;
 		}
 		public static get player():LayaSprite
 		{
