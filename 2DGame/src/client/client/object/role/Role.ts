@@ -154,7 +154,6 @@ module dc
 		public SetPosition(x:number, y:number, z:number):void
 		{
 			super.SetPosition(x, y, z);
-			Scene2D.Instance.UpdateCameraPosition(x, y);
 		}
 		/// <summary>
 		/// 是否移动中

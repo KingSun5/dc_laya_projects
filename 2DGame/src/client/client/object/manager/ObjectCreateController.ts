@@ -16,7 +16,7 @@ module dc
 				Log.Error("CreatePlayer - not find unit id:" + unit_info.UnitID);
 				return null;
 			}
-			let obj:Role = new Role();
+			let obj:Role = new MainPlayer();
 			obj.Init();
 			obj.ObjectServerID = "";
 			obj.UnitTypeID = unit_info.UnitID;
