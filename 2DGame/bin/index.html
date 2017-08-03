@@ -39,13 +39,15 @@
 	<!--用户自定义顺序文件添加到这里-->
 	<!--jsfile--Custom-->
 	<script src="js/framework/core/Singleton.js"></script>
-	<script src="js/framework/core/DCObject.js"></script>
-	<script src="js/framework/core/Component.js"></script>
+	<script src="js/framework/core/IObject.js"></script>
 	<script src="js/framework/core/collection/Stack.js"></script>
 	<script src="js/framework/core/collection/Queue.js"></script>
 	<script src="js/framework/core/collection/List.js"></script>
 	<script src="js/framework/core/collection/DoubleArray.js"></script>
 	<script src="js/framework/core/collection/Dictionary.js"></script>
+	<script src="js/framework/core/component/IComponentObject.js"></script>
+	<script src="js/framework/core/component/ComponentCenter.js"></script>
+	<script src="js/framework/core/component/Component.js"></script>
 	<script src="js/framework/core/math/Size.js"></script>
 	<script src="js/framework/core/struct/Color.js"></script>
 	<script src="js/framework/core/struct/Long.js"></script>
@@ -146,7 +148,6 @@
 	<script src="js/client/client/scene/layer/SceneLayer.js"></script>
 	<script src="js/client/client/scene/battle/BattleInput.js"></script>
 	<script src="js/client/client/scene/BaseScene.js"></script>
-	<script src="js/client/client/object/manager/ObjectCreateController.js"></script>
 	<script src="js/client/client/battle/weapon/Weapon.js"></script>
 	<script src="js/client/client/battle/skill/SkillInfo.js"></script>
 	<script src="js/client/client/battle/skill/SkillEffect.js"></script>
@@ -158,10 +159,11 @@
 	<script src="js/client/client/battle/ai/UnitAIManager.js"></script>
 	<script src="js/client/client/battle/buff/Buff.js"></script>
 	<script src="js/client/client/GameApp.js"></script>
-	<script src="js/client/client/object/unit/UnitObject.js"></script>
 	<script src="js/client/client/object/command/Command.js"></script>
-	<script src="js/client/client/object/role/Role.js"></script>
 	<script src="js/client/client/object/manager/MainObjCmdFacade.js"></script>
+	<script src="js/client/client/object/unit/UnitObject.js"></script>
+	<script src="js/client/client/object/role/Role.js"></script>
+	<script src="js/client/client/object/manager/ObjectCreateController.js"></script>
 	<script src="js/client/client/object/role/Player.js"></script>
 	<script src="js/client/client/object/role/MainPlayer.js"></script>
 	<script src="js/client/client/object/role/Monster.js"></script>
@@ -184,7 +186,6 @@
 	<script src="js/client/gui/tools/loader/UIFullscreeenLoadView.js"></script>
 	<script src="js/client/gui/tools/loader/UILoaderView.js"></script>
 	<script src="js/client/Procedure.js"></script>
-	<script src="js/component/ScaleButton.js"></script>
 	<!--jsfile--endTag-->
 
 	<!--启动类添加到这里-->

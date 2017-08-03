@@ -330,6 +330,7 @@
 			this._href=null;
 			HTMLElement.__super.call(this);
 			this._text=HTMLElement._EMPTYTEXT;
+			this._childRenderMax=true;
 			this.setStyle(new CSSStyle(this));
 			this._getCSSStyle().valign="middle";
 			this.mouseEnabled=true;
@@ -651,7 +652,11 @@
 			return this.contextWidth;
 			},function(value){
 			var changed=false;
-			changed=value !=this.width;
+			if (value===0){
+				changed=value !=this._width;
+				}else{
+				changed=value !=this.width;
+			}
 			_super.prototype._$set_width.call(this,value);
 			if(changed)
 				this.layout();

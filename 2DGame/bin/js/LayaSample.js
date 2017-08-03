@@ -20,7 +20,7 @@ var dc;
             //dc.ResourceManager.Instance.AddAsync("res/image/1.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/2.png", Laya.Loader.IMAGE);
             //dc.ResourceManager.Instance.AddAsync("res/image/3.png", Laya.Loader.IMAGE);
-            dc.TimerManager.Instance.AddLoop(1000, 3, this, this.OnTime, [11]);
+            //dc.TimerManager.Instance.AddLoop(1000, 3, this, this.OnTime, [11]);
         }
         GameMain.prototype.OnEnd = function () {
             var args = [];
@@ -73,7 +73,7 @@ var dc;
             //     if(value == 2)return false;
             //     return true;
             // });
-            var list = new dc.LinkList();
+            //let list:LinkList<number> = new LinkList<number>();
             // list.Add(1);
             // list.Add(2);
             // list.Del(0);
@@ -124,7 +124,7 @@ var dc;
             // this.m_socket = new dc.ClientSocket();
             // this.m_socket.ConnectUrl("ws://127.0.0.1:8181");//ws://echo.websocket.org:80
             // this.m_socket.BindRecvCallback(Laya.Handler.create(this, this.OnRecvData, null, false));
-            dc.NetManager.Instance.ConnectUrl("ws://127.0.0.1:8181");
+            //NetManager.Instance.ConnectUrl("ws://127.0.0.1:8181");
             //声音
             //SoundManager.Instance.PlaySoundEffect("res/sound/hit.mp3", 3);
             //加载

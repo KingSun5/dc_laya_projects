@@ -279,7 +279,7 @@
 	{
 		var bodyRender = body.render,
 			texturePath = bodyRender.sprite.texture,
-			sprite = new LayaSprite();
+			sprite = new Laya.Sprite();
 
 		sprite.loadImage(texturePath);
 		sprite.pivotX = body.render.sprite.xOffset;
@@ -298,7 +298,7 @@
 	{
 		var bodyRender = body.render,
 			options = render.options,
-			sprite = new LayaSprite(),
+			sprite = new Laya.Sprite(),
 			fillStyle, strokeStyle, lineWidth,
 			part, points = [];
 
@@ -378,7 +378,7 @@
 
 		// 如果sprite不存在，则初始化一个
 		if (!sprite)
-			sprite = constraint.layaSprite = new LayaSprite();
+			sprite = constraint.layaSprite = new Laya.Sprite();
 
 		var primitive = sprite.graphics;
 

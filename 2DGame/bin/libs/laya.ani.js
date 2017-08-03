@@ -373,6 +373,9 @@
 							Matrix.TEMP.copyTo(tTestMatrix);
 							tResultMatrix=this.resultTransform.getMatrix();
 							Matrix.mul(tResultMatrix,tTestMatrix,this.resultMatrix);
+							if (this.resultTransform.scX *this.resultTransform.scY < 0){
+								this.resultMatrix.rotate(Math.PI*0.5);
+							}
 							this.resultMatrix.tx=worldX;
 							this.resultMatrix.ty=worldY;
 						}
@@ -1731,6 +1734,8 @@
 		*@param graphics
 		*/
 		__proto.apply=function(boneList,graphics){
+			if (!this.target)
+				return;
 			var tTranslateMix=this.translateMix;
 			var tRotateMix=this.translateMix;
 			var tTranslate=tTranslateMix > 0;
@@ -1866,17 +1871,31 @@
 			var vx=0;
 			var vy=0;
 			var bone;
+			var len=0;
 			if (tBones==null){
 				if (!tTriangles)tTriangles=tWeights;
 				if (boneSlot.deformData)
 					tTriangles=boneSlot.deformData;
-				bone=boneSlot.parent;
+				var parentName;
+				parentName=boneSlot.parent;
+				if (boneList){
+					len=boneList.length;
+					for (i=0;i < len;i++){
+						if (boneList[i].name==parentName){
+							bone=boneList[i];
+							break ;
+						}
+					}
+				};
 				var tBoneMt;
-				tBoneMt=bone.resultMatrix;
+				if (bone){
+					tBoneMt=bone.resultMatrix;
+				}
 				if (!tBoneMt)tBoneMt=PathConstraint._tempMt;
 				var x=tBoneMt.tx;
 				var y=tBoneMt.ty;
 				var a=tBoneMt.a,bb=tBoneMt.b,c=tBoneMt.c,d=tBoneMt.d;
+				if(bone)d*=bone.d;
 				for (v=start,w=offset;w < count;v+=2,w+=2){
 					vx=tTriangles[v],vy=tTriangles[v+1];
 					worldVertices[w]=vx *a+vy *bb+x;
@@ -3192,14 +3211,6 @@
 		/**
 		*@private
 		*/
-		__proto._endLoaded=function(){
-			this._loaded=true;
-			this.event(/*laya.events.Event.LOADED*/"loaded",this);
-		}
-
-		/**
-		*@private
-		*/
 		__proto._calculateKeyFrame=function(node,keyframeCount,keyframeDataCount){
 			var keyFrames=node.keyFrame;
 			keyFrames[keyframeCount]=keyFrames[0];
@@ -3759,7 +3770,7 @@
 		*初始化动画
 		*@param templet 模板
 		*@param aniMode 动画模式
-		*<table border=1>
+		*<table>
 		*<tr><th>模式</th><th>描述</th></tr>
 		*<tr>
 		*<td>0</td> <td>使用模板缓冲的数据，模板缓冲的数据，不允许修改（内存开销小，计算开销小，不支持换装）</td>
@@ -3855,13 +3866,23 @@
 			var tFactory;
 			tFactory=Templet.TEMPLET_DICTIONARY[this._aniPath];
 			if (tFactory){
-				tFactory.isParseFail ? this._parseFail():this._parseComplete();
+				if (tFactory.isParseFail){
+					this._parseFail();
+					}else{
+					if (tFactory.isParserComplete){
+						this._parseComplete();
+						}else{
+						tFactory.on(/*laya.events.Event.COMPLETE*/"complete",this,this._parseComplete);
+						tFactory.on(/*laya.events.Event.ERROR*/"error",this,this._parseFail);
+					}
+				}
 				}else {
 				tFactory=new Templet();
 				tFactory.url=this._aniPath;
 				Templet.TEMPLET_DICTIONARY[this._aniPath]=tFactory;
 				tFactory.on(/*laya.events.Event.COMPLETE*/"complete",this,this._parseComplete);
 				tFactory.on(/*laya.events.Event.ERROR*/"error",this,this._parseFail);
+				tFactory.isParserComplete=false;
 				tFactory.parseData(null,arraybuffer);
 			}
 		}
@@ -5136,6 +5157,7 @@
 			this.deformAniArr=[];
 			this._isDestroyed=false;
 			this._rate=30;
+			this.isParserComplete=false;
 			this.aniSectionDic={};
 			this._skBufferUrl=null;
 			this._textureDic={};
@@ -5214,7 +5236,7 @@
 				console.log("[Error] 版本不一致，请使用IDE版本配套的重新导出"+this._aniVersion+"->"+Templet.LAYA_ANIMATION_VISION);
 				this._loaded=false;
 			}
-			if (this._loaded){
+			if (this.loaded){
 				if (this._mainTexture){
 					this._parsePublicExtData();
 					}else {
@@ -5305,6 +5327,11 @@
 				tTextureName=tTextureNameArr[i *2+1];
 				if (this._mainTexture==null){
 					tTexture=this._textureDic[tSrcTexturePath];
+				}
+				if (!tTexture){
+					this.event(/*laya.events.Event.ERROR*/"error",this);
+					this.isParseFail=true;
+					return;
 				}
 				tX=tByte.getFloat32();
 				tY=tByte.getFloat32();
@@ -5657,6 +5684,7 @@
 				}
 			}
 			this.showSkinByIndex(this.boneSlotDic,0);
+			this.isParserComplete=true;
 			this.event(/*laya.events.Event.COMPLETE*/"complete",this);
 		}
 
@@ -5753,12 +5781,14 @@
 			var tTexture;
 			/*for each*/for(var $each_tTexture in this.subTextureDic){
 				tTexture=this.subTextureDic[$each_tTexture];
-				tTexture.destroy();
+				if(tTexture)
+					tTexture.destroy();
 			}
 			var $each_tTexture;
 			/*for each*/for($each_tTexture in this._textureDic){
 				tTexture=this._textureDic[$each_tTexture];
-				tTexture.destroy();
+				if(tTexture)
+					tTexture.destroy();
 			};
 			var tSkinSlotDisplayData;
 			for (var i=0,n=this.skinSlotDisplayDataArr.length;i < n;i++){
