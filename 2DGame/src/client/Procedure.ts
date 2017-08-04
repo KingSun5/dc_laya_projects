@@ -37,9 +37,9 @@ module dc
         /**
          * 开始游戏，逻辑开始执行
         */
-        public StartGame():void
+        public Start():void
         {
-            GameApp.Instance.StartGame();    
+            GameApp.Instance.Start();    
         }
 
         private InitGameManager():void

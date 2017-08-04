@@ -5,11 +5,12 @@ module dc
      * @author hannibal
      * @time 2017-7-9
      */
-    export class Main
+    export class Main extends Singleton
     {   
         private static isFirstEnterGame:boolean = true;
         constructor()
         {
+            super();
             this.Start();
         }
         /**游戏执行入口*/
@@ -17,8 +18,8 @@ module dc
         {
             if (Main.isFirstEnterGame)
             {
-                dc.Procedure.Instance.Setup();
-                dc.Procedure.Instance.StartGame();
+                Procedure.Instance.Setup();
+                Procedure.Instance.Start();
                 Main.isFirstEnterGame = false;
             }
         }

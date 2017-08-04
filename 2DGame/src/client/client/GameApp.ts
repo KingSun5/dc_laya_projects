@@ -43,7 +43,7 @@ module dc
 
         }
         
-        public StartGame():void
+        public Start():void
         {
             EventController.DispatchEvent(EventID.BEGIN_GAME);
             this.LoadCoreResource();
