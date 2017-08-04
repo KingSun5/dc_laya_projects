@@ -40,7 +40,7 @@ module client.gui.common {
 		public pushImg:Laya.Image;
 		public pointImg:Laya.Image;
 
-        public static  uiView:any ={"type":"View","props":{"y":150,"x":150,"width":300,"pivotY":150,"pivotX":150,"height":300},"child":[{"type":"Image","props":{"y":150,"x":150,"var":"bgImg","skin":"ui/common/img_yidong kuang.png","pivotY":150,"pivotX":150},"child":[{"type":"Image","props":{"y":150,"x":150,"var":"pushImg","skin":"ui/common/img_yidong.png","pivotY":60,"pivotX":60}}]},{"type":"Image","props":{"y":150,"x":150,"var":"pointImg","skin":"ui/common/img_yidongzhizhen.png","rotation":0,"pivotY":184,"pivotX":120}}]};
+        public static  uiView:any ={"type":"View","props":{"y":150,"x":150,"width":300,"pivotY":150,"pivotX":150,"height":300},"child":[{"type":"Image","props":{"y":150,"x":150,"var":"bgImg","skin":"ui/common/img_yidong kuang.png","pivotY":150,"pivotX":150},"child":[{"type":"Image","props":{"y":150,"x":150,"var":"pushImg","skin":"ui/common/img_yidong.png","pivotY":60,"pivotX":60}}]},{"type":"Image","props":{"y":149,"x":147,"var":"pointImg","skin":"ui/common/img_yidongzhizhen.png","rotation":0,"pivotY":184,"pivotX":120}}]};
         constructor(){ super()}
         createChildren():void {
         

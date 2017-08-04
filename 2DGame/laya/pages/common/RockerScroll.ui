@@ -41,7 +41,7 @@
         {
             "x":15,
             "type":"Image",
-            "props":{"y":150,"x":150,"var":"pointImg","skin":"ui/common/img_yidongzhizhen.png","rotation":0,"pivotY":184,"pivotX":120},
+            "props":{"y":149,"x":147,"var":"pointImg","skin":"ui/common/img_yidongzhizhen.png","rotation":0,"pivotY":184,"pivotX":120},
             "nodeParent":1,
             "label":"Image(pointImg)",
             "isDirectory":false,

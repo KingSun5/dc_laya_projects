@@ -104,7 +104,7 @@ module dc
 			this.tmpPos = Vec2ClampMagnitude(this.tmpPos, 1);
 
 			//设置方向
-			this.pointImg.rotation = 180;
+			this.pointImg.rotation = Math.atan2(this.tmpPos.y, this.tmpPos.x)*MathUtils.Rad2Deg+90;
 
 			//派发事件
 			this.event(UIRockerScroll.ROCKER_MOVE_EVT, [this.tmpPos.x,this.tmpPos.y]);
