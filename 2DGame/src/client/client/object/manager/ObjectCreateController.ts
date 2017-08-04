@@ -30,9 +30,6 @@ module dc
 			ObjectManager.Instance.AttachObject(obj);
 			MainObjCmdFacade.Instance.AttackRole = obj;
 
-			obj.AddComponent(RoleScript);
-			//obj.RemoveCompnent(RoleScript);
-
 			return obj;
 		}
 	}

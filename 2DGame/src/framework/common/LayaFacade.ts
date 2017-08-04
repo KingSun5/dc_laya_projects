@@ -33,8 +33,8 @@ import LayaTextInput = laya.ui.TextInput;
 import LayaUIGroup = laya.ui.UIGroup;
 
 //math
-import Point = laya.d3.math.Vector2;
 import Vector2 = laya.d3.math.Vector2;
+import Point = laya.d3.math.Vector2;
 import Vector3 = laya.d3.math.Vector3;
 import Vector4 = laya.d3.math.Vector4;
 import Matrix3x3 = laya.d3.math.Matrix3x3;

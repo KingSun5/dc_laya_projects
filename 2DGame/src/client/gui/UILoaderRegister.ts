@@ -33,6 +33,7 @@ module dc
 
 				new sUILoaderInfo(GUIID.LOGIN, 				LoginView, 			eUILayer.VIEW, 		true, eAligeType.MID),
 				new sUILoaderInfo(GUIID.SELECT_SERVER, 		SelectSeverView, 	eUILayer.DIALOG, 	true, eAligeType.MID),
+				new sUILoaderInfo(GUIID.BATTLE_MAIN, 		BattleMainView, 	eUILayer.VIEW, 		true, eAligeType.MID),
 			];
 		}
 	}

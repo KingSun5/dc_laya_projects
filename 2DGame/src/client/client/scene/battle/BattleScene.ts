@@ -22,7 +22,7 @@ module dc
             this.m_Input = new BattleInput();
             this.m_Input.Setup();
 
-            UnitAIManager.Instance.CreateMainPlayer();
+            this.BuildLoadResource();
         }
 
         public OnExit()
@@ -56,7 +56,7 @@ module dc
 
 		private BuildLoadResource():void
 		{
-
+            this.OnResourceLoadComplate();
 		}
 
         protected RegisterEvent():void
@@ -71,6 +71,10 @@ module dc
         protected OnResourceLoadComplate():void
         {
 			super.OnResourceLoadComplate();
+
+            this.m_Terrain.Show();
+            UnitAIManager.Instance.CreateMainPlayer();
+            UIShowController.Show(GUIID.BATTLE_MAIN);
         }
 	}
 }

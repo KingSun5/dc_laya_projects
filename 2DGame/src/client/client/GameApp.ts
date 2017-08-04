@@ -140,7 +140,7 @@ module dc
             //显示登陆界面
             //UIShowController.Show(GUIID.LOGIN, 111,1112);
             
-            new GameMain();
+            //new GameMain();
             // //压力测试
             // //UnitAIManager.Instance.CreateTestRobot();
 

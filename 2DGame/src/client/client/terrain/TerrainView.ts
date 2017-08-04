@@ -17,13 +17,17 @@ module dc
 		public Setup(map_id:number):void
 		{	
 			this.m_MapID = map_id;
-			ResourceManager.Instance.LoadRes("res/image/map/1001.jpg", LayaLoader.IMAGE, LayaHandler.create(this, this.OnLoadComplete));
 		}
 
 		public Destroy():void
 		{
 			this.destroy();
 			this.UnRegisterEvent();
+		}
+
+		public Show():void
+		{
+			ResourceManager.Instance.LoadRes("res/image/map/1001.jpg", LayaLoader.IMAGE, LayaHandler.create(this, this.OnLoadComplete));
 		}
 
 		private OnLoadComplete(url:string):void

@@ -19,6 +19,7 @@ module dc
 			this.HandleMouse();
 		}
 
+		private tmpDirVec2:Vector2 = Vector2.ZERO;
 		private HandleKeyboard():void
 		{		
 			let Force_X:number = 1, Force_Y:number = 1;
@@ -43,8 +44,8 @@ module dc
 			}
 			if(offset_x != 0 || offset_y != 0)
 			{
-				Vec3Set(Math3DUtils.TempVec3, offset_x, offset_y, 0);
-				MainObjCmdFacade.Instance.pushCommand_KeyboardMove(Math3DUtils.TempVec3);
+				Vec2Set(this.tmpDirVec2, offset_x, offset_y);
+				MainObjCmdFacade.Instance.pushCommand_KeyboardMove(this.tmpDirVec2);
 			}
 		}
 		private HandleMouse():void

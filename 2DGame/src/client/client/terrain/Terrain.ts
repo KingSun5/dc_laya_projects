@@ -15,8 +15,7 @@ module dc
 			this.RegisterEvent();
 			this.m_MapId = map_id;
 			this.m_TerrainView = new TerrainView();
-			this.m_TerrainView.Setup(map_id);
-
+			this.m_TerrainView.Setup(this.m_MapId);
 		}
 		public Destroy():void
 		{
@@ -30,6 +29,11 @@ module dc
 		}
 		public Update():void
 		{
+		}
+
+		public Show():void
+		{
+			this.m_TerrainView.Show();
 		}
 
         private RegisterEvent():void

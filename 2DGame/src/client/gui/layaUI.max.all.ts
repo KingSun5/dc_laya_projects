@@ -2,6 +2,19 @@
 import View=laya.ui.View;
 import Dialog=laya.ui.Dialog;
 import UIBaseView=dc.UIBaseView;
+module client.gui.battle {
+    export class BattleMainUI extends UIBaseView {
+
+        public static  uiView:any ={"type":"UIBaseView","props":{"width":960,"height":640}};
+        constructor(){ super()}
+        createChildren():void {
+        
+            super.createChildren();
+            this.createView(client.gui.battle.BattleMainUI.uiView);
+        }
+    }
+}
+
 module client.gui.common {
     export class AlertViewUI extends UIBaseView {
 		public mainBox:Laya.Box;
@@ -17,6 +30,22 @@ module client.gui.common {
         
             super.createChildren();
             this.createView(client.gui.common.AlertViewUI.uiView);
+        }
+    }
+}
+
+module client.gui.common {
+    export class RockerScrollUI extends View {
+		public bgImg:Laya.Image;
+		public pushImg:Laya.Image;
+		public pointImg:Laya.Image;
+
+        public static  uiView:any ={"type":"View","props":{"y":150,"x":150,"width":300,"pivotY":150,"pivotX":150,"height":300},"child":[{"type":"Image","props":{"y":150,"x":150,"var":"bgImg","skin":"ui/common/img_yidong kuang.png","pivotY":150,"pivotX":150},"child":[{"type":"Image","props":{"y":150,"x":150,"var":"pushImg","skin":"ui/common/img_yidong.png","pivotY":60,"pivotX":60}}]},{"type":"Image","props":{"y":-2,"x":108,"var":"pointImg","skin":"ui/common/img_yidongzhizhen.png","rotation":0,"pivotY":33,"pivotX":80}}]};
+        constructor(){ super()}
+        createChildren():void {
+        
+            super.createChildren();
+            this.createView(client.gui.common.RockerScrollUI.uiView);
         }
     }
 }

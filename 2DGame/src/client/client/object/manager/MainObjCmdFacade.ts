@@ -20,7 +20,7 @@ module dc
 		/**
 		 * 移动命令
 		*/
-		public pushCommand_KeyboardMove(dir:Vector3):boolean
+		public pushCommand_KeyboardMove(dir:Vector2):boolean
 		{
 			if (this.m_AttackObj == null)
 				return false;
@@ -51,7 +51,7 @@ module dc
 		}
 		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～逻辑处理～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
 		/** 移动 */
-		private moveto_AI(dir:Vector3):boolean
+		private moveto_AI(dir:Vector2):boolean
 		{
 			if (!this.m_AttackObj.CanMove()) return false;
 
@@ -66,12 +66,12 @@ module dc
 		}
 		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～执行～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
 		/** 移动 */
-		private enter_Move(dir:Vector3):boolean
+		private enter_Move(dir:Vector2):boolean
 		{
 			//目标位置
 			let cmd:KeyboardMoveCommand = ObjectPools.Get(KeyboardMoveCommand);;
 			cmd.TargetPos = new Vector3(this.m_AttackObj.x+dir.x, this.m_AttackObj.y+dir.y, 0);
-			cmd.Direction = new Vector3(dir.x, dir.y, dir.z);
+			cmd.Direction = new Vector3(dir.x, dir.y, 0);
 			this.m_AttackObj.PushCommand(cmd);
 			return true;
 		}

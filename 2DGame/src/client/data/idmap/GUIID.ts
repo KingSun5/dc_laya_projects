@@ -16,6 +16,7 @@ module dc
 
 		public static readonly LOGIN:number						    = 1000;	    // 登陆
 		public static readonly SELECT_SERVER:number				    = 1001;	    // 选服
+		public static readonly BATTLE_MAIN:number				    = 1100;	    // 主界面
 	}
 
 }
