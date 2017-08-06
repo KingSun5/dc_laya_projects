@@ -119,5 +119,9 @@ module dc
 		{
 			return this.m_IsLoadComplete;
 		}	
+		public get AligeType():eAligeType
+		{
+			return this.m_AligeType;
+		}
 	}
 }

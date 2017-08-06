@@ -186,5 +186,17 @@ module dc
             }
             return (current + (MathUtils.Sign(target - current) * maxDelta));
         }
+
+		/**
+		 * 根据度数获得朝向
+		 * Y轴正方向为1，逆时钟方向为加
+		 */		
+		public static GetFace(angle:number, chunkNums:number):number
+		{
+			var perAngle:number = 360/chunkNums;
+			var nFace:number = (MathUtils.ClampDegrees(angle+90)+perAngle*0.5)/perAngle;
+			nFace = nFace > chunkNums ? nFace-chunkNums : nFace;
+			return Math.ceil(nFace);
+		}		
     }
 }
