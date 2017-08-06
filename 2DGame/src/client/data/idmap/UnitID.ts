@@ -56,6 +56,7 @@ module dc
 		NONE = 0,
 		MOVE,           //移动
 		ATTACK,         //攻击
+		DIE,			//死亡
 	}
 	/**
 	 * 逻辑命令ID

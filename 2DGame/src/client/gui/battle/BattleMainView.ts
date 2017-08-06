@@ -74,10 +74,12 @@ module dc
         protected RegisterEvent():void
         {
             this.m_RockerScroll.on(UIRockerScroll.ROCKER_MOVE_EVT, this, this.OnRockerMove);
+            this.m_RockerScroll.on(UIRockerScroll.ROCKER_END_EVT, this, this.OnRockerStop);
         }
         protected UnRegisterEvent():void
         {
             this.m_RockerScroll.off(UIRockerScroll.ROCKER_MOVE_EVT, this, this.OnRockerMove);
+            this.m_RockerScroll.off(UIRockerScroll.ROCKER_END_EVT, this, this.OnRockerStop);
         }
         /**静态缓存表*/
         protected StaticCacheUI(): any[] 
@@ -100,6 +102,11 @@ module dc
 				Vec2Set(this.tmpDirVec2, offset_x, offset_y);
 				MainObjCmdFacade.Instance.pushCommand_KeyboardMove(this.tmpDirVec2);
 			}
+        }
+
+        private OnRockerStop():void
+        {
+            MainObjCmdFacade.Instance.pushCommand_StopMove();
         }
 	}
 }

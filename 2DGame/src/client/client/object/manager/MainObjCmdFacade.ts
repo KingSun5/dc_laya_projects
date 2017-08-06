@@ -22,7 +22,7 @@ module dc
 		*/
 		public pushCommand_KeyboardMove(dir:Vector2):boolean
 		{
-			if (this.m_AttackObj == null)
+			if (!this.m_AttackObj)
 				return false;
 
 			let ret = this.moveto_AI(dir);
@@ -34,7 +34,7 @@ module dc
 		*/
 		public pushCommand_StopMove():boolean
 		{
-			if (this.m_AttackObj == null)
+			if (!this.m_AttackObj)
 				return false;
 
 			return this.m_AttackObj.Stop_Move();
@@ -44,7 +44,7 @@ module dc
 		*/
 		public pushCommand_Attack(dir:Vector3):boolean
 		{
-			if (this.m_AttackObj == null)
+			if (!this.m_AttackObj)
 				return false;
 
 			return this.attack_AI(dir);

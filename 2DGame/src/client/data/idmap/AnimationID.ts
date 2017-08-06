@@ -8,8 +8,10 @@ module dc
     export class AnimationID
     {
         public static None:string = "";
-        public static Idle:string = "idle";
-        public static Move:string = "move";
+        public static Idle:string = "DJ2";
+        public static Move:string = "YD";
+        public static Attack:string = "GJ";
+        public static Die:string = "SW";
 
         /**
          * 玩家朝向对应的帧

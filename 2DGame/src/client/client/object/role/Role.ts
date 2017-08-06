@@ -13,7 +13,6 @@ module dc
 		protected m_CurSpecialCmd:BaseCommand = null;     	//跳跃等
 		protected m_ListLogicCmd:Array<BaseCommand> = null;
 
-		protected m_PoseType:string = "";					//当前动作
 		protected m_ListStatus:Array<eObjStatus> = null;	//角色状态
 
 		protected m_RoleView:RoleView = null;
@@ -34,7 +33,6 @@ module dc
 			this.m_CurBaseCmd = null;
 			this.m_CurAttackCmd = null;
 			this.m_CurSpecialCmd = null;
-			this.m_PoseType = "";
 			this.m_RoleFace = eFace8.DOWN;
         }
 
@@ -343,11 +341,6 @@ module dc
 		{
 			if (this.m_IsDie) return false;
 
-			if (this.m_CurBaseCmd == null || this.m_CurBaseCmd.CmdType != eCommandType.IDLE)
-			{
-				this.PlayPose(AnimationID.Idle, false);
-			}
-
 			this.IsLogicStop = false;
 			this.SetCurBaseCmd(pCmd);
 
@@ -360,11 +353,6 @@ module dc
 			this.SetCurBaseCmd(pCmd);
 			let cmd:KeyboardMoveCommand = pCmd as KeyboardMoveCommand;
 
-			//动作
-			// if (ArrayUtils.ContainsValue(this.m_StdUnitInfo.ListMotion, AnimationID.Move))
-			// {
-			// 	this.PlayPose(AnimationID.Move, false);
-			// }
 			//移动
 			let move_diff:Vector3 = Vec3Mul(Vec3Normalized(cmd.Direction),this.MoveSpeed * Time.deltaTime);
 			this.SetPosition(this.x+move_diff.x, this.y+move_diff.y, this.z+move_diff.z);
@@ -574,17 +562,6 @@ module dc
 		{
 			return ArrayUtils.ContainsValue(this.m_ListStatus,status);
 		}
-		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～pose～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
-		/**
-		* 播放动作接口
-		* @param nPoseType 动作类型
-		* @param bForce 是否强制播放动画
-		*/
-		public PlayPose(pose_type:string, bForce:boolean, scale:number = 1)
-		{
-
-			return true;
-		}
 
 		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～get/set～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
 		public get IsLogicStop():boolean
@@ -596,14 +573,6 @@ module dc
 			this.m_IsLogicStop = value; 
 		}
 
-		public get PoseType():string
-		{
-			return this.m_PoseType; 
-		}	
-		public set PoseType(value:string)
-		{
-			this.m_PoseType = value; 
-		}
 		public SetAngle(degree:number):void
 		{
 			let face:number = MathUtils.GetFace(degree, eFace8.MAX);

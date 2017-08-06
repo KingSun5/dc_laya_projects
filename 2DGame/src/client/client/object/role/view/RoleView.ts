@@ -10,6 +10,7 @@ module dc
 		protected m_OwnerRole:Role = null;
 		protected m_IsLoadComplete:boolean = false;		//是否准备完成
 		protected m_Animation:LayaAnimation = null;		//动画
+		protected m_CurPose:string = AnimationID.None;
 		protected m_CurFrame:number = 0;
 
 		constructor(role:Role)
@@ -47,20 +48,52 @@ module dc
         {
 			if(this.m_IsLoadComplete)
 			{
-				this.UpdateFrame();
+				let change_pose:boolean = this.UpdatePose();
+				this.UpdateFrame(change_pose);
 			}
 			return true;
         }
 
-		private UpdateFrame():void
+		private UpdatePose():boolean
+		{
+			let pose_name:string = AnimationID.None;
+			if(this.m_OwnerRole.TestStatus(eObjStatus.MOVE))
+			{
+				pose_name = AnimationID.Move;
+			}
+			else if(this.m_OwnerRole.TestStatus(eObjStatus.ATTACK))
+			{
+				pose_name = AnimationID.Attack;
+			}
+			else if(this.m_OwnerRole.TestStatus(eObjStatus.DIE))
+			{
+				pose_name = AnimationID.Die;
+			}
+			else
+			{
+				pose_name = AnimationID.Idle;
+			}
+
+			if(this.m_CurPose != pose_name)
+			{
+				this.m_CurPose = pose_name;
+				return true;
+			}
+			else 
+			{
+				return false;
+			}
+		}
+
+		private UpdateFrame(force:boolean):void
 		{
 			let face:number = this.m_OwnerRole.RoleFace;
-			if(face != this.m_CurFrame)
+			if(force || face != this.m_CurFrame)
 			{
 				let mirror_frame:any =  AnimationID.MotionFrameMirror[face];
 				if(!mirror_frame)return;
 				
-				this.m_Animation.play(0,true,"YD_" + mirror_frame.frame);
+				this.m_Animation.play(0,true, this.m_CurPose + "_" + mirror_frame.frame);
 				this.scaleX = mirror_frame.mirror ? -1 : 1;
 				this.m_CurFrame = face;
 			}
