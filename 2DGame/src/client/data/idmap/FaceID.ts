@@ -8,10 +8,10 @@ module dc
 	export class FaceID
 	{
 
-		public static FACE8_PER_ANGLE:number			= 45;		//每个区间角度 值
+		public static FACE8_PER_ANGLE:number		= 45;		//每个区间角度 值
 		
 		public static DEFAULT_MAX:number			= 8;		//最大值
-		public static PLAYER_MAX:number			= 8;		//玩家最大值
+		public static PLAYER_MAX:number				= 8;		//玩家最大值
 		public static MONSTER_MAX:number			= 8;		//怪物最大值
 	}
 	/**
