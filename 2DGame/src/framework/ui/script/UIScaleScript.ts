@@ -1,7 +1,7 @@
 module dc
 {	
 	/**
-     * 缩放脚本
+     * 缩放脚本：用于按钮按下的效果
      * @author hannibal
      * @time 2017-8-7
 	 * 例：
@@ -29,7 +29,7 @@ module dc
 				this.m_Time = 0.5;
 			}
 			if(this.m_Owner)
-			{
+			{//有按下效果，自动设置中心点对齐
 				this.m_Owner.pivot(this.m_Owner.width*0.5, this.m_Owner.height*0.5);
 			}
 		}

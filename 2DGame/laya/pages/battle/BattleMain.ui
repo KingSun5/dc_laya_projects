@@ -1,6 +1,63 @@
 {
+    "x":0,
     "type":"UIBaseView",
+    "selectedBox":3,
+    "selecteID":4,
     "props":{"width":960,"sceneColor":"#000000","height":640},
+    "nodeParent":-1,
+    "label":"UIBaseView",
+    "isOpen":true,
+    "isDirectory":true,
+    "isAniNode":true,
+    "hasChild":true,
+    "compId":1,
     "child":[
-        ]
+        {
+            "x":15,
+            "type":"Panel",
+            "props":{"width":180,"var":"rightBottom","right":50,"height":180,"bottom":50},
+            "nodeParent":1,
+            "label":"Panel(rightBottom)",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":2,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Image",
+                    "props":{"y":90,"x":90,"var":"skill1Img","skin":"ui/common/img_kaiqiang.png","pivotY":90,"pivotX":90},
+                    "nodeParent":2,
+                    "label":"Image(skill1Img)",
+                    "isOpen":true,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":3,
+                    "child":[
+                        {
+                            "x":45,
+                            "type":"Image",
+                            "props":{"y":90,"x":90,"var":"skillIcon","pivotY":0,"pivotX":0},
+                            "nodeParent":3,
+                            "label":"Image(skillIcon)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":4,
+                            "child":[
+                                ]
+                        }]
+                }]
+        }],
+    "animations":[
+        {
+            "nodes":[
+                ],
+            "name":"ani1",
+            "id":1,
+            "frameRate":24,
+            "action":0
+        }]
 }
