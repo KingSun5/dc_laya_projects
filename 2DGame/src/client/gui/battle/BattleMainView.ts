@@ -75,6 +75,7 @@ module dc
         protected RegisterGUIEventMap():Array<any>
         {
             return [
+                [this.skill1Img, laya.events.Event.CLICK, this.OnPressSkill1],
             ];
         }
         /**自定义事件注册，用于EventController派发的事件*/
@@ -114,6 +115,11 @@ module dc
         private OnRockerStop():void
         {
             MainObjCmdFacade.Instance.pushCommand_StopMove();
+        }
+
+        private OnPressSkill1():void
+        {
+            MainObjCmdFacade.Instance.pushCommand_Attack();
         }
 	}
 }

@@ -17,6 +17,7 @@ module dc
 
 		protected m_RoleView:RoleView = null;
 		protected m_RoleFace:eFace8 = eFace8.NONE;			//朝向
+		protected m_RotateAngle:number = 0;
 
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～基础方法～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         constructor()
@@ -34,6 +35,7 @@ module dc
 			this.m_CurAttackCmd = null;
 			this.m_CurSpecialCmd = null;
 			this.m_RoleFace = eFace8.DOWN;
+			this.m_RotateAngle = 0;
         }
 
         public Setup(info:any):void
@@ -384,20 +386,23 @@ module dc
 			let attackCmd:AttackCommand = pCmd as AttackCommand;
 			if (attackCmd == null) return false;
 
-			let skill_info:SkillInfo = this.m_UnitSkill.FindSkill(this.m_StdWeaponInfo.SkillId);
-			if (skill_info == null)
-				return false;
+			// let skill_info:SkillInfo = this.m_UnitSkill.FindSkill(this.m_StdWeaponInfo.SkillId);
+			// if (skill_info == null)
+			// 	return false;
+
+			//停止移动
+			this.Stop_Move();
 
 			this.SetCurAttackCmd(attackCmd);
 			this.AttachStatus(eObjStatus.ATTACK);
 
 			//修改朝向
 
-			attackCmd.SkillInfo = skill_info;
-			attackCmd.AttackStage = eAttackStage.Begin;
-			attackCmd.StageTime = Time.timeSinceStartup;
+			// attackCmd.SkillInfo = skill_info;
+			// attackCmd.AttackStage = eAttackStage.Begin;
+			// attackCmd.StageTime = Time.timeSinceStartup;
 
-			Log.Debug("Start_Attack:"+Time.timeSinceStartup);
+			//Log.Debug("Start_Attack:"+Time.timeSinceStartup);
 			return true;
 		}
 		public StopAttack():void
@@ -518,6 +523,8 @@ module dc
 		{
 			if (this.m_CurAttackCmd == null) return false;
 
+
+
 			return true;
 		}
 
@@ -532,6 +539,16 @@ module dc
 		public HandleBAttack(info:sHurtInfo):void
 		{
 			super.HandleBAttack(info);
+		}
+
+		public OnPlayComplete(pose_type:string)
+		{
+			switch(pose_type)
+			{
+				case AnimationID.Attack:
+				this.DetachStatus(eObjStatus.ATTACK);
+				break;
+			}
 		}
 		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～角色状态～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
 		/**
@@ -575,8 +592,13 @@ module dc
 
 		public SetAngle(degree:number):void
 		{
+			this.m_RotateAngle = MathUtils.ClampDegrees(degree)*MathUtils.Deg2Rad;
 			let face:number = MathUtils.GetFace(degree, eFace8.MAX);
 			this.SetFace(face);
+		}
+		public get RotateAngle():number
+		{
+			return this.m_RotateAngle;
 		}
 		public SetFace(value:number):void
 		{

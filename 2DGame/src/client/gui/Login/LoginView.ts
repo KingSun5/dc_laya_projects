@@ -49,9 +49,6 @@ module dc
         protected PreLoaderRes():Array<any>
         {
             return [
-                ["res/image/1.png", Laya.Loader.IMAGE],
-                ["res/image/2.png", Laya.Loader.IMAGE],
-                ["res/image/3.png", Laya.Loader.IMAGE],
             ];
         }
 

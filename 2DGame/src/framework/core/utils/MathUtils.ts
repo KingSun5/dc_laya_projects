@@ -113,8 +113,6 @@ module dc
 		}
 		/**
 		 * 转换为360度弧度
-		 * @param degrees
-		 * @return 
 		 */
 		public static ClampRadians(radians:number):number
 		{
@@ -130,9 +128,6 @@ module dc
 		}
 		/**
 		 * 两点间的距离
-		 * @param _p1
-		 * @param _p2
-		 * @return 
 		 */		
 		public static GetDistance(x1:number, y1:number, x2:number, y2:number):number
 		{
@@ -144,10 +139,6 @@ module dc
 		}	
 		/**
 		 * 两点间的弧度：x正方形为0，顺时针为正
-		 * @param p1
-		 * @param p2
-		 * @return 
-		 * 
 		 */		
 		public static GetLineRadians(x1:number, y1:number, x2:number, y2:number):number
 		{
@@ -157,22 +148,28 @@ module dc
 		{
 			let degree:number = MathUtils.ToDegree(MathUtils.GetLineRadians(x1, y1, x2, y2));
 			return MathUtils.ClampDegrees(degree);
-		}	
+		}		
 		/**
-		 * 弧度转化为度 
-		 * @param radian
-		 * @return 
-		 * 
+		 * 弧度转向量
+		 * @param 	radians 	弧度
+		 */	
+		public static GetLineFromRadians(radians:number):Vector2
+		{
+			let x:number = Math.cos(radians);
+			let y:number = Math.sin(radians);
+			let dir:Vector2 = new Vector2(x, y);
+			Vec2Normal(dir);
+			return dir;
+		}
+		/**
+		 * 弧度转化为度
 		 */		
 		public static ToDegree(radian:number):number
 		{
 			return radian * (180.0/Math.PI);
 		}
 		/**
-		 * 度转化为弧度 
-		 * @param radian
-		 * @return 
-		 * 
+		 * 度转化为弧度
 		 */		
 		public static ToRadian(degree:number):number
 		{

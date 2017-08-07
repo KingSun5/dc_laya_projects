@@ -72,7 +72,7 @@ module dc
         //～～～～～～～～～～～～～～～～～～～～～～～初始化游戏～～～～～～～～～～～～～～～～～～～～～～～//
         private InitScene():void
         {
-            //Laya.Stat.show(0, 0);
+            Laya.Stat.show(0, 0);
             //调试面板
             //Laya.DebugPanel.init();
             //调用DebugTool调试面板

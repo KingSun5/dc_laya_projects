@@ -25,6 +25,7 @@ module dc
 			this.m_CurFrame = 0;
 			this.m_Animation = new LayaAnimation();
 			this.m_Animation.interval = 150;
+			this.m_Animation.on(LayaEvent.COMPLETE, this, this.OnPlayComplete);
 			if(info && info.length > 0)
 			{
 				for(let url of info)
@@ -99,7 +100,13 @@ module dc
 			}
 		}
 
-		protected OnLoadAnimation():void
+		private OnPlayComplete()
+		{
+			this.m_OwnerRole.OnPlayComplete(this.m_CurPose);
+		}
+
+		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～加载～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
+		private OnLoadAnimation():void
 		{
 			this.m_IsLoadComplete = true;
 			//添加到舞台

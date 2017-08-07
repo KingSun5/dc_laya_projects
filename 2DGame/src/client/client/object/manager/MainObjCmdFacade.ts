@@ -42,12 +42,12 @@ module dc
 		/**
 		 * 攻击
 		*/
-		public pushCommand_Attack(dir:Vector3):boolean
+		public pushCommand_Attack():boolean
 		{
 			if (!this.m_AttackObj)
 				return false;
 
-			return this.attack_AI(dir);
+			return this.attack_AI();
 		}
 		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～逻辑处理～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
 		/** 移动 */
@@ -57,12 +57,12 @@ module dc
 
 			return this.enter_Move(dir);
 		}
-		private attack_AI(dir:Vector3):boolean
+		private attack_AI():boolean
 		{
 			if (!this.m_AttackObj.CanAttack())
 				return false;
 
-			return this.enter_Attack(dir);
+			return this.enter_Attack();
 		}
 		/*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～执行～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
 		/** 移动 */
@@ -75,12 +75,13 @@ module dc
 			this.m_AttackObj.PushCommand(cmd);
 			return true;
 		}
-		private enter_Attack(dir:Vector3):boolean
+		private enter_Attack():boolean
 		{
+			let dir:Vector2 = MathUtils.GetLineFromRadians(this.m_AttackObj.RotateAngle);
 			//cmd
 			let cmd:AttackCommand = ObjectPools.Get(AttackCommand);
 			cmd.CmdType = eCommandType.ATTACK;
-			cmd.Direction = dir;
+			cmd.Direction = new Vector3(dir.x, dir.y, 0);
 			this.m_AttackObj.PushCommand(cmd);
 
 			return true;

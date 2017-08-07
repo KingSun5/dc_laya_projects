@@ -47,6 +47,10 @@ module dc
 				Vec2Set(this.tmpDirVec2, offset_x, offset_y);
 				MainObjCmdFacade.Instance.pushCommand_KeyboardMove(this.tmpDirVec2);
 			}
+			else
+			{
+				MainObjCmdFacade.Instance.pushCommand_StopMove();
+			}
 		}
 		private HandleMouse():void
 		{
