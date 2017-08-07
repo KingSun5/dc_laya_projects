@@ -71,7 +71,7 @@ module dc
             return super.Update();
         }
 		/**加载完成回调*/
-		protected OnLoadComplete(args:Array<string>):void
+		protected OnLoadComplete(args:any):void
 		{
 			this.m_RoleView.Setup(args);
 			this.m_RootNode.addChild(this.m_RoleView);
@@ -401,6 +401,10 @@ module dc
 			// attackCmd.SkillInfo = skill_info;
 			// attackCmd.AttackStage = eAttackStage.Begin;
 			// attackCmd.StageTime = Time.timeSinceStartup;
+			
+			let offset:Vector3 = Vec3Mul(attackCmd.Direction, 50);
+			let pos:Vector3 = Vec3Add(this.Position, offset);
+			this.m_UnitWeapon.CreateBullet(0, pos, attackCmd.Direction);
 
 			//Log.Debug("Start_Attack:"+Time.timeSinceStartup);
 			return true;

@@ -53,7 +53,7 @@ module dc
 			ResourceManager.Instance.LoadArrayRes(arr_res, LayaHandler.create(this, this.OnLoadComplete));
 		}
 		/**加载完成回调*/
-		protected OnLoadComplete(args:Array<string>):void
+		protected OnLoadComplete(args:any):void
 		{
 			this.m_IsLoadComplete = true;
 		}
