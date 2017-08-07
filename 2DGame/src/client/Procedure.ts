@@ -18,8 +18,8 @@ module dc
         */
         public Setup():void
         {
-            UIID.DEFAULT_WIDTH = 640;
-            UIID.DEFAULT_HEIGHT = 960;
+            UIID.DEFAULT_WIDTH = 960;
+            UIID.DEFAULT_HEIGHT = 640;
             Laya.init(UIID.DEFAULT_WIDTH,UIID.DEFAULT_HEIGHT, Laya.WebGL);
             //Laya3D.init(UIID.DEFAULT_WIDTH,UIID.DEFAULT_HEIGHT, false);
 

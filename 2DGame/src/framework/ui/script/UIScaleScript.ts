@@ -13,7 +13,7 @@ module dc
 		private m_Time:number = 0;
 
 		/**
-		 * @param 	info	格式{scaleTo:0.8,time:0.5}
+		 * @param 	info	格式{scaleTo:0.8,time:0.6}
 		*/
 		public Setup(owner:LayaSprite, info:any):void
 		{
@@ -26,7 +26,7 @@ module dc
 			else
 			{
 				this.m_ScaleTo = 0.9;
-				this.m_Time = 0.5;
+				this.m_Time = 0.6;
 			}
 			if(this.m_Owner)
 			{//有按下效果，自动设置中心点对齐

@@ -21,8 +21,7 @@ module dc
             this.m_RockerScroll.pos(180,UIID.DEFAULT_HEIGHT-180);
             this.m_RockerScroll.Setup(null);
 
-            //按钮缩放
-            ObjectPools.Get(UIScaleScript);
+            ObjectPools.Get(UIScaleScript).Setup(this.skill1Img);
         }
         /**销毁*/
         protected OnDestroy():void

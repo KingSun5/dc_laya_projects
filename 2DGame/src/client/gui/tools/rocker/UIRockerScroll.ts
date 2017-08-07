@@ -11,6 +11,8 @@ module dc
 		private m_MouseX:number = 0;			//缓存触摸位置，非移动状态时需要用到
 		private m_MouseY:number = 0;
 
+		private m_TouchId:number = 0;			//这个很关键，记录触摸的手指id
+
 		public static ROCKER_MOVE_EVT:string 	= "ROCKER_MOVE_EVT";	//移动事件
 		public static ROCKER_END_EVT:string 	= "ROCKER_END_EVT";
 
@@ -58,11 +60,12 @@ module dc
 			this.m_IsDraging = true;
 			this.m_MouseX = evt.stageX;
 			this.m_MouseY = evt.stageY;
+			this.m_TouchId = evt.touchId;
 			this.HandleDrag(this.m_MouseX, this.m_MouseY);
 		}
 		private OnMouseUp(evt:any):void
 		{
-			if(this.m_IsDraging)
+			if(this.m_IsDraging && this.m_TouchId == evt.touchId)
 			{
 				this.m_IsDraging = false;
 				this.EndDrag();
@@ -70,7 +73,7 @@ module dc
 		}
 		private OnMouseMove(evt:any):void
 		{
-			if(this.m_IsDraging)
+			if(this.m_IsDraging && this.m_TouchId == evt.touchId)
 			{
 				this.m_MouseX = evt.stageX;
 				this.m_MouseY = evt.stageY;

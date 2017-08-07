@@ -12,11 +12,6 @@ module dc
         protected OnCreate(args:any):void
         {
             super.OnCreate(args);
-            
-            //按钮缩放
-            ObjectPools.Get(UIScaleScript).Setup(this.btnLogin);
-            //按钮缩放
-            ObjectPools.Get(UIPlaySoundScript).Setup(this.btnLogin,{file:"res/sound/hit.mp3"});
         }
         /**销毁*/
         protected OnDestroy():void
