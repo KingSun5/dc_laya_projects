@@ -72,7 +72,7 @@ module dc
         //～～～～～～～～～～～～～～～～～～～～～～～初始化游戏～～～～～～～～～～～～～～～～～～～～～～～//
         private InitScene():void
         {
-            Laya.Stat.show(0, 0);
+            //Laya.Stat.show(0, 0);
             //调试面板
             //Laya.DebugPanel.init();
             //调用DebugTool调试面板
@@ -84,7 +84,7 @@ module dc
 
             Laya.stage.scaleMode = laya.display.Stage.SCALE_EXACTFIT;
             //设置横竖屏
-            Laya.stage.screenMode = laya.display.Stage.SCREEN_HORIZONTAL;
+            Laya.stage.screenMode = laya.display.Stage.SCREEN_VERTICAL;
 
             //设置水平对齐
             Laya.stage.alignH =laya.display.Stage.ALIGN_CENTER;
@@ -138,15 +138,15 @@ module dc
             LangManager.Instance.LoadAll();
 
             //显示登陆界面
-            //UIShowController.Show(GUIID.LOGIN, 111,1112);
+            UIShowController.Show(GUIID.LOGIN, 111,1112);
             
             //new GameMain();
             // //压力测试
             // //UnitAIManager.Instance.CreateTestRobot();
 
-            let info:SceneTransmitInfo = new SceneTransmitInfo();
-            info.sceneId = 1000;
-            EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
+            // let info:SceneTransmitInfo = new SceneTransmitInfo();
+            // info.sceneId = 1000;
+            // EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
 
             //this.Test3D();
         }

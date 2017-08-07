@@ -12,6 +12,11 @@ module dc
         protected OnCreate(args:any):void
         {
             super.OnCreate(args);
+            
+            //按钮缩放
+            ObjectPools.Get(UIScaleScript).Setup(this.btnLogin);
+            //按钮缩放
+            ObjectPools.Get(UIPlaySoundScript).Setup(this.btnLogin,{file:"res/sound/hit.mp3"});
         }
         /**销毁*/
         protected OnDestroy():void
@@ -96,7 +101,7 @@ module dc
 
             let info:SceneTransmitInfo = new SceneTransmitInfo();
             info.sceneId = 1000;
-            EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
+            //EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
         }
         /**点击注册*/
         private OnPressRegister(event: LayaEvent)

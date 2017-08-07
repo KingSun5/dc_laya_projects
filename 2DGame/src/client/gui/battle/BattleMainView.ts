@@ -15,10 +15,14 @@ module dc
         {
             super.OnCreate(args);
 
+            //摇杆
             this.m_RockerScroll = new UIRockerScroll();
             this.addChild(this.m_RockerScroll);
-            this.m_RockerScroll.pos(200,UIID.DEFAULT_HEIGHT-200);
+            this.m_RockerScroll.pos(180,UIID.DEFAULT_HEIGHT-180);
             this.m_RockerScroll.Setup(null);
+
+            //按钮缩放
+            ObjectPools.Get(UIScaleScript);
         }
         /**销毁*/
         protected OnDestroy():void
@@ -49,6 +53,9 @@ module dc
         public OnLoadComplete():void
         {
             super.OnLoadComplete();
+
+            this.skillIcon.skin = "res/image/battlemain/img_wuqi1.png";
+            this.skillIcon.pivot(this.skillIcon.width*0.5,this.skillIcon.height*0.5);
         }
 
         /**多语言;初始化，或语音设定改变时触发*/
@@ -61,6 +68,7 @@ module dc
         protected PreLoaderRes():Array<any>
         {
             return [
+                ["res/image/battlemain/img_wuqi1.png", Laya.Loader.IMAGE],
             ];
         }
 
