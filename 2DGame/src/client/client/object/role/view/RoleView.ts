@@ -99,7 +99,7 @@ module dc
 				this.m_CurFrame = face;
 			}
 		}
-
+		/**动画播放结束*/
 		private OnPlayComplete()
 		{
 			this.m_OwnerRole.OnPlayComplete(this.m_CurPose);
