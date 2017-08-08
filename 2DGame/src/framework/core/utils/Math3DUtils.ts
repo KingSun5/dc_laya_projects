@@ -186,7 +186,7 @@ module dc
 		let num:number = Vector3.dot(onNormal, onNormal);
 		if (num < 1E-05)
 		{
-			return Vector3.ZERO;
+			return new Vector3();
 		}
 		return (Vec3Div(Vec3Mul(onNormal, Vector3.dot(vector, onNormal)), num));
 	}

@@ -24,7 +24,7 @@ module dc
 			this.m_IsLoadComplete = false;
            	this.m_RootNode = new LayaSprite();
 			this.m_RootNode.name = "object:" + this.m_ObjectGUID;
-			this.m_Position = Vector3.ZERO;
+			this.m_Position = new Vector3();
 			this.m_AligeType = eAligeType.MID;
         }
 

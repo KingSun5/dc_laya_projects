@@ -360,7 +360,7 @@ module dc
 			this.SetPosition(this.x+move_diff.x, this.y+move_diff.y, this.z+move_diff.z);
 
 			//角度
-			let degree:number = Math.atan2(-move_diff.y, move_diff.x) * MathUtils.Rad2Deg;//负数是因为Y轴朝向，与标准笛卡尔坐标系相反
+			let degree:number = MathUtils.GetPointDegree(move_diff.x,move_diff.y);
 			this.SetAngle(degree);
 
 			this.AttachStatus(eObjStatus.MOVE);
@@ -597,12 +597,27 @@ module dc
 		public SetAngle(degree:number):void
 		{
 			this.m_RotateAngle = MathUtils.ClampDegrees(degree)*MathUtils.Deg2Rad;
-			let face:number = MathUtils.GetFace(degree, eFace8.MAX);
+			let face:number = this.GetFaceByAngle(degree, eFace8.MAX);
 			this.SetFace(face);
 		}
 		public get RotateAngle():number
 		{
 			return this.m_RotateAngle;
+		}
+		/**
+		 * 根据度数获得朝向
+		 * Y轴正方向为1，逆时钟方向为加
+		 */		
+		public GetFaceByAngle(angle:number, chunkNums:number):number
+		{
+			var perAngle:number = 360/chunkNums;
+			var nFace:number = (MathUtils.ClampDegrees(angle-90)+perAngle*0.5)/perAngle;
+			nFace = nFace > chunkNums ? nFace-chunkNums : nFace;
+			nFace = Math.ceil(nFace);
+			if(nFace == 1)
+				return 1;
+			else
+				return (chunkNums - nFace + 2);
 		}
 		public SetFace(value:number):void
 		{

@@ -24,7 +24,7 @@ module dc
         {
 			super.Init();
 
-			this.m_Direction = Vector3.ZERO;
+			this.m_Direction = new Vector3();
 			this.m_MoveSpeed = 0;
            	this.m_RowIndex = Number.MIN_VALUE;
            	this.m_ColIndex = Number.MIN_VALUE;

@@ -7,7 +7,7 @@ module dc
      */
 	export class MapObject extends RenderObject
 	{
-		protected m_Direction:Vector2;	//移动方向
+		protected m_Direction:Vector3;	//移动方向
 		protected m_MoveSpeed:number;	//移动速度
 
 		protected m_RowIndex:number;	//所在地图的行
@@ -24,7 +24,7 @@ module dc
         {
 			super.Init();
 
-			this.m_Direction = Vector2.ZERO;
+			this.m_Direction = new Vector3();
 			this.m_MoveSpeed = 0;
            	this.m_RowIndex = Number.MIN_VALUE;
            	this.m_ColIndex = Number.MIN_VALUE;
@@ -63,9 +63,9 @@ module dc
 				this.OnMapGridChangle(map_row, map_col);
 			}
 		}
-		public SetDirection(x:number, y:number)
+		public SetDirection(x:number, y:number, z:number)
 		{
-			Vec2Set(this.m_Direction, x, y);
+			Vec3Set(this.m_Direction, x, y, z);
 		}
 		public SetSpeed(s:number)
 		{
@@ -90,7 +90,7 @@ module dc
 				this.m_PathGrid.addObject(this);
 			}
 		}
-		public get Direction():Vector2
+		public get Direction():Vector3
 		{
 			return this.m_Direction;
 		}

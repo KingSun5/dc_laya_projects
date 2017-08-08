@@ -4,6 +4,15 @@ module dc
      * 数学工具类
      * @author hannibal
      * @time 2017-7-8
+	 * 坐标系：y轴向下，顺时针方向
+	 * 					|
+	 * 					| 
+	 * 					| 
+	 * -----------------|---------------->x
+	 *  				|
+	 * 					|
+	 * 					|
+	 * 					y  
      */
     export class MathUtils
     {		
@@ -35,14 +44,8 @@ module dc
 		}
 		public static Clamp01(value:number):number
         {
-            if (value < 0)
-            {
-                return 0;
-            }
-            if (value > 1)
-            {
-                return 1;
-            }
+            if (value < 0)return 0;
+            if (value > 1) return 1;
             return value;
         }
 
@@ -53,10 +56,7 @@ module dc
         public static LerpAngle(a:number, b:number, t:number):number
         {
             let num:number = MathUtils.Repeat(b - a, 360);
-            if (num > 180)
-            {
-                num -= 360;
-            }
+            if (num > 180)num -= 360;
             return (a + (num * MathUtils.Clamp01(t)));
         }
 
@@ -99,16 +99,8 @@ module dc
 		 */		
 		public static ClampDegrees(degrees:number):number
 		{
-			while(degrees < 0)
-			{
-				degrees = degrees + 360;
-			}
-			
-			while(degrees >= 360)
-			{
-				degrees = degrees - 360;
-			}
-			
+			while(degrees < 0)degrees = degrees + 360;
+			while(degrees >= 360)degrees = degrees - 360;
 			return degrees;
 		}
 		/**
@@ -116,14 +108,8 @@ module dc
 		 */
 		public static ClampRadians(radians:number):number
 		{
-			while (radians < 0)
-			{
-				radians = radians + 2 * Math.PI;
-			}
-			while (radians >= 2 * Math.PI)
-			{
-				radians = radians - 2 * Math.PI;
-			}
+			while (radians < 0)radians = radians + 2 * Math.PI;
+			while (radians >= 2 * Math.PI)radians = radians - 2 * Math.PI;
 			return radians;
 		}
 		/**
@@ -138,7 +124,7 @@ module dc
 			return Math.pow(y2-y1,2) + Math.pow(x2-x1,2);
 		}	
 		/**
-		 * 两点间的弧度：x正方形为0，顺时针为正
+		 * 两点间的弧度：x正方形为0，Y轴向下,顺时针为正
 		 */		
 		public static GetLineRadians(x1:number, y1:number, x2:number, y2:number):number
 		{
@@ -149,6 +135,15 @@ module dc
 			let degree:number = MathUtils.ToDegree(MathUtils.GetLineRadians(x1, y1, x2, y2));
 			return MathUtils.ClampDegrees(degree);
 		}		
+		public static GetPointRadians(x:number, y:number):number
+		{
+			return Math.atan2(y,x);
+		}
+		public static GetPointDegree(x:number, y:number):number
+		{
+			let degree:number = MathUtils.ToDegree(MathUtils.GetPointRadians(x, y));
+			return MathUtils.ClampDegrees(degree);
+		}			
 		/**
 		 * 弧度转向量
 		 * @param 	radians 	弧度
@@ -182,18 +177,6 @@ module dc
                 return target;
             }
             return (current + (MathUtils.Sign(target - current) * maxDelta));
-        }
-
-		/**
-		 * 根据度数获得朝向
-		 * Y轴正方向为1，逆时钟方向为加
-		 */		
-		public static GetFace(angle:number, chunkNums:number):number
-		{
-			var perAngle:number = 360/chunkNums;
-			var nFace:number = (MathUtils.ClampDegrees(angle+90)+perAngle*0.5)/perAngle;
-			nFace = nFace > chunkNums ? nFace-chunkNums : nFace;
-			return Math.ceil(nFace);
-		}		
+        }		
     }
 }
