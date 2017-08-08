@@ -45,6 +45,7 @@ module dc
                 this.m_BulletSprite = null;
             }
             super.Destroy();
+            ObjectPools.Recover(this);
         }
 		/**加载完成回调*/
 		protected OnLoadComplete(args:any):void

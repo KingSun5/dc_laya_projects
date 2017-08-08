@@ -14,7 +14,7 @@ module dc
 
 		public CreateBullet(type:number, pos:Vector3, dir:Vector3):BaseBullet
 		{
-			let obj:BaseBullet = new BaseBullet();
+			let obj:BaseBullet = ObjectPools.Get(BaseBullet);
 			obj.Init();
 			obj.ObjectServerID = "";
 			obj.Init();
