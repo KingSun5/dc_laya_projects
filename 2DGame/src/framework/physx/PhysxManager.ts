@@ -7,7 +7,6 @@ module dc
      */
 	export class PhysxManager extends Singleton
 	{
-
         private static instance:PhysxManager = null;
         public static get Instance():PhysxManager
         {
@@ -17,7 +16,6 @@ module dc
 		
 		public Setup():void
 		{
-			
 		}
 		public Destroy():void
 		{

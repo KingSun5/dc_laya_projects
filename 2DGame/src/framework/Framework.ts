@@ -41,7 +41,6 @@ module dc
             ResourceManager.Instance.Setup();
             DataProvider.Instance.Setup();
             NetManager.Instance.Setup();
-            PhysxManager.Instance.Setup();
         }
 
         public Destroy():void
@@ -55,7 +54,6 @@ module dc
             ResourceManager.Instance.Destroy();  
             DataProvider.Instance.Destroy();
             NetManager.Instance.Destroy();
-            PhysxManager.Instance.Destroy();
             LayerManager.Destroy();
             Input.Destroy();
         }
@@ -71,7 +69,6 @@ module dc
         public PreTick():void
         {
             TimerManager.Instance.Tick();
-            PhysxManager.Instance.Tick();
             UIManager.Instance.Tick();
             ObjectManager.Instance.Tick();
             SoundManager.Instance.Tick();
