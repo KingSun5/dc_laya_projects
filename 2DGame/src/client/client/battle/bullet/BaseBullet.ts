@@ -50,6 +50,8 @@ module dc
 		/**加载完成回调*/
 		protected OnLoadComplete(args:any):void
 		{
+            if(!this.m_Active)return;
+            
             this.m_BulletSprite = new LayaSprite();
 			this.m_BulletSprite.loadImage(args);
             this.m_BulletSprite.rotation = MathUtils.GetPointDegree(this.m_Direction.x, this.m_Direction.y);
