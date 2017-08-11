@@ -12,6 +12,7 @@ module dc
         protected OnCreate(args:any):void
         {
             super.OnCreate(args);
+            ObjectPools.Get(UIScaleScript).Setup(this.btnLogin, {scaleTo:0.5,time:0.3});
         }
         /**销毁*/
         protected OnDestroy():void

@@ -14,13 +14,10 @@ module dc
 		/**
 		 * @param 	info	格式{file:XXX}
 		*/
-		public Setup(owner:LayaSprite, info:any):void
+		public Setup(owner:LayaSprite, info:{file:string}):void
 		{
 			super.Setup(owner, info);
-			if(info)
-			{
-				this.m_SoundFile = info.file;
-			}
+			this.m_SoundFile = info.file;
 		}
 	
         protected RegisterEvent():void

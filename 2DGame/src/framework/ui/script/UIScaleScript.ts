@@ -15,7 +15,7 @@ module dc
 		/**
 		 * @param 	info	格式{scaleTo:0.8,time:0.6}
 		*/
-		public Setup(owner:LayaSprite, info:any):void
+		public Setup(owner:LayaSprite, info?:{scaleTo:number,time:number}):void
 		{
 			super.Setup(owner, info);
 			if(info)
