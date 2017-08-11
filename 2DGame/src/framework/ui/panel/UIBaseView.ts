@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-19
      */	
-	export class UIBaseView extends LayaView implements UIPanelInterface, IComponentObject, IObject
+	export class UIBaseView extends LayaView implements UIPanelInterface, IComponentObject, IObject, IPauseObject
 	{
         protected m_IsOpen:boolean = false;
         protected m_ScreenID:number = 0;
@@ -181,6 +181,18 @@ module dc
         {
             return this.m_Component.GetComponent(classDef);
         }        
+        //～～～～～～～～～～～～～～～～～～～～～～～暂停～～～～～～～～～～～～～～～～～～～～～～～//
+        /**暂停开始时会调用该方法*/
+		public OnPauseEnter():void
+        {
+
+        }
+
+		/**暂停结束时会调用该方法*/
+		public OnPauseExit():void
+        {
+            
+        }           
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～内部方法～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         /**处理需要提前加载的资源*/
         private LoadResource():void

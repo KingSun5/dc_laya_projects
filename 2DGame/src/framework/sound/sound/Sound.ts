@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-11
      */
-	export class Sound implements IPoolsObject, IObject, IComponentObject
+	export class Sound implements IPoolsObject, IObject, IComponentObject, IPauseObject
 	{
 		protected m_Active:boolean;
 		protected m_SoundFile:string;
@@ -138,5 +138,17 @@ module dc
         {
             return this.m_Component.GetComponent(classDef);
         }
+        //～～～～～～～～～～～～～～～～～～～～～～～暂停～～～～～～～～～～～～～～～～～～～～～～～//
+        /**暂停开始时会调用该方法*/
+		public OnPauseEnter():void
+        {
+
+        }
+
+		/**暂停结束时会调用该方法*/
+		public OnPauseExit():void
+        {
+            
+        }		
 	}
 }

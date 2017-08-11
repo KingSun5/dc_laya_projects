@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-6
      */
-    export class GameObject implements IPoolsObject, IObject, IComponentObject
+    export class GameObject implements IPoolsObject, IObject, IComponentObject, IPauseObject
     {
         protected m_Active:boolean        //是否激活中
         protected m_ObjectType:string;    //对象类型
@@ -85,6 +85,18 @@ module dc
         public GetComponent(classDef:any):ComponentBase
         {
             return this.m_Component.GetComponent(classDef);
+        }
+        //～～～～～～～～～～～～～～～～～～～～～～～暂停～～～～～～～～～～～～～～～～～～～～～～～//
+        /**暂停开始时会调用该方法*/
+		public OnPauseEnter():void
+        {
+
+        }
+
+		/**暂停结束时会调用该方法*/
+		public OnPauseExit():void
+        {
+            
         }
         //～～～～～～～～～～～～～～～～～～～～～～～get/set～～～～～～～～～～～～～～～～～～～～～～～//
         public get Active():boolean

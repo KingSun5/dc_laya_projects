@@ -45,6 +45,17 @@ module dc
         
         public Start():void
         {
+            try{
+                throw new ReferenceError();
+            }
+            catch(e)
+            {
+
+            }
+            finally
+            {
+                Log.Debug("ReferenceError");
+            }
             EventController.DispatchEvent(EventID.BEGIN_GAME);
             this.LoadCoreResource();
         }
