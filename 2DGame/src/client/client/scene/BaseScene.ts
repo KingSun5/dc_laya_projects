@@ -18,7 +18,7 @@ module dc
         {
             UIShowController.CloseAll([]);
             ObjectManager.Instance.RemoveAll();
-            SoundManager.Instance.StopAll();
+            SoundManager.Instance.RemoveAll();
             SceneLayers.Clear();
             this.UnRegisterEvent();
         }

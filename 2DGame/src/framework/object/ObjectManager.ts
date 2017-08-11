@@ -112,7 +112,26 @@ module dc
 
             this.m_ListReleaseObject.length = 0;
         }
-
+        
+        /**暂停游戏*/
+        public PauseGame():void
+        {
+            let obj:GameObject = null;
+            for(let key in this.m_DicObject)
+            {
+                obj.OnPauseEnter();
+            }
+        }
+		/**结束暂停*/
+		public ResumeGame():void
+        {
+            let obj:GameObject = null;
+            for(let key in this.m_DicObject)
+            {
+                obj.OnPauseExit();
+            }
+        }
+        
 	    /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～get/set～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         public GetObjectByID(id:number):GameObject
         {

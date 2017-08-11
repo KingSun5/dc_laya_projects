@@ -7,19 +7,28 @@ module dc
      */
     export class SoundManager extends Singleton
     {
-        private m_CurBGSound:BGSound = null;
         private m_IsCloseBGSound = false;
         private m_IsCloseEffectSound = false;
         private m_IsCloseVoiceSound = false;
         private m_BGSoundVolume = 1;
         private m_EffectSoundVolume = 1;
         private m_VoiceSoundVolume = 1;
+        private m_ShareObjID:number = 0;
+
+        private m_CurBGSound:BGSound = null;    //背景声音
+        private m_DicEffectSound:NDictionary<Sound> = null; //特效声音
 
         private static instance:SoundManager = null;
         public static get Instance():SoundManager
         {
             if(!this.instance)this.instance = new SoundManager();
             return this.instance;
+        }
+
+        constructor()
+        {
+            super();
+            this.m_DicEffectSound = new NDictionary<Sound>();
         }
 
         public Setup():void
@@ -38,11 +47,77 @@ module dc
             
         }
         
-        /**停止所有声音*/
-        public StopAll():void
+        /**清理所有，一般是场景切换时执行*/
+        public RemoveAll():void
         {
-            this.StopBGSound();
+            if(this.m_CurBGSound)
+            {
+                this.RemoveSound(this.m_CurBGSound.ObjectUID);
+            }
         }
+
+        /**删除一个声音，一般是声音播放完成后调用*/
+        public RemoveSound(id:number)
+        {
+            if(this.m_CurBGSound && this.m_CurBGSound.ObjectUID == id)
+            {
+                this.m_CurBGSound.Destroy();
+                ObjectPools.Recover(this.m_CurBGSound);
+                this.m_CurBGSound = null;
+            }
+            else
+            {
+                let sound:Sound = this.m_DicEffectSound.GetValue(id);
+                if(sound)
+                {
+                    sound.Destroy();
+                    ObjectPools.Recover(sound);
+                }
+                this.m_DicEffectSound.Remove(id);
+            }
+        }
+        
+        /**暂停游戏*/
+        public PauseGame():void
+        {            
+            this.StopBGSound();
+            this.m_DicEffectSound.Foreach(function(key, value)
+            {
+                value.Stop();
+                return true;
+            });
+
+            if(this.m_CurBGSound)
+            {
+                this.m_CurBGSound.OnPauseEnter();
+            }
+            this.m_DicEffectSound.Foreach(function(key, value)
+            {
+                value.OnPauseEnter();
+                return true;
+            });
+        }
+		/**结束暂停*/
+		public ResumeGame():void
+        {
+            this.ResumeBGSound();
+            this.m_DicEffectSound.Foreach(function(key, value)
+            {
+                value.Resume();
+                return true;
+            });
+            
+            if(this.m_CurBGSound)
+            {
+                this.m_CurBGSound.OnPauseExit();
+            }
+            this.m_DicEffectSound.Foreach(function(key, value)
+            {
+                value.OnPauseExit();
+                return true;
+            });
+        }
+        
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～背景声音～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/ 
          /**
          * 播放背景声音
@@ -52,7 +127,10 @@ module dc
         public PlayBGSound(file_name:string, count:number):BGSound
         {
             if(this.m_CurBGSound == null)
+            {
                 this.m_CurBGSound = new BGSound();
+                this.m_CurBGSound.ObjectUID = this.ShareGUID();
+            }
             
             this.m_CurBGSound.Setup({file:file_name, time:count});
 
@@ -94,6 +172,7 @@ module dc
         public PlaySoundEffect(file_name:string, count:number):EffectSound
         {
             let sound:EffectSound = ObjectPools.Get(EffectSound);
+            sound.ObjectUID = this.ShareGUID();
             sound.Setup({file:file_name, time:count});
 
             return sound;
@@ -162,6 +241,11 @@ module dc
             }
         }  
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～get/set～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/   
+
+        public ShareGUID():number
+        {
+            return ++this.m_ShareObjID;
+        }        
         public get IsCloseBGSound():boolean
         {
             return this.m_IsCloseBGSound;

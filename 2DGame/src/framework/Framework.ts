@@ -7,6 +7,7 @@ module dc
      */
     export class Framework extends Singleton
     {        
+        private m_IsStopGame:boolean = false;
         private m_MainloopHandle:LayaHandler = null;
 
         private static instance:Framework = null;
@@ -29,6 +30,7 @@ module dc
         {
             this.PrintDeviceInfo();
 
+            this.m_IsStopGame = false;
             this.m_MainloopHandle = main_loop;
             Laya.timer.frameLoop(1, this, this.MainLoop);
 
@@ -38,6 +40,7 @@ module dc
             UIManager.Instance.Setup();
             ObjectManager.Instance.Setup();
             SoundManager.Instance.Setup();
+            EffectManager.Instance.Setup();
             ResourceManager.Instance.Setup();
             DataProvider.Instance.Setup();
             NetManager.Instance.Setup();
@@ -50,7 +53,8 @@ module dc
             TimerManager.Instance.Destroy();
             UIManager.Instance.Destroy();
             ObjectManager.Instance.Destroy();   
-            SoundManager.Instance.Destroy();    
+            SoundManager.Instance.Destroy();   
+            EffectManager.Instance.Destroy(); 
             ResourceManager.Instance.Destroy();  
             DataProvider.Instance.Destroy();
             NetManager.Instance.Destroy();
@@ -62,9 +66,12 @@ module dc
         */
         private MainLoop():void
         {
-            this.PreTick();
-            this.Tick();
-            this.EndTick();
+            if(!this.m_IsStopGame)
+            {
+                this.PreTick();
+                this.Tick();
+                this.EndTick();
+            }
         }
         public PreTick():void
         {
@@ -72,6 +79,7 @@ module dc
             UIManager.Instance.Tick();
             ObjectManager.Instance.Tick();
             SoundManager.Instance.Tick();
+            EffectManager.Instance.Tick();
             ResourceManager.Instance.Tick();
             NetManager.Instance.Tick();
         }
@@ -86,6 +94,28 @@ module dc
         {
             Input.Tick();//放最后
         }
+
+        /**暂停游戏*/
+        public PauseGame():void
+        {
+            this.m_IsStopGame = true;
+            EffectManager.Instance.PauseGame();
+            SoundManager.Instance.PauseGame();
+            ObjectManager.Instance.PauseGame();
+        }
+		/**结束暂停*/
+		public ResumeGame():void
+        {
+            this.m_IsStopGame = false;
+            EffectManager.Instance.ResumeGame();
+            SoundManager.Instance.ResumeGame();
+            ObjectManager.Instance.ResumeGame();
+        }
+        public get isStopGame():boolean
+        {
+            return this.m_IsStopGame;
+        }
+
         /**打印设备信息*/
         private PrintDeviceInfo() 
         {

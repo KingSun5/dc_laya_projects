@@ -8,6 +8,7 @@ module dc
 	export class Sound implements IPoolsObject, IObject, IComponentObject, IPauseObject
 	{
 		protected m_Active:boolean;
+        protected m_ObjectUID:number = 0;       //对象唯一ID
 		protected m_SoundFile:string;
 		protected m_IsPlaying:boolean;
 		protected m_PlayCount:number;
@@ -46,7 +47,6 @@ module dc
 				this.m_SoundChannel = null;
 			}
             this.m_Component.Destroy();
-			ObjectPools.Recover(this);
 		}
 
 		public Update():boolean
@@ -113,7 +113,7 @@ module dc
 
 		protected OnPlayComplete():void
 		{
-			this.Destroy();
+			SoundManager.Instance.OnSoundPlayComplete(this);
 		}
 
 		public IsPlaying():boolean
@@ -121,6 +121,14 @@ module dc
 			return this.m_IsPlaying;
 		}
 		
+        public get ObjectUID():number
+        {
+            return this.m_ObjectUID;
+        }
+        public set ObjectUID(value:number)
+        {
+            this.m_ObjectUID = value; 
+        }
         //～～～～～～～～～～～～～～～～～～～～～～～组件～～～～～～～～～～～～～～～～～～～～～～～//
         public AddComponent(classDef:any):ComponentBase
         {

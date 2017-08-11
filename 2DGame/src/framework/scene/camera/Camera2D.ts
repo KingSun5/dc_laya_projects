@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-26
      */
-	export class Camera2D implements IPauseObject
+	export class Camera2D
 	{
 		protected m_CameraType:eCameraType;
 
@@ -73,19 +73,7 @@ module dc
 				offsetY = Laya.stage.height-Scene2D.Instance.sceneHeight-Scene2D.Instance.sceneOffsetY;
 			}
 			return offsetY;
-		}		
-		//～～～～～～～～～～～～～～～～～～～～～～～暂停～～～～～～～～～～～～～～～～～～～～～～～//
-        /**暂停开始时会调用该方法*/
-		public OnPauseEnter():void
-        {
-
-        }
-
-		/**暂停结束时会调用该方法*/
-		public OnPauseExit():void
-        {
-            
-        }   	
+		} 	
 	}
 	/**
 	 * 相机类型

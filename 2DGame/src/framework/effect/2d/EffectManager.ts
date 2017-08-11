@@ -23,6 +23,44 @@ module dc
             this.m_DicEffect = new NDictionary<BaseEffect>();
         }
 
+        public Setup():void
+        {
+        }
+
+        public Destroy():void
+        {
+            this.m_DicEffect.Foreach(function(key, value)
+            {
+                value.Destroy();
+                ObjectPools.Recover(value);
+                return true;
+            });
+            this.m_DicEffect.Clear();
+        }
+
+        public Tick():void
+        {
+        }
+        
+        /**暂停游戏*/
+        public PauseGame():void
+        {
+            this.m_DicEffect.Foreach(function(key, value)
+            {
+                value.OnPauseEnter();
+                return true;
+            });
+        }
+		/**结束暂停*/
+		public ResumeGame():void
+        {
+            this.m_DicEffect.Foreach(function(key, value)
+            {
+                value.OnPauseExit();
+                return true;
+            });
+        }
+        
         /*～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～创建特效～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～*/
         /**
          * 定点位置创建特效
@@ -90,10 +128,10 @@ module dc
             let eff:BaseEffect = this.m_DicEffect.GetValue(eff_id);
             if(eff)
             {
-                this.m_DicEffect.Remove(eff_id);
                 eff.Destroy();
                 ObjectPools.Recover(eff);
             }
+            this.m_DicEffect.Remove(eff_id);
         }
         public GetEffect(id:number):BaseEffect
         {

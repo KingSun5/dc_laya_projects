@@ -54,6 +54,18 @@ module dc
 				this.m_CurCamera.Update();
 			}
 		}
+		
+        /**暂停游戏*/
+        public PauseGame():void
+        {
+
+        }
+		/**结束暂停*/
+		public ResumeGame():void
+        {
+
+        }
+        
 		public SetSceneSize(w:number, h:number):void
 		{
 			if(this.m_RootScene)
