@@ -3421,12 +3421,6 @@
 			}
 		}
 
-		__proto.dispose=function(){
-			if (this.resourceManager)
-				this.resourceManager.removeResource(this);
-			_super.prototype.dispose.call(this);
-		}
-
 		AnimationTemplet._LinearInterpolation_0=function(bone,index,out,outOfs,data,dt,dData,duration,nextData,interData){
 			out[outOfs]=data[index]+dt *dData[index];
 			return 1;

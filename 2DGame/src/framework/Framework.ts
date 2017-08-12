@@ -102,6 +102,7 @@ module dc
             EffectManager.Instance.PauseGame();
             SoundManager.Instance.PauseGame();
             ObjectManager.Instance.PauseGame();
+            EventController.DispatchEvent(CommonEvent.STOP_GAME, true);
         }
 		/**结束暂停*/
 		public ResumeGame():void
@@ -110,6 +111,7 @@ module dc
             EffectManager.Instance.ResumeGame();
             SoundManager.Instance.ResumeGame();
             ObjectManager.Instance.ResumeGame();
+            EventController.DispatchEvent(CommonEvent.STOP_GAME, false);
         }
         public get isStopGame():boolean
         {

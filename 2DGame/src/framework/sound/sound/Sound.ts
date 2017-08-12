@@ -5,7 +5,7 @@ module dc
      * @author hannibal
      * @time 2017-7-11
      */
-	export class Sound implements IPoolsObject, IObject, IComponentObject, IPauseObject
+	export class Sound  extends EventDispatcher implements IPoolsObject, IObject, IComponentObject, IPauseObject
 	{
 		protected m_Active:boolean;
         protected m_ObjectUID:number = 0;       //对象唯一ID
@@ -18,6 +18,7 @@ module dc
 		
         constructor()
         { 
+			super();
             this.m_Component = new ComponentCenter();
         }
 
@@ -47,6 +48,7 @@ module dc
 				this.m_SoundChannel = null;
 			}
             this.m_Component.Destroy();
+            this.Dispatch(SoundEvent.PLAY_COMPLETE);
 		}
 
 		public Update():boolean

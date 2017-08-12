@@ -116,8 +116,8 @@ module dc
 			}
 			this.m_MainLight = new Laya.DirectionLight();
 			this.m_MainScene.addChild(this.m_MainLight);
-        	this.m_MainLight.ambientColor = ambientColor;
-        	this.m_MainLight.specularColor = specularColor;
+        	//this.m_MainLight.ambientColor = ambientColor;
+        	//this.m_MainLight.specularColor = specularColor;
         	this.m_MainLight.diffuseColor = diffuseColor;
         	this.m_MainLight.direction = direction;
 		}

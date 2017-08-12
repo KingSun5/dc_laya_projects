@@ -7,11 +7,11 @@ module dc
      */	
 	export class BaseEffect extends EventDispatcher implements IPoolsObject, IObject, IComponentObject, IPauseObject
 	{
-        protected m_Active:boolean = false      //是否激活中;
-        protected m_ObjectUID:number = 0;       //对象唯一ID
-        protected m_TotalTime:number = 0;       //总时长
-        protected m_OffsetPos:Vector2 = null;   //位置偏移
-        protected m_IsLoadComplete:boolean = false;//是否准备完成
+        protected m_Active:boolean = false          //是否激活中;
+        protected m_ObjectUID:number = 0;           //对象唯一ID
+        protected m_TotalTime:number = 0;           //总时长
+        protected m_OffsetPos:Vector2 = null;       //位置偏移
+        protected m_IsLoadComplete:boolean = false; //是否准备完成
 
         protected m_RootNode:LayaSprite = null;
         protected m_Animation:LayaAnimation = null;

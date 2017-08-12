@@ -19,6 +19,8 @@ module dc
 		public static ADJUST_BG_VOLUME:string     = "ADJUST_BG_VOLUME";		//调节背景音量(0-1)
 		public static ADJUST_EFFECT_VOLUME:string = "ADJUST_EFFECT_VOLUME";	//调节音效音量(0-1)
 		public static ADJUST_CHAT_VOLUME:string   = "ADJUST_CHAT_VOLUME";	//调节语音音量(0-1)
+
+		public static PLAY_COMPLETE:string   	  = "PLAY_COMPLETE";		//播放完成事件
 	}
 
 	/**背景声音播放模式*/
