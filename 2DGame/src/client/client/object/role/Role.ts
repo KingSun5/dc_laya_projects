@@ -82,6 +82,8 @@ module dc
         public LoadData(info:UnitInfo):void
         {
             super.LoadData(info);
+
+			this.SetAngle(90);
         }
 
         /**
