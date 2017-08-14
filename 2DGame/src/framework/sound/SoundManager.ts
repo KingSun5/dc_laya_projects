@@ -38,7 +38,7 @@ module dc
 
         public Destroy():void
         {
-            this.StopAll();
+            this.RemoveAll();
             this.UnRegisterEvent();
         }
 

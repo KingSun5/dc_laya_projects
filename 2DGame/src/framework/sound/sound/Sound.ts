@@ -115,7 +115,7 @@ module dc
 
 		protected OnPlayComplete():void
 		{
-			SoundManager.Instance.OnSoundPlayComplete(this);
+			SoundManager.Instance.RemoveSound(this.m_ObjectUID);
 		}
 
 		public IsPlaying():boolean
