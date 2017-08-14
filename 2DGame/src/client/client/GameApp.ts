@@ -36,9 +36,11 @@ module dc
 
         private RegisterEvent():void
         {
+            NetManager.Instance.RegisterPacketHandler(S2CMsg.EnterScene, this, this.OnNetEvt);
         }
         private UnRegisterEvent():void
         {
+            NetManager.Instance.UnregisterPacketHandler(S2CMsg.EnterScene, this, this.OnNetEvt);
         }
         
         public Start():void
@@ -136,8 +138,25 @@ module dc
             //new GameMain();
             
             // let info:SceneTransmitInfo = new SceneTransmitInfo();
-            // info.sceneId = 1000;
+            // info.sceneType = 1000;
             // EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
+        }
+        private OnNetEvt(msg_id:number, by:LayaByte):void
+        {
+            switch(msg_id)
+            {
+                case S2CMsg.EnterScene:
+                let scene_id:number = by.getUint32();
+                let scene_type:number = by.getUint16();
+                Log.Info("场景切换 id:" + scene_id + " type:" + scene_type);
+
+                let info:SceneTransmitInfo = new SceneTransmitInfo();
+                info.sceneId = scene_id;
+                info.sceneType = scene_type;
+                EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
+
+                break;
+            }
         }
     }
 }

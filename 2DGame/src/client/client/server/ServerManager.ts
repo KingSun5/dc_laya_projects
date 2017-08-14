@@ -35,9 +35,11 @@ module dc
         {
         }
 		//逻辑服务器
-		public SendGameMsg(msg_id:number, by:LayaByte):void
+		public SendGameMsg(by:LayaByte):void
 		{
 			if(StringUtils.IsNullOrEmpty(this.m_GameServerHost))return;
+			by.pos = 2;
+			let msg_id:number = by.getUint16();
 			NetManager.Instance.Send(msg_id, this.m_GameServerHost, by);
 		}
 

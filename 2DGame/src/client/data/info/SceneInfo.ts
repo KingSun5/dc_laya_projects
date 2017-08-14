@@ -7,7 +7,7 @@ module dc
      */
 	export class SceneTransmitInfo
 	{
-		public sceneId:number;
-		public sceneType:number;
+		public sceneId:number;  //服务器场景唯一id
+		public sceneType:number;//场景类型
 	}
 }

@@ -46,8 +46,8 @@ module dc
         private OnChangeScene(evt:EventArgs):void
         {
             let info:SceneTransmitInfo = evt.Get(0);
-            let type:eSceneType = SceneID.GetSceneTypeByID(info.sceneId);
-            this.GotoScene(type, info.sceneId);
+            let type:eSceneType = SceneID.GetSceneTypeByID(info.sceneType);
+            this.GotoScene(type, info.sceneType);
         }
         //～～～～～～～～～～～～～～～～～～～～～～～场景切换~～～～～～～～～～～～～～～～～～～～～～～～//   
         /**跳转场景*/
@@ -86,7 +86,7 @@ module dc
                     this.m_CurScene = new BattleScene();
                     break;
                 }
-                if(this.m_CurScene != null)
+                if(this.m_CurScene)
                 {
                     this.m_CurScene.OnEnter(type, scene_id, null);
                 }
@@ -94,7 +94,7 @@ module dc
         }
         private LeaveScene():void
         {
-            if(this.m_CurScene != null)
+            if(this.m_CurScene)
             {
                 this.m_CurScene.OnExit();
                 this.m_CurScene = null;
