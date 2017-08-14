@@ -115,6 +115,8 @@ module dc
 
 		protected OnPlayComplete():void
 		{
+			if(!this.m_Active)return;
+
 			SoundManager.Instance.RemoveSound(this.m_ObjectUID);
 		}
 
@@ -130,6 +132,10 @@ module dc
         public set ObjectUID(value:number)
         {
             this.m_ObjectUID = value; 
+        }
+        public get Active():boolean
+        {
+            return this.m_Active;
         }
         //～～～～～～～～～～～～～～～～～～～～～～～组件～～～～～～～～～～～～～～～～～～～～～～～//
         public AddComponent(classDef:any):ComponentBase
@@ -152,13 +158,13 @@ module dc
         /**暂停开始时会调用该方法*/
 		public OnPauseEnter():void
         {
-
+			this.Stop();
         }
 
 		/**暂停结束时会调用该方法*/
 		public OnPauseExit():void
         {
-            
+            this.Resume();
         }		
 	}
 }

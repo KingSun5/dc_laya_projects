@@ -88,14 +88,7 @@ module dc
         
         /**暂停游戏*/
         public PauseGame():void
-        {            
-            this.StopBGSound();
-            this.m_DicEffectSound.Foreach(function(key, value)
-            {
-                value.Stop();
-                return true;
-            });
-
+        {
             if(this.m_CurBGSound)
             {
                 this.m_CurBGSound.OnPauseEnter();
@@ -109,13 +102,6 @@ module dc
 		/**结束暂停*/
 		public ResumeGame():void
         {
-            this.ResumeBGSound();
-            this.m_DicEffectSound.Foreach(function(key, value)
-            {
-                value.Resume();
-                return true;
-            });
-            
             if(this.m_CurBGSound)
             {
                 this.m_CurBGSound.OnPauseExit();

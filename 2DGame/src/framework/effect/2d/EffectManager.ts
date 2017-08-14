@@ -69,10 +69,8 @@ module dc
          * @param	x	        位置x
          * @param	y	        位置y
          * @param	time	    播放时长
-         *          1.对于非循环特效，且未设置time，特效播放结束后，会自动销毁；
-                    2.对于循环特效，到点之后自动销毁
-                    3.只要这个参数大于0，不管是循环特效还是非循环特效，指定时间一到，自动销毁</param>
-                    4.循环特效，且未指定time，则需要外部调用RemoveEffect接口销毁
+         *          1.设置了time，播放指定时长；
+                    2.未设置time，播放一次
          */
         public CreateEffect_Position(file:string, parent_node:LayaNode, x:number=0, y:number=0, time:number = 0):number
         {
@@ -123,15 +121,15 @@ module dc
             this.m_DicEffect.Add(effect.ObjectUID, effect);
             return effect.ObjectUID;
         }
-        public RemoveEffect(eff_id:number):void
+        public RemoveEffect(id:number):void
         {
-            let eff:BaseEffect = this.m_DicEffect.GetValue(eff_id);
+            let eff:BaseEffect = this.m_DicEffect.GetValue(id);
             if(eff)
             {
                 eff.Destroy();
                 ObjectPools.Recover(eff);
             }
-            this.m_DicEffect.Remove(eff_id);
+            this.m_DicEffect.Remove(id);
         }
         public GetEffect(id:number):BaseEffect
         {

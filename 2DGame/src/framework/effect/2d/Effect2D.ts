@@ -34,10 +34,6 @@ module dc
         {
             this.m_Component.Setup();
             this.m_Active = true;
-            if(this.m_TotalTime > 0)
-            {
-                TimerManager.Instance.AddOnce(this.m_TotalTime, this, this.OnTimeEnd)
-            }
             if(!StringUtils.IsNullOrEmpty(file))
             {
                 this.LoadResource(file);
@@ -81,13 +77,24 @@ module dc
             this.m_Animation.play(1, true);
             this.m_RootNode.addChild(this.m_Animation);
             this.m_Animation.pos(this.m_OffsetPos.x, this.m_OffsetPos.y);
+            
+            //加载完成后添加事件
+            if(this.m_TotalTime > 0)
+            {//按指定时间播放
+                TimerManager.Instance.AddOnce(this.m_TotalTime, this, this.OnPlayComplete)
+            }
+            else
+            {//单次播放
+			    this.m_Animation.on(LayaEvent.COMPLETE, this, this.OnPlayComplete);
+            }
         }
-        /**自动销毁回调*/
-        private OnTimeEnd()
-        {
-            this.m_Active = false;
+		/**动画播放结束*/
+		private OnPlayComplete()
+		{
+            if(!this.m_Active)return;
+            
             EffectManager.Instance.RemoveEffect(this.m_ObjectUID);
-        }
+		}
 
         //～～～～～～～～～～～～～～～～～～～～～～～组件～～～～～～～～～～～～～～～～～～～～～～～//
         public AddComponent(classDef:any):ComponentBase
@@ -110,13 +117,19 @@ module dc
         /**暂停开始时会调用该方法*/
 		public OnPauseEnter():void
         {
-
+            if(this.m_Animation)
+            {
+                this.m_Animation.stop();
+            }
         }
 
 		/**暂停结束时会调用该方法*/
 		public OnPauseExit():void
         {
-            
+            if(this.m_Animation)
+            {
+                this.m_Animation.play(1, true);
+            }
         }        
         //～～～～～～～～～～～～～～～～～～～～～～～get/set～～～～～～～～～～～～～～～～～～～～～～～//        
         public SetParent(node:LayaNode):void
