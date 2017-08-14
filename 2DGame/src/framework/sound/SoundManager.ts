@@ -177,6 +177,7 @@ module dc
             let sound:EffectSound = ObjectPools.Get(EffectSound);
             sound.ObjectUID = this.ShareGUID();
             sound.Setup({file:file_name, time:count});
+            this.m_DicEffectSound.Add(sound.ObjectUID, sound);
 
             return sound;
         }

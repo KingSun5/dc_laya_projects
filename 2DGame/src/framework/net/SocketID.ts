@@ -11,12 +11,20 @@ module dc
         public static HEADER_SIZE:number = 2;
     }
     /**
-     * 网络事件
+     * socket事件
     */
     export class SocketEvent
     {
-        public static SOCKET_CONNECTED:string = "SOCKET_CONNECTED";
-        public static SOCKET_CLOSE:string = "SOCKET_CLOSE";
-        public static SOCKET_ERROR:string = "SOCKET_ERROR";
+        public static SOCKET_CONNECTED:string   = "SOCKET_CONNECTED";
+        public static SOCKET_CLOSE:string       = "SOCKET_CLOSE";
+        public static SOCKET_ERROR:string       = "SOCKET_ERROR";
+    }
+    /**
+     * 网络事件
+    */
+    export class NetEvent
+    {
+        public static CONNECTED:string          = "CONNECTED";
+        public static CLOSED:string             = "CLOSED";
     }
 }

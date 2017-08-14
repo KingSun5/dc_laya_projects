@@ -18,8 +18,8 @@ module dc
         */
         public Setup():void
         {
-            UIID.DEFAULT_WIDTH = 960;
-            UIID.DEFAULT_HEIGHT = 640;
+            UIID.DEFAULT_WIDTH = 640;
+            UIID.DEFAULT_HEIGHT = 960;
             //Laya.init(UIID.DEFAULT_WIDTH,UIID.DEFAULT_HEIGHT, Laya.WebGL);
             Laya3D.init(0,0, false);
 
@@ -48,6 +48,7 @@ module dc
             GameApp.Instance.Setup();
             SceneManager.Instance.Setup();
             LoadViewManager.Instance.Setup();
+            ServerManager.Instance.Setup();
             UILoaderRegister.Setup();
             //add here
             
@@ -56,6 +57,7 @@ module dc
         {
             SceneManager.Instance.Destroy();
             LoadViewManager.Instance.Destroy();
+            ServerManager.Instance.Destroy();
             UILoaderRegister.Destroy();
             //add here
 
@@ -67,6 +69,7 @@ module dc
         {
             GameApp.Instance.Tick();
             SceneManager.Instance.Tick();
+            ServerManager.Instance.Tick();
         }
     }
 }

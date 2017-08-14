@@ -36,26 +36,13 @@ module dc
 
         private RegisterEvent():void
         {
-
         }
         private UnRegisterEvent():void
         {
-
         }
         
         public Start():void
         {
-            try{
-                throw new ReferenceError();
-            }
-            catch(e)
-            {
-
-            }
-            finally
-            {
-                Log.Debug("ReferenceError");
-            }
             EventController.DispatchEvent(EventID.BEGIN_GAME);
             this.LoadCoreResource();
         }
@@ -95,7 +82,7 @@ module dc
 
             Laya.stage.scaleMode = laya.display.Stage.SCALE_EXACTFIT;
             //设置横竖屏
-            Laya.stage.screenMode = laya.display.Stage.SCREEN_HORIZONTAL;
+            Laya.stage.screenMode = laya.display.Stage.SCREEN_VERTICAL;
 
             //设置水平对齐
             Laya.stage.alignH =laya.display.Stage.ALIGN_CENTER;
@@ -132,14 +119,6 @@ module dc
         {
 
         }
-        private OnNetConnected():void
-        {
-
-        }
-        private OnNetDisconnect():void
-        {
-
-        }
         /**资源加载完成*/
         private OnDownloadComplate(args:Array<string>):void
         {
@@ -148,14 +127,17 @@ module dc
             ConfigManger.Instance.LoadAll();
             LangManager.Instance.LoadAll();
 
+            
+            ServerManager.Instance.ConnectGameServer("127.0.0.1", 8181);
+
             //显示登陆界面
             //UIShowController.Show(GUIID.LOGIN, 111,1112);
             
             //new GameMain();
             
-            let info:SceneTransmitInfo = new SceneTransmitInfo();
-            info.sceneId = 1000;
-            EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
+            // let info:SceneTransmitInfo = new SceneTransmitInfo();
+            // info.sceneId = 1000;
+            // EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
         }
     }
 }

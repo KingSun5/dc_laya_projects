@@ -235,6 +235,19 @@ module dc
             // image_number.SetNum(123456789);
             // image_number.pos(200,300);
             // UILayerUtils.top.addChild(image_number);
+
+            //try catch
+            // try{
+            //     throw new ReferenceError();
+            // }
+            // catch(e)
+            // {
+
+            // }
+            // finally
+            // {
+            //     Log.Debug("ReferenceError");
+            // }
         }
         public Add(a:number):number
         {

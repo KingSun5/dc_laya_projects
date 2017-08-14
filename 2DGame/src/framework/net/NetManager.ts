@@ -95,6 +95,14 @@ module dc
 				}
 			}
         }
+        //～～～～～～～～～～～～～～～～～～～～～～～发送～～～～～～～～～～～～～～～～～～～～～～～//
+		private tmpSocket:ClientSocket = null;
+		public Send(id:number, host:string, by:LayaByte):number
+		{
+			this.tmpSocket = this.m_DicSockets.GetValue(host);
+			if(!this.tmpSocket)return 0;
+			return this.tmpSocket.Send(by);
+		}
 
         //～～～～～～～～～～～～～～～～～～～～～～～事件～～～～～～～～～～～～～～～～～～～～～～～//
         private RegisterEvent():void
@@ -118,16 +126,7 @@ module dc
 					let host:string = evt.Get(0);
 					Log.Info("连接成功:" + host);
 
-					let socket:ClientSocket = this.m_DicSockets.GetValue(host);
-					let by:LayaByte = dc.ByteArrayUtils.CreateSocketByte(C2SMsg.Encrypt);
-					by.writeUTFString("dc");
-					by.writeInt32(1);
-					socket.Send(by);
-					
-					by = dc.ByteArrayUtils.CreateSocketByte(C2SMsg.Login);
-					by.writeUTFString("dc");
-					by.writeUTFString("123456");
-					socket.Send(by);
+					EventController.DispatchEvent(NetEvent.CONNECTED, host);
 				}
 				break;
 				case SocketEvent.SOCKET_CLOSE:
@@ -141,6 +140,7 @@ module dc
 						this.m_DicSockets.Remove(host);
 					}
 					Log.Error("连接关闭:" + host);
+					EventController.DispatchEvent(NetEvent.CLOSED, host);
 				}
 				break;
 			}
