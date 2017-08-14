@@ -7,13 +7,14 @@ module dc
      */
     export class SoundManager extends Singleton
     {
+        private m_ShareObjID:number = 0;
+
         private m_IsCloseBGSound = false;
         private m_IsCloseEffectSound = false;
         private m_IsCloseVoiceSound = false;
         private m_BGSoundVolume = 1;
         private m_EffectSoundVolume = 1;
         private m_VoiceSoundVolume = 1;
-        private m_ShareObjID:number = 0;
 
         private m_CurBGSound:BGSound = null;    //背景声音
         private m_DicEffectSound:NDictionary<Sound> = null; //特效声音
@@ -54,6 +55,14 @@ module dc
             {
                 this.RemoveSound(this.m_CurBGSound.ObjectUID);
             }
+            
+            this.m_DicEffectSound.Foreach(function(key, value)
+            {
+                value.Destroy();
+                ObjectPools.Recover(value);
+                return true;
+            });
+            this.m_DicEffectSound.Clear();
         }
 
         /**删除一个声音，一般是声音播放完成后调用*/
@@ -124,8 +133,13 @@ module dc
          * @param	file_name	资源
          * @param	count	    播放次数
          */
-        public PlayBGSound(file_name:string, count:number):BGSound
+        public PlayBGSound(file_name:string, count:number):void
         {
+            if(StringUtils.IsNullOrEmpty(file_name))
+            {
+                Log.Error("声音文件错误");
+                return;
+            }
             if(this.m_CurBGSound == null)
             {
                 this.m_CurBGSound = new BGSound();
@@ -133,8 +147,6 @@ module dc
             }
             
             this.m_CurBGSound.Setup({file:file_name, time:count});
-
-            return this.m_CurBGSound;
         }
         public StopBGSound():void
         {
@@ -171,6 +183,11 @@ module dc
          */
         public PlaySoundEffect(file_name:string, count:number):EffectSound
         {
+            if(StringUtils.IsNullOrEmpty(file_name))
+            {
+                Log.Error("声音文件错误");
+                return null;
+            }
             let sound:EffectSound = ObjectPools.Get(EffectSound);
             sound.ObjectUID = this.ShareGUID();
             sound.Setup({file:file_name, time:count});
