@@ -36,11 +36,11 @@ module dc
 
         private RegisterEvent():void
         {
-            NetManager.Instance.RegisterPacketHandler(S2CMsg.EnterScene, this, this.OnNetEvt);
+            NetManager.Instance.RegisterPacketHandler(ss2c.EnterScene, this, this.OnNetEvt);
         }
         private UnRegisterEvent():void
         {
-            NetManager.Instance.UnregisterPacketHandler(S2CMsg.EnterScene, this, this.OnNetEvt);
+            NetManager.Instance.UnregisterPacketHandler(ss2c.EnterScene, this, this.OnNetEvt);
         }
         
         public Start():void
@@ -145,7 +145,7 @@ module dc
         {
             switch(msg_id)
             {
-                case S2CMsg.EnterScene:
+                case ss2c.EnterScene:
                 let scene_id:number = by.getUint32();
                 let scene_type:number = by.getUint16();
                 Log.Info("场景切换 id:" + scene_id + " type:" + scene_type);

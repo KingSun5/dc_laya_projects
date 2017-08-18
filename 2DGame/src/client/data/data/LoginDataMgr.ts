@@ -17,34 +17,34 @@ module dc
         /**在这做数据初始化*/
 		public Init():void
         {
-            NetManager.Instance.RegisterPacketHandler(S2CMsg.Encrypt, this, this.OnNetEvt);
-            NetManager.Instance.RegisterPacketHandler(S2CMsg.Login, this, this.OnNetEvt);
-            NetManager.Instance.RegisterPacketHandler(S2CMsg.CharacterList, this, this.OnNetEvt);
-            NetManager.Instance.RegisterPacketHandler(S2CMsg.CreateCharacter, this, this.OnNetEvt);
-            NetManager.Instance.RegisterPacketHandler(S2CMsg.CharacterInfo, this, this.OnNetEvt);
+            NetManager.Instance.RegisterPacketHandler(gs2c.Encrypt, this, this.OnNetEvt);
+            NetManager.Instance.RegisterPacketHandler(gs2c.Login, this, this.OnNetEvt);
+            NetManager.Instance.RegisterPacketHandler(gs2c.CharacterList, this, this.OnNetEvt);
+            NetManager.Instance.RegisterPacketHandler(gs2c.CreateCharacter, this, this.OnNetEvt);
+            NetManager.Instance.RegisterPacketHandler(ss2c.CharacterInfo, this, this.OnNetEvt);
         }
         /**在这清空数据，尤其是列表等保存的数据*/
         public Release():void
         {
-            NetManager.Instance.UnregisterPacketHandler(S2CMsg.Encrypt, this, this.OnNetEvt);
-            NetManager.Instance.UnregisterPacketHandler(S2CMsg.Login, this, this.OnNetEvt);
-            NetManager.Instance.UnregisterPacketHandler(S2CMsg.CharacterList, this, this.OnNetEvt);
-            NetManager.Instance.UnregisterPacketHandler(S2CMsg.CreateCharacter, this, this.OnNetEvt);
-            NetManager.Instance.UnregisterPacketHandler(S2CMsg.CharacterInfo, this, this.OnNetEvt);
+            NetManager.Instance.UnregisterPacketHandler(gs2c.Encrypt, this, this.OnNetEvt);
+            NetManager.Instance.UnregisterPacketHandler(gs2c.Login, this, this.OnNetEvt);
+            NetManager.Instance.UnregisterPacketHandler(gs2c.CharacterList, this, this.OnNetEvt);
+            NetManager.Instance.UnregisterPacketHandler(gs2c.CreateCharacter, this, this.OnNetEvt);
+            NetManager.Instance.UnregisterPacketHandler(ss2c.CharacterInfo, this, this.OnNetEvt);
         }
 
         /**握手协议*/
         public SendEncrypt():void
         {
-            let by:LayaByte = ByteArrayUtils.CreateSocketByte(C2SMsg.Encrypt);
-            by.writeUTFString("dc");
+            let by:LayaByte = ByteArrayUtils.CreateSocketByte(c2gs.Encrypt);
+            by.writeInt32(1);
             by.writeInt32(1);
             ServerManager.Instance.SendGameMsg(by);
         }
         /**登陆*/
         public SendLogin(account:string, psw:string):void
         {
-            let by:LayaByte = ByteArrayUtils.CreateSocketByte(C2SMsg.Login);
+            let by:LayaByte = ByteArrayUtils.CreateSocketByte(c2gs.Login);
             by.writeUTFString(account);
             by.writeUTFString(psw);
             ServerManager.Instance.SendGameMsg(by);
@@ -54,19 +54,19 @@ module dc
         {
             switch(msg_id)
             {
-                case S2CMsg.Encrypt:
+                case gs2c.Encrypt:
                 let key:number = by.getInt32();
                 this.OnRecvEncrypt("");
                 break;
-                case S2CMsg.Login:
+                case gs2c.Login:
                 let result:number = by.getByte();
                 this.OnRecvLogin(result);
                 break;
-                case S2CMsg.CharacterList:
+                case gs2c.CharacterList:
                 let count:number = by.getByte();
                 this.OnCharacterList(count);
                 break;
-                case S2CMsg.CreateCharacter:
+                case gs2c.CreateCharacter:
                 result = by.getByte();
                 this.OnCreateCharacter(result);
                 break;
@@ -83,14 +83,14 @@ module dc
         private OnRecvLogin(result:number):void
         {
             Log.Info("OnRecvLogin:" + result);
-            let by:LayaByte = ByteArrayUtils.CreateSocketByte(C2SMsg.CharacterList);
+            let by:LayaByte = ByteArrayUtils.CreateSocketByte(c2gs.CharacterList);
             ServerManager.Instance.SendGameMsg(by);
         }
         /**角色列表*/
         private OnCharacterList(count:number):void
         {
             Log.Info("OnCharacterList:" + count);
-            let by:LayaByte = ByteArrayUtils.CreateSocketByte(C2SMsg.CreateCharacter);
+            let by:LayaByte = ByteArrayUtils.CreateSocketByte(c2gs.CreateCharacter);
             by.writeUTFString("test110");//姓名
             by.writeByte(1);//性别
             ServerManager.Instance.SendGameMsg(by);  
@@ -100,7 +100,7 @@ module dc
         {
             Log.Info("OnCreateCharacter:" + result);
 
-            let by:LayaByte = ByteArrayUtils.CreateSocketByte(C2SMsg.EnterGame);
+            let by:LayaByte = ByteArrayUtils.CreateSocketByte(c2ss.EnterGame);
             ServerManager.Instance.SendGameMsg(by);
         }
 	}

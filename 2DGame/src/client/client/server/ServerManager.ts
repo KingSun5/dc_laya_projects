@@ -47,7 +47,7 @@ module dc
         public ConnectGameServer(ip:string, port:number)
         {
             //NetManager.Instance.ConnectUrl("ws://127.0.0.1:8181");
-            NetManager.Instance.ConnectHost("127.0.0.1", 8181);
+            NetManager.Instance.ConnectHost("127.0.0.1", 7000);
         }
 		
         private RegisterEvent():void

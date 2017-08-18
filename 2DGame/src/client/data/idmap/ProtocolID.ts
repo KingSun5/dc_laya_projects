@@ -8,47 +8,78 @@ module dc
 	export class ProtocolID
 	{
 
+	    public static PROTOCOL_RESERVED_LOW:number		= 0;		//	net 保留的协议号，最小值
+	    public static PROTOCOL_RESERVED_HIGH:number		= 999;		//	net 保留的协议号，最大值
+	    public static MSG_APPLAYER_BASE:number			= 1000;		//	应用层协议起始号码
+	    public static MSG_APPLAYER_PER_INTERVAL:number	= 1000;		//  消息起始结束间隔
+
+
+	    //	内部id
+	    public static MSG_BASE_INTERNAL:number	= ProtocolID.MSG_APPLAYER_BASE + 100;
+
+	    public static MSG_BASE_C2GS:number		= ProtocolID.MSG_APPLAYER_BASE + 1000;
+	    public static MSG_BASE_C2SS:number		= ProtocolID.MSG_APPLAYER_BASE + 2000;
+	    public static MSG_BASE_C2WS:number		= ProtocolID.MSG_APPLAYER_BASE + 2000;
+
+        public static MSG_BASE_GS2C:number      = ProtocolID.MSG_APPLAYER_BASE + 5000;
+        public static MSG_BASE_GS2SS:number     = ProtocolID.MSG_APPLAYER_BASE + 6000;
+        public static MSG_BASE_GS2WS:number     = ProtocolID.MSG_APPLAYER_BASE + 7000;
+
+        public static MSG_BASE_SS2C:number      = ProtocolID.MSG_APPLAYER_BASE + 10000;
+        public static MSG_BASE_SS2GS:number     = ProtocolID.MSG_APPLAYER_BASE + 11000;
+        public static MSG_BASE_SS2WS:number     = ProtocolID.MSG_APPLAYER_BASE + 12000;
+
+        public static MSG_BASE_WS2C:number      = ProtocolID.MSG_APPLAYER_BASE + 15000;
+        public static MSG_BASE_WS2GS:number     = ProtocolID.MSG_APPLAYER_BASE + 16000;
+        public static MSG_BASE_WS2SS:number     = ProtocolID.MSG_APPLAYER_BASE + 17000;
 	}
 	
-    export enum C2SMsg
+    export enum c2gs
     {
-        None = 0,
-        Encrypt,                //加密
-        Login,                  //登陆
+        Begin = ProtocolID.MSG_BASE_C2GS,
+        Encrypt = Begin + 1,                //加密
+        Login = Begin + 2,                  //登陆
         
-        CharacterList,          //角色列表
-        CreateCharacter,        //创建角色
+        CharacterList = Begin + 3,          //角色列表
+        CreateCharacter = Begin + 4,        //创建角色
 
-        EnterGame,              //进入游戏；成功后，服务器会发送EnterScene，告诉进入的场景id
-        ResourceLoaded,         //资源加载完毕
-        SceneTransmit,          //传送
-
-        UnitMove,               //移动
-
-        EnterRoom,              //进入房间
-        LeaveRoom,              //离开房间
-        KickoutRoom,            //踢出房间
+        RobotTest = Begin + 10,
     }
 
-    export enum S2CMsg
+    export enum gs2c
     {
-        None = 0,
-        Encrypt,                //加密
-        Login,                  //登陆结果
+        Begin = ProtocolID.MSG_BASE_GS2C,
+        Encrypt = Begin + 1,                //加密
+        Login = Begin + 2,                  //登陆结果
         
-        CharacterList,          //角色列表
-        CreateCharacter,        //创建角色
-        CharacterInfo,          //角色信息
+        CharacterList = Begin + 3,          //角色列表
+        CreateCharacter = Begin + 4,        //创建角色
+        
+        RobotTest = Begin + 10,
+    }
 
-        EnterScene,             //进入场景
+    export enum c2ss
+    {
+        Begin = ProtocolID.MSG_BASE_C2SS,
 
-        UnitMove,               //移动
-        EnterAOI,               //进入aoi
-        LeaveAOI,      
-        UnitModify,             //属性改变 
+        EnterGame = Begin +1,               //进入游戏
+        CharacterInfo = Begin +2,           ////角色信息
+        ResourceLoaded = Begin +3,          //资源加载完毕
+        SceneTransmit = Begin +4,           //传送
 
-        EnterRoom,              //进入房间
-        LeaveRoom,              //离开房间
-        KickoutRoom,            //踢出房间
+        UnitMove = Begin +10,               //移动
+    }
+    
+    export enum ss2c
+    {
+        Begin = ProtocolID.MSG_BASE_SS2C,
+
+        EnterScene = Begin + 1,             //进入场景
+        CharacterInfo = Begin + 2,          //角色信息
+
+        UnitMove = Begin + 10,              //移动
+        EnterAOI = Begin + 11,              //进入aoi
+        LeaveAOI = Begin + 12,
+        UnitModify = Begin + 13,            //属性改变 
     }
 }
