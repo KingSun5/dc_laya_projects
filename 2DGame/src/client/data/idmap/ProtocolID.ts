@@ -19,7 +19,7 @@ module dc
 
 	    public static MSG_BASE_C2GS:number		= ProtocolID.MSG_APPLAYER_BASE + 1000;
 	    public static MSG_BASE_C2SS:number		= ProtocolID.MSG_APPLAYER_BASE + 2000;
-	    public static MSG_BASE_C2WS:number		= ProtocolID.MSG_APPLAYER_BASE + 2000;
+	    public static MSG_BASE_C2WS:number		= ProtocolID.MSG_APPLAYER_BASE + 3000;
 
         public static MSG_BASE_GS2C:number      = ProtocolID.MSG_APPLAYER_BASE + 5000;
         public static MSG_BASE_GS2SS:number     = ProtocolID.MSG_APPLAYER_BASE + 6000;
@@ -62,10 +62,8 @@ module dc
     {
         Begin = ProtocolID.MSG_BASE_C2SS,
 
-        EnterGame = Begin +1,               //进入游戏
-        CharacterInfo = Begin +2,           ////角色信息
-        ResourceLoaded = Begin +3,          //资源加载完毕
-        SceneTransmit = Begin +4,           //传送
+        ResourceLoaded = Begin +1,          //资源加载完毕
+        EnterScene = Begin +2,              //传送
 
         UnitMove = Begin +10,               //移动
     }
@@ -74,12 +72,25 @@ module dc
     {
         Begin = ProtocolID.MSG_BASE_SS2C,
 
-        EnterScene = Begin + 1,             //进入场景
-        CharacterInfo = Begin + 2,          //角色信息
+        CharacterInfo = Begin + 1,          //角色信息
+        EnterScene = Begin + 2,             //进入场景
 
         UnitMove = Begin + 10,              //移动
         EnterAOI = Begin + 11,              //进入aoi
         LeaveAOI = Begin + 12,
         UnitModify = Begin + 13,            //属性改变 
+    }
+
+    export enum c2ws
+    {
+        Begin = ProtocolID.MSG_BASE_C2WS,
+
+        EnterGame = Begin + 1,             //进入游戏
+    }
+    export enum ws2c
+    {
+        Begin = ProtocolID.MSG_BASE_WS2C,
+
+        EnterGame = Begin + 1,             //进入游戏
     }
 }

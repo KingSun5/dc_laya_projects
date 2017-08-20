@@ -100,7 +100,12 @@ module dc
         {
             Log.Info("OnCreateCharacter:" + result);
 
-            let by:LayaByte = ByteArrayUtils.CreateSocketByte(c2ss.EnterGame);
+            let by:LayaByte = ByteArrayUtils.CreateSocketByte(c2ws.EnterGame);
+            by.writeUint32(1);
+            ServerManager.Instance.SendGameMsg(by);
+
+            by = ByteArrayUtils.CreateSocketByte(c2ss.EnterScene);
+            by.writeUint32(0);
             ServerManager.Instance.SendGameMsg(by);
         }
 	}
