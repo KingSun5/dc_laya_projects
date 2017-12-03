@@ -130,16 +130,16 @@ module dc
             LangManager.Instance.LoadAll();
 
             
-            ServerManager.Instance.ConnectGameServer("127.0.0.1", 8181);
+            //ServerManager.Instance.ConnectGameServer("127.0.0.1", 8181);
 
             //显示登陆界面
             //UIShowController.Show(GUIID.LOGIN, 111,1112);
             
             //new GameMain();
             
-            // let info:SceneTransmitInfo = new SceneTransmitInfo();
-            // info.sceneType = 1000;
-            // EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
+             let info:SceneTransmitInfo = new SceneTransmitInfo();
+             info.sceneType = 1000;
+             EventController.DispatchEvent(EventID.CHANGE_SCENE, info);
         }
         private OnNetEvt(msg_id:number, by:LayaByte):void
         {
